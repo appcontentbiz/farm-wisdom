@@ -1,14 +1,20 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { UserProvider } from './context/UserContext';
 import Navbar from './components/Navigation/Navbar';
-import Home from './pages/Home';
-import BeginnerDashboard from './pages/BeginnerDashboard';
-import ProfessionalDashboard from './pages/ProfessionalDashboard';
 import SignIn from './pages/Auth/SignIn';
 import SignUp from './pages/Auth/SignUp';
+import ForgotPassword from './pages/Auth/ForgotPassword';
+import Home from './pages/Home';
+import BeginnerDashboard from './pages/BeginnerDashboard';
 import WeatherDashboard from './pages/WeatherDashboard';
-import StoreLocations from './components/StoreLocations/StoreLocations';
+import ProfessionalDashboard from './pages/ProfessionalDashboard';
+import AuthService from './services/AuthService';
 import './App.css';
+
+const PrivateRoute = ({ children }) => {
+  const user = AuthService.getCurrentUser();
+  return user ? children : <Navigate to="/signin" />;
+};
 
 function App() {
   return (
@@ -19,11 +25,33 @@ function App() {
           <main className="main-content">
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/beginner/*" element={<BeginnerDashboard />} />
-              <Route path="/professional/*" element={<ProfessionalDashboard />} />
               <Route path="/signin" element={<SignIn />} />
               <Route path="/signup" element={<SignUp />} />
-              <Route path="/weather" element={<WeatherDashboard />} />
+              <Route path="/forgot-password" element={<ForgotPassword />} />
+              <Route
+                path="/beginner/*"
+                element={
+                  <PrivateRoute>
+                    <BeginnerDashboard />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/weather"
+                element={
+                  <PrivateRoute>
+                    <WeatherDashboard />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/professional/*"
+                element={
+                  <PrivateRoute>
+                    <ProfessionalDashboard />
+                  </PrivateRoute>
+                }
+              />
               <Route path="/store-locations" element={<StoreLocations />} />
               <Route path="/market" element={<div>Market Prices (Coming Soon)</div>} />
             </Routes>
