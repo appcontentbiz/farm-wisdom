@@ -6,7 +6,8 @@ import SignUp from './pages/Auth/SignUp';
 import ForgotPassword from './pages/Auth/ForgotPassword';
 import Home from './pages/Home';
 import BeginnerDashboard from './pages/BeginnerDashboard';
-import WeatherDashboard from './pages/WeatherDashboard';
+import Weather from './pages/Weather';
+import MarketPrices from './pages/MarketPrices';
 import ProfessionalDashboard from './pages/ProfessionalDashboard';
 import StoreLocations from './pages/StoreLocations';
 import AuthService from './services/AuthService';
@@ -30,9 +31,9 @@ function App() {
               <Route path="/signin" element={<SignIn />} />
               <Route path="/signup" element={<SignUp />} />
               <Route path="/forgot-password" element={<ForgotPassword />} />
-              <Route path="/market" element={<div>Market Prices (Coming Soon)</div>} />
+              <Route path="/market" element={<MarketPrices />} />
               <Route path="/beginner/*" element={<BeginnerDashboard />} />
-              <Route path="/weather" element={<WeatherDashboard />} />
+              <Route path="/weather" element={<Weather />} />
               <Route path="/pricing" element={<Pricing />} />
               <Route
                 path="/professional/*"
