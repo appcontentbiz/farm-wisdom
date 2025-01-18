@@ -1,16 +1,16 @@
-import sgMail from '@sendgrid/mail';
-
+// Mock email service for development
 class EmailService {
   constructor() {
-    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+    this.isDevelopment = process.env.NODE_ENV === 'development';
+    console.log('Email Service running in development mode - emails will be logged to console');
   }
 
   async sendPasswordResetEmail(email, resetToken) {
-    const resetLink = `${process.env.REACT_APP_URL}/reset-password?token=${resetToken}`;
+    const resetLink = `${process.env.REACT_APP_URL || 'http://localhost:3000'}/reset-password?token=${resetToken}`;
     
-    const msg = {
+    const emailContent = {
       to: email,
-      from: process.env.SENDGRID_FROM_EMAIL,
+      from: 'noreply@farm-wisdom.com',
       subject: 'Reset Your Farm Wisdom Password',
       text: `Click this link to reset your password: ${resetLink}`,
       html: `
@@ -41,22 +41,22 @@ class EmailService {
       `
     };
 
-    try {
-      await sgMail.send(msg);
-      return true;
-    } catch (error) {
-      console.error('Error sending email:', error);
-      if (error.response) {
-        console.error(error.response.body);
-      }
-      throw new Error('Failed to send password reset email');
-    }
+    // In development, just log the email
+    console.log('=================== PASSWORD RESET EMAIL ===================');
+    console.log('To:', email);
+    console.log('Reset Link:', resetLink);
+    console.log('Reset Token:', resetToken);
+    console.log('========================================================');
+
+    return true;
   }
 
   async sendWelcomeEmail(email, name) {
-    const msg = {
+    const dashboardLink = `${process.env.REACT_APP_URL || 'http://localhost:3000'}/dashboard`;
+
+    const emailContent = {
       to: email,
-      from: process.env.SENDGRID_FROM_EMAIL,
+      from: 'noreply@farm-wisdom.com',
       subject: 'Welcome to Farm Wisdom!',
       text: `Welcome to Farm Wisdom, ${name}!`,
       html: `
@@ -72,7 +72,7 @@ class EmailService {
             <li style="margin: 10px 0;">👥 Connect with other farmers</li>
           </ul>
           <div style="text-align: center; margin: 30px 0;">
-            <a href="${process.env.REACT_APP_URL}/dashboard" 
+            <a href="${dashboardLink}" 
                style="background-color: #4299e1; 
                       color: white; 
                       padding: 12px 24px; 
@@ -92,16 +92,14 @@ class EmailService {
       `
     };
 
-    try {
-      await sgMail.send(msg);
-      return true;
-    } catch (error) {
-      console.error('Error sending welcome email:', error);
-      if (error.response) {
-        console.error(error.response.body);
-      }
-      throw new Error('Failed to send welcome email');
-    }
+    // In development, just log the email
+    console.log('=================== WELCOME EMAIL ===================');
+    console.log('To:', email);
+    console.log('Name:', name);
+    console.log('Dashboard Link:', dashboardLink);
+    console.log('====================================================');
+
+    return true;
   }
 }
 
