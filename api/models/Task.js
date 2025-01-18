@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const TaskSchema = new mongoose.Schema({
   farm: {
@@ -232,4 +232,4 @@ TaskSchema.methods.updateProgress = function(percentage, milestone = null) {
   }
 };
 
-module.exports = mongoose.model('Task', TaskSchema);
+export default mongoose.model('Task', TaskSchema);

@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const CropSchema = new mongoose.Schema({
   farm: {
@@ -155,4 +155,4 @@ CropSchema.methods.calculateProfitability = function() {
   };
 };
 
-module.exports = mongoose.model('Crop', CropSchema);
+export default mongoose.model('Crop', CropSchema);

@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const CertificationSchema = new mongoose.Schema({
   name: {
@@ -211,4 +211,4 @@ EmployeeSchema.methods.getYearsOfService = function() {
   return Math.floor(years * 10) / 10; // Round to 1 decimal place
 };
 
-module.exports = mongoose.model('Employee', EmployeeSchema);
+export default mongoose.model('Employee', EmployeeSchema);

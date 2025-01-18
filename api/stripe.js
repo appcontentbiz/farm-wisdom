@@ -1,11 +1,13 @@
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+import Stripe from 'stripe';
+
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 const priceIds = {
   professional: 'price_XXXXX', // Replace with actual Stripe price IDs
   enterprise: 'price_YYYYY',
 };
 
-exports.handler = async (event) => {
+export const handler = async (event) => {
   if (event.httpMethod !== 'POST') {
     return {
       statusCode: 405,
