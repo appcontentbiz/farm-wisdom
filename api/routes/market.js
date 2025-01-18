@@ -1,8 +1,8 @@
-const express = require('express');
-const router = express.Router();
-const axios = require('axios');
-const auth = require('../middleware/auth');
+import express from 'express';
+import axios from 'axios';
+import auth from '../middleware/auth.js';
 
+const router = express.Router();
 const MARKET_API_KEY = process.env.MARKET_API_KEY || 'your-market-api-key';
 const MARKET_BASE_URL = 'https://api.commodities-api.com/api/v1';
 
@@ -81,4 +81,4 @@ function calculateTrends(data) {
   };
 }
 
-module.exports = router;
+export default router;

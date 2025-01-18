@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const ResourceSchema = new mongoose.Schema({
   type: {
@@ -150,4 +150,4 @@ FarmSchema.pre('save', function(next) {
   next();
 });
 
-module.exports = mongoose.model('Farm', FarmSchema);
+export default mongoose.model('Farm', FarmSchema);

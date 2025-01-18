@@ -1,33 +1,75 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const auth = require('../middleware/auth');
-const Farm = require('../models/Farm');
-const Crop = require('../models/Crop');
-const Employee = require('../models/Employee');
-const Task = require('../models/Task');
+import auth from '../middleware/auth.js';
+import Farm from '../models/Farm.js';
+import Crop from '../models/Crop.js';
+import Employee from '../models/Employee.js';
+import Task from '../models/Task.js';
 
 // Farm Management
-router.post('/farms', auth, async (req, res) => {
-  try {
-    const farm = new Farm({
-      ...req.body,
-      owner: req.user.id
-    });
-    await farm.save();
-    res.json(farm);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send('Server error');
-  }
-});
-
 router.get('/farms', auth, async (req, res) => {
   try {
     const farms = await Farm.find({ owner: req.user.id });
     res.json(farms);
   } catch (err) {
     console.error(err.message);
-    res.status(500).send('Server error');
+    res.status(500).send('Server Error');
+  }
+});
+
+router.post('/farms', auth, async (req, res) => {
+  try {
+    const newFarm = new Farm({
+      ...req.body,
+      owner: req.user.id
+    });
+
+    const farm = await newFarm.save();
+    res.json(farm);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+router.put('/farms/:id', auth, async (req, res) => {
+  try {
+    let farm = await Farm.findById(req.params.id);
+    if (!farm) return res.status(404).json({ msg: 'Farm not found' });
+
+    // Make sure user owns farm
+    if (farm.owner.toString() !== req.user.id) {
+      return res.status(401).json({ msg: 'Not authorized' });
+    }
+
+    farm = await Farm.findByIdAndUpdate(
+      req.params.id,
+      { $set: req.body },
+      { new: true }
+    );
+
+    res.json(farm);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+router.delete('/farms/:id', auth, async (req, res) => {
+  try {
+    const farm = await Farm.findById(req.params.id);
+    if (!farm) return res.status(404).json({ msg: 'Farm not found' });
+
+    // Make sure user owns farm
+    if (farm.owner.toString() !== req.user.id) {
+      return res.status(401).json({ msg: 'Not authorized' });
+    }
+
+    await farm.remove();
+    res.json({ msg: 'Farm removed' });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
   }
 });
 
@@ -130,4 +172,4 @@ router.get('/resources/:farmId', auth, async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const UserSchema = new mongoose.Schema({
   name: {
@@ -14,40 +14,15 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  planType: {
+  role: {
     type: String,
-    enum: ['basic', 'professional', 'enterprise'],
-    default: 'basic'
+    enum: ['beginner', 'professional'],
+    default: 'beginner'
   },
-  createdAt: {
+  date: {
     type: Date,
     default: Date.now
-  },
-  lastLogin: {
-    type: Date
-  },
-  preferences: {
-    type: Map,
-    of: String
-  },
-  notifications: [{
-    type: {
-      type: String,
-      required: true
-    },
-    message: {
-      type: String,
-      required: true
-    },
-    read: {
-      type: Boolean,
-      default: false
-    },
-    createdAt: {
-      type: Date,
-      default: Date.now
-    }
-  }]
+  }
 });
 
-module.exports = mongoose.model('User', UserSchema);
+export default mongoose.model('User', UserSchema);

@@ -1,9 +1,10 @@
-const express = require('express');
+import express from 'express';
+import auth from '../middleware/auth.js';
+import Farm from '../models/Farm.js';
+import Crop from '../models/Crop.js';
+import Task from '../models/Task.js';
+
 const router = express.Router();
-const auth = require('../middleware/auth');
-const Farm = require('../models/Farm');
-const Crop = require('../models/Crop');
-const Task = require('../models/Task');
 
 // Get farm performance metrics
 router.get('/performance/:farmId', auth, async (req, res) => {
@@ -205,4 +206,4 @@ function calculateROI(crops, farm) {
   return expenses ? (profit / expenses) * 100 : 0;
 }
 
-module.exports = router;
+export default router;
