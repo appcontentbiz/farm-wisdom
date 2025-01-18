@@ -50,123 +50,227 @@ const farmingTypes = [
     image: '/images/traditional-farming.jpg',
     description: 'Time-tested methods passed down through generations',
     benefits: [
-      'Lower initial investment',
-      'Natural farming practices',
-      'Time-tested techniques',
-      'Community knowledge sharing'
-    ],
-    icon: <Agriculture />
-  },
-  {
-    title: 'Urban Farming',
-    image: '/images/urban-farming.jpg',
-    description: 'Transform any space into a productive garden',
-    benefits: [
-      'No land required',
-      'Year-round growing',
-      'Fresh produce at home',
-      'Perfect for beginners'
+      'Proven techniques',
+      'Lower initial costs',
+      'Natural processes',
+      'Community knowledge'
     ],
     guide: {
       basics: [
-        'Choose your space: Balcony, rooftop, or windowsill',
-        'Select container-friendly crops',
-        'Set up proper drainage systems',
-        'Maximize sunlight exposure'
+        'Understanding soil composition',
+        'Natural pest control methods',
+        'Crop rotation principles',
+        'Water conservation'
       ],
       equipment: [
-        'Containers and grow bags',
-        'Quality potting soil',
         'Basic hand tools',
+        'Manual irrigation systems',
+        'Natural fertilizers',
+        'Storage solutions'
+      ],
+      crops: [
+        'Root vegetables',
+        'Leafy greens',
+        'Grains and cereals',
+        'Fruit trees'
+      ],
+      tips: [
+        'Start with local varieties',
+        'Learn from experienced farmers',
+        'Keep detailed records',
+        'Practice sustainable methods'
+      ]
+    },
+    icon: <Agriculture />
+  },
+  {
+    title: 'Container Gardening',
+    image: '/images/urban-farming.jpg',
+    description: 'Perfect for urban spaces and beginners',
+    benefits: [
+      'Space efficient',
+      'Perfect for beginners',
+      'Mobile gardens',
+      'Year-round growing'
+    ],
+    guide: {
+      basics: [
+        'Choosing right containers',
+        'Proper drainage setup',
+        'Soil mix preparation',
+        'Light requirements'
+      ],
+      equipment: [
+        'Growing containers',
+        'Quality potting soil',
+        'Hand tools set',
         'Watering system'
       ],
       crops: [
-        'Herbs: Basil, mint, parsley',
-        'Greens: Lettuce, spinach, kale',
-        'Vegetables: Tomatoes, peppers',
-        'Edible flowers'
+        'Herbs: basil, mint, thyme',
+        'Tomatoes and peppers',
+        'Leafy greens',
+        'Root vegetables'
       ],
       tips: [
-        'Use vertical space efficiently',
-        'Practice companion planting',
-        'Implement water conservation',
-        'Start small and expand gradually'
+        'Monitor moisture levels',
+        'Use vertical space',
+        'Rotate containers',
+        'Regular fertilizing'
       ]
     },
     icon: <Home />
   },
   {
-    title: 'Microgreens Farming',
-    image: '/images/microgreens-farming.jpg',
-    description: 'Grow nutrient-dense miniature vegetables',
+    title: 'Raised Bed Farming',
+    image: '/images/crop-guide.jpg',
+    description: 'Efficient method with better soil control',
     benefits: [
-      'Quick harvest cycles',
-      'High nutritional value',
-      'Minimal space needed',
-      'Year-round production'
+      'Better soil management',
+      'Improved drainage',
+      'Less weeding',
+      'Extended growing season'
     ],
     guide: {
       basics: [
-        'Understanding growth stages',
-        'Selecting seed varieties',
-        'Creating ideal growing conditions',
-        'Harvesting techniques'
+        'Bed construction',
+        'Soil layering',
+        'Irrigation setup',
+        'Plant spacing'
       ],
       equipment: [
-        'Growing trays and mats',
-        'LED grow lights',
-        'Humidity dome',
-        'Fine misting system'
+        'Construction materials',
+        'Quality soil mix',
+        'Drip irrigation',
+        'Garden tools'
       ],
       crops: [
-        'Brassicas: Broccoli, radish',
-        'Herbs: Cilantro, basil',
-        'Grains: Wheat, corn',
-        'Legumes: Peas, beans'
+        'Mixed vegetables',
+        'Companion plants',
+        'Flowers and herbs',
+        'Root crops'
       ],
       tips: [
-        'Maintain proper air circulation',
-        'Monitor humidity levels',
-        'Keep growing medium moist',
-        'Practice proper sanitization'
+        'Plan crop rotation',
+        'Use companion planting',
+        'Add season extenders',
+        'Maintain soil health'
       ]
     },
-    icon: <LocalFlorist />
-  },
-  {
-    title: 'Organic Farming',
-    image: '/images/organic-farming.jpg',
-    description: 'Sustainable farming without synthetic inputs',
-    benefits: [
-      'Premium market prices',
-      'Environmental sustainability',
-      'Healthier produce',
-      'Growing market demand'
-    ],
     icon: <Nature />
   },
   {
     title: 'Hydroponic Farming',
     image: '/images/hydroponic-farming.jpg',
-    description: 'Soil-less farming with controlled environments',
+    description: 'Soil-less growing using nutrient-rich water',
     benefits: [
-      'Year-round production',
-      'Water efficiency',
-      'Space optimization',
-      'Precise nutrient control'
+      'Water efficient',
+      'Higher yields',
+      'Year-round growing',
+      'Space saving'
     ],
+    guide: {
+      basics: [
+        'System setup',
+        'Nutrient management',
+        'pH monitoring',
+        'Environmental control'
+      ],
+      equipment: [
+        'Growing system',
+        'Pumps and timers',
+        'Nutrient solutions',
+        'Monitoring tools'
+      ],
+      crops: [
+        'Leafy greens',
+        'Herbs',
+        'Tomatoes',
+        'Strawberries'
+      ],
+      tips: [
+        'Start simple',
+        'Monitor daily',
+        'Keep it clean',
+        'Learn nutrient signs'
+      ]
+    },
     icon: <Water />
   },
   {
+    title: 'Aquaponic Farming',
+    image: '/images/irrigation-guide.jpg',
+    description: 'Combines fish farming with plant growing',
+    benefits: [
+      'Sustainable system',
+      'Dual production',
+      'Natural fertilizer',
+      'Water efficient'
+    ],
+    guide: {
+      basics: [
+        'System design',
+        'Fish selection',
+        'Plant compatibility',
+        'Water quality'
+      ],
+      equipment: [
+        'Fish tanks',
+        'Growing beds',
+        'Pumps and filters',
+        'Monitoring equipment'
+      ],
+      crops: [
+        'Leafy greens',
+        'Herbs',
+        'Fruiting plants',
+        'Root vegetables'
+      ],
+      tips: [
+        'Balance is key',
+        'Start with hardy fish',
+        'Monitor ammonia',
+        'Gradual scaling'
+      ]
+    },
+    icon: <Pets />
+  },
+  {
     title: 'Smart Farming',
-    image: '/images/smart-farming.jpg',
+    image: '/images/automation-guide.jpg',
     description: 'Technology-driven precision agriculture',
     benefits: [
       'Data-driven decisions',
       'Automated processes',
       'Resource optimization',
-      'Higher yields'
+      'Higher efficiency'
     ],
+    guide: {
+      basics: [
+        'Sensor deployment',
+        'Data collection',
+        'System integration',
+        'Automation setup'
+      ],
+      equipment: [
+        'IoT sensors',
+        'Control systems',
+        'Mobile apps',
+        'Weather stations'
+      ],
+      crops: [
+        'All crop types',
+        'Precision irrigation',
+        'Nutrient monitoring',
+        'Climate control'
+      ],
+      tips: [
+        'Start with basics',
+        'Regular calibration',
+        'Data backup',
+        'System maintenance'
+      ]
+    },
     icon: <Build />,
     pro: true
   }
@@ -182,9 +286,13 @@ const learningPaths = [
         image: '/images/soil-health.jpg',
         topics: [
           'Soil composition and structure',
-          'pH levels and testing',
-          'Organic matter importance',
-          'Nutrient cycles'
+          'pH testing and adjustment',
+          'Organic matter management',
+          'Nutrient cycles and balance',
+          'Soil microorganisms',
+          'Composting techniques',
+          'Soil improvement strategies',
+          'Erosion prevention'
         ]
       },
       {
@@ -192,29 +300,41 @@ const learningPaths = [
         image: '/images/plant-care-guide.jpg',
         topics: [
           'Seed selection and storage',
-          'Planting techniques',
-          'Growth stages monitoring',
-          'Basic troubleshooting'
+          'Proper planting techniques',
+          'Growth stage monitoring',
+          'Watering requirements',
+          'Fertilization schedules',
+          'Pruning methods',
+          'Disease identification',
+          'Plant stress management'
         ]
       },
       {
         title: 'Water Management',
         image: '/images/water-guide.jpg',
         topics: [
-          'Watering schedules',
+          'Irrigation system types',
+          'Water conservation methods',
+          'Rainwater harvesting',
           'Moisture monitoring',
-          'Conservation techniques',
-          'Drainage solutions'
+          'Drainage solutions',
+          'Water quality testing',
+          'Drought management',
+          'Sustainable practices'
         ]
       },
       {
         title: 'Season Planning',
         image: '/images/season-guide.jpg',
         topics: [
-          'Climate considerations',
+          'Climate zone understanding',
           'Planting calendars',
-          'Frost protection',
-          'Harvest timing'
+          'Frost protection methods',
+          'Succession planting',
+          'Crop rotation planning',
+          'Weather monitoring',
+          'Season extension techniques',
+          'Harvest scheduling'
         ]
       }
     ]
@@ -227,40 +347,56 @@ const learningPaths = [
         title: 'Crop Rotation',
         image: '/images/crop-guide.jpg',
         topics: [
-          'Rotation planning',
+          'Rotation planning basics',
+          'Plant family groups',
+          'Soil improvement cycles',
           'Companion planting',
-          'Soil improvement',
-          'Pest prevention'
+          'Cover crop integration',
+          'Nutrient management',
+          'Pest prevention strategies',
+          'Yield optimization'
         ]
       },
       {
         title: 'Pest Management',
         image: '/images/pest-guide.jpg',
         topics: [
-          'Identification guides',
-          'Natural solutions',
-          'Prevention strategies',
-          'Beneficial insects'
+          'Common pest identification',
+          'Natural control methods',
+          'Beneficial insects',
+          'Integrated pest management',
+          'Disease prevention',
+          'Organic solutions',
+          'Monitoring techniques',
+          'Prevention strategies'
         ]
       },
       {
         title: 'Irrigation Systems',
         image: '/images/irrigation-guide.jpg',
         topics: [
-          'System types',
-          'Installation guides',
-          'Maintenance tips',
-          'Water efficiency'
+          'System types and selection',
+          'Installation guidelines',
+          'Maintenance procedures',
+          'Water efficiency metrics',
+          'Automated systems',
+          'Troubleshooting guide',
+          'Seasonal adjustments',
+          'Cost optimization'
         ]
       },
       {
         title: 'Market Planning',
         image: '/images/market-guide.jpg',
         topics: [
-          'Market research',
+          'Market research methods',
           'Pricing strategies',
           'Distribution channels',
-          'Customer relations'
+          'Customer relationships',
+          'Product presentation',
+          'Sales tracking',
+          'Marketing techniques',
+          'Business planning'
         ]
       }
     ]
@@ -273,30 +409,42 @@ const learningPaths = [
         title: 'Precision Agriculture',
         image: '/images/precision-guide.jpg',
         topics: [
-          'GPS mapping',
-          'Soil sampling',
+          'GPS mapping systems',
+          'Soil sampling methods',
           'Variable rate application',
-          'Yield monitoring'
+          'Yield monitoring tools',
+          'Data collection systems',
+          'Remote sensing',
+          'Equipment calibration',
+          'Analysis techniques'
         ]
       },
       {
         title: 'Farm Automation',
         image: '/images/automation-guide.jpg',
         topics: [
-          'Smart irrigation',
-          'Climate control',
-          'Automated feeders',
-          'Monitoring systems'
+          'Smart irrigation systems',
+          'Climate control methods',
+          'Automated feeding systems',
+          'Monitoring equipment',
+          'System integration',
+          'Data logging',
+          'Remote management',
+          'Maintenance protocols'
         ]
       },
       {
         title: 'Data Analytics',
         image: '/images/analytics-guide.jpg',
         topics: [
-          'Data collection',
+          'Data collection methods',
           'Performance metrics',
           'Trend analysis',
-          'Decision support'
+          'Predictive modeling',
+          'Resource optimization',
+          'ROI calculations',
+          'Reporting systems',
+          'Decision support tools'
         ]
       },
       {
@@ -304,9 +452,13 @@ const learningPaths = [
         image: '/images/sustainable-practices.jpg',
         topics: [
           'Resource optimization',
-          'Carbon footprint',
-          'Renewable energy',
-          'Waste management'
+          'Carbon footprint reduction',
+          'Renewable energy integration',
+          'Waste management',
+          'Water conservation',
+          'Biodiversity promotion',
+          'Soil conservation',
+          'Eco-certification'
         ]
       }
     ],
