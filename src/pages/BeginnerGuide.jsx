@@ -189,7 +189,7 @@ const learningPaths = [
       },
       {
         title: 'Basic Plant Care',
-        image: '/images/basic-plant-care.jpg',
+        image: '/images/plant-care-guide.jpg',
         topics: [
           'Seed selection and storage',
           'Planting techniques',
@@ -199,7 +199,7 @@ const learningPaths = [
       },
       {
         title: 'Water Management',
-        image: '/images/water-management.jpg',
+        image: '/images/water-guide.jpg',
         topics: [
           'Watering schedules',
           'Moisture monitoring',
@@ -209,7 +209,7 @@ const learningPaths = [
       },
       {
         title: 'Season Planning',
-        image: '/images/season-planning.jpg',
+        image: '/images/season-guide.jpg',
         topics: [
           'Climate considerations',
           'Planting calendars',
@@ -225,7 +225,7 @@ const learningPaths = [
     modules: [
       {
         title: 'Crop Rotation',
-        image: '/images/crop-rotation.jpg',
+        image: '/images/crop-guide.jpg',
         topics: [
           'Rotation planning',
           'Companion planting',
@@ -235,7 +235,7 @@ const learningPaths = [
       },
       {
         title: 'Pest Management',
-        image: '/images/pest-management.jpg',
+        image: '/images/pest-guide.jpg',
         topics: [
           'Identification guides',
           'Natural solutions',
@@ -245,7 +245,7 @@ const learningPaths = [
       },
       {
         title: 'Irrigation Systems',
-        image: '/images/irrigation-systems.jpg',
+        image: '/images/irrigation-guide.jpg',
         topics: [
           'System types',
           'Installation guides',
@@ -255,7 +255,7 @@ const learningPaths = [
       },
       {
         title: 'Market Planning',
-        image: '/images/market-planning.jpg',
+        image: '/images/market-guide.jpg',
         topics: [
           'Market research',
           'Pricing strategies',
@@ -271,7 +271,7 @@ const learningPaths = [
     modules: [
       {
         title: 'Precision Agriculture',
-        image: '/images/precision-agriculture.jpg',
+        image: '/images/precision-guide.jpg',
         topics: [
           'GPS mapping',
           'Soil sampling',
@@ -281,7 +281,7 @@ const learningPaths = [
       },
       {
         title: 'Farm Automation',
-        image: '/images/farm-automation.jpg',
+        image: '/images/automation-guide.jpg',
         topics: [
           'Smart irrigation',
           'Climate control',
@@ -291,7 +291,7 @@ const learningPaths = [
       },
       {
         title: 'Data Analytics',
-        image: '/images/data-analytics.jpg',
+        image: '/images/analytics-guide.jpg',
         topics: [
           'Data collection',
           'Performance metrics',
