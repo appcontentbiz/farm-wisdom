@@ -8,6 +8,7 @@ import Home from './pages/Home';
 import BeginnerDashboard from './pages/BeginnerDashboard';
 import WeatherDashboard from './pages/WeatherDashboard';
 import ProfessionalDashboard from './pages/ProfessionalDashboard';
+import StoreLocations from './pages/StoreLocations';
 import AuthService from './services/AuthService';
 import './App.css';
 
@@ -52,6 +53,7 @@ function App() {
                   </PrivateRoute>
                 }
               />
+              <Route path="/store-locations" element={<StoreLocations />} />
               <Route path="/market" element={<div>Market Prices (Coming Soon)</div>} />
             </Routes>
           </main>
