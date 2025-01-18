@@ -1,10 +1,10 @@
 [build]
   command = "npm run build"
   publish = "dist"
-  functions = "api"
+  functions = "functions"
 
 [build.environment]
-  NODE_VERSION_18_19_0 = "true"
+  NODE_VERSION = "18.19.0"
 
 [dev]
   command = "npm run dev"
@@ -26,6 +26,16 @@
   to = "/index.html"
   status = 200
   force = true
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
 
 [functions]
   node_bundler = "esbuild"

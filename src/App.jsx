@@ -52,7 +52,6 @@ function App() {
                   </PrivateRoute>
                 }
               />
-              <Route path="/store-locations" element={<StoreLocations />} />
               <Route path="/market" element={<div>Market Prices (Coming Soon)</div>} />
             </Routes>
           </main>

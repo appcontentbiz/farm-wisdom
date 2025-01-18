@@ -2,7 +2,7 @@ import axios from 'axios';
 import EmailService from './EmailService';
 import CryptoJS from 'crypto-js';
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
 class AuthService {
   async login(email, password) {
@@ -20,13 +20,16 @@ class AuthService {
     }
   }
 
-  async register(userData) {
+  async register(name, email, password) {
     try {
-      const response = await axios.post(`${API_URL}/auth/register`, userData);
+      const response = await axios.post(`${API_URL}/auth/register`, {
+        name,
+        email,
+        password
+      });
       if (response.data.token) {
         localStorage.setItem('user', JSON.stringify(response.data));
-        // Send welcome email
-        await EmailService.sendWelcomeEmail(userData.email, userData.name);
+        await EmailService.sendWelcomeEmail(email, name);
       }
       return response.data;
     } catch (error) {
@@ -36,22 +39,15 @@ class AuthService {
 
   async forgotPassword(email) {
     try {
-      // Generate a secure token
       const resetToken = CryptoJS.lib.WordArray.random(32).toString();
-      const tokenExpiry = new Date();
-      tokenExpiry.setHours(tokenExpiry.getHours() + 1); // Token expires in 1 hour
-
-      // Save the token in the database
-      await axios.post(`${API_URL}/auth/forgot-password`, {
+      const response = await axios.post(`${API_URL}/auth/forgot-password`, {
         email,
-        resetToken,
-        tokenExpiry: tokenExpiry.toISOString()
+        resetToken
       });
-
-      // Send the reset email
-      await EmailService.sendPasswordResetEmail(email, resetToken);
-
-      return { message: 'Password reset instructions sent to your email' };
+      if (response.data.success) {
+        await EmailService.sendPasswordResetEmail(email, resetToken);
+      }
+      return response.data;
     } catch (error) {
       throw this.handleError(error);
     }
@@ -69,50 +65,29 @@ class AuthService {
     }
   }
 
-  async googleLogin() {
-    try {
-      window.location.href = `${API_URL}/auth/google`;
-    } catch (error) {
-      throw this.handleError(error);
-    }
-  }
-
-  async facebookLogin() {
-    try {
-      window.location.href = `${API_URL}/auth/facebook`;
-    } catch (error) {
-      throw this.handleError(error);
-    }
-  }
-
-  async handleSocialAuthCallback(provider, code) {
-    try {
-      const response = await axios.get(`${API_URL}/auth/${provider}/callback`, {
-        params: { code }
-      });
-      if (response.data.token) {
-        localStorage.setItem('user', JSON.stringify(response.data));
-      }
-      return response.data;
-    } catch (error) {
-      throw this.handleError(error);
-    }
-  }
-
   logout() {
     localStorage.removeItem('user');
   }
 
   getCurrentUser() {
-    return JSON.parse(localStorage.getItem('user'));
+    const userStr = localStorage.getItem('user');
+    if (!userStr) return null;
+    try {
+      return JSON.parse(userStr);
+    } catch {
+      return null;
+    }
   }
 
   handleError(error) {
     if (error.response) {
-      return new Error(error.response.data.error || 'An error occurred');
+      // Server responded with error
+      return new Error(error.response.data.msg || 'An error occurred');
     } else if (error.request) {
+      // Request made but no response
       return new Error('No response from server');
     } else {
+      // Other error
       return new Error('Error setting up request');
     }
   }
