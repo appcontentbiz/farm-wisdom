@@ -1,0 +1,41 @@
+.store-locations {
+  padding: 1.5rem;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.map-placeholder {
+  background-color: #e0e0e0;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.store-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.store-list li {
+  background: #f8f8f8;
+  margin: 0.5rem 0;
+  padding: 0.75rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.store-list li:hover {
+  background: #dcdcdc;
+}
+
+.store-details {
+  background: #f0f8ff;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+}
