@@ -1,8 +1,8 @@
-const express = require('express');
-const cors = require('cors');
-const mongoose = require('mongoose');
-const dotenv = require('dotenv');
-const jwt = require('jsonwebtoken');
+import express from 'express';
+import cors from 'cors';
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+import jwt from 'jsonwebtoken';
 
 dotenv.config();
 
@@ -12,25 +12,26 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Database connection
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/farm-wisdom', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+// Connect to MongoDB
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/farm-wisdom')
+  .then(() => console.log('MongoDB Connected'))
+  .catch(err => console.error('MongoDB Connection Error:', err));
 
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-db.once('open', () => {
-  console.log('Connected to MongoDB');
-});
+// Import routes
+import authRoutes from './routes/auth.js';
+import farmRoutes from './routes/farm.js';
+import weatherRoutes from './routes/weather.js';
+import analyticsRoutes from './routes/analytics.js';
+import marketRoutes from './routes/market.js';
+import userRoutes from './routes/users.js';
 
-// API Routes
-app.use('/api/auth', require('./routes/auth'));
-app.use('/api/users', require('./routes/users'));
-app.use('/api/weather', require('./routes/weather'));
-app.use('/api/market', require('./routes/market'));
-app.use('/api/farm', require('./routes/farm'));
-app.use('/api/analytics', require('./routes/analytics'));
+// Routes
+app.use('/api/auth', authRoutes);
+app.use('/api/farm', farmRoutes);
+app.use('/api/weather', weatherRoutes);
+app.use('/api/analytics', analyticsRoutes);
+app.use('/api/market', marketRoutes);
+app.use('/api/users', userRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
@@ -38,7 +39,24 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: 'Something went wrong!' });
 });
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+// Serverless Function handler
+export const handler = async (event, context) => {
+  // For local development
+  if (process.env.NODE_ENV === 'development') {
+    const PORT = process.env.PORT || 5000;
+    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+  }
+
+  // For Netlify Functions
+  return new Promise((resolve, reject) => {
+    const callback = (err, response) => {
+      if (err) {
+        reject(err);
+        return;
+      }
+      resolve(response);
+    };
+
+    app(event, context, callback);
+  });
+};
