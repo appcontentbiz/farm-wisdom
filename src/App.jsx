@@ -51,6 +51,7 @@ function App() {
                   </PrivateRoute>
                 }
               />
+              <Route path="/signup" element={<SignUp />} />
             </Routes>
           </main>
         </div>
