@@ -39,7 +39,8 @@ import {
   Science,
   Timeline,
   BarChart,
-  ArrowUpward
+  ArrowUpward,
+  Home
 } from '@mui/icons-material';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -55,6 +56,82 @@ const farmingTypes = [
       'Community knowledge sharing'
     ],
     icon: <Agriculture />
+  },
+  {
+    title: 'Urban Farming',
+    image: '/images/urban-farming.jpg',
+    description: 'Transform any space into a productive garden',
+    benefits: [
+      'No land required',
+      'Year-round growing',
+      'Fresh produce at home',
+      'Perfect for beginners'
+    ],
+    guide: {
+      basics: [
+        'Choose your space: Balcony, rooftop, or windowsill',
+        'Select container-friendly crops',
+        'Set up proper drainage systems',
+        'Maximize sunlight exposure'
+      ],
+      equipment: [
+        'Containers and grow bags',
+        'Quality potting soil',
+        'Basic hand tools',
+        'Watering system'
+      ],
+      crops: [
+        'Herbs: Basil, mint, parsley',
+        'Greens: Lettuce, spinach, kale',
+        'Vegetables: Tomatoes, peppers',
+        'Edible flowers'
+      ],
+      tips: [
+        'Use vertical space efficiently',
+        'Practice companion planting',
+        'Implement water conservation',
+        'Start small and expand gradually'
+      ]
+    },
+    icon: <Home />
+  },
+  {
+    title: 'Microgreens Farming',
+    image: '/images/microgreens-farming.jpg',
+    description: 'Grow nutrient-dense miniature vegetables',
+    benefits: [
+      'Quick harvest cycles',
+      'High nutritional value',
+      'Minimal space needed',
+      'Year-round production'
+    ],
+    guide: {
+      basics: [
+        'Understanding growth stages',
+        'Selecting seed varieties',
+        'Creating ideal growing conditions',
+        'Harvesting techniques'
+      ],
+      equipment: [
+        'Growing trays and mats',
+        'LED grow lights',
+        'Humidity dome',
+        'Fine misting system'
+      ],
+      crops: [
+        'Brassicas: Broccoli, radish',
+        'Herbs: Cilantro, basil',
+        'Grains: Wheat, corn',
+        'Legumes: Peas, beans'
+      ],
+      tips: [
+        'Maintain proper air circulation',
+        'Monitor humidity levels',
+        'Keep growing medium moist',
+        'Practice proper sanitization'
+      ]
+    },
+    icon: <LocalFlorist />
   },
   {
     title: 'Organic Farming',
@@ -302,6 +379,99 @@ const analyticsTools = [
   }
 ];
 
+const professionalFeatures = {
+  title: 'Professional Farm-to-Wellness Program',
+  description: 'Comprehensive approach to farming, health, and sustainability',
+  modules: [
+    {
+      title: 'Holistic Farming Practices',
+      image: '/images/holistic-farming.jpg',
+      topics: [
+        'Biodynamic farming principles',
+        'Ecosystem balance',
+        'Natural pest management',
+        'Soil vitality enhancement'
+      ]
+    },
+    {
+      title: 'Farm-to-Table Nutrition',
+      image: '/images/farm-nutrition.jpg',
+      topics: [
+        'Nutrient density optimization',
+        'Crop nutritional profiles',
+        'Harvest timing for nutrients',
+        'Storage best practices'
+      ]
+    },
+    {
+      title: 'Wellness Integration',
+      image: '/images/wellness-farming.jpg',
+      topics: [
+        'Medicinal herb growing',
+        'Therapeutic gardens',
+        'Stress-reducing layouts',
+        'Mindful farming practices'
+      ]
+    },
+    {
+      title: 'Farm Fitness Program',
+      image: '/images/farm-fitness.jpg',
+      topics: [
+        'Ergonomic farming techniques',
+        'Strength-building activities',
+        'Injury prevention',
+        'Recovery practices'
+      ]
+    }
+  ],
+  analytics: {
+    health: [
+      'Personal wellness metrics',
+      'Activity tracking',
+      'Nutrition analysis',
+      'Progress monitoring'
+    ],
+    business: [
+      'Revenue forecasting',
+      'Expense tracking',
+      'Inventory management',
+      'Market trend analysis'
+    ],
+    sustainability: [
+      'Carbon footprint tracking',
+      'Resource usage analytics',
+      'Waste reduction metrics',
+      'Environmental impact scores'
+    ]
+  },
+  netsuiteLikeFeatures: {
+    financial: [
+      'Real-time financial reporting',
+      'Automated billing and invoicing',
+      'Multi-currency support',
+      'Tax compliance tools'
+    ],
+    inventory: [
+      'Seed-to-sale tracking',
+      'Automated reordering',
+      'Batch tracking',
+      'Expiration management'
+    ],
+    crm: [
+      'Customer relationship management',
+      'Sales pipeline tracking',
+      'Marketing automation',
+      'Support ticket system'
+    ],
+    operations: [
+      'Workflow automation',
+      'Document management',
+      'Employee scheduling',
+      'Equipment maintenance'
+    ]
+  }
+};
+
 function BeginnerGuide() {
   const [activeTab, setActiveTab] = useState(0);
   const [expanded, setExpanded] = useState({});
@@ -345,75 +515,218 @@ function BeginnerGuide() {
 
       {/* Farming Types */}
       {activeTab === 0 && (
-        <Grid container spacing={3}>
-          {farmingTypes.map((type, index) => (
-            <Grid item xs={12} md={6} key={type.title}>
-              <Card 
-                sx={{ 
-                  height: '100%',
-                  ...(type.pro && {
-                    border: '2px solid',
-                    borderColor: 'primary.main',
-                  })
-                }}
-              >
-                <CardActionArea onClick={() => handleExpandClick(index)}>
-                  <CardMedia
-                    component="img"
-                    height="200"
-                    image={type.image}
-                    alt={type.title}
-                  />
-                  <CardContent>
-                    <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
-                      <Box sx={{ color: 'primary.main', mr: 1 }}>{type.icon}</Box>
-                      <Typography variant="h5">
-                        {type.title}
+        <>
+          <Grid container spacing={3}>
+            {farmingTypes.map((type, index) => (
+              <Grid item xs={12} md={6} key={type.title}>
+                <Card 
+                  sx={{ 
+                    height: '100%',
+                    ...(type.pro && {
+                      border: '2px solid',
+                      borderColor: 'primary.main',
+                    })
+                  }}
+                >
+                  <CardActionArea onClick={() => handleExpandClick(index)}>
+                    <CardMedia
+                      component="img"
+                      height="200"
+                      image={type.image}
+                      alt={type.title}
+                    />
+                    <CardContent>
+                      <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
+                        <Box sx={{ color: 'primary.main', mr: 1 }}>{type.icon}</Box>
+                        <Typography variant="h5">
+                          {type.title}
+                        </Typography>
+                        {type.pro && (
+                          <Chip
+                            label="PRO"
+                            color="primary"
+                            size="small"
+                            sx={{ ml: 1 }}
+                          />
+                        )}
+                      </Box>
+                      <Typography color="text.secondary" variant="subtitle1">
+                        {type.description}
                       </Typography>
-                      {type.pro && (
-                        <Chip
-                          label="PRO"
-                          color="primary"
-                          size="small"
-                          sx={{ ml: 1 }}
-                        />
+                    </CardContent>
+                  </CardActionArea>
+                  <Collapse in={expanded[index]}>
+                    <CardContent>
+                      <Typography variant="h6" gutterBottom>Key Benefits:</Typography>
+                      <List>
+                        {type.benefits.map((benefit) => (
+                          <ListItem key={benefit}>
+                            <ListItemIcon>
+                              <ChevronRight color="primary" />
+                            </ListItemIcon>
+                            <ListItemText primary={benefit} />
+                          </ListItem>
+                        ))}
+                      </List>
+                      {type.guide && (
+                        <>
+                          <Divider sx={{ my: 2 }} />
+                          <Typography variant="h6" gutterBottom>Complete Guide:</Typography>
+                          <Grid container spacing={2}>
+                            <Grid item xs={12} md={6}>
+                              <Typography variant="subtitle1" color="primary" gutterBottom>
+                                Getting Started
+                              </Typography>
+                              <List dense>
+                                {type.guide.basics.map((item) => (
+                                  <ListItem key={item}>
+                                    <ListItemIcon>
+                                      <ChevronRight color="primary" />
+                                    </ListItemIcon>
+                                    <ListItemText primary={item} />
+                                  </ListItem>
+                                ))}
+                              </List>
+                            </Grid>
+                            <Grid item xs={12} md={6}>
+                              <Typography variant="subtitle1" color="primary" gutterBottom>
+                                Essential Equipment
+                              </Typography>
+                              <List dense>
+                                {type.guide.equipment.map((item) => (
+                                  <ListItem key={item}>
+                                    <ListItemIcon>
+                                      <ChevronRight color="primary" />
+                                    </ListItemIcon>
+                                    <ListItemText primary={item} />
+                                  </ListItem>
+                                ))}
+                              </List>
+                            </Grid>
+                            <Grid item xs={12} md={6}>
+                              <Typography variant="subtitle1" color="primary" gutterBottom>
+                                Recommended Crops
+                              </Typography>
+                              <List dense>
+                                {type.guide.crops.map((item) => (
+                                  <ListItem key={item}>
+                                    <ListItemIcon>
+                                      <ChevronRight color="primary" />
+                                    </ListItemIcon>
+                                    <ListItemText primary={item} />
+                                  </ListItem>
+                                ))}
+                              </List>
+                            </Grid>
+                            <Grid item xs={12} md={6}>
+                              <Typography variant="subtitle1" color="primary" gutterBottom>
+                                Pro Tips
+                              </Typography>
+                              <List dense>
+                                {type.guide.tips.map((item) => (
+                                  <ListItem key={item}>
+                                    <ListItemIcon>
+                                      <ChevronRight color="primary" />
+                                    </ListItemIcon>
+                                    <ListItemText primary={item} />
+                                  </ListItem>
+                                ))}
+                              </List>
+                            </Grid>
+                          </Grid>
+                        </>
                       )}
-                    </Box>
-                    <Typography color="text.secondary" variant="subtitle1">
-                      {type.description}
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
-                <Collapse in={expanded[index]}>
-                  <CardContent>
-                    <Typography variant="h6" gutterBottom>Key Benefits:</Typography>
-                    <List>
-                      {type.benefits.map((benefit) => (
-                        <ListItem key={benefit}>
-                          <ListItemIcon>
-                            <ChevronRight color="primary" />
-                          </ListItemIcon>
-                          <ListItemText primary={benefit} />
-                        </ListItem>
-                      ))}
-                    </List>
-                    {type.pro && (
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        fullWidth
-                        onClick={() => navigate('/pricing')}
-                        sx={{ mt: 2 }}
-                      >
-                        Upgrade to Access
-                      </Button>
-                    )}
-                  </CardContent>
-                </Collapse>
-              </Card>
+                      {type.pro && (
+                        <Box sx={{ mt: 2 }}>
+                          <Divider sx={{ my: 2 }} />
+                          <Typography variant="h6" gutterBottom>Professional Features:</Typography>
+                          <Grid container spacing={2}>
+                            {Object.entries(professionalFeatures.netsuiteLikeFeatures).map(([category, items]) => (
+                              <Grid item xs={12} md={6} key={category}>
+                                <Typography variant="subtitle1" color="primary" gutterBottom>
+                                  {category.charAt(0).toUpperCase() + category.slice(1)}
+                                </Typography>
+                                <List dense>
+                                  {items.map((item) => (
+                                    <ListItem key={item}>
+                                      <ListItemIcon>
+                                        <ChevronRight color="primary" />
+                                      </ListItemIcon>
+                                      <ListItemText primary={item} />
+                                    </ListItem>
+                                  ))}
+                                </List>
+                              </Grid>
+                            ))}
+                          </Grid>
+                          <Button
+                            variant="contained"
+                            color="primary"
+                            fullWidth
+                            onClick={() => navigate('/pricing')}
+                            sx={{ mt: 2 }}
+                          >
+                            Upgrade to Access
+                          </Button>
+                        </Box>
+                      )}
+                    </CardContent>
+                  </Collapse>
+                </Card>
+              </Grid>
+            ))}
+          </Grid>
+
+          {/* Professional Wellness Section */}
+          <Paper sx={{ p: 4, mt: 4, backgroundColor: 'primary.main', color: 'white' }}>
+            <Typography variant="h4" gutterBottom>
+              Farm-to-Wellness Program (PRO)
+            </Typography>
+            <Typography variant="subtitle1" paragraph>
+              Transform your farming journey into a complete wellness lifestyle
+            </Typography>
+            <Grid container spacing={3}>
+              {professionalFeatures.modules.map((module) => (
+                <Grid item xs={12} md={6} lg={3} key={module.title}>
+                  <Card>
+                    <CardMedia
+                      component="img"
+                      height="160"
+                      image={module.image}
+                      alt={module.title}
+                    />
+                    <CardContent>
+                      <Typography variant="h6" gutterBottom>
+                        {module.title}
+                      </Typography>
+                      <List dense>
+                        {module.topics.map((topic) => (
+                          <ListItem key={topic}>
+                            <ListItemIcon>
+                              <ChevronRight />
+                            </ListItemIcon>
+                            <ListItemText primary={topic} />
+                          </ListItem>
+                        ))}
+                      </List>
+                    </CardContent>
+                  </Card>
+                </Grid>
+              ))}
             </Grid>
-          ))}
-        </Grid>
+            <Box sx={{ mt: 3, textAlign: 'center' }}>
+              <Button
+                variant="contained"
+                color="secondary"
+                size="large"
+                onClick={() => navigate('/pricing')}
+                startIcon={<ArrowUpward />}
+              >
+                Upgrade to Access Wellness Program
+              </Button>
+            </Box>
+          </Paper>
+        </>
       )}
 
       {/* Learning Paths */}
