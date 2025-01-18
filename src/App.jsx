@@ -29,22 +29,9 @@ function App() {
               <Route path="/signin" element={<SignIn />} />
               <Route path="/signup" element={<SignUp />} />
               <Route path="/forgot-password" element={<ForgotPassword />} />
-              <Route
-                path="/beginner/*"
-                element={
-                  <PrivateRoute>
-                    <BeginnerDashboard />
-                  </PrivateRoute>
-                }
-              />
-              <Route
-                path="/weather"
-                element={
-                  <PrivateRoute>
-                    <WeatherDashboard />
-                  </PrivateRoute>
-                }
-              />
+              <Route path="/market" element={<div>Market Prices (Coming Soon)</div>} />
+              <Route path="/beginner/*" element={<BeginnerDashboard />} />
+              <Route path="/weather" element={<WeatherDashboard />} />
               <Route
                 path="/professional/*"
                 element={
@@ -53,8 +40,14 @@ function App() {
                   </PrivateRoute>
                 }
               />
-              <Route path="/store-locations" element={<StoreLocations />} />
-              <Route path="/market" element={<div>Market Prices (Coming Soon)</div>} />
+              <Route
+                path="/store-locations"
+                element={
+                  <PrivateRoute>
+                    <StoreLocations />
+                  </PrivateRoute>
+                }
+              />
             </Routes>
           </main>
         </div>
