@@ -725,66 +725,23 @@ function BeginnerGuide() {
                           <Divider sx={{ my: 2 }} />
                           <Typography variant="h6" gutterBottom>Complete Guide:</Typography>
                           <Grid container spacing={2}>
-                            <Grid item xs={12} md={6}>
-                              <Typography variant="subtitle1" color="primary" gutterBottom>
-                                Getting Started
-                              </Typography>
-                              <List dense>
-                                {type.guide.basics.map((item) => (
-                                  <ListItem key={item}>
-                                    <ListItemIcon>
-                                      <ChevronRight color="primary" />
-                                    </ListItemIcon>
-                                    <ListItemText primary={item} />
-                                  </ListItem>
-                                ))}
-                              </List>
-                            </Grid>
-                            <Grid item xs={12} md={6}>
-                              <Typography variant="subtitle1" color="primary" gutterBottom>
-                                Essential Equipment
-                              </Typography>
-                              <List dense>
-                                {type.guide.equipment.map((item) => (
-                                  <ListItem key={item}>
-                                    <ListItemIcon>
-                                      <ChevronRight color="primary" />
-                                    </ListItemIcon>
-                                    <ListItemText primary={item} />
-                                  </ListItem>
-                                ))}
-                              </List>
-                            </Grid>
-                            <Grid item xs={12} md={6}>
-                              <Typography variant="subtitle1" color="primary" gutterBottom>
-                                Recommended Crops
-                              </Typography>
-                              <List dense>
-                                {type.guide.crops.map((item) => (
-                                  <ListItem key={item}>
-                                    <ListItemIcon>
-                                      <ChevronRight color="primary" />
-                                    </ListItemIcon>
-                                    <ListItemText primary={item} />
-                                  </ListItem>
-                                ))}
-                              </List>
-                            </Grid>
-                            <Grid item xs={12} md={6}>
-                              <Typography variant="subtitle1" color="primary" gutterBottom>
-                                Pro Tips
-                              </Typography>
-                              <List dense>
-                                {type.guide.tips.map((item) => (
-                                  <ListItem key={item}>
-                                    <ListItemIcon>
-                                      <ChevronRight color="primary" />
-                                    </ListItemIcon>
-                                    <ListItemText primary={item} />
-                                  </ListItem>
-                                ))}
-                              </List>
-                            </Grid>
+                            {Object.entries(type.guide).map(([section, items]) => (
+                              <Grid item xs={12} md={6} key={section}>
+                                <Typography variant="subtitle1" color="primary" gutterBottom sx={{ textTransform: 'capitalize' }}>
+                                  {section}:
+                                </Typography>
+                                <List dense>
+                                  {items.map((item) => (
+                                    <ListItem key={item}>
+                                      <ListItemIcon>
+                                        <ChevronRight color="primary" fontSize="small" />
+                                      </ListItemIcon>
+                                      <ListItemText primary={item} />
+                                    </ListItem>
+                                  ))}
+                                </List>
+                              </Grid>
+                            ))}
                           </Grid>
                         </>
                       )}
