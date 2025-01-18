@@ -55,26 +55,37 @@ const tiers = [
   {
     title: 'Enterprise',
     price: '99',
-    description: 'Advanced solutions for large-scale farming',
+    description: 'Advanced solutions for large-scale operations',
     features: [
       'All Professional features',
       'Multi-farm management',
-      'Advanced analytics & reporting',
-      'Climate modeling',
-      'Resource optimization AI',
-      'Integration with IoT devices',
-      'Automated compliance tracking',
-      'Priority support',
-      'Custom feature development',
-      'Team collaboration tools'
+      'Advanced analytics',
+      'Custom reporting',
+      'API access',
+      'Dedicated support',
+      'Employee accounts',
+      'Integration support',
+      'Custom features'
     ],
     buttonText: 'Contact us',
     buttonVariant: 'outlined',
   },
 ];
 
-const Pricing = () => {
+function Pricing() {
   const navigate = useNavigate();
+
+  const handleSubscribe = (tier) => {
+    if (tier.title === 'Free') {
+      navigate('/signup');
+    } else if (tier.title === 'Enterprise') {
+      // Implement contact form or redirect to contact page
+      navigate('/contact');
+    } else {
+      // Implement subscription flow
+      navigate('/signup?plan=professional');
+    }
+  };
 
   return (
     <Container maxWidth="lg" sx={{ py: 8 }}>
@@ -85,13 +96,12 @@ const Pricing = () => {
           color="text.primary"
           gutterBottom
         >
-          Choose Your Path to Success
+          Pricing Plans
         </Typography>
         <Typography variant="h5" color="text.secondary" component="p">
-          Select the plan that best fits your farming journey
+          Choose the perfect plan for your farming needs
         </Typography>
       </Box>
-
       <Grid container spacing={4} alignItems="flex-end">
         {tiers.map((tier) => (
           <Grid
@@ -107,9 +117,9 @@ const Pricing = () => {
                 display: 'flex',
                 flexDirection: 'column',
                 ...(tier.title === 'Professional' && {
-                  transform: 'scale(1.05)',
-                  border: '2px solid',
-                  borderColor: 'primary.main',
+                  transform: { sm: 'scale(1.05)' },
+                  zIndex: 1,
+                  boxShadow: 8,
                 }),
               }}
             >
@@ -119,17 +129,25 @@ const Pricing = () => {
                 titleTypographyProps={{ align: 'center' }}
                 subheaderTypographyProps={{ align: 'center' }}
                 sx={{
-                  backgroundColor: tier.title === 'Professional' ? 'primary.main' : 'grey.100',
-                  color: tier.title === 'Professional' ? 'white' : 'text.primary',
+                  backgroundColor: (theme) =>
+                    tier.title === 'Professional'
+                      ? theme.palette.primary.main
+                      : theme.palette.grey[200],
+                  color: (theme) =>
+                    tier.title === 'Professional'
+                      ? theme.palette.primary.contrastText
+                      : null,
                 }}
-                action={tier.subheader ? (
-                  <Chip
-                    label="POPULAR"
-                    color="secondary"
-                    size="small"
-                    sx={{ mt: 1, mr: 1 }}
-                  />
-                ) : null}
+                action={
+                  tier.title === 'Professional' && (
+                    <Chip
+                      label="POPULAR"
+                      color="secondary"
+                      size="small"
+                      sx={{ mt: 1, mr: 1 }}
+                    />
+                  )
+                }
               />
               <CardContent sx={{ flexGrow: 1 }}>
                 <Box
@@ -171,9 +189,12 @@ const Pricing = () => {
                 <Button
                   fullWidth
                   variant={tier.buttonVariant}
-                  color={tier.title === 'Professional' ? 'secondary' : 'primary'}
-                  onClick={() => navigate('/signup')}
-                  sx={{ py: 2 }}
+                  color={
+                    tier.title === 'Professional' ? 'secondary' : 'primary'
+                  }
+                  onClick={() => handleSubscribe(tier)}
+                  size="large"
+                  sx={{ mt: 'auto' }}
                 >
                   {tier.buttonText}
                 </Button>
@@ -182,26 +203,16 @@ const Pricing = () => {
           </Grid>
         ))}
       </Grid>
-
       <Box sx={{ mt: 6, textAlign: 'center' }}>
-        <Typography variant="h6" color="text.secondary" gutterBottom>
-          Enterprise-Grade Features
+        <Typography variant="subtitle1" color="text.secondary" component="p">
+          All plans include a 14-day money-back guarantee
         </Typography>
-        <Typography variant="body1" color="text.secondary" paragraph>
-          Looking for custom solutions? Our enterprise plan includes dedicated support,
-          custom integrations, and advanced features tailored to your needs.
+        <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
+          Need help choosing? Contact our team for a personalized recommendation
         </Typography>
-        <Button
-          variant="outlined"
-          color="primary"
-          size="large"
-          onClick={() => navigate('/contact')}
-        >
-          Contact Sales Team
-        </Button>
       </Box>
     </Container>
   );
-};
+}
 
 export default Pricing;

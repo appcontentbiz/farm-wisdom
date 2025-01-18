@@ -19,7 +19,8 @@ import {
   CardMedia,
   CardActionArea,
   IconButton,
-  Collapse
+  Collapse,
+  CardActions
 } from '@mui/material';
 import {
   Agriculture,
@@ -49,43 +50,34 @@ const farmingTypes = [
     benefits: [
       'Lower initial investment',
       'Natural farming practices',
-      'Proven techniques'
+      'Time-tested techniques',
+      'Community knowledge sharing'
     ],
-    challenges: [
-      'Labor intensive',
-      'Weather dependent',
-      'Lower yields'
-    ]
+    icon: <Agriculture />
   },
   {
     title: 'Organic Farming',
     image: '/images/organic-farming.jpg',
-    description: 'Chemical-free farming focusing on natural processes',
+    description: 'Sustainable farming without synthetic inputs',
     benefits: [
-      'Premium product prices',
+      'Premium market prices',
       'Environmental sustainability',
+      'Healthier produce',
       'Growing market demand'
     ],
-    challenges: [
-      'Certification process',
-      'Pest management',
-      'Initial yield reduction'
-    ]
+    icon: <Eco />
   },
   {
     title: 'Hydroponic Farming',
     image: '/images/hydroponic-farming.jpg',
-    description: 'Soil-less farming using nutrient-rich water',
+    description: 'Soil-less farming with controlled environments',
     benefits: [
       'Year-round production',
       'Water efficiency',
-      'Space optimization'
+      'Space optimization',
+      'Precise nutrient control'
     ],
-    challenges: [
-      'High setup costs',
-      'Technical knowledge required',
-      'Energy dependent'
-    ]
+    icon: <Water />
   },
   {
     title: 'Smart Farming',
@@ -93,168 +85,174 @@ const farmingTypes = [
     description: 'Technology-driven precision agriculture',
     benefits: [
       'Data-driven decisions',
+      'Automated processes',
       'Resource optimization',
       'Higher yields'
     ],
-    challenges: [
-      'Initial investment',
-      'Technical expertise needed',
-      'Internet connectivity'
-    ]
+    icon: <Build />,
+    pro: true
   }
 ];
 
 const learningPaths = [
   {
-    title: 'Fundamentals',
-    icon: <Agriculture />,
+    title: 'Beginner Basics',
     modules: [
       'Understanding Soil Health',
-      'Basic Plant Biology',
-      'Farm Planning 101',
-      'Essential Tools & Equipment'
+      'Basic Plant Care',
+      'Water Management',
+      'Season Planning'
     ]
   },
   {
-    title: 'Growing Techniques',
-    icon: <LocalFlorist />,
+    title: 'Intermediate Skills',
     modules: [
-      'Seed Selection & Storage',
-      'Planting Methods',
+      'Crop Rotation',
+      'Pest Management',
       'Irrigation Systems',
-      'Crop Rotation'
+      'Market Planning'
     ]
   },
   {
-    title: 'Livestock Management',
-    icon: <Pets />,
+    title: 'Advanced Techniques',
     modules: [
-      'Animal Health Basics',
-      'Feed Management',
-      'Housing Requirements',
-      'Breeding Fundamentals'
-    ]
-  },
-  {
-    title: 'Sustainable Practices',
-    icon: <Eco />,
-    modules: [
-      'Composting Methods',
-      'Natural Pest Control',
-      'Water Conservation',
-      'Soil Conservation'
-    ]
+      'Precision Agriculture',
+      'Farm Automation',
+      'Data Analytics',
+      'Sustainable Practices'
+    ],
+    pro: true
   }
 ];
 
-const seasonalGuides = {
-  Spring: [
-    'Soil preparation techniques',
-    'Early season planting guide',
-    'Frost protection methods',
-    'Spring pest management'
-  ],
-  Summer: [
-    'Irrigation scheduling',
-    'Heat stress management',
-    'Summer crop maintenance',
-    'Pest and disease control'
-  ],
-  Fall: [
-    'Harvest planning',
-    'Fall crop selection',
-    'Soil amendments',
-    'Winter preparation'
-  ],
-  Winter: [
-    'Greenhouse management',
-    'Equipment maintenance',
-    'Planning next season',
-    'Winter crop options'
-  ]
-};
+const seasonalGuides = [
+  {
+    season: 'Spring',
+    icon: <LocalFlorist />,
+    tasks: [
+      'Soil preparation',
+      'Seed starting',
+      'Early planting',
+      'Frost protection'
+    ]
+  },
+  {
+    season: 'Summer',
+    icon: <WbSunny />,
+    tasks: [
+      'Irrigation management',
+      'Pest control',
+      'Succession planting',
+      'Heat management'
+    ]
+  },
+  {
+    season: 'Fall',
+    icon: <Park />,
+    tasks: [
+      'Harvest planning',
+      'Soil amendments',
+      'Cover cropping',
+      'Storage preparation'
+    ]
+  },
+  {
+    season: 'Winter',
+    icon: <Science />,
+    tasks: [
+      'Equipment maintenance',
+      'Planning next season',
+      'Market research',
+      'Skill development'
+    ],
+    pro: true
+  }
+];
 
-const BeginnerGuide = () => {
-  const [selectedTab, setSelectedTab] = useState(0);
-  const [expandedCard, setExpandedCard] = useState(null);
+const analyticsTools = [
+  {
+    title: 'Yield Tracking',
+    description: 'Monitor and analyze crop yields',
+    icon: <Timeline />,
+    pro: true
+  },
+  {
+    title: 'Cost Analysis',
+    description: 'Track expenses and revenue',
+    icon: <BarChart />,
+    pro: true
+  }
+];
+
+function BeginnerGuide() {
+  const [activeTab, setActiveTab] = useState(0);
+  const [expanded, setExpanded] = useState({});
 
   const handleTabChange = (event, newValue) => {
-    setSelectedTab(newValue);
+    setActiveTab(newValue);
   };
 
   const handleExpandClick = (index) => {
-    setExpandedCard(expandedCard === index ? null : index);
+    setExpanded({ ...expanded, [index]: !expanded[index] });
   };
 
   return (
-    <Container maxWidth="lg" sx={{ mt: 4, mb: 8 }}>
-      <Box sx={{ textAlign: 'center', mb: 6 }}>
-        <Typography variant="h3" component="h1" gutterBottom>
-          Your Journey to Successful Farming
-        </Typography>
-        <Typography variant="h6" color="text.secondary" sx={{ mb: 4 }}>
-          Discover different farming approaches and find your path
-        </Typography>
+    <Container maxWidth="lg" sx={{ py: 4 }}>
+      <Typography variant="h4" component="h1" gutterBottom>
+        Beginner's Guide to Farming
+      </Typography>
+      
+      <Box sx={{ borderBottom: 1, borderColor: 'divider', mb: 3 }}>
+        <Tabs value={activeTab} onChange={handleTabChange} aria-label="guide sections">
+          <Tab label="Farming Types" />
+          <Tab label="Learning Paths" />
+          <Tab label="Seasonal Guides" />
+          <Tab label="Analytics & Tools" />
+        </Tabs>
       </Box>
 
-      <Paper sx={{ mb: 6 }}>
-        <Tabs
-          value={selectedTab}
-          onChange={handleTabChange}
-          variant="fullWidth"
-          indicatorColor="primary"
-          textColor="primary"
-        >
-          <Tab label="Farming Types" icon={<Park />} />
-          <Tab label="Learning Paths" icon={<Timeline />} />
-          <Tab label="Seasonal Guides" icon={<WbSunny />} />
-          <Tab label="Analytics & Tools" icon={<BarChart />} />
-        </Tabs>
-      </Paper>
-
-      {/* Farming Types Tab */}
-      {selectedTab === 0 && (
-        <Grid container spacing={4}>
+      {/* Farming Types */}
+      {activeTab === 0 && (
+        <Grid container spacing={3}>
           {farmingTypes.map((type, index) => (
             <Grid item xs={12} md={6} key={type.title}>
               <Card>
                 <CardActionArea onClick={() => handleExpandClick(index)}>
                   <CardMedia
                     component="img"
-                    height="200"
+                    height="140"
                     image={type.image}
                     alt={type.title}
                   />
                   <CardContent>
-                    <Typography variant="h5" component="h2" gutterBottom>
-                      {type.title}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
+                    <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
+                      {type.icon}
+                      <Typography variant="h6" sx={{ ml: 1 }}>
+                        {type.title}
+                      </Typography>
+                      {type.pro && (
+                        <Chip
+                          label="PRO"
+                          color="primary"
+                          size="small"
+                          sx={{ ml: 1 }}
+                        />
+                      )}
+                    </Box>
+                    <Typography color="text.secondary">
                       {type.description}
                     </Typography>
                   </CardContent>
                 </CardActionArea>
-                <Collapse in={expandedCard === index}>
+                <Collapse in={expanded[index]}>
                   <CardContent>
-                    <Typography variant="h6" gutterBottom>Benefits:</Typography>
-                    <List dense>
+                    <List>
                       {type.benefits.map((benefit) => (
                         <ListItem key={benefit}>
                           <ListItemIcon>
-                            <ChevronRight color="primary" />
+                            <ChevronRight />
                           </ListItemIcon>
                           <ListItemText primary={benefit} />
-                        </ListItem>
-                      ))}
-                    </List>
-                    <Typography variant="h6" gutterBottom>Challenges:</Typography>
-                    <List dense>
-                      {type.challenges.map((challenge) => (
-                        <ListItem key={challenge}>
-                          <ListItemIcon>
-                            <ChevronRight color="error" />
-                          </ListItemIcon>
-                          <ListItemText primary={challenge} />
                         </ListItem>
                       ))}
                     </List>
@@ -266,58 +264,82 @@ const BeginnerGuide = () => {
         </Grid>
       )}
 
-      {/* Learning Paths Tab */}
-      {selectedTab === 1 && (
-        <Grid container spacing={4}>
+      {/* Learning Paths */}
+      {activeTab === 1 && (
+        <Grid container spacing={3}>
           {learningPaths.map((path) => (
-            <Grid item xs={12} md={6} key={path.title}>
-              <Card sx={{ height: '100%' }}>
+            <Grid item xs={12} md={4} key={path.title}>
+              <Card>
                 <CardContent>
-                  <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                    <Box sx={{ mr: 2, color: 'primary.main' }}>{path.icon}</Box>
-                    <Typography variant="h5" component="h2">
-                      {path.title}
-                    </Typography>
-                  </Box>
+                  <Typography variant="h6" gutterBottom>
+                    {path.title}
+                    {path.pro && (
+                      <Chip
+                        label="PRO"
+                        color="primary"
+                        size="small"
+                        sx={{ ml: 1 }}
+                      />
+                    )}
+                  </Typography>
                   <List>
                     {path.modules.map((module) => (
                       <ListItem key={module}>
                         <ListItemIcon>
-                          <Chip
-                            size="small"
-                            label="PRO"
-                            color="primary"
-                            variant="outlined"
-                          />
+                          <ChevronRight />
                         </ListItemIcon>
                         <ListItemText primary={module} />
                       </ListItem>
                     ))}
                   </List>
                 </CardContent>
+                {path.pro && (
+                  <CardActions>
+                    <Button
+                      component={Link}
+                      to="/pricing"
+                      color="primary"
+                      variant="contained"
+                      fullWidth
+                    >
+                      Upgrade to Access
+                    </Button>
+                  </CardActions>
+                )}
               </Card>
             </Grid>
           ))}
         </Grid>
       )}
 
-      {/* Seasonal Guides Tab */}
-      {selectedTab === 2 && (
-        <Grid container spacing={4}>
-          {Object.entries(seasonalGuides).map(([season, guides]) => (
-            <Grid item xs={12} md={6} key={season}>
-              <Card sx={{ height: '100%' }}>
+      {/* Seasonal Guides */}
+      {activeTab === 2 && (
+        <Grid container spacing={3}>
+          {seasonalGuides.map((season) => (
+            <Grid item xs={12} md={3} key={season.season}>
+              <Card>
                 <CardContent>
-                  <Typography variant="h5" component="h2" gutterBottom>
-                    {season}
-                  </Typography>
+                  <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+                    {season.icon}
+                    <Typography variant="h6" sx={{ ml: 1 }}>
+                      {season.season}
+                    </Typography>
+                    {season.pro && (
+                      <Chip
+                        label="PRO"
+                        color="primary"
+                        size="small"
+                        sx={{ ml: 1 }}
+                      />
+                    )}
+                  </Box>
                   <List>
-                    {guides.map((guide) => (
-                      <ListItem key={guide}>
+                    {season.tasks.map((task) => (
+                      <ListItem key={task}>
                         <ListItemIcon>
-                          <EmojiNature color="primary" />
+                          <ChevronRight />
                         </ListItemIcon>
-                        <ListItemText primary={guide} />
+                        <ListItemText primary={task} />
                       </ListItem>
                     ))}
                   </List>
@@ -328,63 +350,55 @@ const BeginnerGuide = () => {
         </Grid>
       )}
 
-      {/* Analytics & Tools Tab */}
-      {selectedTab === 3 && (
-        <Box sx={{ textAlign: 'center', py: 4 }}>
-          <Science sx={{ fontSize: 60, color: 'primary.main', mb: 2 }} />
-          <Typography variant="h5" gutterBottom>
-            Advanced Tools & Analytics
-          </Typography>
-          <Typography variant="body1" color="text.secondary" paragraph>
-            Unlock powerful tools and analytics to optimize your farming operations
-          </Typography>
-          <Grid container spacing={3} justifyContent="center" sx={{ mt: 2 }}>
-            <Grid item xs={12} md={4}>
-              <Card sx={{ height: '100%', backgroundColor: 'primary.light' }}>
+      {/* Analytics & Tools */}
+      {activeTab === 3 && (
+        <Grid container spacing={3}>
+          {analyticsTools.map((tool) => (
+            <Grid item xs={12} md={6} key={tool.title}>
+              <Card>
                 <CardContent>
-                  <Typography variant="h6" gutterBottom color="primary.contrastText">
-                    Soil Analysis
-                  </Typography>
-                  <Typography variant="body2" color="primary.contrastText">
-                    Professional soil testing and recommendations
+                  <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+                    {tool.icon}
+                    <Typography variant="h6" sx={{ ml: 1 }}>
+                      {tool.title}
+                    </Typography>
+                    {tool.pro && (
+                      <Chip
+                        label="PRO"
+                        color="primary"
+                        size="small"
+                        sx={{ ml: 1 }}
+                      />
+                    )}
+                  </Box>
+                  <Typography color="text.secondary">
+                    {tool.description}
                   </Typography>
                 </CardContent>
+                <CardActions>
+                  <Button
+                    component={Link}
+                    to="/pricing"
+                    color="primary"
+                    variant="contained"
+                    fullWidth
+                  >
+                    Upgrade to Access
+                  </Button>
+                </CardActions>
               </Card>
             </Grid>
-            <Grid item xs={12} md={4}>
-              <Card sx={{ height: '100%', backgroundColor: 'secondary.light' }}>
-                <CardContent>
-                  <Typography variant="h6" gutterBottom color="secondary.contrastText">
-                    Yield Predictions
-                  </Typography>
-                  <Typography variant="body2" color="secondary.contrastText">
-                    AI-powered crop yield forecasting
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <Card sx={{ height: '100%', backgroundColor: 'success.light' }}>
-                <CardContent>
-                  <Typography variant="h6" gutterBottom color="success.contrastText">
-                    Market Analysis
-                  </Typography>
-                  <Typography variant="body2" color="success.contrastText">
-                    Real-time market data and trends
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-          </Grid>
-        </Box>
+          ))}
+        </Grid>
       )}
 
-      <Box sx={{ mt: 6, textAlign: 'center' }}>
+      {/* Call to Action */}
+      <Paper sx={{ mt: 4, p: 3, textAlign: 'center' }}>
         <Typography variant="h5" gutterBottom>
-          Ready to Take Your Farming to the Next Level?
+          Ready to take your farming to the next level?
         </Typography>
-        <Typography variant="body1" color="text.secondary" paragraph>
-          Get full access to all guides, tools, and expert support
+        <Typography color="text.secondary" paragraph>
+          Upgrade to PRO for access to advanced features, tools, and expert guidance.
         </Typography>
         <Button
           component={Link}
@@ -392,22 +406,12 @@ const BeginnerGuide = () => {
           variant="contained"
           color="primary"
           size="large"
-          sx={{ mr: 2 }}
         >
           View Pricing Plans
         </Button>
-        <Button
-          component={Link}
-          to="/signup"
-          variant="outlined"
-          color="primary"
-          size="large"
-        >
-          Start Free Trial
-        </Button>
-      </Box>
+      </Paper>
     </Container>
   );
-};
+}
 
 export default BeginnerGuide;
