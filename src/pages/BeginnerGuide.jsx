@@ -48,6 +48,7 @@ const farmingTypes = [
   {
     title: 'Traditional Farming',
     image: '/images/traditional-farming.jpg',
+    icon: <Agriculture />,
     description: 'Time-tested methods passed down through generations',
     benefits: [
       'Proven techniques',
@@ -80,199 +81,83 @@ const farmingTypes = [
         'Keep detailed records',
         'Practice sustainable methods'
       ]
-    },
-    icon: <Agriculture />
+    }
   },
   {
-    title: 'Container Gardening',
+    title: 'Urban Farming',
     image: '/images/urban-farming.jpg',
-    description: 'Perfect for urban spaces and beginners',
+    icon: <Home />,
+    description: 'Modern solutions for city-based agriculture',
     benefits: [
-      'Space efficient',
-      'Perfect for beginners',
-      'Mobile gardens',
-      'Year-round growing'
+      'Space efficiency',
+      'Year-round growing',
+      'Fresh local produce',
+      'Community building'
     ],
     guide: {
       basics: [
-        'Choosing right containers',
-        'Proper drainage setup',
-        'Soil mix preparation',
-        'Light requirements'
+        'Container gardening',
+        'Vertical farming techniques',
+        'Light management',
+        'Space optimization'
       ],
       equipment: [
         'Growing containers',
-        'Quality potting soil',
-        'Hand tools set',
-        'Watering system'
+        'Vertical structures',
+        'LED grow lights',
+        'Automated watering systems'
       ],
       crops: [
-        'Herbs: basil, mint, thyme',
-        'Tomatoes and peppers',
-        'Leafy greens',
-        'Root vegetables'
+        'Herbs',
+        'Microgreens',
+        'Dwarf vegetables',
+        'Climbing plants'
       ],
       tips: [
-        'Monitor moisture levels',
-        'Use vertical space',
-        'Rotate containers',
-        'Regular fertilizing'
-      ]
-    },
-    icon: <Home />
-  },
-  {
-    title: 'Raised Bed Farming',
-    image: '/images/crop-guide.jpg',
-    description: 'Efficient method with better soil control',
-    benefits: [
-      'Better soil management',
-      'Improved drainage',
-      'Less weeding',
-      'Extended growing season'
-    ],
-    guide: {
-      basics: [
-        'Bed construction',
-        'Soil layering',
-        'Irrigation setup',
-        'Plant spacing'
-      ],
-      equipment: [
-        'Construction materials',
-        'Quality soil mix',
-        'Drip irrigation',
-        'Garden tools'
-      ],
-      crops: [
-        'Mixed vegetables',
-        'Companion plants',
-        'Flowers and herbs',
-        'Root crops'
-      ],
-      tips: [
-        'Plan crop rotation',
+        'Maximize sunlight exposure',
         'Use companion planting',
-        'Add season extenders',
-        'Maintain soil health'
+        'Monitor water carefully',
+        'Focus on high-value crops'
       ]
-    },
-    icon: <Nature />
-  },
-  {
-    title: 'Hydroponic Farming',
-    image: '/images/hydroponic-farming.jpg',
-    description: 'Soil-less growing using nutrient-rich water',
-    benefits: [
-      'Water efficient',
-      'Higher yields',
-      'Year-round growing',
-      'Space saving'
-    ],
-    guide: {
-      basics: [
-        'System setup',
-        'Nutrient management',
-        'pH monitoring',
-        'Environmental control'
-      ],
-      equipment: [
-        'Growing system',
-        'Pumps and timers',
-        'Nutrient solutions',
-        'Monitoring tools'
-      ],
-      crops: [
-        'Leafy greens',
-        'Herbs',
-        'Tomatoes',
-        'Strawberries'
-      ],
-      tips: [
-        'Start simple',
-        'Monitor daily',
-        'Keep it clean',
-        'Learn nutrient signs'
-      ]
-    },
-    icon: <Water />
-  },
-  {
-    title: 'Aquaponic Farming',
-    image: '/images/irrigation-guide.jpg',
-    description: 'Combines fish farming with plant growing',
-    benefits: [
-      'Sustainable system',
-      'Dual production',
-      'Natural fertilizer',
-      'Water efficient'
-    ],
-    guide: {
-      basics: [
-        'System design',
-        'Fish selection',
-        'Plant compatibility',
-        'Water quality'
-      ],
-      equipment: [
-        'Fish tanks',
-        'Growing beds',
-        'Pumps and filters',
-        'Monitoring equipment'
-      ],
-      crops: [
-        'Leafy greens',
-        'Herbs',
-        'Fruiting plants',
-        'Root vegetables'
-      ],
-      tips: [
-        'Balance is key',
-        'Start with hardy fish',
-        'Monitor ammonia',
-        'Gradual scaling'
-      ]
-    },
-    icon: <Pets />
+    }
   },
   {
     title: 'Smart Farming',
-    image: '/images/automation-guide.jpg',
+    image: '/images/smart-farming.jpg',
+    icon: <Science />,
     description: 'Technology-driven precision agriculture',
     benefits: [
       'Data-driven decisions',
-      'Automated processes',
       'Resource optimization',
-      'Higher efficiency'
+      'Higher yields',
+      'Reduced waste'
     ],
     guide: {
       basics: [
         'Sensor deployment',
-        'Data collection',
-        'System integration',
-        'Automation setup'
+        'Data collection methods',
+        'Automation basics',
+        'System integration'
       ],
       equipment: [
         'IoT sensors',
-        'Control systems',
+        'Automated systems',
         'Mobile apps',
         'Weather stations'
       ],
       crops: [
-        'All crop types',
-        'Precision irrigation',
-        'Nutrient monitoring',
-        'Climate control'
+        'High-value crops',
+        'Research varieties',
+        'Climate-adapted plants',
+        'Experimental hybrids'
       ],
       tips: [
-        'Start with basics',
-        'Regular calibration',
-        'Data backup',
-        'System maintenance'
+        'Regular system maintenance',
+        'Data backup practices',
+        'Stay updated with tech',
+        'Network with experts'
       ]
-    },
-    icon: <Build />,
-    pro: true
+    }
   }
 ];
 
@@ -674,10 +559,6 @@ function BeginnerGuide() {
                 <Card 
                   sx={{ 
                     height: '100%',
-                    ...(type.pro && {
-                      border: '2px solid',
-                      borderColor: 'primary.main',
-                    })
                   }}
                 >
                   <CardActionArea onClick={() => handleExpandClick(index)}>
@@ -693,14 +574,6 @@ function BeginnerGuide() {
                         <Typography variant="h5">
                           {type.title}
                         </Typography>
-                        {type.pro && (
-                          <Chip
-                            label="PRO"
-                            color="primary"
-                            size="small"
-                            sx={{ ml: 1 }}
-                          />
-                        )}
                       </Box>
                       <Typography color="text.secondary" variant="subtitle1">
                         {type.description}
@@ -744,40 +617,6 @@ function BeginnerGuide() {
                             ))}
                           </Grid>
                         </>
-                      )}
-                      {type.pro && (
-                        <Box sx={{ mt: 2 }}>
-                          <Divider sx={{ my: 2 }} />
-                          <Typography variant="h6" gutterBottom>Professional Features:</Typography>
-                          <Grid container spacing={2}>
-                            {Object.entries(professionalFeatures.netsuiteLikeFeatures).map(([category, items]) => (
-                              <Grid item xs={12} md={6} key={category}>
-                                <Typography variant="subtitle1" color="primary" gutterBottom>
-                                  {category.charAt(0).toUpperCase() + category.slice(1)}
-                                </Typography>
-                                <List dense>
-                                  {items.map((item) => (
-                                    <ListItem key={item}>
-                                      <ListItemIcon>
-                                        <ChevronRight color="primary" />
-                                      </ListItemIcon>
-                                      <ListItemText primary={item} />
-                                    </ListItem>
-                                  ))}
-                                </List>
-                              </Grid>
-                            ))}
-                          </Grid>
-                          <Button
-                            variant="contained"
-                            color="primary"
-                            fullWidth
-                            onClick={() => navigate('/pricing')}
-                            sx={{ mt: 2 }}
-                          >
-                            Upgrade to Access
-                          </Button>
-                        </Box>
                       )}
                     </CardContent>
                   </Collapse>
@@ -848,23 +687,11 @@ function BeginnerGuide() {
                   sx={{ 
                     p: 3, 
                     mb: 3,
-                    ...(path.pro && {
-                      border: '2px solid',
-                      borderColor: 'primary.main',
-                    })
                   }}
                 >
                   <Box sx={{ mb: 3 }}>
                     <Typography variant="h4" gutterBottom>
                       {path.title}
-                      {path.pro && (
-                        <Chip
-                          label="PRO"
-                          color="primary"
-                          size="small"
-                          sx={{ ml: 2 }}
-                        />
-                      )}
                     </Typography>
                     <Typography variant="h6" color="text.secondary" gutterBottom>
                       {path.description}
@@ -900,20 +727,6 @@ function BeginnerGuide() {
                       </Grid>
                     ))}
                   </Grid>
-                  
-                  {path.pro && (
-                    <Box sx={{ mt: 3, textAlign: 'center' }}>
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        size="large"
-                        onClick={() => navigate('/pricing')}
-                        startIcon={<ArrowUpward />}
-                      >
-                        Upgrade to Access Advanced Content
-                      </Button>
-                    </Box>
-                  )}
                 </Paper>
               </Grid>
             ))}
@@ -969,10 +782,6 @@ function BeginnerGuide() {
               <Card 
                 sx={{ 
                   height: '100%',
-                  ...(season.pro && {
-                    border: '2px solid',
-                    borderColor: 'primary.main',
-                  })
                 }}
               >
                 <CardMedia
@@ -987,14 +796,6 @@ function BeginnerGuide() {
                     <Typography variant="h5">
                       {season.season}
                     </Typography>
-                    {season.pro && (
-                      <Chip
-                        label="PRO"
-                        color="primary"
-                        size="small"
-                        sx={{ ml: 1 }}
-                      />
-                    )}
                   </Box>
                   <List>
                     {season.tasks.map((task) => (
@@ -1007,18 +808,6 @@ function BeginnerGuide() {
                     ))}
                   </List>
                 </CardContent>
-                {season.pro && (
-                  <CardActions>
-                    <Button
-                      fullWidth
-                      variant="contained"
-                      color="primary"
-                      onClick={() => navigate('/pricing')}
-                    >
-                      Upgrade to Access
-                    </Button>
-                  </CardActions>
-                )}
               </Card>
             </Grid>
           ))}
@@ -1034,10 +823,6 @@ function BeginnerGuide() {
                 <Card 
                   sx={{ 
                     height: '100%',
-                    ...(tool.pro && {
-                      border: '2px solid',
-                      borderColor: 'primary.main',
-                    })
                   }}
                 >
                   <CardMedia
@@ -1052,14 +837,6 @@ function BeginnerGuide() {
                       <Typography variant="h5">
                         {tool.title}
                       </Typography>
-                      {tool.pro && (
-                        <Chip
-                          label="PRO"
-                          color="primary"
-                          size="small"
-                          sx={{ ml: 1 }}
-                        />
-                      )}
                     </Box>
                     <Typography color="text.secondary" variant="subtitle1">
                       {tool.description}
