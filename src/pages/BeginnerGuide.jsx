@@ -38,9 +38,10 @@ import {
   Park,
   Science,
   Timeline,
-  BarChart
+  BarChart,
+  ArrowUpward
 } from '@mui/icons-material';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const farmingTypes = [
   {
@@ -129,6 +130,7 @@ const seasonalGuides = [
   {
     season: 'Spring',
     icon: <LocalFlorist />,
+    image: '/images/spring-farming.jpg',
     tasks: [
       'Soil preparation',
       'Seed starting',
@@ -139,6 +141,7 @@ const seasonalGuides = [
   {
     season: 'Summer',
     icon: <WbSunny />,
+    image: '/images/summer-farming.jpg',
     tasks: [
       'Irrigation management',
       'Pest control',
@@ -149,6 +152,7 @@ const seasonalGuides = [
   {
     season: 'Fall',
     icon: <Park />,
+    image: '/images/fall-farming.jpg',
     tasks: [
       'Harvest planning',
       'Soil amendments',
@@ -159,6 +163,7 @@ const seasonalGuides = [
   {
     season: 'Winter',
     icon: <Science />,
+    image: '/images/winter-farming.jpg',
     tasks: [
       'Equipment maintenance',
       'Planning next season',
@@ -174,12 +179,14 @@ const analyticsTools = [
     title: 'Yield Tracking',
     description: 'Monitor and analyze crop yields',
     icon: <Timeline />,
+    image: '/images/yield-tracking.jpg',
     pro: true
   },
   {
     title: 'Cost Analysis',
     description: 'Track expenses and revenue',
     icon: <BarChart />,
+    image: '/images/cost-analysis.jpg',
     pro: true
   }
 ];
@@ -187,6 +194,7 @@ const analyticsTools = [
 function BeginnerGuide() {
   const [activeTab, setActiveTab] = useState(0);
   const [expanded, setExpanded] = useState({});
+  const navigate = useNavigate();
 
   const handleTabChange = (event, newValue) => {
     setActiveTab(newValue);
@@ -198,16 +206,29 @@ function BeginnerGuide() {
 
   return (
     <Container maxWidth="lg" sx={{ py: 4 }}>
-      <Typography variant="h4" component="h1" gutterBottom>
-        Beginner's Guide to Farming
-      </Typography>
+      {/* Hero Section */}
+      <Box textAlign="center" mb={6}>
+        <Typography variant="h3" component="h1" gutterBottom fontWeight="bold">
+          Your Journey to Successful Farming
+        </Typography>
+        <Typography variant="h6" color="text.secondary" sx={{ mb: 4 }}>
+          Discover different farming approaches and find your path to success
+        </Typography>
+      </Box>
       
       <Box sx={{ borderBottom: 1, borderColor: 'divider', mb: 3 }}>
-        <Tabs value={activeTab} onChange={handleTabChange} aria-label="guide sections">
-          <Tab label="Farming Types" />
-          <Tab label="Learning Paths" />
-          <Tab label="Seasonal Guides" />
-          <Tab label="Analytics & Tools" />
+        <Tabs 
+          value={activeTab} 
+          onChange={handleTabChange} 
+          aria-label="guide sections"
+          variant="fullWidth"
+          textColor="primary"
+          indicatorColor="primary"
+        >
+          <Tab label="Farming Types" icon={<Agriculture />} />
+          <Tab label="Learning Paths" icon={<Timeline />} />
+          <Tab label="Seasonal Guides" icon={<WbSunny />} />
+          <Tab label="Analytics & Tools" icon={<BarChart />} />
         </Tabs>
       </Box>
 
@@ -216,18 +237,26 @@ function BeginnerGuide() {
         <Grid container spacing={3}>
           {farmingTypes.map((type, index) => (
             <Grid item xs={12} md={6} key={type.title}>
-              <Card>
+              <Card 
+                sx={{ 
+                  height: '100%',
+                  ...(type.pro && {
+                    border: '2px solid',
+                    borderColor: 'primary.main',
+                  })
+                }}
+              >
                 <CardActionArea onClick={() => handleExpandClick(index)}>
                   <CardMedia
                     component="img"
-                    height="140"
+                    height="200"
                     image={type.image}
                     alt={type.title}
                   />
                   <CardContent>
                     <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
-                      {type.icon}
-                      <Typography variant="h6" sx={{ ml: 1 }}>
+                      <Box sx={{ color: 'primary.main', mr: 1 }}>{type.icon}</Box>
+                      <Typography variant="h5">
                         {type.title}
                       </Typography>
                       {type.pro && (
@@ -239,23 +268,35 @@ function BeginnerGuide() {
                         />
                       )}
                     </Box>
-                    <Typography color="text.secondary">
+                    <Typography color="text.secondary" variant="subtitle1">
                       {type.description}
                     </Typography>
                   </CardContent>
                 </CardActionArea>
                 <Collapse in={expanded[index]}>
                   <CardContent>
+                    <Typography variant="h6" gutterBottom>Key Benefits:</Typography>
                     <List>
                       {type.benefits.map((benefit) => (
                         <ListItem key={benefit}>
                           <ListItemIcon>
-                            <ChevronRight />
+                            <ChevronRight color="primary" />
                           </ListItemIcon>
                           <ListItemText primary={benefit} />
                         </ListItem>
                       ))}
                     </List>
+                    {type.pro && (
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        fullWidth
+                        onClick={() => navigate('/pricing')}
+                        sx={{ mt: 2 }}
+                      >
+                        Upgrade to Access
+                      </Button>
+                    )}
                   </CardContent>
                 </Collapse>
               </Card>
@@ -269,10 +310,20 @@ function BeginnerGuide() {
         <Grid container spacing={3}>
           {learningPaths.map((path) => (
             <Grid item xs={12} md={4} key={path.title}>
-              <Card>
+              <Card 
+                sx={{ 
+                  height: '100%',
+                  ...(path.pro && {
+                    border: '2px solid',
+                    borderColor: 'primary.main',
+                  })
+                }}
+              >
                 <CardContent>
-                  <Typography variant="h6" gutterBottom>
-                    {path.title}
+                  <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+                    <Typography variant="h5" component="h2">
+                      {path.title}
+                    </Typography>
                     {path.pro && (
                       <Chip
                         label="PRO"
@@ -281,12 +332,12 @@ function BeginnerGuide() {
                         sx={{ ml: 1 }}
                       />
                     )}
-                  </Typography>
+                  </Box>
                   <List>
                     {path.modules.map((module) => (
                       <ListItem key={module}>
                         <ListItemIcon>
-                          <ChevronRight />
+                          <ChevronRight color="primary" />
                         </ListItemIcon>
                         <ListItemText primary={module} />
                       </ListItem>
@@ -296,11 +347,10 @@ function BeginnerGuide() {
                 {path.pro && (
                   <CardActions>
                     <Button
-                      component={Link}
-                      to="/pricing"
-                      color="primary"
-                      variant="contained"
                       fullWidth
+                      variant="contained"
+                      color="primary"
+                      onClick={() => navigate('/pricing')}
                     >
                       Upgrade to Access
                     </Button>
@@ -317,11 +367,25 @@ function BeginnerGuide() {
         <Grid container spacing={3}>
           {seasonalGuides.map((season) => (
             <Grid item xs={12} md={3} key={season.season}>
-              <Card>
+              <Card 
+                sx={{ 
+                  height: '100%',
+                  ...(season.pro && {
+                    border: '2px solid',
+                    borderColor: 'primary.main',
+                  })
+                }}
+              >
+                <CardMedia
+                  component="img"
+                  height="160"
+                  image={season.image}
+                  alt={`${season.season} Farming`}
+                />
                 <CardContent>
                   <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                    {season.icon}
-                    <Typography variant="h6" sx={{ ml: 1 }}>
+                    <Box sx={{ color: 'primary.main', mr: 1 }}>{season.icon}</Box>
+                    <Typography variant="h5">
                       {season.season}
                     </Typography>
                     {season.pro && (
@@ -337,13 +401,25 @@ function BeginnerGuide() {
                     {season.tasks.map((task) => (
                       <ListItem key={task}>
                         <ListItemIcon>
-                          <ChevronRight />
+                          <ChevronRight color="primary" />
                         </ListItemIcon>
                         <ListItemText primary={task} />
                       </ListItem>
                     ))}
                   </List>
                 </CardContent>
+                {season.pro && (
+                  <CardActions>
+                    <Button
+                      fullWidth
+                      variant="contained"
+                      color="primary"
+                      onClick={() => navigate('/pricing')}
+                    >
+                      Upgrade to Access
+                    </Button>
+                  </CardActions>
+                )}
               </Card>
             </Grid>
           ))}
@@ -352,60 +428,94 @@ function BeginnerGuide() {
 
       {/* Analytics & Tools */}
       {activeTab === 3 && (
-        <Grid container spacing={3}>
-          {analyticsTools.map((tool) => (
-            <Grid item xs={12} md={6} key={tool.title}>
-              <Card>
-                <CardContent>
-                  <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                    {tool.icon}
-                    <Typography variant="h6" sx={{ ml: 1 }}>
-                      {tool.title}
+        <>
+          <Grid container spacing={3}>
+            {analyticsTools.map((tool) => (
+              <Grid item xs={12} md={6} key={tool.title}>
+                <Card 
+                  sx={{ 
+                    height: '100%',
+                    ...(tool.pro && {
+                      border: '2px solid',
+                      borderColor: 'primary.main',
+                    })
+                  }}
+                >
+                  <CardMedia
+                    component="img"
+                    height="200"
+                    image={tool.image}
+                    alt={tool.title}
+                  />
+                  <CardContent>
+                    <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+                      <Box sx={{ color: 'primary.main', mr: 1 }}>{tool.icon}</Box>
+                      <Typography variant="h5">
+                        {tool.title}
+                      </Typography>
+                      {tool.pro && (
+                        <Chip
+                          label="PRO"
+                          color="primary"
+                          size="small"
+                          sx={{ ml: 1 }}
+                        />
+                      )}
+                    </Box>
+                    <Typography color="text.secondary" variant="subtitle1">
+                      {tool.description}
                     </Typography>
-                    {tool.pro && (
-                      <Chip
-                        label="PRO"
-                        color="primary"
-                        size="small"
-                        sx={{ ml: 1 }}
-                      />
-                    )}
-                  </Box>
-                  <Typography color="text.secondary">
-                    {tool.description}
-                  </Typography>
-                </CardContent>
-                <CardActions>
-                  <Button
-                    component={Link}
-                    to="/pricing"
-                    color="primary"
-                    variant="contained"
-                    fullWidth
-                  >
-                    Upgrade to Access
-                  </Button>
-                </CardActions>
-              </Card>
-            </Grid>
-          ))}
-        </Grid>
+                  </CardContent>
+                  <CardActions>
+                    <Button
+                      fullWidth
+                      variant="contained"
+                      color="primary"
+                      onClick={() => navigate('/pricing')}
+                    >
+                      Upgrade to Access
+                    </Button>
+                  </CardActions>
+                </Card>
+              </Grid>
+            ))}
+          </Grid>
+
+          {/* Pro Features Highlight */}
+          <Paper sx={{ mt: 4, p: 4, backgroundColor: 'primary.main', color: 'white' }}>
+            <Typography variant="h4" gutterBottom>
+              Unlock Professional Analytics
+            </Typography>
+            <Typography variant="subtitle1" paragraph>
+              Take your farming to the next level with advanced analytics and tools
+            </Typography>
+            <Button
+              variant="contained"
+              color="secondary"
+              size="large"
+              onClick={() => navigate('/pricing')}
+              startIcon={<ArrowUpward />}
+            >
+              Upgrade to Pro
+            </Button>
+          </Paper>
+        </>
       )}
 
-      {/* Call to Action */}
-      <Paper sx={{ mt: 4, p: 3, textAlign: 'center' }}>
-        <Typography variant="h5" gutterBottom>
-          Ready to take your farming to the next level?
+      {/* Bottom CTA */}
+      <Paper sx={{ mt: 6, p: 4, textAlign: 'center' }}>
+        <Typography variant="h4" gutterBottom>
+          Ready to enhance your farming journey?
         </Typography>
-        <Typography color="text.secondary" paragraph>
-          Upgrade to PRO for access to advanced features, tools, and expert guidance.
+        <Typography variant="subtitle1" color="text.secondary" paragraph>
+          Get access to all premium features and take your farming to the next level
         </Typography>
         <Button
-          component={Link}
-          to="/pricing"
           variant="contained"
           color="primary"
           size="large"
+          onClick={() => navigate('/pricing')}
+          sx={{ minWidth: 200 }}
         >
           View Pricing Plans
         </Button>
