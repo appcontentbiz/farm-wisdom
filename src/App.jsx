@@ -10,6 +10,7 @@ import WeatherDashboard from './pages/WeatherDashboard';
 import ProfessionalDashboard from './pages/ProfessionalDashboard';
 import StoreLocations from './pages/StoreLocations';
 import AuthService from './services/AuthService';
+import Pricing from './pages/Pricing';
 import './App.css';
 
 const PrivateRoute = ({ children }) => {
@@ -32,6 +33,7 @@ function App() {
               <Route path="/market" element={<div>Market Prices (Coming Soon)</div>} />
               <Route path="/beginner/*" element={<BeginnerDashboard />} />
               <Route path="/weather" element={<WeatherDashboard />} />
+              <Route path="/pricing" element={<Pricing />} />
               <Route
                 path="/professional/*"
                 element={
