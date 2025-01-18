@@ -1,4 +1,6 @@
 import axios from 'axios';
+import EmailService from './EmailService';
+import CryptoJS from 'crypto-js';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 
@@ -23,6 +25,8 @@ class AuthService {
       const response = await axios.post(`${API_URL}/auth/register`, userData);
       if (response.data.token) {
         localStorage.setItem('user', JSON.stringify(response.data));
+        // Send welcome email
+        await EmailService.sendWelcomeEmail(userData.email, userData.name);
       }
       return response.data;
     } catch (error) {
@@ -32,8 +36,22 @@ class AuthService {
 
   async forgotPassword(email) {
     try {
-      const response = await axios.post(`${API_URL}/auth/forgot-password`, { email });
-      return response.data;
+      // Generate a secure token
+      const resetToken = CryptoJS.lib.WordArray.random(32).toString();
+      const tokenExpiry = new Date();
+      tokenExpiry.setHours(tokenExpiry.getHours() + 1); // Token expires in 1 hour
+
+      // Save the token in the database
+      await axios.post(`${API_URL}/auth/forgot-password`, {
+        email,
+        resetToken,
+        tokenExpiry: tokenExpiry.toISOString()
+      });
+
+      // Send the reset email
+      await EmailService.sendPasswordResetEmail(email, resetToken);
+
+      return { message: 'Password reset instructions sent to your email' };
     } catch (error) {
       throw this.handleError(error);
     }
