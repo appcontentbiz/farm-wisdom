@@ -26,7 +26,7 @@ import {
   Agriculture,
   WbSunny,
   Water,
-  Eco,
+  Nature,
   Build,
   People,
   ExpandMore,
@@ -66,7 +66,7 @@ const farmingTypes = [
       'Healthier produce',
       'Growing market demand'
     ],
-    icon: <Eco />
+    icon: <Nature />
   },
   {
     title: 'Hydroponic Farming',

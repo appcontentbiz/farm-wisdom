@@ -24,7 +24,7 @@ import {
   Timeline,
   MonetizationOn,
   CloudQueue,
-  Eco,
+  Nature,
 } from '@mui/icons-material';
 
 export default function Home() {
@@ -44,7 +44,7 @@ export default function Home() {
       { text: 'Sample market prices', icon: <MonetizationOn /> },
     ],
     professional: [
-      { text: 'Advanced crop management', icon: <Eco /> },
+      { text: 'Advanced crop management', icon: <Nature /> },
       { text: 'Real-time market analysis', icon: <MonetizationOn /> },
       { text: 'Professional analytics', icon: <Timeline /> },
       { text: 'Expert consultation', icon: <Agriculture /> },
