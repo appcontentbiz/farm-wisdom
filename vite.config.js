@@ -15,6 +15,15 @@ export default defineConfig({
   },
   build: {
     outDir: 'dist',
+    assetsDir: 'assets',
+    copyPublicDir: true, // Ensure public directory is copied to dist
     sourcemap: true,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom', '@mui/material', '@mui/icons-material'],
+        },
+      },
+    },
   },
 });

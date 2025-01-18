@@ -59,33 +59,34 @@ const images = [
 
 const downloadImage = (url, filename) => {
   return new Promise((resolve, reject) => {
-    const filepath = path.join(__dirname, 'public', 'images', filename);
-    const file = fs.createWriteStream(filepath);
+    const publicPath = path.join(__dirname, 'public', 'images', filename);
+    const distPath = path.join(__dirname, 'dist', 'images', filename);
+    
+    const download = (filepath) => {
+      const file = fs.createWriteStream(filepath);
+      https.get(url, response => {
+        response.pipe(file);
+        file.on('finish', () => {
+          file.close();
+          console.log(`Downloaded ${filename} to ${filepath}`);
+          resolve();
+        });
+      }).on('error', err => {
+        fs.unlink(filepath, () => {
+          console.error(`Error downloading ${filename}:`, err.message);
+          reject(err);
+        });
+      });
+    };
 
-    https.get(url, response => {
-      response.pipe(file);
-      file.on('finish', () => {
-        file.close();
-        console.log(`Downloaded ${filename}`);
-        resolve();
-      });
-    }).on('error', err => {
-      fs.unlink(filepath, () => {
-        console.error(`Error downloading ${filename}:`, err.message);
-        reject(err);
-      });
-    });
+    // Download to both public and dist folders
+    Promise.all([
+      download(publicPath),
+      download(distPath)
+    ]).then(() => resolve());
   });
 };
 
-async function downloadAllImages() {
-  for (const image of images) {
-    try {
-      await downloadImage(image.url, image.name);
-    } catch (error) {
-      console.error(`Failed to download ${image.name}:`, error);
-    }
-  }
-}
-
-downloadAllImages();
+Promise.all(images.map(img => downloadImage(img.url, img.name)))
+  .then(() => console.log('All images downloaded successfully'))
+  .catch(err => console.error('Error downloading images:', err));
