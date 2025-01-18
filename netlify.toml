@@ -1,41 +1,16 @@
 [build]
   command = "npm run build"
   publish = "dist"
-  functions = "functions"
+  functions = "api"
 
 [build.environment]
   NODE_VERSION = "18.19.0"
 
-[dev]
-  command = "npm run dev"
-  port = 8888
-  targetPort = 5000
-  publish = "dist"
-  autoLaunch = true
-
-# Rewrite API requests to serverless functions
-[[redirects]]
-  from = "/api/*"
-  to = "/.netlify/functions/:splat"
-  status = 200
-  force = true
-
-# Handle client-side routing
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
   force = true
-
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
-
-[[redirects]]
-  from = "/api/*"
-  to = "/.netlify/functions/:splat"
-  status = 200
 
 [functions]
   node_bundler = "esbuild"
