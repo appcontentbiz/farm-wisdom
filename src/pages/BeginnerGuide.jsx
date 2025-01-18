@@ -98,29 +98,140 @@ const farmingTypes = [
 const learningPaths = [
   {
     title: 'Beginner Basics',
+    description: 'Master the fundamental principles of farming with hands-on guidance',
     modules: [
-      'Understanding Soil Health',
-      'Basic Plant Care',
-      'Water Management',
-      'Season Planning'
+      {
+        title: 'Understanding Soil Health',
+        image: '/images/soil-health.jpg',
+        topics: [
+          'Soil composition and structure',
+          'pH levels and testing',
+          'Organic matter importance',
+          'Nutrient cycles'
+        ]
+      },
+      {
+        title: 'Basic Plant Care',
+        image: '/images/basic-plant-care.jpg',
+        topics: [
+          'Seed selection and storage',
+          'Planting techniques',
+          'Growth stages monitoring',
+          'Basic troubleshooting'
+        ]
+      },
+      {
+        title: 'Water Management',
+        image: '/images/water-management.jpg',
+        topics: [
+          'Watering schedules',
+          'Moisture monitoring',
+          'Conservation techniques',
+          'Drainage solutions'
+        ]
+      },
+      {
+        title: 'Season Planning',
+        image: '/images/season-planning.jpg',
+        topics: [
+          'Climate considerations',
+          'Planting calendars',
+          'Frost protection',
+          'Harvest timing'
+        ]
+      }
     ]
   },
   {
     title: 'Intermediate Skills',
+    description: 'Expand your farming knowledge with advanced techniques',
     modules: [
-      'Crop Rotation',
-      'Pest Management',
-      'Irrigation Systems',
-      'Market Planning'
+      {
+        title: 'Crop Rotation',
+        image: '/images/crop-rotation.jpg',
+        topics: [
+          'Rotation planning',
+          'Companion planting',
+          'Soil improvement',
+          'Pest prevention'
+        ]
+      },
+      {
+        title: 'Pest Management',
+        image: '/images/pest-management.jpg',
+        topics: [
+          'Identification guides',
+          'Natural solutions',
+          'Prevention strategies',
+          'Beneficial insects'
+        ]
+      },
+      {
+        title: 'Irrigation Systems',
+        image: '/images/irrigation-systems.jpg',
+        topics: [
+          'System types',
+          'Installation guides',
+          'Maintenance tips',
+          'Water efficiency'
+        ]
+      },
+      {
+        title: 'Market Planning',
+        image: '/images/market-planning.jpg',
+        topics: [
+          'Market research',
+          'Pricing strategies',
+          'Distribution channels',
+          'Customer relations'
+        ]
+      }
     ]
   },
   {
     title: 'Advanced Techniques',
+    description: 'Leverage technology and data for optimal farming results',
     modules: [
-      'Precision Agriculture',
-      'Farm Automation',
-      'Data Analytics',
-      'Sustainable Practices'
+      {
+        title: 'Precision Agriculture',
+        image: '/images/precision-agriculture.jpg',
+        topics: [
+          'GPS mapping',
+          'Soil sampling',
+          'Variable rate application',
+          'Yield monitoring'
+        ]
+      },
+      {
+        title: 'Farm Automation',
+        image: '/images/farm-automation.jpg',
+        topics: [
+          'Smart irrigation',
+          'Climate control',
+          'Automated feeders',
+          'Monitoring systems'
+        ]
+      },
+      {
+        title: 'Data Analytics',
+        image: '/images/data-analytics.jpg',
+        topics: [
+          'Data collection',
+          'Performance metrics',
+          'Trend analysis',
+          'Decision support'
+        ]
+      },
+      {
+        title: 'Sustainable Practices',
+        image: '/images/sustainable-practices.jpg',
+        topics: [
+          'Resource optimization',
+          'Carbon footprint',
+          'Renewable energy',
+          'Waste management'
+        ]
+      }
     ],
     pro: true
   }
@@ -307,59 +418,125 @@ function BeginnerGuide() {
 
       {/* Learning Paths */}
       {activeTab === 1 && (
-        <Grid container spacing={3}>
-          {learningPaths.map((path) => (
-            <Grid item xs={12} md={4} key={path.title}>
-              <Card 
-                sx={{ 
-                  height: '100%',
-                  ...(path.pro && {
-                    border: '2px solid',
-                    borderColor: 'primary.main',
-                  })
-                }}
-              >
-                <CardContent>
-                  <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                    <Typography variant="h5" component="h2">
+        <>
+          <Grid container spacing={4}>
+            {learningPaths.map((path) => (
+              <Grid item xs={12} key={path.title}>
+                <Paper 
+                  sx={{ 
+                    p: 3, 
+                    mb: 3,
+                    ...(path.pro && {
+                      border: '2px solid',
+                      borderColor: 'primary.main',
+                    })
+                  }}
+                >
+                  <Box sx={{ mb: 3 }}>
+                    <Typography variant="h4" gutterBottom>
                       {path.title}
+                      {path.pro && (
+                        <Chip
+                          label="PRO"
+                          color="primary"
+                          size="small"
+                          sx={{ ml: 2 }}
+                        />
+                      )}
                     </Typography>
-                    {path.pro && (
-                      <Chip
-                        label="PRO"
-                        color="primary"
-                        size="small"
-                        sx={{ ml: 1 }}
-                      />
-                    )}
+                    <Typography variant="h6" color="text.secondary" gutterBottom>
+                      {path.description}
+                    </Typography>
                   </Box>
-                  <List>
+                  
+                  <Grid container spacing={3}>
                     {path.modules.map((module) => (
-                      <ListItem key={module}>
-                        <ListItemIcon>
-                          <ChevronRight color="primary" />
-                        </ListItemIcon>
-                        <ListItemText primary={module} />
-                      </ListItem>
+                      <Grid item xs={12} md={6} lg={3} key={module.title}>
+                        <Card sx={{ height: '100%' }}>
+                          <CardMedia
+                            component="img"
+                            height="160"
+                            image={module.image}
+                            alt={module.title}
+                          />
+                          <CardContent>
+                            <Typography variant="h6" gutterBottom>
+                              {module.title}
+                            </Typography>
+                            <List dense>
+                              {module.topics.map((topic) => (
+                                <ListItem key={topic}>
+                                  <ListItemIcon>
+                                    <ChevronRight color="primary" />
+                                  </ListItemIcon>
+                                  <ListItemText primary={topic} />
+                                </ListItem>
+                              ))}
+                            </List>
+                          </CardContent>
+                        </Card>
+                      </Grid>
                     ))}
-                  </List>
-                </CardContent>
-                {path.pro && (
-                  <CardActions>
-                    <Button
-                      fullWidth
-                      variant="contained"
-                      color="primary"
-                      onClick={() => navigate('/pricing')}
-                    >
-                      Upgrade to Access
-                    </Button>
-                  </CardActions>
-                )}
-              </Card>
-            </Grid>
-          ))}
-        </Grid>
+                  </Grid>
+                  
+                  {path.pro && (
+                    <Box sx={{ mt: 3, textAlign: 'center' }}>
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        size="large"
+                        onClick={() => navigate('/pricing')}
+                        startIcon={<ArrowUpward />}
+                      >
+                        Upgrade to Access Advanced Content
+                      </Button>
+                    </Box>
+                  )}
+                </Paper>
+              </Grid>
+            ))}
+          </Grid>
+
+          {/* Quick Start Guide */}
+          <Paper sx={{ p: 4, mt: 4, backgroundColor: 'primary.main', color: 'white' }}>
+            <Typography variant="h4" gutterBottom>
+              Quick Start Guide
+            </Typography>
+            <Typography variant="subtitle1" paragraph>
+              Not sure where to begin? Follow our recommended learning path:
+            </Typography>
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                <Agriculture sx={{ fontSize: 40 }} />
+                <Box>
+                  <Typography variant="h6">Week 1-2: Fundamentals</Typography>
+                  <Typography>Master soil basics and plant care essentials</Typography>
+                </Box>
+              </Box>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                <Water sx={{ fontSize: 40 }} />
+                <Box>
+                  <Typography variant="h6">Week 3-4: Water & Planning</Typography>
+                  <Typography>Learn irrigation basics and season planning</Typography>
+                </Box>
+              </Box>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                <Build sx={{ fontSize: 40 }} />
+                <Box>
+                  <Typography variant="h6">Month 2: Intermediate Skills</Typography>
+                  <Typography>Explore crop rotation and pest management</Typography>
+                </Box>
+              </Box>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                <Timeline sx={{ fontSize: 40 }} />
+                <Box>
+                  <Typography variant="h6">Month 3+: Advanced Techniques</Typography>
+                  <Typography>Dive into precision farming and analytics</Typography>
+                </Box>
+              </Box>
+            </Box>
+          </Paper>
+        </>
       )}
 
       {/* Seasonal Guides */}
