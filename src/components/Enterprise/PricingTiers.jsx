@@ -15,6 +15,7 @@ import {
 import {
   Check as CheckIcon,
   Star as StarIcon,
+  Business as BusinessIcon,
   Diamond as DiamondIcon,
 } from '@mui/icons-material';
 
@@ -50,34 +51,58 @@ const tiers = [
     buttonText: 'Upgrade to Pro'
   },
   {
-    title: 'Enterprise Plus',
+    title: 'Enterprise',
     price: '$299/month',
     features: [
       'Everything in Professional, plus:',
-      'Real-time Analytics Dashboard',
+      'Multi-farm Management',
+      'Advanced Analytics Dashboard',
+      'Custom Integrations',
+      'Dedicated Support',
+      'Team Collaboration Tools',
+      'Compliance Reporting',
+      'Advanced Features:',
+      '- Resource Planning',
+      '- Inventory Management',
+      '- Quality Control',
+      '- Financial Analytics',
+      'Security Features:',
+      '- Role-based Access',
+      '- Data Encryption',
+      '- Audit Logs',
+    ],
+    icon: <BusinessIcon />,
+    color: '#FF9800',
+    buttonText: 'Contact Sales'
+  },
+  {
+    title: 'Enterprise Plus',
+    price: '$499/month',
+    features: [
+      'Everything in Enterprise, plus:',
+      'Real-time Analytics Suite',
       'AI-Powered Insights',
       'Predictive Maintenance',
       'Advanced Export Options',
-      'Custom Integrations',
-      'Dedicated Support Team',
-      'Advanced Features:',
+      'Premium Support Package',
+      'Cutting-edge Features:',
       '- Drone Data Analysis',
       '- Smart Irrigation Analytics',
       '- Carbon Footprint Tracking',
       '- Supply Chain Optimization',
-      '- Quality Control Systems',
-      '- Labor Management',
-      '- Resource Planning',
+      '- Advanced Quality Control',
+      '- Automated Labor Management',
+      '- Predictive Resource Planning',
       'Advanced Visualizations:',
-      '- Interactive Charts',
       '- Real-time Monitoring',
-      '- Custom Dashboards',
+      '- Interactive Dashboards',
       '- Performance Benchmarking',
-      'Enterprise Security:',
-      '- Role-based Access',
-      '- Data Encryption',
-      '- Audit Trails',
-      '- Compliance Reports'
+      '- Custom Chart Builder',
+      'Enterprise Plus Security:',
+      '- Advanced Encryption',
+      '- Custom Security Policies',
+      '- Compliance Automation',
+      '- Security Auditing'
     ],
     icon: <DiamondIcon />,
     color: '#9C27B0',
@@ -99,7 +124,8 @@ const PricingTiers = () => (
       display: 'grid', 
       gridTemplateColumns: { 
         xs: '1fr',
-        md: 'repeat(3, 1fr)'
+        sm: 'repeat(2, 1fr)',
+        lg: 'repeat(4, 1fr)'
       },
       gap: 3 
     }}>
@@ -122,7 +148,7 @@ const PricingTiers = () => (
         >
           {tier.featured && (
             <Chip
-              label="Most Popular"
+              label="Most Advanced"
               color="secondary"
               sx={{
                 position: 'absolute',
@@ -158,8 +184,8 @@ const PricingTiers = () => (
                     primaryTypographyProps={{
                       variant: 'body2',
                       sx: { 
-                        fontWeight: feature.includes('plus:') ? 'bold' : 'normal',
-                        color: feature.includes('plus:') ? 'text.primary' : 'text.secondary'
+                        fontWeight: feature.includes('plus:') || feature.includes('in ') ? 'bold' : 'normal',
+                        color: feature.includes('plus:') || feature.includes('in ') ? 'text.primary' : 'text.secondary'
                       }
                     }}
                   />
