@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import {
   Box,
-  Typography,
+  Button,
   Grid,
   Paper,
-  Button,
+  Typography,
   List,
   ListItem,
   ListItemText,
   ListItemIcon,
-  CheckIcon,
-  LightbulbIcon
 } from '@mui/material';
+import CheckIcon from '@mui/icons-material/Check';
+import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import '../styles/BeginnerDashboard.css';
 
 const farmingStyles = [
