@@ -50,6 +50,10 @@ import Restaurant from '@mui/icons-material/Restaurant';
 import MonitorHeart from '@mui/icons-material/MonitorHeart';
 import LocalDining from '@mui/icons-material/LocalDining';
 import FiberManualRecord from '@mui/icons-material/FiberManualRecord';
+import Store from '@mui/icons-material/Store';
+import LocalShipping from '@mui/icons-material/LocalShipping';
+import Storefront from '@mui/icons-material/Storefront';
+import AttachMoney from '@mui/icons-material/AttachMoney';
 
 const DEMO_DURATION = 30 * 60 * 1000; // 30 minutes
 
@@ -129,6 +133,83 @@ const generateTreatmentHistory = () => {
     });
   }
   return dates;
+};
+
+const localMarkets = {
+  markets: [
+    {
+      name: "Farmer's Market Central",
+      type: "Weekly Market",
+      schedule: "Every Saturday 7AM-2PM",
+      accepts: ["Fresh Produce", "Organic Crops", "Value-Added Products"],
+      paymentTypes: ["Cash", "SNAP/EBT", "Credit Cards"],
+      commission: "15%",
+      requirements: "Local produce only, organic preferred"
+    },
+    {
+      name: "Community Food Bank",
+      type: "Food Bank",
+      schedule: "Mon-Fri 9AM-4PM",
+      accepts: ["All Fresh Produce", "Shelf-Stable Items"],
+      paymentTypes: ["Tax Deduction Receipt"],
+      commission: "0%",
+      requirements: "Clean, edible produce"
+    },
+    {
+      name: "Local Co-op Market",
+      type: "Cooperative Store",
+      schedule: "Daily 8AM-8PM",
+      accepts: ["Organic Produce", "Local Crops", "Specialty Items"],
+      paymentTypes: ["Direct Payment", "Store Credit"],
+      commission: "20%",
+      requirements: "Member-owned, quality standards apply"
+    }
+  ],
+  gleaningOpportunities: [
+    {
+      organization: "Harvest Share",
+      description: "Connects farmers with volunteers to harvest excess crops",
+      benefits: ["Tax deduction", "Community goodwill", "Reduced waste"],
+      schedule: "Seasonal (Spring-Fall)",
+      contact: "harvest@share.org"
+    },
+    {
+      organization: "Food Rescue Network",
+      description: "Collects and distributes surplus farm produce",
+      benefits: ["Free pickup", "Tax benefits", "Social impact"],
+      schedule: "Year-round",
+      contact: "rescue@foodnetwork.org"
+    }
+  ],
+  distributors: [
+    {
+      name: "Local Foods Distribution",
+      type: "Wholesale Distributor",
+      minimumOrder: "$100",
+      paymentTerms: "Net 30",
+      requirements: "GAP certification preferred",
+      products: ["Fresh produce", "Value-added products"],
+      contact: "sales@localfoods.com"
+    },
+    {
+      name: "Farm-to-School Program",
+      type: "Educational Institution",
+      minimumOrder: "Varies by school",
+      paymentTerms: "Net 45",
+      requirements: "Food safety certification required",
+      products: ["Fresh fruits", "Vegetables", "Educational visits"],
+      contact: "farm2school@edu.org"
+    },
+    {
+      name: "Restaurant Alliance",
+      type: "Restaurant Supplier",
+      minimumOrder: "$50",
+      paymentTerms: "Weekly payment",
+      requirements: "Quality grading required",
+      products: ["Premium produce", "Specialty crops"],
+      contact: "orders@restaurantalliance.com"
+    }
+  ]
 };
 
 function Demo() {
@@ -524,6 +605,132 @@ function Demo() {
                       </TableBody>
                     </Table>
                   </TableContainer>
+                </Grid>
+              </Grid>
+            </CardContent>
+          </Card>
+        </Grid>
+
+        {/* Local Markets and Gleaning */}
+        <Grid item xs={12}>
+          <Card>
+            <CardHeader
+              title="Local Markets & Gleaning Opportunities"
+              avatar={<Store color="primary" />}
+              action={
+                <Tooltip title="Find places to sell or donate your harvest">
+                  <IconButton>
+                    <Help />
+                  </IconButton>
+                </Tooltip>
+              }
+            />
+            <CardContent>
+              <Grid container spacing={3}>
+                {/* Farmers Markets */}
+                <Grid item xs={12} md={4}>
+                  <Card variant="outlined">
+                    <CardHeader
+                      title="Local Markets"
+                      avatar={<Storefront color="primary" />}
+                    />
+                    <CardContent>
+                      {localMarkets.markets.map((market, index) => (
+                        <Box key={index} sx={{ mb: 3 }}>
+                          <Typography variant="h6" color="primary">
+                            {market.name}
+                          </Typography>
+                          <Typography variant="body2" color="text.secondary">
+                            {market.type} - {market.schedule}
+                          </Typography>
+                          <Typography variant="body2">
+                            <strong>Accepts:</strong> {market.accepts.join(", ")}
+                          </Typography>
+                          <Typography variant="body2">
+                            <strong>Payment:</strong> {market.paymentTypes.join(", ")}
+                          </Typography>
+                          <Typography variant="body2">
+                            <strong>Commission:</strong> {market.commission}
+                          </Typography>
+                        </Box>
+                      ))}
+                    </CardContent>
+                  </Card>
+                </Grid>
+
+                {/* Gleaning Opportunities */}
+                <Grid item xs={12} md={4}>
+                  <Card variant="outlined">
+                    <CardHeader
+                      title="Gleaning Programs"
+                      avatar={<LocalShipping color="primary" />}
+                    />
+                    <CardContent>
+                      {localMarkets.gleaningOpportunities.map((opportunity, index) => (
+                        <Box key={index} sx={{ mb: 3 }}>
+                          <Typography variant="h6" color="primary">
+                            {opportunity.organization}
+                          </Typography>
+                          <Typography variant="body2">
+                            {opportunity.description}
+                          </Typography>
+                          <Typography variant="body2">
+                            <strong>Benefits:</strong>
+                          </Typography>
+                          <List dense>
+                            {opportunity.benefits.map((benefit, i) => (
+                              <ListItem key={i}>
+                                <ListItemIcon>
+                                  <FiberManualRecord sx={{ width: 8, height: 8 }} />
+                                </ListItemIcon>
+                                <ListItemText primary={benefit} />
+                              </ListItem>
+                            ))}
+                          </List>
+                          <Typography variant="body2">
+                            <strong>Schedule:</strong> {opportunity.schedule}
+                          </Typography>
+                          <Typography variant="body2">
+                            <strong>Contact:</strong> {opportunity.contact}
+                          </Typography>
+                        </Box>
+                      ))}
+                    </CardContent>
+                  </Card>
+                </Grid>
+
+                {/* Distributors */}
+                <Grid item xs={12} md={4}>
+                  <Card variant="outlined">
+                    <CardHeader
+                      title="Distribution Partners"
+                      avatar={<AttachMoney color="primary" />}
+                    />
+                    <CardContent>
+                      {localMarkets.distributors.map((distributor, index) => (
+                        <Box key={index} sx={{ mb: 3 }}>
+                          <Typography variant="h6" color="primary">
+                            {distributor.name}
+                          </Typography>
+                          <Typography variant="body2" color="text.secondary">
+                            {distributor.type}
+                          </Typography>
+                          <Typography variant="body2">
+                            <strong>Minimum Order:</strong> {distributor.minimumOrder}
+                          </Typography>
+                          <Typography variant="body2">
+                            <strong>Payment Terms:</strong> {distributor.paymentTerms}
+                          </Typography>
+                          <Typography variant="body2">
+                            <strong>Products:</strong> {distributor.products.join(", ")}
+                          </Typography>
+                          <Typography variant="body2">
+                            <strong>Contact:</strong> {distributor.contact}
+                          </Typography>
+                        </Box>
+                      ))}
+                    </CardContent>
+                  </Card>
                 </Grid>
               </Grid>
             </CardContent>
