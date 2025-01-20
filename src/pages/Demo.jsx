@@ -66,8 +66,6 @@ const SoilData = [
   { id: 'Organic Matter', value: 3.5, ideal: '3.0-5.0' },
 ];
 
-const DEMO_DURATION = 30 * 60 * 1000; // 30 minutes
-
 export default function Demo() {
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
