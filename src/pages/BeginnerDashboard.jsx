@@ -316,9 +316,15 @@ const farmingStyles = [
 
 const BeginnerDashboard = () => {
   const [selectedStyle, setSelectedStyle] = useState(null);
+  const [showGuide, setShowGuide] = useState(false);
 
   const handleStyleClick = (style) => {
-    setSelectedStyle(style === selectedStyle ? null : style);
+    if (selectedStyle?.id === style.id) {
+      setShowGuide(!showGuide);
+    } else {
+      setSelectedStyle(style);
+      setShowGuide(true);
+    }
   };
 
   return (
@@ -339,7 +345,15 @@ const BeginnerDashboard = () => {
               elevation={selectedStyle?.id === style.id ? 8 : 1}
               sx={{ cursor: 'pointer', height: '100%' }}
             >
-              <img src={style.image} alt={style.name} className="style-image" />
+              <img 
+                src={style.image} 
+                alt={style.name} 
+                className="style-image"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = 'https://images.unsplash.com/photo-1495908333425-29a1e0918c5f?w=800';
+                }}
+              />
               <Box p={2}>
                 <Typography variant="h5" gutterBottom>
                   {style.name}
@@ -348,7 +362,7 @@ const BeginnerDashboard = () => {
                   {style.description}
                 </Typography>
                 <Box sx={{ mt: 2 }}>
-                  <Typography variant="body2">
+                  <Typography variant="body2" sx={{ mb: 1 }}>
                     Difficulty: {style.difficulty}
                   </Typography>
                   <Typography variant="body2">
@@ -358,8 +372,19 @@ const BeginnerDashboard = () => {
               </Box>
             </Paper>
 
-            {selectedStyle?.id === style.id && (
+            {selectedStyle?.id === style.id && showGuide && (
               <Paper className="style-guide" sx={{ mt: 2, p: 3 }}>
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
+                  <Typography variant="h6">Guide Content</Typography>
+                  <Button
+                    variant="outlined"
+                    color="primary"
+                    onClick={() => setShowGuide(false)}
+                  >
+                    Hide Guide
+                  </Button>
+                </Box>
+
                 <Typography variant="h6" gutterBottom>
                   Key Points:
                 </Typography>
@@ -397,15 +422,6 @@ const BeginnerDashboard = () => {
                       </ListItem>
                     ))}
                   </List>
-
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={() => handleStyleClick(null)}
-                    sx={{ mt: 2 }}
-                  >
-                    Hide Guide
-                  </Button>
                 </Box>
               </Paper>
             )}
