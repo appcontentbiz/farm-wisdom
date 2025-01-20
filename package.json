@@ -17,6 +17,7 @@
     "@mui/material": "^5.14.20",
     "@nivo/calendar": "^0.84.0",
     "@nivo/line": "^0.84.0",
+    "@nivo/pie": "^0.88.0",
     "@sendgrid/mail": "^8.1.0",
     "axios": "^1.7.9",
     "bcryptjs": "^2.4.3",

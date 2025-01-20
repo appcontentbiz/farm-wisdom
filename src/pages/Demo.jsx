@@ -19,6 +19,13 @@ import {
   IconButton,
   Chip,
   Divider,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
 } from '@mui/material';
 import Agriculture from '@mui/icons-material/Agriculture';
 import WbSunny from '@mui/icons-material/WbSunny';
@@ -30,8 +37,34 @@ import LocalFlorist from '@mui/icons-material/LocalFlorist';
 import BugReport from '@mui/icons-material/BugReport';
 import Nature from '@mui/icons-material/Nature';
 import TrendingUp from '@mui/icons-material/TrendingUp';
+import Pets from '@mui/icons-material/Pets';
+import Inventory from '@mui/icons-material/Inventory';
+import Landscape from '@mui/icons-material/Landscape';
 import { ResponsiveLine } from '@nivo/line';
 import { ResponsiveCalendar } from '@nivo/calendar';
+import { ResponsivePie } from '@nivo/pie';
+
+const DEMO_DURATION = 30 * 60 * 1000; // 30 minutes
+
+const LivestockData = {
+  cattle: { count: 50, health: 95, nextVaccination: '2025-02-15', feed: 85 },
+  sheep: { count: 120, health: 92, nextVaccination: '2025-02-10', feed: 78 },
+  chickens: { count: 500, health: 88, nextVaccination: '2025-02-01', feed: 90 },
+};
+
+const ResourceData = {
+  feed: { current: 2500, unit: 'kg', reorderPoint: 1000, cost: 0.5 },
+  water: { current: 5000, unit: 'L', reorderPoint: 2000, cost: 0.1 },
+  medicine: { current: 100, unit: 'units', reorderPoint: 30, cost: 25 },
+};
+
+const SoilData = [
+  { id: 'pH', value: 6.8, ideal: '6.0-7.0' },
+  { id: 'Nitrogen', value: 45, ideal: '40-60' },
+  { id: 'Phosphorus', value: 35, ideal: '30-50' },
+  { id: 'Potassium', value: 55, ideal: '50-70' },
+  { id: 'Organic Matter', value: 3.5, ideal: '3.0-5.0' },
+];
 
 const DEMO_DURATION = 30 * 60 * 1000; // 30 minutes
 
@@ -87,6 +120,10 @@ export default function Demo() {
     treatmentHistory: generateTreatmentHistory(),
   });
 
+  const [livestock, setLivestock] = useState(LivestockData);
+  const [resources, setResources] = useState(ResourceData);
+  const [soil, setSoil] = useState(SoilData);
+
   // Tutorial steps
   const steps = [
     {
@@ -109,6 +146,18 @@ export default function Demo() {
     {
       target: '.pest-control',
       content: 'Monitor and manage pest threats to protect your crops.',
+    },
+    {
+      target: '.livestock-management',
+      content: 'Track and manage your livestock health and resources.',
+    },
+    {
+      target: '.resource-planning',
+      content: 'Monitor and plan your farm resources efficiently.',
+    },
+    {
+      target: '.soil-analysis',
+      content: 'Analyze soil conditions for optimal crop growth.',
     },
   ];
 
@@ -493,6 +542,188 @@ export default function Demo() {
                   margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
                 />
               </Box>
+            </CardContent>
+          </Card>
+        </Grid>
+
+        {/* Livestock Management */}
+        <Grid item xs={12} md={6} className="livestock-management">
+          <Card>
+            <CardHeader
+              title="Livestock Management"
+              avatar={<Pets color="primary" />}
+              action={
+                <Tooltip title="Track livestock health and schedules">
+                  <IconButton>
+                    <Help />
+                  </IconButton>
+                </Tooltip>
+              }
+            />
+            <CardContent>
+              <TableContainer component={Paper}>
+                <Table size="small">
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>Type</TableCell>
+                      <TableCell align="right">Count</TableCell>
+                      <TableCell align="right">Health %</TableCell>
+                      <TableCell align="right">Feed Level %</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {Object.entries(livestock).map(([type, data]) => (
+                      <TableRow key={type}>
+                        <TableCell component="th" scope="row">
+                          {type.charAt(0).toUpperCase() + type.slice(1)}
+                        </TableCell>
+                        <TableCell align="right">{data.count}</TableCell>
+                        <TableCell align="right">
+                          <Chip
+                            label={`${data.health}%`}
+                            color={data.health > 90 ? 'success' : 'warning'}
+                            size="small"
+                          />
+                        </TableCell>
+                        <TableCell align="right">
+                          <Chip
+                            label={`${data.feed}%`}
+                            color={data.feed > 80 ? 'success' : 'warning'}
+                            size="small"
+                          />
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </CardContent>
+          </Card>
+        </Grid>
+
+        {/* Resource Planning */}
+        <Grid item xs={12} md={6} className="resource-planning">
+          <Card>
+            <CardHeader
+              title="Resource Planning"
+              avatar={<Inventory color="primary" />}
+              action={
+                <Tooltip title="Monitor and manage farm resources">
+                  <IconButton>
+                    <Help />
+                  </IconButton>
+                </Tooltip>
+              }
+            />
+            <CardContent>
+              <TableContainer component={Paper}>
+                <Table size="small">
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>Resource</TableCell>
+                      <TableCell align="right">Current Stock</TableCell>
+                      <TableCell align="right">Status</TableCell>
+                      <TableCell align="right">Cost/Unit</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {Object.entries(resources).map(([name, data]) => (
+                      <TableRow key={name}>
+                        <TableCell component="th" scope="row">
+                          {name.charAt(0).toUpperCase() + name.slice(1)}
+                        </TableCell>
+                        <TableCell align="right">
+                          {data.current} {data.unit}
+                        </TableCell>
+                        <TableCell align="right">
+                          <Chip
+                            label={data.current > data.reorderPoint ? 'Sufficient' : 'Low'}
+                            color={data.current > data.reorderPoint ? 'success' : 'error'}
+                            size="small"
+                          />
+                        </TableCell>
+                        <TableCell align="right">${data.cost}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </CardContent>
+          </Card>
+        </Grid>
+
+        {/* Soil Analysis */}
+        <Grid item xs={12} className="soil-analysis">
+          <Card>
+            <CardHeader
+              title="Soil Analysis"
+              avatar={<Landscape color="primary" />}
+              action={
+                <Tooltip title="Monitor soil health and nutrients">
+                  <IconButton>
+                    <Help />
+                  </IconButton>
+                </Tooltip>
+              }
+            />
+            <CardContent>
+              <Grid container spacing={2}>
+                <Grid item xs={12} md={8}>
+                  <TableContainer component={Paper}>
+                    <Table size="small">
+                      <TableHead>
+                        <TableRow>
+                          <TableCell>Parameter</TableCell>
+                          <TableCell align="right">Current Value</TableCell>
+                          <TableCell align="right">Ideal Range</TableCell>
+                          <TableCell align="right">Status</TableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        {soil.map((param) => {
+                          const [min, max] = param.ideal.split('-').map(Number);
+                          const status = param.value >= min && param.value <= max ? 'Optimal' : 'Attention Needed';
+                          return (
+                            <TableRow key={param.id}>
+                              <TableCell component="th" scope="row">
+                                {param.id}
+                              </TableCell>
+                              <TableCell align="right">{param.value}</TableCell>
+                              <TableCell align="right">{param.ideal}</TableCell>
+                              <TableCell align="right">
+                                <Chip
+                                  label={status}
+                                  color={status === 'Optimal' ? 'success' : 'warning'}
+                                  size="small"
+                                />
+                              </TableCell>
+                            </TableRow>
+                          );
+                        })}
+                      </TableBody>
+                    </Table>
+                  </TableContainer>
+                </Grid>
+                <Grid item xs={12} md={4}>
+                  <Box sx={{ height: 200 }}>
+                    <ResponsivePie
+                      data={soil.map(item => ({
+                        id: item.id,
+                        value: item.value,
+                        color: `hsl(${Math.random() * 360}, 70%, 50%)`,
+                      }))}
+                      margin={{ top: 10, right: 10, bottom: 10, left: 10 }}
+                      innerRadius={0.5}
+                      padAngle={0.7}
+                      cornerRadius={3}
+                      activeOuterRadiusOffset={8}
+                      colors={{ scheme: 'nivo' }}
+                      enableArcLinkLabels={false}
+                      arcLabelsSkipAngle={10}
+                    />
+                  </Box>
+                </Grid>
+              </Grid>
             </CardContent>
           </Card>
         </Grid>
