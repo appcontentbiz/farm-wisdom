@@ -17,68 +17,74 @@ import CheckIcon from '@mui/icons-material/Check';
 const tiers = [
   {
     title: 'Basic',
-    price: '0',
-    description: 'Get started with basic farming knowledge',
+    price: '29',
+    description: 'Essential farm management tools',
     features: [
-      'Access to basic farming guides',
-      'Community forum access',
-      'Basic crop planning tools',
-      'Limited article access'
+      'Basic farm management tools',
+      'Weather forecasts',
+      'Crop planning calendar',
+      'Basic analytics',
+      'Community support',
+      'Mobile app access'
     ],
-    buttonText: 'Sign up for free',
+    buttonText: 'Start Free Trial',
     buttonVariant: 'outlined',
   },
   {
     title: 'Professional',
     subheader: 'Most Popular',
-    price: '15',
-    description: 'Everything in Basic, plus advanced features',
+    price: '99',
+    description: 'Advanced features for growing farms',
     features: [
       'All Basic features',
-      'Advanced farming guides',
-      'Expert consultation (2/month)',
-      'Crop yield tracking',
-      'Weather integration',
-      'Market price updates'
+      'Advanced crop management',
+      'Equipment tracking',
+      'Financial forecasting',
+      'Priority support',
+      'Custom reports',
+      'Mobile app access'
     ],
-    buttonText: 'Start free trial',
+    buttonText: 'Upgrade to Pro',
     buttonVariant: 'contained',
+    popular: true
   },
   {
     title: 'Enterprise',
-    price: '30',
-    description: 'Custom solutions for large operations',
+    price: '299',
+    description: 'Multi-farm management and team collaboration',
     features: [
       'All Professional features',
-      'Custom farming plans',
-      'Unlimited expert consultation',
-      'Advanced analytics',
-      'Equipment management',
-      'Supply chain integration',
-      'Priority support'
+      'Multi-farm Management',
+      'Team Collaboration Tools',
+      'Resource Planning',
+      'Inventory Management',
+      'Quality Control',
+      'Financial Analytics',
+      'Role-based Access',
+      'Data Encryption',
+      'Audit Logs'
     ],
-    buttonText: 'Contact us',
+    buttonText: 'Contact Sales',
     buttonVariant: 'outlined',
   },
   {
     title: 'Enterprise Plus',
-    subheader: 'Maximum Support',
-    price: '50',
-    description: 'Complete farming ecosystem with AI assistance',
+    price: '499',
+    description: 'Complete solution with AI and advanced analytics',
     features: [
       'All Enterprise features',
-      'AI-powered farming insights',
-      'Automated monitoring systems',
-      'Drone integration',
-      'Smart irrigation control',
-      'Real-time soil analysis',
-      'Climate control automation',
-      'Dedicated success manager',
-      'Custom API access',
-      'White-label options'
+      'Real-time Analytics Suite',
+      'AI-Powered Insights',
+      'Predictive Maintenance',
+      'Drone Data Integration',
+      'Smart Irrigation Control',
+      'Advanced Security Features',
+      'Premium Support Package',
+      'Custom API Access',
+      'White-label Options'
     ],
-    buttonText: 'Contact us',
-    buttonVariant: 'contained',
+    buttonText: 'Contact Sales',
+    buttonVariant: 'outlined',
   }
 ];
 
@@ -103,7 +109,7 @@ const PricingTiers = () => {
             item
             key={tier.title}
             xs={12}
-            sm={6}
+            sm={tier.title === 'Enterprise Plus' ? 12 : 6}
             md={3}
           >
             <Card
@@ -111,12 +117,33 @@ const PricingTiers = () => {
                 height: '100%',
                 display: 'flex',
                 flexDirection: 'column',
-                '&:hover': {
-                  transform: 'scale(1.02)',
-                  transition: 'transform 0.2s ease-in-out',
-                },
+                ...(tier.popular && {
+                  border: '2px solid #1976d2',
+                  position: 'relative'
+                }),
+                ...(tier.title === 'Enterprise Plus' && {
+                  border: '2px solid #9c27b0',
+                  position: 'relative'
+                })
               }}
             >
+              {tier.popular && (
+                <Box
+                  sx={{
+                    position: 'absolute',
+                    top: 0,
+                    right: 20,
+                    transform: 'translateY(-50%)',
+                    backgroundColor: '#e91e63',
+                    color: 'white',
+                    px: 2,
+                    py: 0.5,
+                    borderRadius: 1,
+                  }}
+                >
+                  POPULAR
+                </Box>
+              )}
               <CardHeader
                 title={tier.title}
                 subheader={tier.subheader}
@@ -127,15 +154,23 @@ const PricingTiers = () => {
                     theme.palette.mode === 'light'
                       ? theme.palette.grey[200]
                       : theme.palette.grey[700],
+                  ...(tier.title === 'Enterprise Plus' && {
+                    backgroundColor: '#9c27b0',
+                    color: 'white',
+                    '& .MuiCardHeader-subheader': {
+                      color: 'rgba(255, 255, 255, 0.7)',
+                    },
+                  }),
                 }}
               />
-              <CardContent sx={{ flexGrow: 1 }}>
+              <CardContent sx={{ flexGrow: 1, pt: 0 }}>
                 <Box
                   sx={{
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'baseline',
                     mb: 2,
+                    pt: 2,
                   }}
                 >
                   <Typography component="h2" variant="h3" color="text.primary">
@@ -153,21 +188,28 @@ const PricingTiers = () => {
                 >
                   {tier.description}
                 </Typography>
-                <List>
+                <List sx={{ mb: 2 }}>
                   {tier.features.map((feature) => (
                     <ListItem key={feature} sx={{ py: 1 }}>
                       <ListItemIcon>
-                        <CheckIcon sx={{ color: 'primary.main' }} />
+                        <CheckIcon sx={{ color: tier.title === 'Enterprise Plus' ? '#9c27b0' : 'primary.main' }} />
                       </ListItemIcon>
-                      <ListItemText primary={feature} />
+                      <ListItemText 
+                        primary={feature}
+                        sx={{
+                          '& .MuiTypography-root': {
+                            fontSize: '0.875rem',
+                          },
+                        }}
+                      />
                     </ListItem>
                   ))}
                 </List>
                 <Button
                   fullWidth
                   variant={tier.buttonVariant}
-                  color="primary"
-                  sx={{ mt: 2 }}
+                  color={tier.title === 'Enterprise Plus' ? 'secondary' : 'primary'}
+                  sx={{ mt: 'auto' }}
                 >
                   {tier.buttonText}
                 </Button>

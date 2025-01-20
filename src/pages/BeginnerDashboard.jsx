@@ -8,6 +8,9 @@ import {
   List,
   ListItem,
   ListItemText,
+  ListItemIcon,
+  CheckIcon,
+  LightbulbIcon
 } from '@mui/material';
 import '../styles/BeginnerDashboard.css';
 
@@ -20,25 +23,25 @@ const farmingStyles = [
     difficulty: 'Moderate',
     spaceNeeded: 'Large',
     keyPoints: [
-      'Uses basic tools and natural methods',
-      'Relies on seasonal patterns',
-      'Minimal technology required',
-      'Good for staple crops'
+      'Sustainable practices',
+      'Natural pest control',
+      'Crop rotation',
+      'Soil enrichment'
     ],
     guide: {
-      introduction: 'Traditional farming connects you with time-tested agricultural practices.',
+      introduction: 'Traditional farming relies on time-tested methods that have been refined over generations. It emphasizes working in harmony with nature and local ecosystems.',
       stepsToStart: [
-        'Prepare the soil',
-        'Plan your crops',
-        'Get basic tools',
-        'Learn about seasons',
-        'Start composting'
+        'Choose suitable land with good soil quality',
+        'Plan your crop rotation schedule',
+        'Prepare soil using natural amendments',
+        'Implement natural pest control methods',
+        'Practice water conservation'
       ],
       proTips: [
-        'Start small and expand gradually',
-        'Learn from local farmers',
-        'Keep a farming journal',
-        'Practice crop rotation'
+        'Start with easy-to-grow crops native to your region',
+        'Learn from experienced local farmers',
+        'Keep detailed records of planting and harvesting',
+        'Save seeds from successful crops'
       ]
     }
   },
@@ -166,29 +169,29 @@ const farmingStyles = [
     id: 6,
     name: 'Aquaponic Farming',
     description: 'Combines fish farming with plant growing',
-    image: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952',
+    image: 'https://images.unsplash.com/photo-1519666336592-e225a99dcd2f',
     difficulty: 'Advanced',
     spaceNeeded: 'Medium',
     keyPoints: [
-      'Sustainable ecosystem',
-      'Produces fish and plants',
-      'Water-efficient',
-      'Natural fertilization'
+      'Combines aquaculture and hydroponics',
+      'Water-efficient system',
+      'Year-round production',
+      'High yield potential'
     ],
     guide: {
-      introduction: 'Aquaponics creates a sustainable ecosystem combining fish and plant production.',
+      introduction: 'Aquaponic farming creates a symbiotic environment where fish and plants help each other thrive. Fish waste provides nutrients for plants, while plants filter water for fish.',
       stepsToStart: [
-        'Set up fish tanks',
-        'Install growing beds',
-        'Choose fish species',
-        'Select compatible plants',
+        'Set up fish tanks and growing beds',
+        'Install water circulation system',
+        'Choose compatible fish species',
+        'Select appropriate plants',
         'Balance the ecosystem'
       ],
       proTips: [
-        'Start with hardy fish',
-        'Monitor water quality',
-        'Keep system balanced',
-        'Plan for power outages'
+        'Start with hardy fish like tilapia',
+        'Monitor water quality daily',
+        'Maintain proper fish-to-plant ratios',
+        'Keep backup power for water pumps'
       ]
     }
   },
@@ -319,21 +322,17 @@ const BeginnerDashboard = () => {
   const [showGuide, setShowGuide] = useState(false);
 
   const handleStyleClick = (style) => {
-    if (selectedStyle?.id === style.id) {
-      setShowGuide(!showGuide);
-    } else {
-      setSelectedStyle(style);
-      setShowGuide(true);
-    }
+    setSelectedStyle(style);
+    setShowGuide(true);
   };
 
   return (
     <div className="beginner-dashboard">
       <Typography variant="h2" align="center" gutterBottom>
-        Welcome to Beginner Farming
+        Beginner Farming Styles
       </Typography>
       <Typography variant="h6" align="center" gutterBottom sx={{ mb: 4 }}>
-        Choose a farming style to get started:
+        Choose a farming style to learn more:
       </Typography>
 
       <Grid container spacing={3}>
@@ -343,7 +342,6 @@ const BeginnerDashboard = () => {
               className={`farming-style-card ${selectedStyle?.id === style.id ? 'selected' : ''}`}
               onClick={() => handleStyleClick(style)}
               elevation={selectedStyle?.id === style.id ? 8 : 1}
-              sx={{ cursor: 'pointer', height: '100%' }}
             >
               <img 
                 src={style.image} 
@@ -354,7 +352,7 @@ const BeginnerDashboard = () => {
                   e.target.src = 'https://images.unsplash.com/photo-1495908333425-29a1e0918c5f?w=800';
                 }}
               />
-              <Box p={2}>
+              <Box p={3}>
                 <Typography variant="h5" gutterBottom>
                   {style.name}
                 </Typography>
@@ -362,72 +360,85 @@ const BeginnerDashboard = () => {
                   {style.description}
                 </Typography>
                 <Box sx={{ mt: 2 }}>
-                  <Typography variant="body2" sx={{ mb: 1 }}>
-                    Difficulty: {style.difficulty}
+                  <Typography variant="subtitle2" gutterBottom>
+                    Difficulty: <span style={{ color: 'text.secondary' }}>{style.difficulty}</span>
                   </Typography>
-                  <Typography variant="body2">
-                    Space Needed: {style.spaceNeeded}
+                  <Typography variant="subtitle2">
+                    Space Needed: <span style={{ color: 'text.secondary' }}>{style.spaceNeeded}</span>
                   </Typography>
                 </Box>
               </Box>
             </Paper>
-
-            {selectedStyle?.id === style.id && showGuide && (
-              <Paper className="style-guide" sx={{ mt: 2, p: 3 }}>
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
-                  <Typography variant="h6">Guide Content</Typography>
-                  <Button
-                    variant="outlined"
-                    color="primary"
-                    onClick={() => setShowGuide(false)}
-                  >
-                    Hide Guide
-                  </Button>
-                </Box>
-
-                <Typography variant="h6" gutterBottom>
-                  Key Points:
-                </Typography>
-                <List>
-                  {style.keyPoints.map((point, index) => (
-                    <ListItem key={index}>
-                      <ListItemText primary={point} />
-                    </ListItem>
-                  ))}
-                </List>
-
-                <Box sx={{ mt: 3 }}>
-                  <Typography variant="body1" paragraph>
-                    {style.guide.introduction}
-                  </Typography>
-
-                  <Typography variant="h6" gutterBottom>
-                    Steps to Get Started:
-                  </Typography>
-                  <List>
-                    {style.guide.stepsToStart.map((step, index) => (
-                      <ListItem key={index}>
-                        <ListItemText primary={`${index + 1}. ${step}`} />
-                      </ListItem>
-                    ))}
-                  </List>
-
-                  <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
-                    Pro Tips:
-                  </Typography>
-                  <List>
-                    {style.guide.proTips.map((tip, index) => (
-                      <ListItem key={index}>
-                        <ListItemText primary={tip} />
-                      </ListItem>
-                    ))}
-                  </List>
-                </Box>
-              </Paper>
-            )}
           </Grid>
         ))}
       </Grid>
+
+      {selectedStyle && showGuide && (
+        <Box sx={{ mt: 4, p: 3, bgcolor: 'background.paper', borderRadius: 2, boxShadow: 3 }}>
+          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
+            <Typography variant="h4">{selectedStyle.name} Guide</Typography>
+            <Button
+              variant="outlined"
+              onClick={() => setShowGuide(false)}
+              sx={{ minWidth: 120 }}
+            >
+              Hide Guide
+            </Button>
+          </Box>
+
+          <Grid container spacing={4}>
+            <Grid item xs={12} md={4}>
+              <Typography variant="h6" gutterBottom>
+                Key Points
+              </Typography>
+              <List>
+                {selectedStyle.keyPoints.map((point, index) => (
+                  <ListItem key={index}>
+                    <ListItemIcon>
+                      <CheckIcon color="primary" />
+                    </ListItemIcon>
+                    <ListItemText primary={point} />
+                  </ListItem>
+                ))}
+              </List>
+            </Grid>
+
+            <Grid item xs={12} md={8}>
+              <Typography variant="body1" paragraph>
+                {selectedStyle.guide.introduction}
+              </Typography>
+
+              <Typography variant="h6" gutterBottom sx={{ mt: 3 }}>
+                Steps to Get Started
+              </Typography>
+              <List>
+                {selectedStyle.guide.stepsToStart.map((step, index) => (
+                  <ListItem key={index}>
+                    <ListItemText 
+                      primary={`${index + 1}. ${step}`}
+                      sx={{ '& .MuiTypography-root': { color: 'text.primary' } }}
+                    />
+                  </ListItem>
+                ))}
+              </List>
+
+              <Typography variant="h6" gutterBottom sx={{ mt: 3 }}>
+                Pro Tips
+              </Typography>
+              <List>
+                {selectedStyle.guide.proTips.map((tip, index) => (
+                  <ListItem key={index}>
+                    <ListItemIcon>
+                      <LightbulbIcon color="primary" />
+                    </ListItemIcon>
+                    <ListItemText primary={tip} />
+                  </ListItem>
+                ))}
+              </List>
+            </Grid>
+          </Grid>
+        </Box>
+      )}
     </div>
   );
 };
