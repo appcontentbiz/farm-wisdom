@@ -17,12 +17,16 @@ import {
   CircularProgress
 } from '@mui/material';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { useUser } from '../context/UserContext';
+import { useSnackbar } from 'notistack';
 
 const steps = ['Account Details', 'Farm Information', 'Payment'];
 
 function SignUp() {
   const navigate = useNavigate();
   const location = useLocation();
+  const { login } = useUser();
+  const { enqueueSnackbar } = useSnackbar();
   const searchParams = new URLSearchParams(location.search);
   const isProfessional = searchParams.get('plan') === 'professional';
 
@@ -103,20 +107,19 @@ function SignUp() {
   };
 
   const handleSubmit = async () => {
+    if (!validateStep()) return;
+    
     setLoading(true);
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      // TODO: Replace with actual API call
+      await new Promise(resolve => setTimeout(resolve, 1500)); // Simulate API call
       
-      // Navigate to success page or dashboard
-      navigate('/dashboard', { 
-        state: { 
-          message: `Welcome to Farm Wisdom ${isProfessional ? 'Professional' : 'Free'} tier!`,
-          newUser: true
-        }
-      });
+      // For demo purposes, always succeed
+      login('user');
+      enqueueSnackbar('Successfully signed up!', { variant: 'success' });
+      navigate('/dashboard');
     } catch (error) {
-      setErrors({ submit: 'Failed to create account. Please try again.' });
+      enqueueSnackbar('Error signing up. Please try again.', { variant: 'error' });
     } finally {
       setLoading(false);
     }
