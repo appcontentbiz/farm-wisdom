@@ -40,6 +40,7 @@ import TrendingUp from '@mui/icons-material/TrendingUp';
 import Pets from '@mui/icons-material/Pets';
 import Inventory from '@mui/icons-material/Inventory';
 import Landscape from '@mui/icons-material/Landscape';
+import FitnessCenter from '@mui/icons-material/FitnessCenter';
 
 const DEMO_DURATION = 30 * 60 * 1000; // 30 minutes
 
@@ -61,6 +62,50 @@ const SoilData = [
   { id: 'Phosphorus', value: 35, ideal: '30-50' },
   { id: 'Potassium', value: 55, ideal: '50-70' },
   { id: 'Organic Matter', value: 3.5, ideal: '3.0-5.0' },
+];
+
+const demoFeatures = [
+  {
+    title: 'Livestock Management',
+    description: 'Track and monitor your livestock health and resources',
+    status: 'Healthy',
+    metrics: {
+      health: 95,
+      feed: 80,
+      water: 85
+    }
+  },
+  {
+    title: 'Resource Planning',
+    description: 'Monitor essential farm resources and inventory',
+    status: 'Good',
+    metrics: {
+      feed: 75,
+      water: 90,
+      medicine: 85
+    }
+  },
+  {
+    title: 'Soil Analysis',
+    description: 'Track soil health and nutrient levels',
+    status: 'Optimal',
+    metrics: {
+      ph: 6.8,
+      nitrogen: 80,
+      phosphorus: 75
+    }
+  },
+  {
+    title: 'Health & Fitness',
+    description: 'Monitor farmer health and daily activity',
+    status: 'Active',
+    metrics: {
+      steps: 12500,
+      waterIntake: 2.5,
+      activeMinutes: 180,
+      restPeriods: 3
+    }
+  }
 ];
 
 const generateTreatmentHistory = () => {
@@ -110,6 +155,12 @@ function Demo() {
   const [livestock, setLivestock] = useState(LivestockData);
   const [resources, setResources] = useState(ResourceData);
   const [soil, setSoil] = useState(SoilData);
+  const [health, setHealth] = useState({
+    steps: 12500,
+    waterIntake: 2.5,
+    activeMinutes: 180,
+    restPeriods: 3
+  });
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
 
@@ -135,6 +186,10 @@ function Demo() {
     {
       target: '.soil-analysis',
       content: 'Analyze soil conditions for optimal crop growth',
+    },
+    {
+      target: '.health-fitness',
+      content: 'Monitor your health and daily activity',
     },
   ];
 
@@ -406,6 +461,39 @@ function Demo() {
                   </TableContainer>
                 </Grid>
               </Grid>
+            </CardContent>
+          </Card>
+        </Grid>
+
+        {/* Health & Fitness */}
+        <Grid item xs={12} md={6} className="health-fitness">
+          <Card>
+            <CardHeader
+              title="Health & Fitness"
+              avatar={<FitnessCenter color="primary" />}
+              action={
+                <Tooltip title="Monitor your health and daily activity">
+                  <IconButton>
+                    <Help />
+                  </IconButton>
+                </Tooltip>
+              }
+            />
+            <CardContent>
+              <Box sx={{ mb: 2 }}>
+                <Typography variant="body1">
+                  Steps: {health.steps}
+                </Typography>
+                <Typography variant="body1">
+                  Water Intake: {health.waterIntake} L
+                </Typography>
+                <Typography variant="body1">
+                  Active Minutes: {health.activeMinutes} minutes
+                </Typography>
+                <Typography variant="body1">
+                  Rest Periods: {health.restPeriods} hours
+                </Typography>
+              </Box>
             </CardContent>
           </Card>
         </Grid>

@@ -4,7 +4,12 @@ import '../../styles/Navbar.css';
 
 export default function Navbar() {
   const navigate = useNavigate();
-  const { userRole } = useUser();
+  const { userRole, isAuthenticated, logout } = useUser();
+
+  const handleLogout = () => {
+    logout();
+    navigate('/');
+  };
 
   return (
     <nav className="navbar">
@@ -19,10 +24,15 @@ export default function Navbar() {
       </div>
       <div className="nav-right">
         <Link to="/pricing" className="nav-button upgrade">Upgrade</Link>
-        {!userRole && (
+        {!isAuthenticated ? (
           <>
             <Link to="/signin" className="nav-button signin">Sign In</Link>
             <Link to="/signup" className="nav-button signup">Sign Up</Link>
+          </>
+        ) : (
+          <>
+            <Link to="/dashboard" className="nav-button">Dashboard</Link>
+            <button onClick={handleLogout} className="nav-button signout">Sign Out</button>
           </>
         )}
       </div>
