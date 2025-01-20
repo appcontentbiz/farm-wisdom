@@ -1,5 +1,32 @@
 import { useState } from 'react';
+import { 
+  Box,
+  Card,
+  CardContent,
+  CardMedia,
+  Typography,
+  Grid,
+  Button,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Divider,
+  Paper,
+  Tabs,
+  Tab,
+} from '@mui/material';
+import {
+  Check as CheckIcon,
+  ArrowForward as ArrowForwardIcon,
+  Star as StarIcon,
+} from '@mui/icons-material';
 import { farmingImages } from '../assets/images/farming-styles';
+import { PricingTiers } from '../components/Enterprise/PricingTiers';
 import '../styles/BeginnerDashboard.css';
 
 const farmingStyles = [
@@ -998,193 +1025,225 @@ const farmingStyles = [
   }
 ];
 
-export default function BeginnerDashboard() {
+const BeginnerDashboard = () => {
   const [selectedStyle, setSelectedStyle] = useState(null);
-  const [progressData, setProgressData] = useState({});
-  const [learningMode, setLearningMode] = useState('guided');
-  const [completedTasks, setCompletedTasks] = useState([]);
-  const [userNotes, setUserNotes] = useState({});
-  const [activeQuiz, setActiveQuiz] = useState(null);
+  const [showUpgradeDialog, setShowUpgradeDialog] = useState(false);
+  const [activeTab, setActiveTab] = useState(0);
 
-  const handleTaskCompletion = (taskId) => {
-    setCompletedTasks([...completedTasks, taskId]);
-    setProgressData({
-      ...progressData,
-      [selectedStyle.id]: {
-        ...progressData[selectedStyle.id],
-        completedTasks: [...(progressData[selectedStyle.id]?.completedTasks || []), taskId]
-      }
-    });
+  const handleStyleClick = (style) => {
+    setSelectedStyle(style);
   };
 
-  const handleNoteAdd = (sectionId, note) => {
-    setUserNotes({
-      ...userNotes,
-      [sectionId]: [...(userNotes[sectionId] || []), note]
-    });
+  const handleCloseDialog = () => {
+    setSelectedStyle(null);
   };
 
-  const startQuiz = (styleId) => {
-    setActiveQuiz(styleId);
+  const handleUpgradeClick = () => {
+    setShowUpgradeDialog(true);
+  };
+
+  const handleCloseUpgradeDialog = () => {
+    setShowUpgradeDialog(false);
+  };
+
+  const renderGuideContent = (guide) => {
+    if (!guide) return null;
+
+    return (
+      <Box sx={{ p: 3 }}>
+        <Typography variant="h5" gutterBottom>
+          {selectedStyle.name} Guide
+        </Typography>
+        
+        <Typography variant="body1" paragraph>
+          {guide.introduction}
+        </Typography>
+
+        <Typography variant="h6" gutterBottom>
+          Preparation Phase
+        </Typography>
+        <List>
+          {guide.preparationPhase.tasks.map((task, index) => (
+            <ListItem key={index}>
+              <ListItemIcon>
+                <CheckIcon color="primary" />
+              </ListItemIcon>
+              <ListItemText primary={task} />
+            </ListItem>
+          ))}
+        </List>
+
+        <Typography variant="h6" gutterBottom>
+          Seasonal Guidance
+        </Typography>
+        <Grid container spacing={2}>
+          {Object.entries(guide.seasonalGuidance).map(([season, tasks]) => (
+            <Grid item xs={12} md={3} key={season}>
+              <Paper sx={{ p: 2 }}>
+                <Typography variant="subtitle1" gutterBottom sx={{ textTransform: 'capitalize' }}>
+                  {season}
+                </Typography>
+                <List dense>
+                  {tasks.map((task, index) => (
+                    <ListItem key={index}>
+                      <ListItemIcon>
+                        <CheckIcon color="primary" fontSize="small" />
+                      </ListItemIcon>
+                      <ListItemText primary={task} />
+                    </ListItem>
+                  ))}
+                </List>
+              </Paper>
+            </Grid>
+          ))}
+        </Grid>
+
+        <Box sx={{ mt: 4 }}>
+          <Typography variant="h6" gutterBottom>
+            Holistic Living Integration
+          </Typography>
+          <Grid container spacing={2}>
+            {Object.entries(guide.holisticLiving).map(([aspect, content]) => (
+              <Grid item xs={12} md={4} key={aspect}>
+                <Paper sx={{ p: 2, height: '100%' }}>
+                  <Typography variant="subtitle1" gutterBottom sx={{ textTransform: 'capitalize' }}>
+                    {aspect}
+                  </Typography>
+                  <List dense>
+                    {Array.isArray(content) ? content.map((item, index) => (
+                      <ListItem key={index}>
+                        <ListItemIcon>
+                          <CheckIcon color="primary" fontSize="small" />
+                        </ListItemIcon>
+                        <ListItemText primary={item} />
+                      </ListItem>
+                    )) : (
+                      Object.entries(content).map(([subAspect, items]) => (
+                        <Box key={subAspect}>
+                          <Typography variant="subtitle2" sx={{ mt: 1, mb: 1 }}>
+                            {subAspect.replace(/([A-Z])/g, ' $1').trim()}
+                          </Typography>
+                          <List dense>
+                            {items.map((item, index) => (
+                              <ListItem key={index}>
+                                <ListItemIcon>
+                                  <CheckIcon color="primary" fontSize="small" />
+                                </ListItemIcon>
+                                <ListItemText primary={item} />
+                              </ListItem>
+                            ))}
+                          </List>
+                        </Box>
+                      ))
+                    )}
+                  </List>
+                </Paper>
+              </Grid>
+            ))}
+          </Grid>
+        </Box>
+      </Box>
+    );
   };
 
   return (
-    <div className="beginner-dashboard">
-      <div className="style-grid">
+    <Box sx={{ p: 3 }}>
+      <Typography variant="h4" gutterBottom>
+        Beginner's Guide to Farming Styles
+      </Typography>
+      
+      <Grid container spacing={3}>
         {farmingStyles.map((style) => (
-          <div 
-            key={style.id} 
-            className={`style-card ${selectedStyle?.id === style.id ? 'selected' : ''}`}
-            onClick={() => setSelectedStyle(style)}
-          >
-            <img src={style.image} alt={style.name} className="style-image" />
-            <h2>{style.name}</h2>
-            <p>{style.description}</p>
-            <div className="style-meta">
-              <span>Difficulty: {style.difficulty}</span>
-              <span>Space: {style.spaceNeeded}</span>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {selectedStyle && (
-        <div className="style-details">
-          <div className="guide-content">
-            <Typography variant="h4" gutterBottom>
-              {selectedStyle.name}
-            </Typography>
-            
-            <Typography variant="body1" paragraph>
-              {selectedStyle.description}
-            </Typography>
-
-            {/* Basic Information */}
-            <Box sx={{ mb: 4 }}>
-              <Typography variant="h6" color="primary">
-                Overview
-              </Typography>
-              <Grid container spacing={2}>
-                <Grid item xs={6}>
-                  <Paper sx={{ p: 2 }}>
-                    <Typography variant="subtitle1">Difficulty Level</Typography>
-                    <Typography variant="body1">{selectedStyle.difficulty}</Typography>
-                  </Paper>
-                </Grid>
-                <Grid item xs={6}>
-                  <Paper sx={{ p: 2 }}>
-                    <Typography variant="subtitle1">Space Required</Typography>
-                    <Typography variant="body1">{selectedStyle.spaceNeeded}</Typography>
-                  </Paper>
-                </Grid>
-              </Grid>
-            </Box>
-
-            {/* Guide Introduction */}
-            <Box sx={{ mb: 4 }}>
-              <Typography variant="h6" color="primary">
-                Introduction
-              </Typography>
-              <Typography variant="body1" paragraph>
-                {selectedStyle.guide.introduction}
-              </Typography>
-            </Box>
-
-            {/* Rest of the interactive elements */}
-            {/* ... */}
-
-            {/* Key Points */}
-            <Box sx={{ mb: 4 }}>
-              <Typography variant="h6" color="primary">
-                Key Points
-              </Typography>
-              <List>
-                {selectedStyle.keyPoints.map((point, index) => (
-                  <ListItem key={index}>
-                    <ListItemIcon>
-                      <CheckCircleOutlineIcon color="primary" />
-                    </ListItemIcon>
-                    <ListItemText primary={point} />
-                  </ListItem>
-                ))}
-              </List>
-            </Box>
-
-            {/* Preparation Phase */}
-            <Box sx={{ mb: 4 }}>
-              <Typography variant="h6" color="primary">
-                Getting Started
-              </Typography>
-              <Typography variant="subtitle1" gutterBottom>
-                Timeline: {selectedStyle.guide.preparationPhase.timeline}
-              </Typography>
-              <List>
-                {selectedStyle.guide.preparationPhase.tasks.map((task, index) => (
-                  <ListItem key={index}>
-                    <ListItemIcon>
-                      <ArrowRightIcon color="primary" />
-                    </ListItemIcon>
-                    <ListItemText primary={task} />
-                  </ListItem>
-                ))}
-              </List>
-            </Box>
-
-            {/* Seasonal Guidance */}
-            <Box sx={{ mb: 4 }}>
-              <Typography variant="h6" color="primary">
-                Seasonal Guide
-              </Typography>
-              <Grid container spacing={2}>
-                {Object.entries(selectedStyle.guide.seasonalGuidance).map(([season, tasks]) => (
-                  <Grid item xs={12} md={6} key={season}>
-                    <Paper sx={{ p: 2 }}>
-                      <Typography variant="subtitle1" sx={{ textTransform: 'capitalize' }} gutterBottom>
-                        {season}
-                      </Typography>
-                      <List dense>
-                        {tasks.map((task, index) => (
-                          <ListItem key={index}>
-                            <ListItemIcon>
-                              <FiberManualRecordIcon fontSize="small" />
-                            </ListItemIcon>
-                            <ListItemText primary={task} />
-                          </ListItem>
-                        ))}
-                      </List>
-                    </Paper>
-                  </Grid>
-                ))}
-              </Grid>
-            </Box>
-
-            {/* Holistic Living */}
-            <Box sx={{ mb: 4 }}>
-              <Typography variant="h6" color="primary">
-                Holistic Living Integration
-              </Typography>
-              {Object.entries(selectedStyle.guide.holisticLiving).map(([category, practices]) => (
-                <Box key={category} sx={{ mb: 3 }}>
-                  <Typography variant="subtitle1" sx={{ textTransform: 'capitalize' }} gutterBottom>
-                    {category}
+          <Grid item xs={12} sm={6} md={4} key={style.id}>
+            <Card 
+              onClick={() => handleStyleClick(style)}
+              sx={{ 
+                cursor: 'pointer',
+                height: '100%',
+                display: 'flex',
+                flexDirection: 'column',
+                '&:hover': {
+                  transform: 'scale(1.02)',
+                  transition: 'transform 0.2s ease-in-out'
+                }
+              }}
+            >
+              <CardMedia
+                component="img"
+                height="200"
+                image={farmingImages[style.id]}
+                alt={style.name}
+              />
+              <CardContent sx={{ flexGrow: 1 }}>
+                <Typography variant="h6" gutterBottom>
+                  {style.name}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  {style.description}
+                </Typography>
+                <Box sx={{ mt: 2 }}>
+                  <Typography variant="body2">
+                    Difficulty: {style.difficulty}
                   </Typography>
-                  <List dense>
-                    {Array.isArray(practices) ? practices.map((practice, index) => (
-                      <ListItem key={index}>
-                        <ListItemIcon>
-                          <EcoIcon fontSize="small" color="primary" />
-                        </ListItemIcon>
-                        <ListItemText primary={practice} />
-                      </ListItem>
-                    )) : null}
-                  </List>
+                  <Typography variant="body2">
+                    Space Needed: {style.spaceNeeded}
+                  </Typography>
                 </Box>
-              ))}
-            </Box>
+              </CardContent>
+            </Card>
+          </Grid>
+        ))}
+      </Grid>
 
-          </div>
-        </div>
-      )}
-    </div>
+      <Dialog 
+        open={Boolean(selectedStyle)} 
+        onClose={handleCloseDialog}
+        maxWidth="lg"
+        fullWidth
+      >
+        {selectedStyle && (
+          <>
+            <DialogTitle>
+              <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                {selectedStyle.name}
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={handleUpgradeClick}
+                  startIcon={<StarIcon />}
+                >
+                  Upgrade to Enterprise Plus
+                </Button>
+              </Box>
+            </DialogTitle>
+            <DialogContent dividers>
+              {renderGuideContent(selectedStyle.guide)}
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleCloseDialog}>Close</Button>
+            </DialogActions>
+          </>
+        )}
+      </Dialog>
+
+      <Dialog
+        open={showUpgradeDialog}
+        onClose={handleCloseUpgradeDialog}
+        maxWidth="xl"
+        fullWidth
+      >
+        <DialogTitle>
+          Upgrade to Enterprise Plus
+        </DialogTitle>
+        <DialogContent>
+          <PricingTiers />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseUpgradeDialog}>Close</Button>
+        </DialogActions>
+      </Dialog>
+    </Box>
   );
-}
+};
+
+export default BeginnerDashboard;
