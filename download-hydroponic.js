@@ -8,7 +8,7 @@ const __dirname = path.dirname(__filename);
 
 const downloadImage = (url, filename) => {
   return new Promise((resolve, reject) => {
-    const filepath = path.join(__dirname, 'public', 'images', filename);
+    const filepath = path.join(__dirname, 'src', 'assets', 'images', 'farming-styles', filename);
     const file = fs.createWriteStream(filepath);
 
     https.get(url, response => {
@@ -29,5 +29,5 @@ const downloadImage = (url, filename) => {
 
 downloadImage(
   'https://images.unsplash.com/photo-1585444744772-5e9b59680275?w=1200&q=80',
-  'hydroponic-farming.jpg'
+  'hydroponic.jpg'
 );

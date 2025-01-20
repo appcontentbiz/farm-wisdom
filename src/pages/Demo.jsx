@@ -26,6 +26,10 @@ import {
   TableHead,
   TableRow,
   Paper,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
 } from '@mui/material';
 import Agriculture from '@mui/icons-material/Agriculture';
 import WbSunny from '@mui/icons-material/WbSunny';
@@ -41,6 +45,11 @@ import Pets from '@mui/icons-material/Pets';
 import Inventory from '@mui/icons-material/Inventory';
 import Landscape from '@mui/icons-material/Landscape';
 import FitnessCenter from '@mui/icons-material/FitnessCenter';
+import DirectionsRun from '@mui/icons-material/DirectionsRun';
+import Restaurant from '@mui/icons-material/Restaurant';
+import MonitorHeart from '@mui/icons-material/MonitorHeart';
+import LocalDining from '@mui/icons-material/LocalDining';
+import FiberManualRecord from '@mui/icons-material/FiberManualRecord';
 
 const DEMO_DURATION = 30 * 60 * 1000; // 30 minutes
 
@@ -155,12 +164,68 @@ function Demo() {
   const [livestock, setLivestock] = useState(LivestockData);
   const [resources, setResources] = useState(ResourceData);
   const [soil, setSoil] = useState(SoilData);
-  const [health, setHealth] = useState({
-    steps: 12500,
-    waterIntake: 2.5,
-    activeMinutes: 180,
-    restPeriods: 3
-  });
+  const healthMetrics = {
+    activity: {
+      steps: 12500,
+      activeMinutes: 180,
+      caloriesBurned: 2450,
+      distanceKm: 8.5,
+      heartRate: 72,
+      restingHeartRate: 65
+    },
+    nutrition: {
+      waterIntake: 2.5,
+      calories: 2100,
+      protein: 75,
+      carbs: 250,
+      fats: 65,
+      fiber: 28
+    },
+    rest: {
+      sleepHours: 7.5,
+      sleepQuality: 85,
+      restPeriods: 3,
+      stressLevel: 'Low'
+    },
+    meals: [
+      {
+        time: 'Breakfast',
+        foods: [
+          'Organic Oatmeal with Farm Berries',
+          'Farm Fresh Eggs',
+          'Green Smoothie'
+        ],
+        calories: 450
+      },
+      {
+        time: 'Lunch',
+        foods: [
+          'Garden Salad with Grilled Chicken',
+          'Homemade Whole Grain Bread',
+          'Fresh Apple'
+        ],
+        calories: 650
+      },
+      {
+        time: 'Dinner',
+        foods: [
+          'Grilled Farm Fish',
+          'Roasted Root Vegetables',
+          'Quinoa'
+        ],
+        calories: 750
+      },
+      {
+        time: 'Snacks',
+        foods: [
+          'Mixed Nuts',
+          'Farm Yogurt with Honey',
+          'Fresh Fruit'
+        ],
+        calories: 250
+      }
+    ]
+  };
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
 
@@ -466,7 +531,7 @@ function Demo() {
         </Grid>
 
         {/* Health & Fitness */}
-        <Grid item xs={12} md={6} className="health-fitness">
+        <Grid item xs={12} className="health-fitness">
           <Card>
             <CardHeader
               title="Health & Fitness"
@@ -480,20 +545,114 @@ function Demo() {
               }
             />
             <CardContent>
-              <Box sx={{ mb: 2 }}>
-                <Typography variant="body1">
-                  Steps: {health.steps}
-                </Typography>
-                <Typography variant="body1">
-                  Water Intake: {health.waterIntake} L
-                </Typography>
-                <Typography variant="body1">
-                  Active Minutes: {health.activeMinutes} minutes
-                </Typography>
-                <Typography variant="body1">
-                  Rest Periods: {health.restPeriods} hours
-                </Typography>
-              </Box>
+              <Grid container spacing={3}>
+                {/* Activity Metrics */}
+                <Grid item xs={12} md={6}>
+                  <Card variant="outlined">
+                    <CardHeader
+                      title="Activity"
+                      avatar={<DirectionsRun color="primary" />}
+                    />
+                    <CardContent>
+                      <Typography variant="body1">
+                        Steps: {healthMetrics.activity.steps}
+                      </Typography>
+                      <Typography variant="body1">
+                        Active Minutes: {healthMetrics.activity.activeMinutes}
+                      </Typography>
+                      <Typography variant="body1">
+                        Calories Burned: {healthMetrics.activity.caloriesBurned} kcal
+                      </Typography>
+                      <Typography variant="body1">
+                        Distance: {healthMetrics.activity.distanceKm} km
+                      </Typography>
+                      <Typography variant="body1">
+                        Heart Rate: {healthMetrics.activity.heartRate} bpm
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                </Grid>
+
+                {/* Nutrition Metrics */}
+                <Grid item xs={12} md={6}>
+                  <Card variant="outlined">
+                    <CardHeader
+                      title="Nutrition"
+                      avatar={<Restaurant color="primary" />}
+                    />
+                    <CardContent>
+                      <Typography variant="body1">
+                        Water Intake: {healthMetrics.nutrition.waterIntake}L
+                      </Typography>
+                      <Typography variant="body1">
+                        Calories: {healthMetrics.nutrition.calories} kcal
+                      </Typography>
+                      <Typography variant="body1">
+                        Protein: {healthMetrics.nutrition.protein}g
+                      </Typography>
+                      <Typography variant="body1">
+                        Carbs: {healthMetrics.nutrition.carbs}g
+                      </Typography>
+                      <Typography variant="body1">
+                        Fats: {healthMetrics.nutrition.fats}g
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                </Grid>
+
+                {/* Rest & Recovery */}
+                <Grid item xs={12} md={6}>
+                  <Card variant="outlined">
+                    <CardHeader
+                      title="Rest & Recovery"
+                      avatar={<MonitorHeart color="primary" />}
+                    />
+                    <CardContent>
+                      <Typography variant="body1">
+                        Sleep: {healthMetrics.rest.sleepHours} hours
+                      </Typography>
+                      <Typography variant="body1">
+                        Sleep Quality: {healthMetrics.rest.sleepQuality}%
+                      </Typography>
+                      <Typography variant="body1">
+                        Rest Periods: {healthMetrics.rest.restPeriods}
+                      </Typography>
+                      <Typography variant="body1">
+                        Stress Level: {healthMetrics.rest.stressLevel}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                </Grid>
+
+                {/* Meal Tracking */}
+                <Grid item xs={12} md={6}>
+                  <Card variant="outlined">
+                    <CardHeader
+                      title="Farm-to-Table Meals"
+                      avatar={<LocalDining color="primary" />}
+                    />
+                    <CardContent>
+                      {healthMetrics.meals.map((meal, index) => (
+                        <Box key={index} sx={{ mb: 2 }}>
+                          <Typography variant="subtitle1" color="primary">
+                            {meal.time} ({meal.calories} kcal)
+                          </Typography>
+                          <List dense>
+                            {meal.foods.map((food, foodIndex) => (
+                              <ListItem key={foodIndex}>
+                                <ListItemIcon>
+                                  <FiberManualRecord sx={{ width: 8, height: 8 }} />
+                                </ListItemIcon>
+                                <ListItemText primary={food} />
+                              </ListItem>
+                            ))}
+                          </List>
+                        </Box>
+                      ))}
+                    </CardContent>
+                  </Card>
+                </Grid>
+              </Grid>
             </CardContent>
           </Card>
         </Grid>
