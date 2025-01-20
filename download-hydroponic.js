@@ -28,6 +28,6 @@ const downloadImage = (url, filename) => {
 };
 
 downloadImage(
-  'https://images.unsplash.com/photo-1595227140690-9e77562f1eaa?w=1200&q=80',
+  'https://images.unsplash.com/photo-1558616629-899031969d5e?w=1200&q=80',
   'hydroponic.jpg'
 );
