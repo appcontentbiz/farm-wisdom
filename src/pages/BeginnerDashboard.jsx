@@ -26,7 +26,7 @@ import {
   Star as StarIcon,
 } from '@mui/icons-material';
 import { farmingImages } from '../assets/images/farming-styles';
-import { PricingTiers } from '../components/Enterprise/PricingTiers';
+import PricingTiers from '../components/Enterprise/PricingTiers';
 import '../styles/BeginnerDashboard.css';
 
 const farmingStyles = [
