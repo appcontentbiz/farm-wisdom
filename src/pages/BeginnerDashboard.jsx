@@ -25,9 +25,17 @@ import {
   ArrowForward as ArrowForwardIcon,
   Star as StarIcon,
 } from '@mui/icons-material';
-import { farmingImages } from '../assets/images/farming-styles';
 import PricingTiers from '../components/Enterprise/PricingTiers';
 import '../styles/BeginnerDashboard.css';
+
+// Default images for farming styles
+const defaultImages = {
+  1: 'https://images.unsplash.com/photo-1500937386664-56d1dfef3854',
+  2: 'https://images.unsplash.com/photo-1585320806297-9794b3e4eeae',
+  3: 'https://images.unsplash.com/photo-1592419044706-39796d40f98c',
+  4: 'https://images.unsplash.com/photo-1571913384368-90c1a3df61c0',
+  5: 'https://images.unsplash.com/photo-1558616629-899031969d5e'
+};
 
 const farmingStyles = [
   {
@@ -1107,7 +1115,7 @@ const BeginnerDashboard = () => {
               <Grid item xs={12} md={4} key={aspect}>
                 <Paper sx={{ p: 2, height: '100%' }}>
                   <Typography variant="subtitle1" gutterBottom sx={{ textTransform: 'capitalize' }}>
-                    {aspect}
+                    {aspect.replace(/([A-Z])/g, ' $1').trim()}
                   </Typography>
                   <List dense>
                     {Array.isArray(content) ? content.map((item, index) => (
@@ -1171,7 +1179,7 @@ const BeginnerDashboard = () => {
               <CardMedia
                 component="img"
                 height="200"
-                image={farmingImages[style.id]}
+                image={defaultImages[style.id]}
                 alt={style.name}
               />
               <CardContent sx={{ flexGrow: 1 }}>
