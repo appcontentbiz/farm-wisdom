@@ -3,7 +3,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background-color: white;
+  background-color: #ffffff;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   position: sticky;
   top: 0;
@@ -19,65 +19,82 @@
 .nav-brand {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #2c3e50;
+  color: #2e7d32;
   text-decoration: none;
 }
 
 .nav-links {
   display: flex;
   gap: 1.5rem;
+  align-items: center;
 }
 
 .nav-links a {
-  color: #666;
   text-decoration: none;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  transition: all 0.3s ease;
+  color: #333;
+  font-weight: 500;
+  transition: color 0.2s ease;
 }
 
 .nav-links a:hover {
-  color: #3498db;
-  background-color: #f8f9fa;
+  color: #2e7d32;
 }
 
 .nav-links a.active {
-  color: #3498db;
-  background-color: #f8f9fa;
+  color: #2e7d32;
+  font-weight: 600;
 }
 
 .nav-right {
   display: flex;
   gap: 1rem;
+  align-items: center;
 }
 
 .nav-button {
-  padding: 0.5rem 1.5rem;
+  padding: 0.5rem 1rem;
   border-radius: 4px;
-  cursor: pointer;
-  font-weight: 500;
   text-decoration: none;
-  transition: all 0.3s ease;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.demo {
+  background-color: #2e7d32;
+  color: white;
+  padding: 0.5rem 1.5rem;
+}
+
+.demo:hover {
+  background-color: #1b5e20;
+  transform: translateY(-1px);
+}
+
+.upgrade {
+  background-color: #f57c00;
+  color: white;
+}
+
+.upgrade:hover {
+  background-color: #ef6c00;
 }
 
 .signin {
-  color: #2c3e50;
-  border: 1px solid #2c3e50;
+  color: #2e7d32;
+  border: 1px solid #2e7d32;
 }
 
 .signin:hover {
-  background-color: #2c3e50;
-  color: white;
+  background-color: rgba(46, 125, 50, 0.1);
 }
 
 .signup {
-  background-color: #27ae60;
+  background-color: #2e7d32;
   color: white;
-  border: none;
 }
 
 .signup:hover {
-  background-color: #219a52;
+  background-color: #1b5e20;
 }
 
 @media (max-width: 768px) {

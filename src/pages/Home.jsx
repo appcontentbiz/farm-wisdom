@@ -175,7 +175,7 @@ export default function Home() {
                   variant="outlined"
                   color="primary"
                   size="large"
-                  onClick={() => selectRole('professional')}
+                  onClick={() => navigate('/demo')}
                   sx={{ minWidth: 150 }}
                 >
                   Try Demo

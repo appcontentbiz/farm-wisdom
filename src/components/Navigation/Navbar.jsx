@@ -10,22 +10,21 @@ export default function Navbar() {
     <nav className="navbar">
       <div className="nav-left">
         <Link to="/" className="nav-brand">FarmWisdom</Link>
-        {userRole && (
-          <div className="nav-links">
-            <Link to="/beginner" className={userRole === 'beginner' ? 'active' : ''}>
-              Beginner Guide
-            </Link>
-            <Link to="/professional" className={userRole === 'professional' ? 'active' : ''}>
-              Professional Tools
-            </Link>
-            <Link to="/weather">Weather</Link>
-            <Link to="/market">Market Prices</Link>
-          </div>
-        )}
+        <div className="nav-links">
+          <Link to="/beginner">Beginner Guide</Link>
+          <Link to="/demo" className="nav-button demo">Try Demo</Link>
+          <Link to="/weather">Weather</Link>
+          <Link to="/market">Market Prices</Link>
+        </div>
       </div>
       <div className="nav-right">
-        <Link to="/signin" className="nav-button signin">Sign In</Link>
-        <Link to="/signup" className="nav-button signup">Sign Up</Link>
+        <Link to="/pricing" className="nav-button upgrade">Upgrade</Link>
+        {!userRole && (
+          <>
+            <Link to="/signin" className="nav-button signin">Sign In</Link>
+            <Link to="/signup" className="nav-button signup">Sign Up</Link>
+          </>
+        )}
       </div>
     </nav>
   );
