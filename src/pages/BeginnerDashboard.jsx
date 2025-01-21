@@ -14,6 +14,13 @@ import {
   Stack,
   Card,
   CardContent,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  IconButton,
+  useTheme,
+  useMediaQuery,
 } from '@mui/material';
 import CheckIcon from '@mui/icons-material/Check';
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
@@ -21,6 +28,7 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import WarningIcon from '@mui/icons-material/Warning';
+import CloseIcon from '@mui/icons-material/Close';
 import '../styles/BeginnerDashboard.css';
 
 const farmingStyles = [
@@ -540,11 +548,18 @@ const farmingStyles = [
 
 const BeginnerDashboard = () => {
   const [selectedStyle, setSelectedStyle] = useState(null);
-  const [showGuide, setShowGuide] = useState(false);
+  const [openDialog, setOpenDialog] = useState(false);
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
 
-  const handleStyleClick = (style) => {
+  const handleLearnMore = (style, event) => {
+    event.stopPropagation();
     setSelectedStyle(style);
-    setShowGuide(true);
+    setOpenDialog(true);
+  };
+
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
   };
 
   const getDifficultyColor = (difficulty) => {
@@ -560,6 +575,164 @@ const BeginnerDashboard = () => {
     }
   };
 
+  const GuideContent = ({ style }) => (
+    <Box>
+      <Box sx={{ mb: 4 }}>
+        <img 
+          src={style.image} 
+          alt={style.name}
+          style={{
+            width: '100%',
+            height: '300px',
+            objectFit: 'cover',
+            borderRadius: theme.shape.borderRadius,
+          }}
+          onError={(e) => {
+            e.target.onerror = null;
+            e.target.src = 'https://images.unsplash.com/photo-1495908333425-29a1e0918c5f?w=800';
+          }}
+        />
+      </Box>
+
+      <Grid container spacing={4}>
+        <Grid item xs={12} md={4}>
+          <Card elevation={2} sx={{ mb: 3 }}>
+            <CardContent>
+              <Typography variant="h6" gutterBottom>
+                Quick Facts
+              </Typography>
+              <List dense>
+                <ListItem>
+                  <ListItemIcon>
+                    <AccessTimeIcon color="primary" />
+                  </ListItemIcon>
+                  <ListItemText 
+                    primary="Time to Harvest"
+                    secondary={style.timeToHarvest}
+                  />
+                </ListItem>
+                <ListItem>
+                  <ListItemIcon>
+                    <AttachMoneyIcon color="primary" />
+                  </ListItemIcon>
+                  <ListItemText 
+                    primary="Startup Cost"
+                    secondary={style.startupCost}
+                  />
+                </ListItem>
+                <ListItem>
+                  <ListItemIcon>
+                    <CalendarMonthIcon color="primary" />
+                  </ListItemIcon>
+                  <ListItemText 
+                    primary="Best Seasons"
+                    secondary={style.bestSeasons.join(', ')}
+                  />
+                </ListItem>
+              </List>
+            </CardContent>
+          </Card>
+
+          <Typography variant="h6" gutterBottom>
+            Key Points
+          </Typography>
+          <List>
+            {style.keyPoints.map((point, index) => (
+              <ListItem key={index}>
+                <ListItemIcon>
+                  <CheckIcon color="primary" />
+                </ListItemIcon>
+                <ListItemText primary={point} />
+              </ListItem>
+            ))}
+          </List>
+        </Grid>
+
+        <Grid item xs={12} md={8}>
+          <Typography variant="body1" paragraph>
+            {style.guide.introduction}
+          </Typography>
+
+          <Typography variant="h6" gutterBottom sx={{ mt: 3 }}>
+            Requirements
+          </Typography>
+          <Grid container spacing={2} sx={{ mb: 3 }}>
+            {Object.entries(style.guide.requirements).map(([key, value]) => (
+              <Grid item xs={12} sm={6} key={key}>
+                <Card variant="outlined">
+                  <CardContent>
+                    <Typography variant="subtitle2" color="primary" gutterBottom>
+                      {key.charAt(0).toUpperCase() + key.slice(1)}
+                    </Typography>
+                    <Typography variant="body2">{value}</Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
+            ))}
+          </Grid>
+
+          <Typography variant="h6" gutterBottom>
+            Steps to Get Started
+          </Typography>
+          <List>
+            {style.guide.stepsToStart.map((step, index) => (
+              <ListItem key={index}>
+                <ListItemText 
+                  primary={`${index + 1}. ${step}`}
+                  sx={{ '& .MuiTypography-root': { color: 'text.primary' } }}
+                />
+              </ListItem>
+            ))}
+          </List>
+
+          <Typography variant="h6" gutterBottom sx={{ mt: 3 }}>
+            Common Challenges
+          </Typography>
+          <List>
+            {style.guide.commonChallenges.map((challenge, index) => (
+              <ListItem key={index}>
+                <ListItemIcon>
+                  <WarningIcon color="warning" />
+                </ListItemIcon>
+                <ListItemText primary={challenge} />
+              </ListItem>
+            ))}
+          </List>
+
+          <Typography variant="h6" gutterBottom sx={{ mt: 3 }}>
+            Pro Tips
+          </Typography>
+          <List>
+            {style.guide.proTips.map((tip, index) => (
+              <ListItem key={index}>
+                <ListItemIcon>
+                  <LightbulbIcon color="primary" />
+                </ListItemIcon>
+                <ListItemText primary={tip} />
+              </ListItem>
+            ))}
+          </List>
+
+          <Divider sx={{ my: 3 }} />
+
+          <Typography variant="h6" gutterBottom>
+            Monthly Maintenance
+          </Typography>
+          <List>
+            {style.guide.monthlyMaintenance.map((task, index) => (
+              <ListItem key={index}>
+                <ListItemIcon>
+                  <CheckIcon color="success" />
+                </ListItemIcon>
+                <ListItemText primary={task} />
+              </ListItem>
+            ))}
+          </List>
+        </Grid>
+      </Grid>
+    </Box>
+  );
+
   return (
     <div className="beginner-dashboard">
       <Typography variant="h2" align="center" gutterBottom>
@@ -573,9 +746,8 @@ const BeginnerDashboard = () => {
         {farmingStyles.map((style) => (
           <Grid item xs={12} sm={6} md={4} key={style.id}>
             <Paper
-              className={`farming-style-card ${selectedStyle?.id === style.id ? 'selected' : ''}`}
-              onClick={() => handleStyleClick(style)}
-              elevation={selectedStyle?.id === style.id ? 8 : 1}
+              className="farming-style-card"
+              elevation={1}
               sx={{
                 transition: 'all 0.3s ease',
                 '&:hover': {
@@ -616,7 +788,7 @@ const BeginnerDashboard = () => {
                   variant="contained"
                   color="primary"
                   fullWidth
-                  onClick={() => handleStyleClick(style)}
+                  onClick={(e) => handleLearnMore(style, e)}
                 >
                   Learn More
                 </Button>
@@ -626,157 +798,48 @@ const BeginnerDashboard = () => {
         ))}
       </Grid>
 
-      {selectedStyle && showGuide && (
-        <Box sx={{ mt: 4, p: 3, bgcolor: 'background.paper', borderRadius: 2, boxShadow: 3 }}>
-          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
-            <Typography variant="h4">{selectedStyle.name} Guide</Typography>
-            <Button
-              variant="outlined"
-              onClick={() => setShowGuide(false)}
-              sx={{ minWidth: 120 }}
-            >
-              Hide Guide
-            </Button>
-          </Box>
-
-          <Grid container spacing={4}>
-            <Grid item xs={12} md={4}>
-              <Card elevation={2} sx={{ mb: 3 }}>
-                <CardContent>
-                  <Typography variant="h6" gutterBottom>
-                    Quick Facts
-                  </Typography>
-                  <List dense>
-                    <ListItem>
-                      <ListItemIcon>
-                        <AccessTimeIcon color="primary" />
-                      </ListItemIcon>
-                      <ListItemText 
-                        primary="Time to Harvest"
-                        secondary={selectedStyle.timeToHarvest}
-                      />
-                    </ListItem>
-                    <ListItem>
-                      <ListItemIcon>
-                        <AttachMoneyIcon color="primary" />
-                      </ListItemIcon>
-                      <ListItemText 
-                        primary="Startup Cost"
-                        secondary={selectedStyle.startupCost}
-                      />
-                    </ListItem>
-                    <ListItem>
-                      <ListItemIcon>
-                        <CalendarMonthIcon color="primary" />
-                      </ListItemIcon>
-                      <ListItemText 
-                        primary="Best Seasons"
-                        secondary={selectedStyle.bestSeasons.join(', ')}
-                      />
-                    </ListItem>
-                  </List>
-                </CardContent>
-              </Card>
-
-              <Typography variant="h6" gutterBottom>
-                Key Points
-              </Typography>
-              <List>
-                {selectedStyle.keyPoints.map((point, index) => (
-                  <ListItem key={index}>
-                    <ListItemIcon>
-                      <CheckIcon color="primary" />
-                    </ListItemIcon>
-                    <ListItemText primary={point} />
-                  </ListItem>
-                ))}
-              </List>
-            </Grid>
-
-            <Grid item xs={12} md={8}>
-              <Typography variant="body1" paragraph>
-                {selectedStyle.guide.introduction}
-              </Typography>
-
-              <Typography variant="h6" gutterBottom sx={{ mt: 3 }}>
-                Requirements
-              </Typography>
-              <Grid container spacing={2} sx={{ mb: 3 }}>
-                {Object.entries(selectedStyle.guide.requirements).map(([key, value]) => (
-                  <Grid item xs={12} sm={6} key={key}>
-                    <Card variant="outlined">
-                      <CardContent>
-                        <Typography variant="subtitle2" color="primary" gutterBottom>
-                          {key.charAt(0).toUpperCase() + key.slice(1)}
-                        </Typography>
-                        <Typography variant="body2">{value}</Typography>
-                      </CardContent>
-                    </Card>
-                  </Grid>
-                ))}
-              </Grid>
-
-              <Typography variant="h6" gutterBottom>
-                Steps to Get Started
-              </Typography>
-              <List>
-                {selectedStyle.guide.stepsToStart.map((step, index) => (
-                  <ListItem key={index}>
-                    <ListItemText 
-                      primary={`${index + 1}. ${step}`}
-                      sx={{ '& .MuiTypography-root': { color: 'text.primary' } }}
-                    />
-                  </ListItem>
-                ))}
-              </List>
-
-              <Typography variant="h6" gutterBottom sx={{ mt: 3 }}>
-                Common Challenges
-              </Typography>
-              <List>
-                {selectedStyle.guide.commonChallenges.map((challenge, index) => (
-                  <ListItem key={index}>
-                    <ListItemIcon>
-                      <WarningIcon color="warning" />
-                    </ListItemIcon>
-                    <ListItemText primary={challenge} />
-                  </ListItem>
-                ))}
-              </List>
-
-              <Typography variant="h6" gutterBottom sx={{ mt: 3 }}>
-                Pro Tips
-              </Typography>
-              <List>
-                {selectedStyle.guide.proTips.map((tip, index) => (
-                  <ListItem key={index}>
-                    <ListItemIcon>
-                      <LightbulbIcon color="primary" />
-                    </ListItemIcon>
-                    <ListItemText primary={tip} />
-                  </ListItem>
-                ))}
-              </List>
-
-              <Divider sx={{ my: 3 }} />
-
-              <Typography variant="h6" gutterBottom>
-                Monthly Maintenance
-              </Typography>
-              <List>
-                {selectedStyle.guide.monthlyMaintenance.map((task, index) => (
-                  <ListItem key={index}>
-                    <ListItemIcon>
-                      <CheckIcon color="success" />
-                    </ListItemIcon>
-                    <ListItemText primary={task} />
-                  </ListItem>
-                ))}
-              </List>
-            </Grid>
-          </Grid>
-        </Box>
-      )}
+      <Dialog
+        fullScreen={fullScreen}
+        maxWidth="lg"
+        open={openDialog}
+        onClose={handleCloseDialog}
+        scroll="paper"
+        aria-labelledby="farming-guide-dialog"
+      >
+        <DialogTitle 
+          sx={{ 
+            m: 0, 
+            p: 2, 
+            display: 'flex', 
+            justifyContent: 'space-between', 
+            alignItems: 'center'
+          }}
+        >
+          <Typography variant="h4">
+            {selectedStyle?.name} Guide
+          </Typography>
+          <IconButton
+            aria-label="close"
+            onClick={handleCloseDialog}
+            sx={{
+              position: 'absolute',
+              right: 8,
+              top: 8,
+              color: (theme) => theme.palette.grey[500],
+            }}
+          >
+            <CloseIcon />
+          </IconButton>
+        </DialogTitle>
+        <DialogContent dividers>
+          {selectedStyle && <GuideContent style={selectedStyle} />}
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseDialog} variant="contained" color="primary">
+            Close
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };
