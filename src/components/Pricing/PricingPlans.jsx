@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   Box,
   Button,
@@ -35,7 +36,8 @@ const plans = [
     ],
     buttonText: 'Start Free Trial',
     buttonVariant: 'outlined',
-    color: '#2196f3'
+    color: '#2196f3',
+    path: '/signup'
   },
   {
     title: 'Professional',
@@ -54,7 +56,8 @@ const plans = [
     buttonText: 'Upgrade to Pro',
     buttonVariant: 'contained',
     popular: true,
-    color: '#e91e63'
+    color: '#e91e63',
+    path: '/checkout/professional'
   },
   {
     title: 'Enterprise',
@@ -73,9 +76,10 @@ const plans = [
       'Data Encryption',
       'Audit Logs'
     ],
-    buttonText: 'Contact Sales',
+    buttonText: 'Upgrade to Enterprise',
     buttonVariant: 'outlined',
-    color: '#9c27b0'
+    color: '#9c27b0',
+    path: '/checkout/enterprise'
   },
   {
     title: 'Enterprise Plus',
@@ -94,15 +98,21 @@ const plans = [
       'Custom API Access',
       'White-label Options'
     ],
-    buttonText: 'Contact Sales',
+    buttonText: 'Upgrade to Enterprise Pro',
     buttonVariant: 'contained',
     premium: true,
-    color: '#4caf50'
+    color: '#4caf50',
+    path: '/checkout/enterprise-plus'
   }
 ];
 
 const PricingPlans = () => {
   const theme = useTheme();
+  const navigate = useNavigate();
+
+  const handlePlanSelection = (path) => {
+    navigate(path);
+  };
 
   return (
     <Container maxWidth="lg" sx={{ py: 8 }}>
@@ -229,6 +239,7 @@ const PricingPlans = () => {
                     variant={plan.buttonVariant}
                     color={plan.premium ? 'success' : 'primary'}
                     size="large"
+                    onClick={() => handlePlanSelection(plan.path)}
                     sx={{
                       mt: 2,
                       py: 1.5,

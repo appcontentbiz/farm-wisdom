@@ -13,6 +13,7 @@ import ProfessionalDashboard from './pages/ProfessionalDashboard';
 import StoreLocations from './pages/StoreLocations';
 import AuthService from './services/AuthService';
 import PricingPlans from './components/Pricing/PricingPlans';
+import Checkout from './pages/Checkout';
 import Demo from './pages/Demo';
 import './App.css';
 
@@ -38,6 +39,7 @@ function App() {
                 <Route path="/beginner/*" element={<BeginnerDashboard />} />
                 <Route path="/weather" element={<Weather />} />
                 <Route path="/pricing" element={<PricingPlans />} />
+                <Route path="/checkout/:plan" element={<Checkout />} />
                 <Route path="/demo" element={<Demo />} />
                 <Route
                   path="/professional/*"
