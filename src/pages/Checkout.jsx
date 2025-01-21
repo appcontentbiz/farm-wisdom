@@ -19,11 +19,11 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-  CheckCircleIcon
 } from '@mui/material';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
 import LockIcon from '@mui/icons-material/Lock';
 import SecurityIcon from '@mui/icons-material/Security';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 const PLAN_DETAILS = {
   'professional': {
