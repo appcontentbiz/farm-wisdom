@@ -15,6 +15,7 @@ import AuthService from './services/AuthService';
 import PricingPlans from './components/Pricing/PricingPlans';
 import Checkout from './pages/Checkout';
 import Demo from './pages/Demo';
+import Resources from './pages/Resources';
 import './App.css';
 
 const PrivateRoute = ({ children }) => {
@@ -41,6 +42,7 @@ function App() {
                 <Route path="/pricing" element={<PricingPlans />} />
                 <Route path="/checkout/:plan" element={<Checkout />} />
                 <Route path="/demo" element={<Demo />} />
+                <Route path="/resources" element={<Resources />} />
                 <Route
                   path="/professional/*"
                   element={

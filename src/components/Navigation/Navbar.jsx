@@ -17,6 +17,7 @@ export default function Navbar() {
         <Link to="/" className="nav-brand">FarmWisdom</Link>
         <div className="nav-links">
           <Link to="/beginner">Beginner Guide</Link>
+          <Link to="/resources">Resources</Link>
           <Link to="/demo" className="nav-button demo">Try Demo</Link>
           <Link to="/weather">Weather</Link>
           <Link to="/market">Market Prices</Link>
