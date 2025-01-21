@@ -12,7 +12,7 @@ import MarketPrices from './pages/MarketPrices';
 import ProfessionalDashboard from './pages/ProfessionalDashboard';
 import StoreLocations from './pages/StoreLocations';
 import AuthService from './services/AuthService';
-import Pricing from './pages/Pricing';
+import PricingPlans from './components/Pricing/PricingPlans';
 import Demo from './pages/Demo';
 import './App.css';
 
@@ -37,7 +37,7 @@ function App() {
                 <Route path="/market" element={<MarketPrices />} />
                 <Route path="/beginner/*" element={<BeginnerDashboard />} />
                 <Route path="/weather" element={<Weather />} />
-                <Route path="/pricing" element={<Pricing />} />
+                <Route path="/pricing" element={<PricingPlans />} />
                 <Route path="/demo" element={<Demo />} />
                 <Route
                   path="/professional/*"
@@ -55,7 +55,6 @@ function App() {
                     </PrivateRoute>
                   }
                 />
-                <Route path="/signup" element={<SignUp />} />
               </Routes>
             </main>
           </div>
