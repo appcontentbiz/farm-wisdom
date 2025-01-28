@@ -558,6 +558,7 @@ function Demo() {
                     <IconButton>
                       <Help />
                     </IconButton>
+                  </Tooltip>
                 }
               />
               <CardContent>
@@ -584,6 +585,7 @@ function Demo() {
                     <IconButton>
                       <Help />
                     </IconButton>
+                  </Tooltip>
                 }
               />
               <CardContent>
@@ -638,6 +640,7 @@ function Demo() {
                     <IconButton>
                       <Help />
                     </IconButton>
+                  </Tooltip>
                 }
               />
               <CardContent>
@@ -688,6 +691,7 @@ function Demo() {
                     <IconButton>
                       <Help />
                     </IconButton>
+                  </Tooltip>
                 }
               />
               <CardContent>
@@ -744,6 +748,7 @@ function Demo() {
                     <IconButton>
                       <Help />
                     </IconButton>
+                  </Tooltip>
                 }
               />
               <CardContent>
@@ -869,6 +874,7 @@ function Demo() {
                     <IconButton>
                       <Help />
                     </IconButton>
+                  </Tooltip>
                 }
               />
               <CardContent>
