@@ -178,44 +178,48 @@ const localMarkets = {
   markets: [
     {
       name: "Farmer's Market Central",
-      type: "Weekly Market",
-      schedule: "Every Saturday 7AM-2PM",
+      schedule: "Weekly Market - Every Saturday 7AM-2PM",
       accepts: ["Fresh Produce", "Organic Crops", "Value-Added Products"],
-      paymentTypes: ["Cash", "SNAP/EBT", "Credit Cards"],
-      commission: "15%",
-      requirements: "Local produce only, organic preferred"
+      payment: "Cash, SNAP/EBT, Credit Cards",
+      commission: "15%"
     },
     {
       name: "Community Food Bank",
-      type: "Food Bank",
-      schedule: "Mon-Fri 9AM-4PM",
+      schedule: "Food Bank - Mon-Fri 9AM-4PM",
       accepts: ["All Fresh Produce", "Shelf-Stable Items"],
-      paymentTypes: ["Tax Deduction Receipt"],
-      commission: "0%",
-      requirements: "Clean, edible produce"
+      payment: "Tax Deduction Receipt",
+      commission: "0%"
     },
     {
       name: "Local Co-op Market",
-      type: "Cooperative Store",
-      schedule: "Daily 8AM-8PM",
+      schedule: "Cooperative Store - Mon-Sat 8AM-8PM",
       accepts: ["Organic Produce", "Local Crops", "Specialty Items"],
-      paymentTypes: ["Direct Payment", "Store Credit"],
-      commission: "20%",
-      requirements: "Member-owned, quality standards apply"
+      payment: "Direct Payment, Store Credit",
+      commission: "20%"
     }
   ],
-  programs: [
+  gleaningPrograms: [
     {
-      name: "Farm-to-School Program",
-      description: "Provides fresh produce to local schools",
-      requirements: ["Food safety certification", "Liability insurance"],
-      contact: "farm2school@edu.org"
+      name: "Harvest Share",
+      description: "Connects farmers with volunteers to harvest excess crops",
+      benefits: [
+        "Tax deduction",
+        "Community goodwill",
+        "Reduced waste"
+      ],
+      schedule: "Seasonal (Spring-Fall)",
+      contact: "harvest@share.org"
     },
     {
-      name: "Restaurant Alliance",
-      description: "Connects farmers with local restaurants",
-      requirements: ["Quality grading", "Liability insurance"],
-      contact: "orders@restaurantalliance.com"
+      name: "Food Rescue Network",
+      description: "Collects and distributes surplus farm produce",
+      benefits: [
+        "Free pickup",
+        "Tax benefits",
+        "Social impact"
+      ],
+      schedule: "Year-round",
+      contact: "rescue@foodnetwork.org"
     }
   ],
   distributors: [
@@ -224,7 +228,6 @@ const localMarkets = {
       type: "Wholesale Distributor",
       minimumOrder: "$100",
       paymentTerms: "Net 30",
-      requirements: "GAP certification preferred",
       products: ["Fresh produce", "Value-added products"],
       contact: "sales@localfoods.com"
     },
@@ -233,7 +236,6 @@ const localMarkets = {
       type: "Educational Institution",
       minimumOrder: "Varies by school",
       paymentTerms: "Net 45",
-      requirements: "Food safety certification required",
       products: ["Fresh fruits", "Vegetables", "Educational visits"],
       contact: "farm2school@edu.org"
     },
@@ -242,7 +244,6 @@ const localMarkets = {
       type: "Restaurant Supplier",
       minimumOrder: "$50",
       paymentTerms: "Weekly payment",
-      requirements: "Quality grading required",
       products: ["Premium produce", "Specialty crops"],
       contact: "orders@restaurantalliance.com"
     }
@@ -912,7 +913,7 @@ function Demo() {
 
         {selectedTab === 6 && (
           <Grid container spacing={3}>
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} md={4}>
               <Card>
                 <CardHeader
                   title="Local Markets"
@@ -930,16 +931,21 @@ function Demo() {
                       <ListItem key={index} button onClick={() => handleOpenDialog('Market Details', 
                         <Box>
                           <Typography variant="h6">{market.name}</Typography>
-                          <Typography variant="body2" color="textSecondary" gutterBottom>
+                          <Typography variant="subtitle2" color="textSecondary" gutterBottom>
                             {market.schedule}
                           </Typography>
-                          <Typography variant="subtitle1">Accepts:</Typography>
-                          <Box display="flex" gap={1} mb={2}>
-                            {market.accepts.map((item, i) => (
-                              <Chip key={i} label={item} size="small" />
-                            ))}
+                          <Box mt={2}>
+                            <Typography variant="subtitle1">Accepts:</Typography>
+                            <Typography variant="body2">{market.accepts.join(", ")}</Typography>
                           </Box>
-                          <Typography variant="subtitle1">Commission: {market.commission}%</Typography>
+                          <Box mt={2}>
+                            <Typography variant="subtitle1">Payment:</Typography>
+                            <Typography variant="body2">{market.payment}</Typography>
+                          </Box>
+                          <Box mt={2}>
+                            <Typography variant="subtitle1">Commission:</Typography>
+                            <Typography variant="body2">{market.commission}</Typography>
+                          </Box>
                         </Box>
                       )}>
                         <ListItemIcon><StorefrontIcon /></ListItemIcon>
@@ -954,12 +960,12 @@ function Demo() {
               </Card>
             </Grid>
 
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} md={4}>
               <Card>
                 <CardHeader
-                  title="Farm-to-Table Programs"
+                  title="Gleaning Programs"
                   action={
-                    <Tooltip title="View farm-to-table opportunities">
+                    <Tooltip title="View gleaning opportunities">
                       <IconButton>
                         <HelpIcon />
                       </IconButton>
@@ -968,36 +974,89 @@ function Demo() {
                 />
                 <CardContent>
                   <List>
-                    {localMarkets.programs.map((program, index) => (
+                    {localMarkets.gleaningPrograms.map((program, index) => (
                       <ListItem key={index} button onClick={() => handleOpenDialog('Program Details',
                         <Box>
                           <Typography variant="h6">{program.name}</Typography>
-                          <Typography variant="body2" color="textSecondary" gutterBottom>
+                          <Typography variant="body2" gutterBottom>
                             {program.description}
                           </Typography>
-                          <Typography variant="subtitle1">Requirements:</Typography>
-                          <List dense>
-                            {program.requirements.map((req, i) => (
-                              <ListItem key={i}>
-                                <ListItemIcon><CheckCircleIcon /></ListItemIcon>
-                                <ListItemText primary={req} />
-                              </ListItem>
-                            ))}
-                          </List>
-                          <Button
-                            variant="contained"
-                            color="primary"
-                            startIcon={<SendIcon />}
-                            onClick={() => window.location.href = `mailto:${program.contact}`}
-                          >
-                            Contact Program
-                          </Button>
+                          <Box mt={2}>
+                            <Typography variant="subtitle1">Benefits:</Typography>
+                            <List dense>
+                              {program.benefits.map((benefit, i) => (
+                                <ListItem key={i}>
+                                  <ListItemIcon><CheckCircleIcon /></ListItemIcon>
+                                  <ListItemText primary={benefit} />
+                                </ListItem>
+                              ))}
+                            </List>
+                          </Box>
+                          <Box mt={2}>
+                            <Typography variant="subtitle1">Schedule:</Typography>
+                            <Typography variant="body2">{program.schedule}</Typography>
+                          </Box>
+                          <Box mt={2}>
+                            <Typography variant="subtitle1">Contact:</Typography>
+                            <Typography variant="body2">{program.contact}</Typography>
+                          </Box>
                         </Box>
                       )}>
                         <ListItemIcon><LocalFloristIcon /></ListItemIcon>
                         <ListItemText 
                           primary={program.name}
                           secondary={program.description}
+                        />
+                      </ListItem>
+                    ))}
+                  </List>
+                </CardContent>
+              </Card>
+            </Grid>
+
+            <Grid item xs={12} md={4}>
+              <Card>
+                <CardHeader
+                  title="Distribution Partners"
+                  action={
+                    <Tooltip title="View distribution partners">
+                      <IconButton>
+                        <HelpIcon />
+                      </IconButton>
+                    </Tooltip>
+                  }
+                />
+                <CardContent>
+                  <List>
+                    {localMarkets.distributors.map((distributor, index) => (
+                      <ListItem key={index} button onClick={() => handleOpenDialog('Distributor Details',
+                        <Box>
+                          <Typography variant="h6">{distributor.name}</Typography>
+                          <Typography variant="subtitle2" color="textSecondary" gutterBottom>
+                            {distributor.type}
+                          </Typography>
+                          <Box mt={2}>
+                            <Typography variant="subtitle1">Minimum Order:</Typography>
+                            <Typography variant="body2">{distributor.minimumOrder}</Typography>
+                          </Box>
+                          <Box mt={2}>
+                            <Typography variant="subtitle1">Payment Terms:</Typography>
+                            <Typography variant="body2">{distributor.paymentTerms}</Typography>
+                          </Box>
+                          <Box mt={2}>
+                            <Typography variant="subtitle1">Products:</Typography>
+                            <Typography variant="body2">{distributor.products.join(", ")}</Typography>
+                          </Box>
+                          <Box mt={2}>
+                            <Typography variant="subtitle1">Contact:</Typography>
+                            <Typography variant="body2">{distributor.contact}</Typography>
+                          </Box>
+                        </Box>
+                      )}>
+                        <ListItemIcon><LocalShippingIcon /></ListItemIcon>
+                        <ListItemText 
+                          primary={distributor.name}
+                          secondary={distributor.type}
                         />
                       </ListItem>
                     ))}
