@@ -59,6 +59,14 @@ import {
   WaterDrop as WaterDropIcon,
   Thermostat as ThermostatIcon,
   CheckCircle as CheckCircleIcon,
+  DirectionsRun as DirectionsRunIcon,
+  FitnessCenter as FitnessCenterIcon,
+  MonitorHeart as MonitorHeartIcon,
+  Restaurant as RestaurantIcon,
+  LocalDining as LocalDiningIcon,
+  Storefront as StorefrontIcon,
+  LocalFlorist as LocalFloristIcon,
+  Send as SendIcon,
 } from '@mui/icons-material';
 import {
   LineChart,
@@ -196,20 +204,18 @@ const localMarkets = {
       requirements: "Member-owned, quality standards apply"
     }
   ],
-  gleaningOpportunities: [
+  programs: [
     {
-      organization: "Harvest Share",
-      description: "Connects farmers with volunteers to harvest excess crops",
-      benefits: ["Tax deduction", "Community goodwill", "Reduced waste"],
-      schedule: "Seasonal (Spring-Fall)",
-      contact: "harvest@share.org"
+      name: "Farm-to-School Program",
+      description: "Provides fresh produce to local schools",
+      requirements: ["Food safety certification", "Liability insurance"],
+      contact: "farm2school@edu.org"
     },
     {
-      organization: "Food Rescue Network",
-      description: "Collects and distributes surplus farm produce",
-      benefits: ["Free pickup", "Tax benefits", "Social impact"],
-      schedule: "Year-round",
-      contact: "rescue@foodnetwork.org"
+      name: "Restaurant Alliance",
+      description: "Connects farmers with local restaurants",
+      requirements: ["Quality grading", "Liability insurance"],
+      contact: "orders@restaurantalliance.com"
     }
   ],
   distributors: [
@@ -583,6 +589,8 @@ function Demo() {
             <Tab label="Weather & Irrigation" />
             <Tab label="Livestock" />
             <Tab label="Resources" />
+            <Tab label="Wellness & Health" />
+            <Tab label="Farm-to-Table" />
           </Tabs>
         </Grid>
 
@@ -801,6 +809,202 @@ function Demo() {
                 <Typography>Detailed resource management content will be shown here</Typography>
               </CardContent>
             </Card>
+          </Grid>
+        )}
+
+        {selectedTab === 5 && (
+          <Grid container spacing={3}>
+            <Grid item xs={12} md={6}>
+              <Card>
+                <CardHeader
+                  title="Farmer Wellness Tracker"
+                  action={
+                    <Tooltip title="Monitor your health and wellness metrics">
+                      <IconButton>
+                        <HelpIcon />
+                      </IconButton>
+                    </Tooltip>
+                  }
+                />
+                <CardContent>
+                  <Grid container spacing={2}>
+                    <Grid item xs={12}>
+                      <Typography variant="subtitle1" gutterBottom>
+                        Daily Activity
+                      </Typography>
+                      <List>
+                        <ListItem>
+                          <ListItemIcon><DirectionsRunIcon /></ListItemIcon>
+                          <ListItemText 
+                            primary="Steps" 
+                            secondary={`${healthMetrics.activity.steps} steps`}
+                          />
+                        </ListItem>
+                        <ListItem>
+                          <ListItemIcon><FitnessCenterIcon /></ListItemIcon>
+                          <ListItemText 
+                            primary="Active Minutes" 
+                            secondary={`${healthMetrics.activity.activeMinutes} minutes`}
+                          />
+                        </ListItem>
+                        <ListItem>
+                          <ListItemIcon><MonitorHeartIcon /></ListItemIcon>
+                          <ListItemText 
+                            primary="Heart Rate" 
+                            secondary={`${healthMetrics.activity.heartRate} bpm`}
+                          />
+                        </ListItem>
+                      </List>
+                    </Grid>
+                  </Grid>
+                </CardContent>
+              </Card>
+            </Grid>
+
+            <Grid item xs={12} md={6}>
+              <Card>
+                <CardHeader
+                  title="Nutrition Tracking"
+                  action={
+                    <Tooltip title="Track your daily nutrition">
+                      <IconButton>
+                        <HelpIcon />
+                      </IconButton>
+                    </Tooltip>
+                  }
+                />
+                <CardContent>
+                  <Grid container spacing={2}>
+                    <Grid item xs={12}>
+                      <Typography variant="subtitle1" gutterBottom>
+                        Daily Intake
+                      </Typography>
+                      <List>
+                        <ListItem>
+                          <ListItemIcon><WaterDropIcon /></ListItemIcon>
+                          <ListItemText 
+                            primary="Water Intake" 
+                            secondary={`${healthMetrics.nutrition.waterIntake}L`}
+                          />
+                        </ListItem>
+                        <ListItem>
+                          <ListItemIcon><RestaurantIcon /></ListItemIcon>
+                          <ListItemText 
+                            primary="Calories" 
+                            secondary={`${healthMetrics.nutrition.calories} kcal`}
+                          />
+                        </ListItem>
+                        <ListItem>
+                          <ListItemIcon><LocalDiningIcon /></ListItemIcon>
+                          <ListItemText 
+                            primary="Protein" 
+                            secondary={`${healthMetrics.nutrition.protein}g`}
+                          />
+                        </ListItem>
+                      </List>
+                    </Grid>
+                  </Grid>
+                </CardContent>
+              </Card>
+            </Grid>
+          </Grid>
+        )}
+
+        {selectedTab === 6 && (
+          <Grid container spacing={3}>
+            <Grid item xs={12} md={6}>
+              <Card>
+                <CardHeader
+                  title="Local Markets"
+                  action={
+                    <Tooltip title="View local market opportunities">
+                      <IconButton>
+                        <HelpIcon />
+                      </IconButton>
+                    </Tooltip>
+                  }
+                />
+                <CardContent>
+                  <List>
+                    {localMarkets.markets.map((market, index) => (
+                      <ListItem key={index} button onClick={() => handleOpenDialog('Market Details', 
+                        <Box>
+                          <Typography variant="h6">{market.name}</Typography>
+                          <Typography variant="body2" color="textSecondary" gutterBottom>
+                            {market.schedule}
+                          </Typography>
+                          <Typography variant="subtitle1">Accepts:</Typography>
+                          <Box display="flex" gap={1} mb={2}>
+                            {market.accepts.map((item, i) => (
+                              <Chip key={i} label={item} size="small" />
+                            ))}
+                          </Box>
+                          <Typography variant="subtitle1">Commission: {market.commission}%</Typography>
+                        </Box>
+                      )}>
+                        <ListItemIcon><StorefrontIcon /></ListItemIcon>
+                        <ListItemText 
+                          primary={market.name}
+                          secondary={market.schedule}
+                        />
+                      </ListItem>
+                    ))}
+                  </List>
+                </CardContent>
+              </Card>
+            </Grid>
+
+            <Grid item xs={12} md={6}>
+              <Card>
+                <CardHeader
+                  title="Farm-to-Table Programs"
+                  action={
+                    <Tooltip title="View farm-to-table opportunities">
+                      <IconButton>
+                        <HelpIcon />
+                      </IconButton>
+                    </Tooltip>
+                  }
+                />
+                <CardContent>
+                  <List>
+                    {localMarkets.programs.map((program, index) => (
+                      <ListItem key={index} button onClick={() => handleOpenDialog('Program Details',
+                        <Box>
+                          <Typography variant="h6">{program.name}</Typography>
+                          <Typography variant="body2" color="textSecondary" gutterBottom>
+                            {program.description}
+                          </Typography>
+                          <Typography variant="subtitle1">Requirements:</Typography>
+                          <List dense>
+                            {program.requirements.map((req, i) => (
+                              <ListItem key={i}>
+                                <ListItemIcon><CheckCircleIcon /></ListItemIcon>
+                                <ListItemText primary={req} />
+                              </ListItem>
+                            ))}
+                          </List>
+                          <Button
+                            variant="contained"
+                            color="primary"
+                            startIcon={<SendIcon />}
+                            onClick={() => window.location.href = `mailto:${program.contact}`}
+                          >
+                            Contact Program
+                          </Button>
+                        </Box>
+                      )}>
+                        <ListItemIcon><LocalFloristIcon /></ListItemIcon>
+                        <ListItemText 
+                          primary={program.name}
+                          secondary={program.description}
+                        />
+                      </ListItem>
+                    ))}
+                  </List>
+                </CardContent>
+              </Card>
+            </Grid>
           </Grid>
         )}
       </Grid>
