@@ -74,9 +74,18 @@ import AttachMoney from '@mui/icons-material/AttachMoney';
 import WaterDrop from '@mui/icons-material/WaterDrop';
 import Thermostat from '@mui/icons-material/Thermostat';
 import AcUnit from '@mui/icons-material/AcUnit';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, Legend, ResponsiveContainer } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, Legend, ResponsiveContainer, BarChart, Bar, PieChart, Pie, Cell } from 'recharts';
+import WaterDropIcon from '@mui/icons-material/WaterDrop';
+import ThermostatIcon from '@mui/icons-material/Thermostat';
+import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
+import TimelineIcon from '@mui/icons-material/Timeline';
+import PetsIcon from '@mui/icons-material/Pets';
+import LocalShippingIcon from '@mui/icons-material/LocalShipping';
+import WarningIcon from '@mui/icons-material/Warning';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import HelpIcon from '@mui/icons-material/Help';
 
-const DEMO_DURATION = 30 * 60 * 1000; // 30 minutes
+const DEMO_DURATION = 3600000; // 1 hour in milliseconds
 
 const LivestockData = {
   cattle: { count: 50, health: 95, nextVaccination: '2025-02-15', feed: 85 },
@@ -233,46 +242,49 @@ const localMarkets = {
   ]
 };
 
+const weatherData = [
+  { time: '6:00', temperature: 18, humidity: 65, rainfall: 0 },
+  { time: '9:00', temperature: 22, humidity: 60, rainfall: 0 },
+  { time: '12:00', temperature: 25, humidity: 55, rainfall: 0.2 },
+  { time: '15:00', temperature: 24, humidity: 58, rainfall: 0.5 },
+  { time: '18:00', temperature: 21, humidity: 62, rainfall: 0.1 },
+];
+
+const marketPrices = [
+  { month: 'Jan', corn: 180, wheat: 220, soybeans: 420 },
+  { month: 'Feb', corn: 200, wheat: 240, soybeans: 450 },
+  { month: 'Mar', corn: 190, wheat: 230, soybeans: 440 },
+  { month: 'Apr', corn: 210, wheat: 250, soybeans: 460 },
+];
+
+const cropHealth = [
+  { name: 'Optimal', value: 65 },
+  { name: 'Warning', value: 25 },
+  { name: 'Critical', value: 10 },
+];
+
+const COLORS = ['#00C49F', '#FFBB28', '#FF8042'];
+
 function Demo() {
   const [startTime] = useState(Date.now());
   const [timeLeft, setTimeLeft] = useState(DEMO_DURATION);
   const [selectedTab, setSelectedTab] = useState(0);
   const [openDialog, setOpenDialog] = useState(false);
   const [dialogContent, setDialogContent] = useState({ title: '', content: null });
-  const [autoIrrigation, setAutoIrrigation] = useState(true);
-  const [selectedCrop, setSelectedCrop] = useState('Wheat');
-  const [selectedTimeRange, setSelectedTimeRange] = useState('week');
-  
-  const [cropData] = useState({
-    cropType: 'Wheat',
-    growthStage: 'Flowering',
-    healthScore: 85,
-    expectedYield: 4.2,
-  });
-  const [weatherData] = useState({
-    temperature: 23,
-    humidity: 65,
-    rainfall: 25,
-    forecast: [
-      { date: '2025-01-20', temp: 22, rain: 20 },
-      { date: '2025-01-21', temp: 24, rain: 10 },
-      { date: '2025-01-22', temp: 21, rain: 30 },
-    ],
-  });
-  const [pestData] = useState({
-    riskLevel: 'Medium',
-    activeThreats: ['Aphids', 'Spider Mites'],
-    lastInspection: '2025-01-19',
-    treatmentHistory: generateTreatmentHistory(),
-  });
-  const [equipmentData] = useState({
-    tractor: { status: 'Operational', nextService: '2025-02-15' },
-    harvester: { status: 'Maintenance Required', nextService: '2025-01-25' },
-    irrigationSystem: { status: 'Operational', nextService: '2025-03-01' },
-  });
-  const [livestock, setLivestock] = useState(LivestockData);
-  const [resources, setResources] = useState(ResourceData);
-  const [soil, setSoil] = useState(SoilData);
+  const [autoIrrigation, setAutoIrrigation] = useState(false);
+  const [moistureLevel, setMoistureLevel] = useState(65);
+  const [notifications, setNotifications] = useState([]);
+  const [selectedAnimal, setSelectedAnimal] = useState('cattle');
+  const [resourceEfficiency, setResourceEfficiency] = useState(78);
+  const { enqueueSnackbar } = useSnackbar();
+  const navigate = useNavigate();
+
+  const cropRecommendations = [
+    { crop: 'Wheat', confidence: 95, reason: 'Optimal soil conditions and season' },
+    { crop: 'Corn', confidence: 85, reason: 'Good market demand, suitable climate' },
+    { crop: 'Soybeans', confidence: 80, reason: 'Crop rotation benefit, soil nitrogen' },
+  ];
+
   const healthMetrics = {
     activity: {
       steps: 12500,
@@ -335,49 +347,6 @@ function Demo() {
       }
     ]
   };
-  const { enqueueSnackbar } = useSnackbar();
-  const navigate = useNavigate();
-
-  const cropRecommendations = [
-    { crop: 'Wheat', confidence: 95, reason: 'Optimal soil conditions and season' },
-    { crop: 'Corn', confidence: 85, reason: 'Good market demand, suitable climate' },
-    { crop: 'Soybeans', confidence: 80, reason: 'Crop rotation benefit, soil nitrogen' },
-  ];
-
-  const marketPrices = [
-    { date: '2025-01-20', wheat: 220, corn: 150, soybeans: 380 },
-    { date: '2025-01-21', wheat: 225, corn: 152, soybeans: 375 },
-    { date: '2025-01-22', wheat: 223, corn: 155, soybeans: 378 },
-    { date: '2025-01-23', wheat: 228, corn: 153, soybeans: 382 },
-    { date: '2025-01-24', wheat: 230, corn: 151, soybeans: 385 },
-  ];
-
-  const handleTabChange = (event, newValue) => {
-    setSelectedTab(newValue);
-  };
-
-  const handleOpenDialog = (title, content) => {
-    setDialogContent({ title, content });
-    setOpenDialog(true);
-  };
-
-  const handleCloseDialog = () => {
-    setOpenDialog(false);
-  };
-
-  const handleAutoIrrigationChange = (event) => {
-    setAutoIrrigation(event.target.checked);
-    enqueueSnackbar(`Auto-irrigation ${event.target.checked ? 'enabled' : 'disabled'}`, {
-      variant: 'success',
-    });
-  };
-
-  const handleCropChange = (event) => {
-    setSelectedCrop(event.target.value);
-    enqueueSnackbar(`Switched to ${event.target.value} analysis`, {
-      variant: 'info',
-    });
-  };
 
   const steps = [
     {
@@ -432,11 +401,160 @@ function Demo() {
     return () => clearInterval(timer);
   }, [startTime, navigate, enqueueSnackbar]);
 
+  useEffect(() => {
+    // Simulate real-time data updates
+    const interval = setInterval(() => {
+      // Update moisture level
+      setMoistureLevel(prev => {
+        const newLevel = prev + (Math.random() * 2 - 1);
+        if (newLevel < 40 && autoIrrigation) {
+          enqueueSnackbar('Auto-irrigation activated due to low moisture levels', { 
+            variant: 'info',
+            action: (
+              <Button color="inherit" size="small" onClick={() => setAutoIrrigation(false)}>
+                Disable
+              </Button>
+            )
+          });
+          return 65;
+        }
+        return Math.max(0, Math.min(100, newLevel));
+      });
+
+      // Update resource efficiency
+      setResourceEfficiency(prev => {
+        const newEfficiency = prev + (Math.random() * 2 - 1);
+        return Math.max(0, Math.min(100, newEfficiency));
+      });
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [autoIrrigation, enqueueSnackbar]);
+
+  const handleTabChange = (event, newValue) => {
+    setSelectedTab(newValue);
+  };
+
+  const handleOpenDialog = (title, content) => {
+    setDialogContent({ title, content });
+    setOpenDialog(true);
+  };
+
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
+  };
+
+  const handleAutoIrrigationChange = (event) => {
+    setAutoIrrigation(event.target.checked);
+    enqueueSnackbar(`Auto-irrigation ${event.target.checked ? 'enabled' : 'disabled'}`, {
+      variant: 'success',
+    });
+  };
+
+  const handleCropChange = (event) => {
+    setSelectedCrop(event.target.value);
+    enqueueSnackbar(`Switched to ${event.target.value} analysis`, {
+      variant: 'info',
+    });
+  };
+
   const handleJoyrideCallback = (data) => {
     const { status } = data;
     if ([STATUS.FINISHED, STATUS.SKIPPED].includes(status)) {
       enqueueSnackbar('Tutorial completed! Explore the features on your own.', { variant: 'success' });
     }
+  };
+
+  const handleCropClick = (crop) => {
+    setSelectedCrop(crop);
+    handleOpenDialog(
+      'Crop Details',
+      <Box>
+        <Typography variant="h6" gutterBottom>
+          {crop.charAt(0).toUpperCase() + crop.slice(1)} Management
+        </Typography>
+        <Grid container spacing={2}>
+          <Grid item xs={6}>
+            <Typography variant="subtitle1">Optimal Conditions:</Typography>
+            <List dense>
+              <ListItem>
+                <ListItemIcon><ThermostatIcon /></ListItemIcon>
+                <ListItemText primary="Temperature: 20-25°C" />
+              </ListItem>
+              <ListItem>
+                <ListItemIcon><WaterDropIcon /></ListItemIcon>
+                <ListItemText primary="Soil Moisture: 60-70%" />
+              </ListItem>
+            </List>
+          </Grid>
+          <Grid item xs={6}>
+            <Typography variant="subtitle1">Current Market Price:</Typography>
+            <Typography variant="h4" color="primary">
+              ${marketPrices[marketPrices.length - 1][crop]}
+            </Typography>
+            <Typography variant="caption" color="textSecondary">
+              per metric ton
+            </Typography>
+          </Grid>
+        </Grid>
+      </Box>
+    );
+  };
+
+  const handleAnimalClick = (animal) => {
+    setSelectedAnimal(animal);
+    const healthData = {
+      cattle: { temp: 38.5, heart: 65, feed: 12.5 },
+      sheep: { temp: 39.2, heart: 75, feed: 2.5 },
+      chicken: { temp: 41.1, heart: 275, feed: 0.1 },
+    };
+    
+    handleOpenDialog(
+      'Livestock Health Monitor',
+      <Box>
+        <Typography variant="h6" gutterBottom>
+          {animal.charAt(0).toUpperCase() + animal.slice(1)} Health Statistics
+        </Typography>
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <TableContainer component={Paper}>
+              <Table size="small">
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Metric</TableCell>
+                    <TableCell align="right">Current</TableCell>
+                    <TableCell align="right">Status</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  <TableRow>
+                    <TableCell>Temperature</TableCell>
+                    <TableCell align="right">{healthData[animal].temp}°C</TableCell>
+                    <TableCell align="right">
+                      <CheckCircleIcon color="success" />
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Heart Rate</TableCell>
+                    <TableCell align="right">{healthData[animal].heart} bpm</TableCell>
+                    <TableCell align="right">
+                      <CheckCircleIcon color="success" />
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Feed Intake</TableCell>
+                    <TableCell align="right">{healthData[animal].feed} kg/day</TableCell>
+                    <TableCell align="right">
+                      <WarningIcon color="warning" />
+                    </TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Grid>
+        </Grid>
+      </Box>
+    );
   };
 
   const progress = ((DEMO_DURATION - timeLeft) / DEMO_DURATION) * 100;
@@ -462,632 +580,330 @@ function Demo() {
   );
 
   return (
-    <Container maxWidth="lg" sx={{ py: 4 }}>
-      <Box sx={{ mb: 4 }}>
-        <Typography variant="h4" gutterBottom>
-          Farm Management Demo
-        </Typography>
-        <LinearProgress variant="determinate" value={progress} sx={{ mb: 2 }} />
-        <Typography variant="body2" color="text.secondary">
-          Demo time remaining: {Math.floor(timeLeft / 60000)} minutes
-        </Typography>
-      </Box>
+    <Container maxWidth="lg">
+      <Joyride
+        steps={steps}
+        continuous
+        showProgress
+        showSkipButton
+        callback={handleJoyrideCallback}
+        styles={{
+          options: {
+            primaryColor: '#2196f3',
+          },
+        }}
+      />
+      
+      <Grid container spacing={3}>
+        <Grid item xs={12}>
+          <Box mb={3}>
+            <Typography variant="h4" gutterBottom>
+              Farm Management Demo
+            </Typography>
+            <Typography variant="subtitle1" color="textSecondary">
+              Experience the future of farming with our interactive demo
+            </Typography>
+          </Box>
+        </Grid>
 
-      <Tabs value={selectedTab} onChange={handleTabChange} variant="scrollable" scrollButtons="auto" sx={{ mb: 3 }}>
-        <Tab label="Farm Overview" />
-        <Tab label="Crop Management" />
-        <Tab label="Weather & Irrigation" />
-        <Tab label="Livestock" />
-        <Tab label="Resources" />
-        <Tab label="Market Analysis" />
-      </Tabs>
-
-      {selectedTab === 0 && (
-        <Grid container spacing={3}>
-          {/* Quick Stats */}
-          <Grid item xs={12}>
-            <Paper sx={{ p: 2 }}>
-              <Typography variant="h6" gutterBottom>Quick Stats</Typography>
+        {/* Weather and Irrigation Control */}
+        <Grid item xs={12} md={6}>
+          <Card>
+            <CardHeader
+              title="Weather & Irrigation"
+              action={
+                <Tooltip title="Monitor and control irrigation based on real-time weather data">
+                  <IconButton>
+                    <HelpIcon />
+                  </IconButton>
+                </Tooltip>
+              }
+            />
+            <CardContent>
               <Grid container spacing={2}>
-                <Grid item xs={12} sm={3}>
-                  <Box sx={{ textAlign: 'center' }}>
-                    <Typography variant="subtitle2">Crop Health</Typography>
-                    <CircularProgress variant="determinate" value={cropData.healthScore} color="success" />
-                    <Typography variant="body2">{cropData.healthScore}%</Typography>
-                  </Box>
+                <Grid item xs={12}>
+                  <LineChart width={500} height={200} data={weatherData}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="time" />
+                    <YAxis yAxisId="left" />
+                    <YAxis yAxisId="right" orientation="right" />
+                    <RechartsTooltip />
+                    <Legend />
+                    <Line yAxisId="left" type="monotone" dataKey="temperature" stroke="#8884d8" />
+                    <Line yAxisId="right" type="monotone" dataKey="humidity" stroke="#82ca9d" />
+                  </LineChart>
                 </Grid>
-                <Grid item xs={12} sm={3}>
-                  <Box sx={{ textAlign: 'center' }}>
-                    <Typography variant="subtitle2">Resource Usage</Typography>
-                    <CircularProgress variant="determinate" value={75} color="primary" />
-                    <Typography variant="body2">75% Efficient</Typography>
-                  </Box>
-                </Grid>
-                <Grid item xs={12} sm={3}>
-                  <Box sx={{ textAlign: 'center' }}>
-                    <Typography variant="subtitle2">Livestock Health</Typography>
-                    <CircularProgress variant="determinate" value={92} color="success" />
-                    <Typography variant="body2">92% Healthy</Typography>
-                  </Box>
-                </Grid>
-                <Grid item xs={12} sm={3}>
-                  <Box sx={{ textAlign: 'center' }}>
-                    <Typography variant="subtitle2">Profit Margin</Typography>
-                    <CircularProgress variant="determinate" value={85} color="primary" />
-                    <Typography variant="body2">85% Target</Typography>
-                  </Box>
-                </Grid>
-              </Grid>
-            </Paper>
-          </Grid>
-
-          {/* Crop Planning */}
-          <Grid item xs={12} md={6} className="crop-planning">
-            <Card>
-              <CardHeader
-                title="Crop Planning"
-                avatar={<Agriculture color="primary" />}
-                action={
-                  <Tooltip title="Plan and monitor your crops">
-                    <IconButton>
-                      <Help />
-                    </IconButton>
-                  </Tooltip>
-                }
-              />
-              <CardContent>
-                <Box sx={{ mb: 2 }}>
-                  <Chip icon={<LocalFlorist />} label={`Growth Stage: ${cropData.growthStage}`} sx={{ mr: 1 }} />
-                  <Chip icon={<Nature />} label={`Health: ${cropData.healthScore}%`} color="success" />
-                </Box>
-                <Typography variant="h6" color="primary">
-                  Expected Yield: {cropData.expectedYield} tons/acre
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-
-          {/* Weather Monitoring */}
-          <Grid item xs={12} md={6} className="weather-monitoring">
-            <Card>
-              <CardHeader
-                title="Weather Monitoring"
-                avatar={<WbSunny color="primary" />}
-                action={
-                  <Tooltip title="Monitor weather conditions">
-                    <IconButton>
-                      <Help />
-                    </IconButton>
-                  </Tooltip>
-                }
-              />
-              <CardContent>
-                <Box sx={{ mb: 2 }}>
-                  <Typography variant="body1">
-                    Temperature: {weatherData.temperature}°C
-                  </Typography>
-                  <Typography variant="body1">
-                    Humidity: {weatherData.humidity}%
-                  </Typography>
-                </Box>
-              </CardContent>
-            </Card>
-          </Grid>
-
-          {/* Livestock Management */}
-          <Grid item xs={12} md={6} className="livestock-management">
-            <Card>
-              <CardHeader
-                title="Livestock Management"
-                avatar={<Pets color="primary" />}
-                action={
-                  <Tooltip title="Track livestock health and schedules">
-                    <IconButton>
-                      <Help />
-                    </IconButton>
-                  </Tooltip>
-                }
-              />
-              <CardContent>
-                <TableContainer component={Paper}>
-                  <Table size="small">
-                    <TableHead>
-                      <TableRow>
-                        <TableCell>Type</TableCell>
-                        <TableCell align="right">Count</TableCell>
-                        <TableCell align="right">Health %</TableCell>
-                        <TableCell align="right">Feed Level %</TableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {Object.entries(livestock).map(([type, data]) => (
-                        <TableRow key={type}>
-                          <TableCell component="th" scope="row">
-                            {type.charAt(0).toUpperCase() + type.slice(1)}
-                          </TableCell>
-                          <TableCell align="right">{data.count}</TableCell>
-                          <TableCell align="right">
-                            <Chip
-                              label={`${data.health}%`}
-                              color={data.health > 90 ? 'success' : 'warning'}
-                              size="small"
-                            />
-                          </TableCell>
-                          <TableCell align="right">
-                            <Chip
-                              label={`${data.feed}%`}
-                              color={data.feed > 80 ? 'success' : 'warning'}
-                              size="small"
-                            />
-                          </TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </TableContainer>
-              </CardContent>
-            </Card>
-          </Grid>
-
-          {/* Resource Planning */}
-          <Grid item xs={12} md={6} className="resource-planning">
-            <Card>
-              <CardHeader
-                title="Resource Planning"
-                avatar={<Inventory color="primary" />}
-                action={
-                  <Tooltip title="Monitor and manage farm resources">
-                    <IconButton>
-                      <Help />
-                    </IconButton>
-                  </Tooltip>
-                }
-              />
-              <CardContent>
-                <TableContainer component={Paper}>
-                  <Table size="small">
-                    <TableHead>
-                      <TableRow>
-                        <TableCell>Resource</TableCell>
-                        <TableCell align="right">Current Stock</TableCell>
-                        <TableCell align="right">Status</TableCell>
-                        <TableCell align="right">Cost/Unit</TableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {Object.entries(resources).map(([name, data]) => (
-                        <TableRow key={name}>
-                          <TableCell component="th" scope="row">
-                            {name.charAt(0).toUpperCase() + name.slice(1)}
-                          </TableCell>
-                          <TableCell align="right">
-                            {data.current} {data.unit}
-                          </TableCell>
-                          <TableCell align="right">
-                            <Chip
-                              label={data.current > data.reorderPoint ? 'Sufficient' : 'Low'}
-                              color={data.current > data.reorderPoint ? 'success' : 'error'}
-                              size="small"
-                            />
-                          </TableCell>
-                          <TableCell align="right">${data.cost}</TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </TableContainer>
-              </CardContent>
-            </Card>
-          </Grid>
-
-          {/* Soil Analysis */}
-          <Grid item xs={12} className="soil-analysis">
-            <Card>
-              <CardHeader
-                title="Soil Analysis"
-                avatar={<Landscape color="primary" />}
-                action={
-                  <Tooltip title="Monitor soil health and nutrients">
-                    <IconButton>
-                      <Help />
-                    </IconButton>
-                  </Tooltip>
-                }
-              />
-              <CardContent>
-                <Grid container spacing={2}>
-                  <Grid item xs={12}>
-                    <TableContainer component={Paper}>
-                      <Table size="small">
-                        <TableHead>
-                          <TableRow>
-                            <TableCell>Parameter</TableCell>
-                            <TableCell align="right">Current Value</TableCell>
-                            <TableCell align="right">Ideal Range</TableCell>
-                            <TableCell align="right">Status</TableCell>
-                          </TableRow>
-                        </TableHead>
-                        <TableBody>
-                          {soil.map((param) => {
-                            const [min, max] = param.ideal.split('-').map(Number);
-                            const status = param.value >= min && param.value <= max ? 'Optimal' : 'Attention Needed';
-                            return (
-                              <TableRow key={param.id}>
-                                <TableCell component="th" scope="row">
-                                  {param.id}
-                                </TableCell>
-                                <TableCell align="right">{param.value}</TableCell>
-                                <TableCell align="right">{param.ideal}</TableCell>
-                                <TableCell align="right">
-                                  <Chip
-                                    label={status}
-                                    color={status === 'Optimal' ? 'success' : 'warning'}
-                                    size="small"
-                                  />
-                                </TableCell>
-                              </TableRow>
-                            );
-                          })}
-                        </TableBody>
-                      </Table>
-                    </TableContainer>
-                  </Grid>
-                </Grid>
-              </CardContent>
-            </Card>
-          </Grid>
-
-          {/* Local Markets and Gleaning */}
-          <Grid item xs={12}>
-            <Card>
-              <CardHeader
-                title="Local Markets & Gleaning Opportunities"
-                avatar={<Store color="primary" />}
-                action={
-                  <Tooltip title="Find places to sell or donate your harvest">
-                    <IconButton>
-                      <Help />
-                    </IconButton>
-                  </Tooltip>
-                }
-              />
-              <CardContent>
-                <Grid container spacing={3}>
-                  {/* Farmers Markets */}
-                  <Grid item xs={12} md={4}>
-                    <Card variant="outlined">
-                      <CardHeader
-                        title="Local Markets"
-                        avatar={<Storefront color="primary" />}
-                      />
-                      <CardContent>
-                        {localMarkets.markets.map((market, index) => (
-                          <Box key={index} sx={{ mb: 3 }}>
-                            <Typography variant="h6" color="primary">
-                              {market.name}
-                            </Typography>
-                            <Typography variant="body2" color="text.secondary">
-                              {market.type} - {market.schedule}
-                            </Typography>
-                            <Typography variant="body2">
-                              <strong>Accepts:</strong> {market.accepts.join(", ")}
-                            </Typography>
-                            <Typography variant="body2">
-                              <strong>Payment:</strong> {market.paymentTypes.join(", ")}
-                            </Typography>
-                            <Typography variant="body2">
-                              <strong>Commission:</strong> {market.commission}
-                            </Typography>
-                          </Box>
-                        ))}
-                      </CardContent>
-                    </Card>
-                  </Grid>
-
-                  {/* Gleaning Opportunities */}
-                  <Grid item xs={12} md={4}>
-                    <Card variant="outlined">
-                      <CardHeader
-                        title="Gleaning Programs"
-                        avatar={<LocalShipping color="primary" />}
-                      />
-                      <CardContent>
-                        {localMarkets.gleaningOpportunities.map((opportunity, index) => (
-                          <Box key={index} sx={{ mb: 3 }}>
-                            <Typography variant="h6" color="primary">
-                              {opportunity.organization}
-                            </Typography>
-                            <Typography variant="body2">
-                              {opportunity.description}
-                            </Typography>
-                            <Typography variant="body2">
-                              <strong>Benefits:</strong>
-                            </Typography>
-                            <List dense>
-                              {opportunity.benefits.map((benefit, i) => (
-                                <ListItem key={i}>
-                                  <ListItemIcon>
-                                    <FiberManualRecord sx={{ width: 8, height: 8 }} />
-                                  </ListItemIcon>
-                                  <ListItemText primary={benefit} />
-                                </ListItem>
-                              ))}
-                            </List>
-                            <Typography variant="body2">
-                              <strong>Schedule:</strong> {opportunity.schedule}
-                            </Typography>
-                            <Typography variant="body2">
-                              <strong>Contact:</strong> {opportunity.contact}
-                            </Typography>
-                          </Box>
-                        ))}
-                      </CardContent>
-                    </Card>
-                  </Grid>
-
-                  {/* Distributors */}
-                  <Grid item xs={12} md={4}>
-                    <Card variant="outlined">
-                      <CardHeader
-                        title="Distribution Partners"
-                        avatar={<AttachMoney color="primary" />}
-                      />
-                      <CardContent>
-                        {localMarkets.distributors.map((distributor, index) => (
-                          <Box key={index} sx={{ mb: 3 }}>
-                            <Typography variant="h6" color="primary">
-                              {distributor.name}
-                            </Typography>
-                            <Typography variant="body2" color="text.secondary">
-                              {distributor.type}
-                            </Typography>
-                            <Typography variant="body2">
-                              <strong>Minimum Order:</strong> {distributor.minimumOrder}
-                            </Typography>
-                            <Typography variant="body2">
-                              <strong>Payment Terms:</strong> {distributor.paymentTerms}
-                            </Typography>
-                            <Typography variant="body2">
-                              <strong>Products:</strong> {distributor.products.join(", ")}
-                            </Typography>
-                            <Typography variant="body2">
-                              <strong>Contact:</strong> {distributor.contact}
-                            </Typography>
-                          </Box>
-                        ))}
-                      </CardContent>
-                    </Card>
-                  </Grid>
-                </Grid>
-              </CardContent>
-            </Card>
-          </Grid>
-
-          {/* Health & Fitness */}
-          <Grid item xs={12} className="health-fitness">
-            <Card>
-              <CardHeader
-                title="Health & Fitness"
-                avatar={<FitnessCenter color="primary" />}
-                action={
-                  <Tooltip title="Monitor your health and daily activity">
-                    <IconButton>
-                      <Help />
-                    </IconButton>
-                  </Tooltip>
-                }
-              />
-              <CardContent>
-                <Grid container spacing={3}>
-                  {/* Activity Metrics */}
-                  <Grid item xs={12} md={6}>
-                    <Card variant="outlined">
-                      <CardHeader
-                        title="Activity"
-                        avatar={<DirectionsRun color="primary" />}
-                      />
-                      <CardContent>
-                        <Typography variant="body1">
-                          Steps: {healthMetrics.activity.steps}
-                        </Typography>
-                        <Typography variant="body1">
-                          Active Minutes: {healthMetrics.activity.activeMinutes}
-                        </Typography>
-                        <Typography variant="body1">
-                          Calories Burned: {healthMetrics.activity.caloriesBurned} kcal
-                        </Typography>
-                        <Typography variant="body1">
-                          Distance: {healthMetrics.activity.distanceKm} km
-                        </Typography>
-                        <Typography variant="body1">
-                          Heart Rate: {healthMetrics.activity.heartRate} bpm
-                        </Typography>
-                      </CardContent>
-                    </Card>
-                  </Grid>
-
-                  {/* Nutrition Metrics */}
-                  <Grid item xs={12} md={6}>
-                    <Card variant="outlined">
-                      <CardHeader
-                        title="Nutrition"
-                        avatar={<Restaurant color="primary" />}
-                      />
-                      <CardContent>
-                        <Typography variant="body1">
-                          Water Intake: {healthMetrics.nutrition.waterIntake}L
-                        </Typography>
-                        <Typography variant="body1">
-                          Calories: {healthMetrics.nutrition.calories} kcal
-                        </Typography>
-                        <Typography variant="body1">
-                          Protein: {healthMetrics.nutrition.protein}g
-                        </Typography>
-                        <Typography variant="body1">
-                          Carbs: {healthMetrics.nutrition.carbs}g
-                        </Typography>
-                        <Typography variant="body1">
-                          Fats: {healthMetrics.nutrition.fats}g
-                        </Typography>
-                      </CardContent>
-                    </Card>
-                  </Grid>
-
-                  {/* Rest & Recovery */}
-                  <Grid item xs={12} md={6}>
-                    <Card variant="outlined">
-                      <CardHeader
-                        title="Rest & Recovery"
-                        avatar={<MonitorHeart color="primary" />}
-                      />
-                      <CardContent>
-                        <Typography variant="body1">
-                          Sleep: {healthMetrics.rest.sleepHours} hours
-                        </Typography>
-                        <Typography variant="body1">
-                          Sleep Quality: {healthMetrics.rest.sleepQuality}%
-                        </Typography>
-                        <Typography variant="body1">
-                          Rest Periods: {healthMetrics.rest.restPeriods}
-                        </Typography>
-                        <Typography variant="body1">
-                          Stress Level: {healthMetrics.rest.stressLevel}
-                        </Typography>
-                      </CardContent>
-                    </Card>
-                  </Grid>
-
-                  {/* Meal Tracking */}
-                  <Grid item xs={12} md={6}>
-                    <Card variant="outlined">
-                      <CardHeader
-                        title="Farm-to-Table Meals"
-                        avatar={<LocalDining color="primary" />}
-                      />
-                      <CardContent>
-                        {healthMetrics.meals.map((meal, index) => (
-                          <Box key={index} sx={{ mb: 2 }}>
-                            <Typography variant="subtitle1" color="primary">
-                              {meal.time} ({meal.calories} kcal)
-                            </Typography>
-                            <List dense>
-                              {meal.foods.map((food, foodIndex) => (
-                                <ListItem key={foodIndex}>
-                                  <ListItemIcon>
-                                    <FiberManualRecord sx={{ width: 8, height: 8 }} />
-                                  </ListItemIcon>
-                                  <ListItemText primary={food} />
-                                </ListItem>
-                              ))}
-                            </List>
-                          </Box>
-                        ))}
-                      </CardContent>
-                    </Card>
-                  </Grid>
-                </Grid>
-              </CardContent>
-            </Card>
-          </Grid>
-        </Grid>
-      )}
-
-      {selectedTab === 1 && (
-        <Grid container spacing={3}>
-          <Grid item xs={12} md={6}>
-            <Card>
-              <CardHeader title="Crop Selection" />
-              <CardContent>
-                <FormControl fullWidth sx={{ mb: 2 }}>
-                  <InputLabel>Select Crop</InputLabel>
-                  <Select value={selectedCrop} onChange={handleCropChange}>
-                    <MenuItem value="Wheat">Wheat</MenuItem>
-                    <MenuItem value="Corn">Corn</MenuItem>
-                    <MenuItem value="Soybeans">Soybeans</MenuItem>
-                  </Select>
-                </FormControl>
-                <Typography variant="h6" gutterBottom>AI Recommendations</Typography>
-                <List>
-                  {cropRecommendations.map((rec) => (
-                    <ListItem key={rec.crop}>
-                      <ListItemIcon>
-                        <LocalFlorist color={rec.confidence > 90 ? "success" : "primary"} />
-                      </ListItemIcon>
-                      <ListItemText
-                        primary={`${rec.crop} (${rec.confidence}% confidence)`}
-                        secondary={rec.reason}
-                      />
-                    </ListItem>
-                  ))}
-                </List>
-              </CardContent>
-            </Card>
-          </Grid>
-        </Grid>
-      )}
-
-      {selectedTab === 2 && (
-        <Grid container spacing={3}>
-          <Grid item xs={12} md={6}>
-            <Card>
-              <CardHeader
-                title="Weather & Irrigation Control"
-                action={
+                <Grid item xs={12}>
                   <FormControlLabel
                     control={
                       <Switch
                         checked={autoIrrigation}
-                        onChange={handleAutoIrrigationChange}
+                        onChange={(e) => setAutoIrrigation(e.target.checked)}
                         color="primary"
                       />
                     }
-                    label="Auto Irrigation"
+                    label="Auto-Irrigation"
                   />
-                }
-              />
-              <CardContent>
-                <Grid container spacing={2}>
-                  <Grid item xs={4}>
-                    <Box sx={{ textAlign: 'center' }}>
-                      <Thermostat color="primary" sx={{ fontSize: 40 }} />
-                      <Typography variant="h6">{weatherData.temperature}°C</Typography>
-                      <Typography variant="body2">Temperature</Typography>
-                    </Box>
-                  </Grid>
-                  <Grid item xs={4}>
-                    <Box sx={{ textAlign: 'center' }}>
-                      <WaterDrop color="primary" sx={{ fontSize: 40 }} />
-                      <Typography variant="h6">{weatherData.humidity}%</Typography>
-                      <Typography variant="body2">Humidity</Typography>
-                    </Box>
-                  </Grid>
-                  <Grid item xs={4}>
-                    <Box sx={{ textAlign: 'center' }}>
-                      <AcUnit color="primary" sx={{ fontSize: 40 }} />
-                      <Typography variant="h6">{weatherData.rainfall}mm</Typography>
-                      <Typography variant="body2">Rainfall</Typography>
-                    </Box>
-                  </Grid>
+                  <Box mt={2}>
+                    <Typography gutterBottom>
+                      Soil Moisture Level: {moistureLevel.toFixed(1)}%
+                    </Typography>
+                    <LinearProgress
+                      variant="determinate"
+                      value={moistureLevel}
+                      color={moistureLevel < 40 ? "warning" : "primary"}
+                    />
+                  </Box>
                 </Grid>
-              </CardContent>
-            </Card>
-          </Grid>
+              </Grid>
+            </CardContent>
+          </Card>
         </Grid>
-      )}
 
-      {selectedTab === 5 && (
-        <Grid container spacing={3}>
-          <Grid item xs={12}>
-            {renderMarketAnalysis()}
-          </Grid>
+        {/* Crop Management */}
+        <Grid item xs={12} md={6}>
+          <Card>
+            <CardHeader
+              title="Crop Management"
+              action={
+                <Tooltip title="Monitor crop health and manage planting schedules">
+                  <IconButton>
+                    <HelpIcon />
+                  </IconButton>
+                </Tooltip>
+              }
+            />
+            <CardContent>
+              <Grid container spacing={2}>
+                <Grid item xs={12} sm={6}>
+                  <PieChart width={200} height={200}>
+                    <Pie
+                      data={cropHealth}
+                      cx={100}
+                      cy={100}
+                      innerRadius={60}
+                      outerRadius={80}
+                      paddingAngle={5}
+                      dataKey="value"
+                    >
+                      {cropHealth.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                      ))}
+                    </Pie>
+                    <RechartsTooltip />
+                  </PieChart>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <FormControl fullWidth>
+                    <InputLabel>Select Crop</InputLabel>
+                    <Select
+                      value={selectedCrop}
+                      onChange={(e) => handleCropClick(e.target.value)}
+                    >
+                      <MenuItem value="corn">Corn</MenuItem>
+                      <MenuItem value="wheat">Wheat</MenuItem>
+                      <MenuItem value="soybeans">Soybeans</MenuItem>
+                    </Select>
+                  </FormControl>
+                  <Box mt={2}>
+                    <Typography variant="subtitle2" gutterBottom>
+                      Recommended Actions:
+                    </Typography>
+                    <List dense>
+                      <ListItem button onClick={() => handleOpenDialog('Fertilization Schedule', 'View and adjust fertilization schedules')}>
+                        <ListItemIcon><TimelineIcon /></ListItemIcon>
+                        <ListItemText primary="Check Fertilization Schedule" />
+                      </ListItem>
+                      <ListItem button onClick={() => handleOpenDialog('Pest Control', 'Monitor and manage pest control measures')}>
+                        <ListItemIcon><WarningIcon /></ListItemIcon>
+                        <ListItemText primary="Pest Control Status" />
+                      </ListItem>
+                    </List>
+                  </Box>
+                </Grid>
+              </Grid>
+            </CardContent>
+          </Card>
         </Grid>
-      )}
 
-      <Dialog open={openDialog} onClose={handleCloseDialog} maxWidth="md" fullWidth>
+        {/* Market Analysis */}
+        <Grid item xs={12}>
+          <Card>
+            <CardHeader
+              title="Market Analysis"
+              action={
+                <Tooltip title="Track market prices and trends">
+                  <IconButton>
+                    <HelpIcon />
+                  </IconButton>
+                </Tooltip>
+              }
+            />
+            <CardContent>
+              <Grid container spacing={2}>
+                <Grid item xs={12}>
+                  <BarChart width={1000} height={300} data={marketPrices}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="month" />
+                    <YAxis />
+                    <RechartsTooltip />
+                    <Legend />
+                    <Bar dataKey="corn" fill="#8884d8" />
+                    <Bar dataKey="wheat" fill="#82ca9d" />
+                    <Bar dataKey="soybeans" fill="#ffc658" />
+                  </BarChart>
+                </Grid>
+                <Grid item xs={12}>
+                  <Box display="flex" justifyContent="space-between">
+                    <Button
+                      variant="outlined"
+                      startIcon={<MonetizationOnIcon />}
+                      onClick={() => handleOpenDialog('Price Alerts', 'Set up price alerts for your crops')}
+                    >
+                      Set Price Alerts
+                    </Button>
+                    <Button
+                      variant="outlined"
+                      startIcon={<LocalShippingIcon />}
+                      onClick={() => handleOpenDialog('Logistics', 'Plan your harvest logistics')}
+                    >
+                      Plan Logistics
+                    </Button>
+                  </Box>
+                </Grid>
+              </Grid>
+            </CardContent>
+          </Card>
+        </Grid>
+
+        {/* Livestock Management */}
+        <Grid item xs={12} md={6}>
+          <Card>
+            <CardHeader
+              title="Livestock Management"
+              action={
+                <Tooltip title="Monitor livestock health and manage feeding schedules">
+                  <IconButton>
+                    <HelpIcon />
+                  </IconButton>
+                </Tooltip>
+              }
+            />
+            <CardContent>
+              <Grid container spacing={2}>
+                <Grid item xs={12}>
+                  <FormControl fullWidth>
+                    <InputLabel>Select Animal Type</InputLabel>
+                    <Select
+                      value={selectedAnimal}
+                      onChange={(e) => handleAnimalClick(e.target.value)}
+                    >
+                      <MenuItem value="cattle">Cattle</MenuItem>
+                      <MenuItem value="sheep">Sheep</MenuItem>
+                      <MenuItem value="chicken">Chicken</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12}>
+                  <List>
+                    <ListItem button onClick={() => handleOpenDialog('Feeding Schedule', 'View and adjust feeding schedules')}>
+                      <ListItemIcon><TimelineIcon /></ListItemIcon>
+                      <ListItemText 
+                        primary="Feeding Schedule" 
+                        secondary="Next feeding in 2 hours"
+                      />
+                    </ListItem>
+                    <ListItem button onClick={() => handleOpenDialog('Health Records', 'View health records and vaccination history')}>
+                      <ListItemIcon><PetsIcon /></ListItemIcon>
+                      <ListItemText 
+                        primary="Health Records" 
+                        secondary="Last checkup: 3 days ago"
+                      />
+                    </ListItem>
+                  </List>
+                </Grid>
+              </Grid>
+            </CardContent>
+          </Card>
+        </Grid>
+
+        {/* Resource Optimization */}
+        <Grid item xs={12} md={6}>
+          <Card>
+            <CardHeader
+              title="Resource Optimization"
+              action={
+                <Tooltip title="Track and optimize resource usage">
+                  <IconButton>
+                    <HelpIcon />
+                  </IconButton>
+                </Tooltip>
+              }
+            />
+            <CardContent>
+              <Grid container spacing={2}>
+                <Grid item xs={12} display="flex" justifyContent="center" alignItems="center">
+                  <Box position="relative" display="inline-flex">
+                    <CircularProgress
+                      variant="determinate"
+                      value={resourceEfficiency}
+                      size={120}
+                      thickness={4}
+                    />
+                    <Box
+                      position="absolute"
+                      top={0}
+                      left={0}
+                      bottom={0}
+                      right={0}
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="center"
+                    >
+                      <Typography variant="h6" component="div" color="textSecondary">
+                        {resourceEfficiency.toFixed(1)}%
+                      </Typography>
+                    </Box>
+                  </Box>
+                </Grid>
+                <Grid item xs={12}>
+                  <List>
+                    <ListItem button onClick={() => handleOpenDialog('Water Usage', 'Monitor and optimize water consumption')}>
+                      <ListItemIcon><WaterDropIcon /></ListItemIcon>
+                      <ListItemText 
+                        primary="Water Usage" 
+                        secondary="15% below average"
+                      />
+                    </ListItem>
+                    <ListItem button onClick={() => handleOpenDialog('Energy Consumption', 'Track and reduce energy consumption')}>
+                      <ListItemIcon><TimelineIcon /></ListItemIcon>
+                      <ListItemText 
+                        primary="Energy Consumption" 
+                        secondary="Peak hours: 2PM - 5PM"
+                      />
+                    </ListItem>
+                  </List>
+                </Grid>
+              </Grid>
+            </CardContent>
+          </Card>
+        </Grid>
+      </Grid>
+
+      <Dialog
+        open={openDialog}
+        onClose={handleCloseDialog}
+        maxWidth="md"
+        fullWidth
+      >
         <DialogTitle>{dialogContent.title}</DialogTitle>
-        <DialogContent>{dialogContent.content}</DialogContent>
+        <DialogContent>
+          {dialogContent.content}
+        </DialogContent>
         <DialogActions>
-          <Button onClick={handleCloseDialog}>Close</Button>
+          <Button onClick={handleCloseDialog} color="primary">
+            Close
+          </Button>
         </DialogActions>
       </Dialog>
     </Container>
