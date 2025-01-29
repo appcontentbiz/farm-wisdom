@@ -15,7 +15,9 @@ import AuthService from './services/AuthService';
 import PricingPlans from './components/Pricing/PricingPlans';
 import Checkout from './pages/Checkout';
 import Demo from './pages/Demo';
+import InteractiveDemo from './pages/InteractiveDemo';
 import Resources from './pages/Resources';
+import SmartCropPlanning from './pages/SmartCropPlanning';
 import './App.css';
 
 const PrivateRoute = ({ children }) => {
@@ -42,7 +44,9 @@ function App() {
                 <Route path="/pricing" element={<PricingPlans />} />
                 <Route path="/checkout/:plan" element={<Checkout />} />
                 <Route path="/demo" element={<Demo />} />
+                <Route path="/try-enterprise" element={<InteractiveDemo />} />
                 <Route path="/resources" element={<Resources />} />
+                <Route path="/smart-crop-planning" element={<SmartCropPlanning />} />
                 <Route
                   path="/professional/*"
                   element={

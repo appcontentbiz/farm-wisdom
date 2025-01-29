@@ -59,6 +59,22 @@
   transition: all 0.2s ease;
 }
 
+.nav-button.enterprise {
+  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(79, 70, 229, 0.1);
+}
+
+.nav-button.enterprise:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(79, 70, 229, 0.2);
+  background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
+}
+
 .demo {
   background-color: #2e7d32;
   color: white;
