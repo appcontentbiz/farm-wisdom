@@ -62,6 +62,20 @@ export default function Navbar() {
                 Smart Crop Planning
               </Button>
             </StyledLink>
+            <StyledLink to="/precision-weather">
+              <Button 
+                color="inherit"
+                sx={{
+                  background: 'linear-gradient(135deg, #03a9f4 0%, #0288d1 100%)',
+                  color: 'white',
+                  '&:hover': {
+                    background: 'linear-gradient(135deg, #0288d1 0%, #01579b 100%)',
+                  }
+                }}
+              >
+                Precision Weather
+              </Button>
+            </StyledLink>
             <StyledLink to="/demo">
               <Button color="inherit">Try Demo</Button>
             </StyledLink>
