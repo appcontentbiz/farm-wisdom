@@ -118,6 +118,20 @@ export default function Navbar() {
                 Equipment Management
               </Button>
             </StyledLink>
+            <StyledLink to="/community-hub">
+              <Button 
+                color="inherit"
+                sx={{
+                  background: 'linear-gradient(135deg, #4caf50 0%, #388e3c 100%)',
+                  color: 'white',
+                  '&:hover': {
+                    background: 'linear-gradient(135deg, #388e3c 0%, #2e7d32 100%)',
+                  }
+                }}
+              >
+                Community Hub
+              </Button>
+            </StyledLink>
             <StyledLink to="/demo">
               <Button color="inherit">Try Demo</Button>
             </StyledLink>

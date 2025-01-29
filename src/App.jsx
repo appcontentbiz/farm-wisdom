@@ -22,6 +22,7 @@ import PrecisionWeather from './pages/PrecisionWeather';
 import MarketIntelligence from './pages/MarketIntelligence';
 import ResourceOptimization from './pages/ResourceOptimization';
 import EquipmentManagement from './pages/EquipmentManagement';
+import CommunityHub from './pages/CommunityHub';
 import './App.css';
 
 const PrivateRoute = ({ children }) => {
@@ -55,6 +56,7 @@ function App() {
                 <Route path="/market-intelligence" element={<MarketIntelligence />} />
                 <Route path="/resource-optimization" element={<ResourceOptimization />} />
                 <Route path="/equipment-management" element={<EquipmentManagement />} />
+                <Route path="/community-hub" element={<CommunityHub />} />
                 <Route
                   path="/professional/*"
                   element={
