@@ -997,167 +997,186 @@ function Demo() {
         {selectedTab === 6 && (
           <Grid container spacing={3}>
             <Grid item xs={12} md={4}>
-              <Card>
-                <CardHeader
-                  title="Local Markets & Community Resources"
-                  subheader="Find and connect with local markets, food banks, and co-ops"
-                />
-                <CardContent>
-                  <Box sx={{ mb: 3 }}>
-                    <Grid container spacing={2} alignItems="center">
-                      <Grid item xs={12} md={6}>
-                        <TextField
-                          fullWidth
-                          variant="outlined"
-                          placeholder="Search markets..."
-                          value={searchTerm}
-                          onChange={(e) => setSearchTerm(e.target.value)}
-                          InputProps={{
-                            startAdornment: <SearchIcon sx={{ mr: 1, color: 'text.secondary' }} />
-                          }}
-                        />
-                      </Grid>
-                      <Grid item xs={12} md={6}>
-                        <FormControl fullWidth>
-                          <InputLabel>Filter By Type</InputLabel>
-                          <Select
-                            value={filterType}
-                            onChange={(e) => setFilterType(e.target.value)}
-                            label="Filter By Type"
-                          >
-                            <MenuItem value="all">All Locations</MenuItem>
-                            <MenuItem value="farmers-markets">Farmer's Markets</MenuItem>
-                            <MenuItem value="food-banks">Food Banks</MenuItem>
-                            <MenuItem value="co-ops">Co-ops</MenuItem>
-                          </Select>
-                        </FormControl>
-                      </Grid>
-                    </Grid>
-                  </Box>
+              <Card sx={{ p: 3 }}>
+                <Typography variant="h4" gutterBottom>
+                  Local Markets & Community Resources
+                </Typography>
+                <Typography variant="subtitle1" color="text.secondary" gutterBottom>
+                  Find and connect with local markets, food banks, and co-ops
+                </Typography>
 
+                <Box sx={{ mt: 4, mb: 4 }}>
                   <Grid container spacing={3}>
-                    {filteredMarkets.map((market) => (
-                      <Grid item xs={12} md={6} lg={4} key={market.id}>
-                        <Card 
-                          elevation={2}
-                          sx={{
-                            height: '100%',
-                            display: 'flex',
-                            flexDirection: 'column',
-                            '&:hover': {
-                              boxShadow: 6,
-                              cursor: 'pointer'
-                            }
-                          }}
+                    <Grid item xs={12} md={7}>
+                      <TextField
+                        fullWidth
+                        placeholder="Search markets..."
+                        variant="outlined"
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        InputProps={{
+                          startAdornment: <SearchIcon sx={{ ml: 1, color: 'text.secondary' }} />,
+                          sx: { borderRadius: 1 }
+                        }}
+                      />
+                    </Grid>
+                    <Grid item xs={12} md={5}>
+                      <FormControl fullWidth>
+                        <InputLabel id="location-type-label">Filter By Type</InputLabel>
+                        <Select
+                          labelId="location-type-label"
+                          value={filterType}
+                          onChange={(e) => setFilterType(e.target.value)}
+                          label="Filter By Type"
                         >
-                          <CardHeader
-                            title={market.name}
-                            action={
-                              <IconButton onClick={() => toggleFavorite(market.id)}>
-                                {favoriteMarkets.includes(market.id) ? 
-                                  <FavoriteIcon color="error" /> : 
-                                  <FavoriteBorderIcon />
-                                }
-                              </IconButton>
-                            }
-                          />
-                          <CardContent sx={{ flexGrow: 1 }}>
-                            <Typography variant="body2" color="text.secondary" paragraph>
-                              {market.description}
-                            </Typography>
-                            
-                            <List dense>
-                              <ListItem>
-                                <ListItemIcon>
-                                  <AccessTimeIcon />
-                                </ListItemIcon>
-                                <ListItemText primary={market.schedule} />
-                              </ListItem>
-                              <ListItem>
-                                <ListItemIcon>
-                                  <LocationOnIcon />
-                                </ListItemIcon>
-                                <ListItemText primary={market.address} />
-                              </ListItem>
-                              <ListItem>
-                                <ListItemIcon>
-                                  <LocalAtmIcon />
-                                </ListItemIcon>
-                                <ListItemText 
-                                  primary="Payment Options"
-                                  secondary={market.payment.join(', ')}
-                                />
-                              </ListItem>
-                            </List>
-
-                            <Box sx={{ mt: 2 }}>
-                              <Typography variant="subtitle2" gutterBottom>
-                                Accepts:
-                              </Typography>
-                              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
-                                {market.accepts.map((item, index) => (
-                                  <Chip
-                                    key={index}
-                                    label={item}
-                                    size="small"
-                                    color="primary"
-                                    variant="outlined"
-                                  />
-                                ))}
-                              </Box>
-                            </Box>
-                          </CardContent>
-                          <Box sx={{ p: 2, borderTop: 1, borderColor: 'divider' }}>
-                            <Grid container spacing={1}>
-                              <Grid item xs={4}>
-                                <Button
-                                  fullWidth
-                                  startIcon={<PhoneIcon />}
-                                  href={`tel:${market.phone}`}
-                                  size="small"
-                                >
-                                  Call
-                                </Button>
-                              </Grid>
-                              <Grid item xs={4}>
-                                <Button
-                                  fullWidth
-                                  startIcon={<LanguageIcon />}
-                                  href={`https://${market.website}`}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  size="small"
-                                >
-                                  Visit
-                                </Button>
-                              </Grid>
-                              <Grid item xs={4}>
-                                <Button
-                                  fullWidth
-                                  startIcon={<LocationOnIcon />}
-                                  onClick={() => {
-                                    window.open(`https://maps.google.com/?q=${market.coordinates.lat},${market.coordinates.lng}`);
-                                  }}
-                                  size="small"
-                                >
-                                  Map
-                                </Button>
-                              </Grid>
-                            </Grid>
-                          </Box>
-                        </Card>
-                      </Grid>
-                    ))}
+                          <MenuItem value="all">All Locations</MenuItem>
+                          <MenuItem value="farmers-markets">Farmer's Markets</MenuItem>
+                          <MenuItem value="food-banks">Food Banks</MenuItem>
+                          <MenuItem value="co-ops">Co-ops</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </Grid>
                   </Grid>
+                </Box>
 
-                  {filteredMarkets.length === 0 && (
-                    <Box sx={{ textAlign: 'center', py: 4 }}>
-                      <Typography variant="h6" color="text.secondary">
-                        No markets found matching your search criteria
-                      </Typography>
-                    </Box>
-                  )}
-                </CardContent>
+                <Grid container spacing={3}>
+                  {filteredMarkets.map((market) => (
+                    <Grid item xs={12} md={4} key={market.id}>
+                      <Card 
+                        elevation={1}
+                        sx={{
+                          height: '100%',
+                          display: 'flex',
+                          flexDirection: 'column',
+                          transition: 'all 0.2s ease-in-out',
+                          '&:hover': {
+                            transform: 'translateY(-4px)',
+                            boxShadow: 3
+                          }
+                        }}
+                      >
+                        <CardContent sx={{ flexGrow: 1, p: 3 }}>
+                          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 2 }}>
+                            <Typography variant="h5" component="h2" gutterBottom>
+                              {market.name}
+                            </Typography>
+                            <IconButton 
+                              onClick={() => toggleFavorite(market.id)}
+                              sx={{ mt: -1, mr: -1 }}
+                            >
+                              {favoriteMarkets.includes(market.id) ? 
+                                <FavoriteIcon color="error" /> : 
+                                <FavoriteBorderIcon />
+                              }
+                            </IconButton>
+                          </Box>
+                          
+                          <Typography variant="body1" color="text.secondary" paragraph>
+                            {market.description}
+                          </Typography>
+
+                          <Box sx={{ mt: 3 }}>
+                            <Typography 
+                              variant="subtitle2" 
+                              sx={{ 
+                                display: 'flex', 
+                                alignItems: 'center',
+                                color: 'text.secondary',
+                                mb: 1
+                              }}
+                            >
+                              <AccessTimeIcon sx={{ fontSize: 20, mr: 1 }} />
+                              {market.schedule}
+                            </Typography>
+
+                            <Typography 
+                              variant="subtitle2" 
+                              sx={{ 
+                                display: 'flex', 
+                                alignItems: 'center',
+                                color: 'text.secondary',
+                                mb: 1
+                              }}
+                            >
+                              <LocationOnIcon sx={{ fontSize: 20, mr: 1 }} />
+                              {market.address}
+                            </Typography>
+                          </Box>
+
+                          <Box sx={{ mt: 3 }}>
+                            <Typography variant="subtitle2" gutterBottom>
+                              Accepts:
+                            </Typography>
+                            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                              {market.accepts.map((item, index) => (
+                                <Chip
+                                  key={index}
+                                  label={item}
+                                  size="small"
+                                  variant="outlined"
+                                  sx={{ 
+                                    borderRadius: '4px',
+                                    backgroundColor: 'background.paper'
+                                  }}
+                                />
+                              ))}
+                            </Box>
+                          </Box>
+                        </CardContent>
+
+                        <Box sx={{ p: 2, borderTop: '1px solid', borderColor: 'divider' }}>
+                          <Grid container spacing={1}>
+                            <Grid item xs={4}>
+                              <Button
+                                fullWidth
+                                size="small"
+                                startIcon={<PhoneIcon />}
+                                href={`tel:${market.phone}`}
+                                sx={{ textTransform: 'none' }}
+                              >
+                                Call
+                              </Button>
+                            </Grid>
+                            <Grid item xs={4}>
+                              <Button
+                                fullWidth
+                                size="small"
+                                startIcon={<LanguageIcon />}
+                                href={`https://${market.website}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                sx={{ textTransform: 'none' }}
+                              >
+                                Visit
+                              </Button>
+                            </Grid>
+                            <Grid item xs={4}>
+                              <Button
+                                fullWidth
+                                size="small"
+                                startIcon={<LocationOnIcon />}
+                                onClick={() => {
+                                  window.open(`https://maps.google.com/?q=${market.coordinates.lat},${market.coordinates.lng}`);
+                                }}
+                                sx={{ textTransform: 'none' }}
+                              >
+                                Map
+                              </Button>
+                            </Grid>
+                          </Grid>
+                        </Box>
+                      </Card>
+                    </Grid>
+                  ))}
+                </Grid>
+
+                {filteredMarkets.length === 0 && (
+                  <Box sx={{ textAlign: 'center', py: 4 }}>
+                    <Typography variant="h6" color="text.secondary">
+                      No markets found matching your search criteria
+                    </Typography>
+                  </Box>
+                )}
               </Card>
             </Grid>
 
