@@ -104,6 +104,20 @@ export default function Navbar() {
                 Resource Optimization
               </Button>
             </StyledLink>
+            <StyledLink to="/equipment-management">
+              <Button 
+                color="inherit"
+                sx={{
+                  background: 'linear-gradient(135deg, #607d8b 0%, #455a64 100%)',
+                  color: 'white',
+                  '&:hover': {
+                    background: 'linear-gradient(135deg, #455a64 0%, #263238 100%)',
+                  }
+                }}
+              >
+                Equipment Management
+              </Button>
+            </StyledLink>
             <StyledLink to="/demo">
               <Button color="inherit">Try Demo</Button>
             </StyledLink>
