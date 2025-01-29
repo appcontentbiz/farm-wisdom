@@ -76,6 +76,20 @@ export default function Navbar() {
                 Precision Weather
               </Button>
             </StyledLink>
+            <StyledLink to="/market-intelligence">
+              <Button 
+                color="inherit"
+                sx={{
+                  background: 'linear-gradient(135deg, #ff9800 0%, #f57c00 100%)',
+                  color: 'white',
+                  '&:hover': {
+                    background: 'linear-gradient(135deg, #f57c00 0%, #e65100 100%)',
+                  }
+                }}
+              >
+                Market Intelligence
+              </Button>
+            </StyledLink>
             <StyledLink to="/demo">
               <Button color="inherit">Try Demo</Button>
             </StyledLink>

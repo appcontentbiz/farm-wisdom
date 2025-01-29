@@ -19,6 +19,7 @@ import InteractiveDemo from './pages/InteractiveDemo';
 import Resources from './pages/Resources';
 import SmartCropPlanning from './pages/SmartCropPlanning';
 import PrecisionWeather from './pages/PrecisionWeather';
+import MarketIntelligence from './pages/MarketIntelligence';
 import './App.css';
 
 const PrivateRoute = ({ children }) => {
@@ -49,6 +50,7 @@ function App() {
                 <Route path="/resources" element={<Resources />} />
                 <Route path="/smart-crop-planning" element={<SmartCropPlanning />} />
                 <Route path="/precision-weather" element={<PrecisionWeather />} />
+                <Route path="/market-intelligence" element={<MarketIntelligence />} />
                 <Route
                   path="/professional/*"
                   element={
