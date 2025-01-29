@@ -153,7 +153,7 @@ export default function MarketIntelligence() {
     const newAlert = {
       id: alerts.length + 1,
       type: 'Custom Price Alert',
-      message: \`Alert when \${priceAlert.commodity} price goes \${priceAlert.type} \$\${priceAlert.threshold}\`,
+      message: `Alert when ${priceAlert.commodity} price goes ${priceAlert.type} ${priceAlert.threshold}`,
       severity: 'info',
     };
     setAlerts([...alerts, newAlert]);

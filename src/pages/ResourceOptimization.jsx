@@ -270,19 +270,19 @@ export default function ResourceOptimization() {
             </Typography>
             <Box sx={{ height: 300 }}>
               <ResponsiveContainer width="100%" height="100%">
-                <PieChart>
+                <PieChart width={200} height={200}>
                   <Pie
                     data={efficiencyData}
                     cx="50%"
                     cy="50%"
                     labelLine={false}
-                    label={({ name, value }) => \`\${name}: \${value.toFixed(1)}%\`}
+                    label={({ name, value }) => `${name}: ${value.toFixed(1)}%`}
                     outerRadius={80}
                     fill="#8884d8"
                     dataKey="value"
                   >
                     {efficiencyData.map((entry, index) => (
-                      <Cell key={\`cell-\${index}\`} fill={COLORS[index % COLORS.length]} />
+                      <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                     ))}
                   </Pie>
                   <ChartTooltip />
