@@ -90,6 +90,20 @@ export default function Navbar() {
                 Market Intelligence
               </Button>
             </StyledLink>
+            <StyledLink to="/resource-optimization">
+              <Button 
+                color="inherit"
+                sx={{
+                  background: 'linear-gradient(135deg, #9c27b0 0%, #7b1fa2 100%)',
+                  color: 'white',
+                  '&:hover': {
+                    background: 'linear-gradient(135deg, #7b1fa2 0%, #4a148c 100%)',
+                  }
+                }}
+              >
+                Resource Optimization
+              </Button>
+            </StyledLink>
             <StyledLink to="/demo">
               <Button color="inherit">Try Demo</Button>
             </StyledLink>
