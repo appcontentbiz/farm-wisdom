@@ -285,6 +285,18 @@ function Demo() {
   const [moistureLevel, setMoistureLevel] = useState(65);
   const [selectedAnimal, setSelectedAnimal] = useState('cattle');
   const [resourceEfficiency, setResourceEfficiency] = useState(78);
+  const [priceAlertDialog, setPriceAlertDialog] = useState(false);
+  const [logisticsDialog, setLogisticsDialog] = useState(false);
+  const [priceAlert, setPriceAlert] = useState({
+    commodity: '',
+    price: '',
+    type: 'above'
+  });
+  const [logistics, setLogistics] = useState({
+    type: 'delivery',
+    date: '',
+    location: ''
+  });
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
 
@@ -542,6 +554,16 @@ function Demo() {
     }
   };
 
+  const handlePriceAlert = () => {
+    enqueueSnackbar('Price alert set successfully!', { variant: 'success' });
+    setPriceAlertDialog(false);
+  };
+
+  const handleLogistics = () => {
+    enqueueSnackbar('Logistics request scheduled successfully!', { variant: 'success' });
+    setLogisticsDialog(false);
+  };
+
   return (
     <Container maxWidth="lg">
       <Joyride
@@ -747,18 +769,21 @@ function Demo() {
                     <Grid item xs={12}>
                       <Box display="flex" justifyContent="space-between">
                         <Button
-                          variant="outlined"
-                          startIcon={<MonetizationOnIcon />}
-                          onClick={() => handleOpenDialog('Price Alerts', 'Set up price alerts for your crops')}
+                          variant="contained"
+                          color="primary"
+                          onClick={() => setPriceAlertDialog(true)}
+                          sx={{ mt: 2 }}
                         >
                           Set Price Alerts
                         </Button>
+
                         <Button
-                          variant="outlined"
-                          startIcon={<LocalShippingIcon />}
-                          onClick={() => handleOpenDialog('Logistics', 'Plan your harvest logistics')}
+                          variant="contained"
+                          color="primary"
+                          onClick={() => setLogisticsDialog(true)}
+                          sx={{ mt: 2 }}
                         >
-                          Plan Logistics
+                          Set Logistics
                         </Button>
                       </Box>
                     </Grid>
@@ -1082,6 +1107,86 @@ function Demo() {
           <Button onClick={handleCloseDialog} color="primary">
             Close
           </Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* Price Alert Dialog */}
+      <Dialog open={priceAlertDialog} onClose={() => setPriceAlertDialog(false)}>
+        <DialogTitle>Set Price Alert</DialogTitle>
+        <DialogContent>
+          <FormControl fullWidth sx={{ mt: 2 }}>
+            <InputLabel>Commodity</InputLabel>
+            <Select
+              value={priceAlert.commodity}
+              label="Commodity"
+              onChange={(e) => setPriceAlert({ ...priceAlert, commodity: e.target.value })}
+            >
+              <MenuItem value="corn">Corn</MenuItem>
+              <MenuItem value="wheat">Wheat</MenuItem>
+              <MenuItem value="soybeans">Soybeans</MenuItem>
+            </Select>
+          </FormControl>
+          <FormControl fullWidth sx={{ mt: 2 }}>
+            <InputLabel>Alert Type</InputLabel>
+            <Select
+              value={priceAlert.type}
+              label="Alert Type"
+              onChange={(e) => setPriceAlert({ ...priceAlert, type: e.target.value })}
+            >
+              <MenuItem value="above">Price Above</MenuItem>
+              <MenuItem value="below">Price Below</MenuItem>
+            </Select>
+          </FormControl>
+          <TextField
+            fullWidth
+            label="Price"
+            type="number"
+            value={priceAlert.price}
+            onChange={(e) => setPriceAlert({ ...priceAlert, price: e.target.value })}
+            sx={{ mt: 2 }}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setPriceAlertDialog(false)}>Cancel</Button>
+          <Button onClick={handlePriceAlert} variant="contained">Set Alert</Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* Logistics Dialog */}
+      <Dialog open={logisticsDialog} onClose={() => setLogisticsDialog(false)}>
+        <DialogTitle>Schedule Logistics</DialogTitle>
+        <DialogContent>
+          <FormControl fullWidth sx={{ mt: 2 }}>
+            <InputLabel>Type</InputLabel>
+            <Select
+              value={logistics.type}
+              label="Type"
+              onChange={(e) => setLogistics({ ...logistics, type: e.target.value })}
+            >
+              <MenuItem value="delivery">Delivery</MenuItem>
+              <MenuItem value="pickup">Pickup</MenuItem>
+            </Select>
+          </FormControl>
+          <TextField
+            fullWidth
+            label="Date"
+            type="date"
+            value={logistics.date}
+            onChange={(e) => setLogistics({ ...logistics, date: e.target.value })}
+            InputLabelProps={{ shrink: true }}
+            sx={{ mt: 2 }}
+          />
+          <TextField
+            fullWidth
+            label="Location"
+            value={logistics.location}
+            onChange={(e) => setLogistics({ ...logistics, location: e.target.value })}
+            sx={{ mt: 2 }}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setLogisticsDialog(false)}>Cancel</Button>
+          <Button onClick={handleLogistics} variant="contained">Schedule</Button>
         </DialogActions>
       </Dialog>
     </Container>

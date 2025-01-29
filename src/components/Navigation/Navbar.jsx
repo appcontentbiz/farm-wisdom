@@ -36,12 +36,24 @@ export default function Navbar() {
 
   return (
     <AppBar position="sticky" color="default" elevation={1} sx={{ bgcolor: 'white' }}>
-      <Toolbar sx={{ justifyContent: 'space-between' }}>
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+      <Toolbar sx={{ justifyContent: 'space-between', overflowX: 'auto' }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', minWidth: 'max-content' }}>
           <StyledLink to="/" className="nav-brand">
             FarmWisdom
           </StyledLink>
-          <Box sx={{ display: 'flex', gap: 2, ml: 4, alignItems: 'center' }}>
+          <Box sx={{ 
+            display: 'flex', 
+            gap: 1, 
+            ml: 2, 
+            alignItems: 'center',
+            flexWrap: 'nowrap',
+            '& .MuiButton-root': {
+              minWidth: 'auto',
+              px: 1.5,
+              whiteSpace: 'nowrap',
+              fontSize: '0.875rem'
+            }
+          }}>
             <StyledLink to="/beginner">
               <Button color="inherit">Beginner Guide</Button>
             </StyledLink>
