@@ -11,11 +11,13 @@ import {
   Button,
   Tabs,
   Tab,
+  Link,
 } from '@mui/material';
 import SchoolIcon from '@mui/icons-material/School';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import PeopleIcon from '@mui/icons-material/People';
 import AgricultureIcon from '@mui/icons-material/Agriculture';
+import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 
 const Resources = () => {
   const [selectedTab, setSelectedTab] = React.useState(0);
@@ -200,7 +202,7 @@ const Resources = () => {
           </Typography>
           
           <Typography variant="body1" paragraph>
-            Agricultural commodities form the backbone of global trade and represent a crucial opportunity for farmers to maximize their profits. These standardized agricultural products—ranging from grains and oilseeds to livestock and dairy—are traded on specialized markets that operate under specific rules and mechanisms. Understanding how commodity markets work is essential for modern farmers looking to optimize their revenue streams and manage risk effectively.
+            Agricultural commodities form the backbone of global trade and represent a crucial opportunity for farmers to maximize their profits. These standardized agricultural products—ranging from grains and oilseeds to livestock and dairy—are traded on specialized markets that operate under specific rules and mechanisms. Understanding how commodity markets work is essential for modern farmers looking to optimize their revenue streams and manage risk effectively. Learn more about the <Link href="https://www.cmegroup.com/education/courses/introduction-to-agricultural-products" target="_blank" rel="noopener noreferrer">basics of agricultural trading<OpenInNewIcon sx={{ fontSize: 14, ml: 0.5 }} /></Link>.
           </Typography>
 
           <Typography variant="h5" gutterBottom sx={{ mt: 3 }}>
@@ -208,7 +210,7 @@ const Resources = () => {
           </Typography>
           
           <Typography variant="body1" paragraph>
-            Agricultural commodities are standardized farm products that can be bought and sold on regulated exchanges. These products must meet specific quality standards, known as basis grades, which ensure consistency and interchangeability in the marketplace. Common examples include corn, wheat, soybeans, cotton, and livestock. The standardization of these products enables efficient trading and price discovery, allowing farmers to sell their products to buyers worldwide.
+            Agricultural commodities are standardized farm products that can be bought and sold on regulated exchanges. These products must meet specific quality standards, known as <Link href="https://www.cmegroup.com/markets/agriculture" target="_blank" rel="noopener noreferrer">basis grades<OpenInNewIcon sx={{ fontSize: 14, ml: 0.5 }} /></Link>, which ensure consistency and interchangeability in the marketplace. Common examples include corn, wheat, soybeans, cotton, and livestock. The standardization of these products enables efficient trading and price discovery, allowing farmers to sell their products to buyers worldwide.
           </Typography>
 
           <Typography variant="h5" gutterBottom sx={{ mt: 3 }}>
@@ -216,7 +218,7 @@ const Resources = () => {
           </Typography>
           
           <Typography variant="body1" paragraph>
-            Commodity markets operate through both spot (cash) markets and futures markets. In spot markets, physical commodities are traded for immediate delivery, while futures markets involve contracts for future delivery at predetermined prices. These markets serve several crucial functions: price discovery, risk management through hedging, and market efficiency through liquidity provision. Prices are influenced by various factors, including weather conditions, global supply and demand, currency exchange rates, and government policies.
+            Commodity markets operate through both <Link href="https://www.cmegroup.com/education/courses/introduction-to-futures/definition-of-futures.html" target="_blank" rel="noopener noreferrer">spot (cash) markets and futures markets<OpenInNewIcon sx={{ fontSize: 14, ml: 0.5 }} /></Link>. In spot markets, physical commodities are traded for immediate delivery, while futures markets involve contracts for future delivery at predetermined prices. These markets serve several crucial functions: price discovery, risk management through hedging, and market efficiency through liquidity provision. Prices are influenced by various factors, including weather conditions, global supply and demand, currency exchange rates, and government policies. Explore current <Link href="https://www.nasdaq.com/market-activity/commodities" target="_blank" rel="noopener noreferrer">commodity market prices<OpenInNewIcon sx={{ fontSize: 14, ml: 0.5 }} /></Link>.
           </Typography>
 
           <Typography variant="h5" gutterBottom sx={{ mt: 3 }}>
@@ -224,7 +226,7 @@ const Resources = () => {
           </Typography>
           
           <Typography variant="body1" paragraph>
-            Commodity markets offer farmers several significant advantages. First, they provide price transparency and discovery, helping farmers make informed decisions about what to plant and when to sell. Second, futures markets allow farmers to lock in prices for their crops before harvest, protecting against price declines. Third, options contracts provide additional flexibility in managing price risk while maintaining upside potential. These tools enable farmers to stabilize their income streams and make more confident investment decisions in their operations.
+            Commodity markets offer farmers several significant advantages. First, they provide price transparency and discovery, helping farmers make informed decisions about what to plant and when to sell. Second, futures markets allow farmers to lock in prices for their crops before harvest, protecting against price declines. Third, <Link href="https://www.cmegroup.com/education/courses/introduction-to-options" target="_blank" rel="noopener noreferrer">options contracts<OpenInNewIcon sx={{ fontSize: 14, ml: 0.5 }} /></Link> provide additional flexibility in managing price risk while maintaining upside potential. These tools enable farmers to stabilize their income streams and make more confident investment decisions in their operations.
           </Typography>
 
           <Typography variant="h5" gutterBottom sx={{ mt: 3 }}>
@@ -232,7 +234,7 @@ const Resources = () => {
           </Typography>
           
           <Typography variant="body1" paragraph>
-            Successful commodity marketing requires a well-planned strategy. Farmers can employ various approaches, such as forward contracting, hedging with futures, or using options to protect against price risk. Many farmers use a combination of these tools to create a balanced marketing plan that aligns with their risk tolerance and business objectives. Additionally, understanding seasonal price patterns and market fundamentals can help farmers time their sales more effectively.
+            Successful commodity marketing requires a well-planned strategy. Farmers can employ various approaches, such as <Link href="https://www.cmegroup.com/education/courses/hedging-with-futures-and-options" target="_blank" rel="noopener noreferrer">forward contracting, hedging with futures, or using options<OpenInNewIcon sx={{ fontSize: 14, ml: 0.5 }} /></Link> to protect against price risk. Many farmers use a combination of these tools to create a balanced marketing plan that aligns with their risk tolerance and business objectives. Additionally, understanding <Link href="https://www.cmegroup.com/education/courses/understanding-seasonal-spreads" target="_blank" rel="noopener noreferrer">seasonal price patterns<OpenInNewIcon sx={{ fontSize: 14, ml: 0.5 }} /></Link> and market fundamentals can help farmers time their sales more effectively.
           </Typography>
 
           <Typography variant="h5" gutterBottom sx={{ mt: 3 }}>
@@ -240,7 +242,7 @@ const Resources = () => {
           </Typography>
           
           <Typography variant="body1" paragraph>
-            The commodity market landscape continues to evolve with technological advancement and changing global trade patterns. Digital platforms are making it easier for farmers to access market information and execute trades. Sustainability certifications are creating new premium markets for environmentally conscious production methods. Understanding these trends and adapting marketing strategies accordingly will be crucial for future success in agricultural commodity markets.
+            The commodity market landscape continues to evolve with technological advancement and changing global trade patterns. Digital platforms are making it easier for farmers to access market information and execute trades. <Link href="https://www.usda.gov/topics/organic" target="_blank" rel="noopener noreferrer">Sustainability certifications<OpenInNewIcon sx={{ fontSize: 14, ml: 0.5 }} /></Link> are creating new premium markets for environmentally conscious production methods. Understanding these trends and adapting marketing strategies accordingly will be crucial for future success in agricultural commodity markets.
           </Typography>
 
           <Box sx={{ mt: 4, p: 2, bgcolor: 'background.paper', borderRadius: 1 }}>
@@ -248,9 +250,9 @@ const Resources = () => {
               Key Takeaways for Farmers:
             </Typography>
             <ul>
-              <li>Understand the basics of commodity markets and price formation</li>
-              <li>Develop a comprehensive marketing strategy that includes risk management</li>
-              <li>Stay informed about market trends and conditions</li>
+              <li>Understand the basics of commodity markets and price formation - <Link href="https://www.cmegroup.com/education/courses/introduction-to-agricultural-products/learn-about-agricultural-products.html" target="_blank" rel="noopener noreferrer">Learn More<OpenInNewIcon sx={{ fontSize: 14, ml: 0.5 }} /></Link></li>
+              <li>Develop a comprehensive marketing strategy that includes risk management - <Link href="https://www.cmegroup.com/education/courses/hedging-with-futures-and-options/developing-a-hedging-strategy.html" target="_blank" rel="noopener noreferrer">View Strategies<OpenInNewIcon sx={{ fontSize: 14, ml: 0.5 }} /></Link></li>
+              <li>Stay informed about market trends and conditions - <Link href="https://www.ers.usda.gov/topics/farm-economy/commodity-outlook/" target="_blank" rel="noopener noreferrer">USDA Outlook<OpenInNewIcon sx={{ fontSize: 14, ml: 0.5 }} /></Link></li>
               <li>Consider using a combination of marketing tools to optimize returns</li>
               <li>Maintain flexibility to adapt to changing market conditions</li>
             </ul>
@@ -476,7 +478,7 @@ const Resources = () => {
           </Typography>
           
           <Typography variant="body1" paragraph>
-            Agricultural commodities form the backbone of global trade and represent a crucial opportunity for farmers to maximize their profits. These standardized agricultural products—ranging from grains and oilseeds to livestock and dairy—are traded on specialized markets that operate under specific rules and mechanisms. Understanding how commodity markets work is essential for modern farmers looking to optimize their revenue streams and manage risk effectively.
+            Agricultural commodities form the backbone of global trade and represent a crucial opportunity for farmers to maximize their profits. These standardized agricultural products—ranging from grains and oilseeds to livestock and dairy—are traded on specialized markets that operate under specific rules and mechanisms. Understanding how commodity markets work is essential for modern farmers looking to optimize their revenue streams and manage risk effectively. Learn more about the <Link href="https://www.cmegroup.com/education/courses/introduction-to-agricultural-products" target="_blank" rel="noopener noreferrer">basics of agricultural trading<OpenInNewIcon sx={{ fontSize: 14, ml: 0.5 }} /></Link>.
           </Typography>
 
           <Typography variant="h5" gutterBottom sx={{ mt: 3 }}>
@@ -484,7 +486,7 @@ const Resources = () => {
           </Typography>
           
           <Typography variant="body1" paragraph>
-            Agricultural commodities are standardized farm products that can be bought and sold on regulated exchanges. These products must meet specific quality standards, known as basis grades, which ensure consistency and interchangeability in the marketplace. Common examples include corn, wheat, soybeans, cotton, and livestock. The standardization of these products enables efficient trading and price discovery, allowing farmers to sell their products to buyers worldwide.
+            Agricultural commodities are standardized farm products that can be bought and sold on regulated exchanges. These products must meet specific quality standards, known as <Link href="https://www.cmegroup.com/markets/agriculture" target="_blank" rel="noopener noreferrer">basis grades<OpenInNewIcon sx={{ fontSize: 14, ml: 0.5 }} /></Link>, which ensure consistency and interchangeability in the marketplace. Common examples include corn, wheat, soybeans, cotton, and livestock. The standardization of these products enables efficient trading and price discovery, allowing farmers to sell their products to buyers worldwide.
           </Typography>
 
           <Typography variant="h5" gutterBottom sx={{ mt: 3 }}>
@@ -492,7 +494,7 @@ const Resources = () => {
           </Typography>
           
           <Typography variant="body1" paragraph>
-            Commodity markets operate through both spot (cash) markets and futures markets. In spot markets, physical commodities are traded for immediate delivery, while futures markets involve contracts for future delivery at predetermined prices. These markets serve several crucial functions: price discovery, risk management through hedging, and market efficiency through liquidity provision. Prices are influenced by various factors, including weather conditions, global supply and demand, currency exchange rates, and government policies.
+            Commodity markets operate through both <Link href="https://www.cmegroup.com/education/courses/introduction-to-futures/definition-of-futures.html" target="_blank" rel="noopener noreferrer">spot (cash) markets and futures markets<OpenInNewIcon sx={{ fontSize: 14, ml: 0.5 }} /></Link>. In spot markets, physical commodities are traded for immediate delivery, while futures markets involve contracts for future delivery at predetermined prices. These markets serve several crucial functions: price discovery, risk management through hedging, and market efficiency through liquidity provision. Prices are influenced by various factors, including weather conditions, global supply and demand, currency exchange rates, and government policies. Explore current <Link href="https://www.nasdaq.com/market-activity/commodities" target="_blank" rel="noopener noreferrer">commodity market prices<OpenInNewIcon sx={{ fontSize: 14, ml: 0.5 }} /></Link>.
           </Typography>
 
           <Typography variant="h5" gutterBottom sx={{ mt: 3 }}>
@@ -500,7 +502,7 @@ const Resources = () => {
           </Typography>
           
           <Typography variant="body1" paragraph>
-            Commodity markets offer farmers several significant advantages. First, they provide price transparency and discovery, helping farmers make informed decisions about what to plant and when to sell. Second, futures markets allow farmers to lock in prices for their crops before harvest, protecting against price declines. Third, options contracts provide additional flexibility in managing price risk while maintaining upside potential. These tools enable farmers to stabilize their income streams and make more confident investment decisions in their operations.
+            Commodity markets offer farmers several significant advantages. First, they provide price transparency and discovery, helping farmers make informed decisions about what to plant and when to sell. Second, futures markets allow farmers to lock in prices for their crops before harvest, protecting against price declines. Third, <Link href="https://www.cmegroup.com/education/courses/introduction-to-options" target="_blank" rel="noopener noreferrer">options contracts<OpenInNewIcon sx={{ fontSize: 14, ml: 0.5 }} /></Link> provide additional flexibility in managing price risk while maintaining upside potential. These tools enable farmers to stabilize their income streams and make more confident investment decisions in their operations.
           </Typography>
 
           <Typography variant="h5" gutterBottom sx={{ mt: 3 }}>
@@ -508,7 +510,7 @@ const Resources = () => {
           </Typography>
           
           <Typography variant="body1" paragraph>
-            Successful commodity marketing requires a well-planned strategy. Farmers can employ various approaches, such as forward contracting, hedging with futures, or using options to protect against price risk. Many farmers use a combination of these tools to create a balanced marketing plan that aligns with their risk tolerance and business objectives. Additionally, understanding seasonal price patterns and market fundamentals can help farmers time their sales more effectively.
+            Successful commodity marketing requires a well-planned strategy. Farmers can employ various approaches, such as <Link href="https://www.cmegroup.com/education/courses/hedging-with-futures-and-options" target="_blank" rel="noopener noreferrer">forward contracting, hedging with futures, or using options<OpenInNewIcon sx={{ fontSize: 14, ml: 0.5 }} /></Link> to protect against price risk. Many farmers use a combination of these tools to create a balanced marketing plan that aligns with their risk tolerance and business objectives. Additionally, understanding <Link href="https://www.cmegroup.com/education/courses/understanding-seasonal-spreads" target="_blank" rel="noopener noreferrer">seasonal price patterns<OpenInNewIcon sx={{ fontSize: 14, ml: 0.5 }} /></Link> and market fundamentals can help farmers time their sales more effectively.
           </Typography>
 
           <Typography variant="h5" gutterBottom sx={{ mt: 3 }}>
@@ -516,7 +518,7 @@ const Resources = () => {
           </Typography>
           
           <Typography variant="body1" paragraph>
-            The commodity market landscape continues to evolve with technological advancement and changing global trade patterns. Digital platforms are making it easier for farmers to access market information and execute trades. Sustainability certifications are creating new premium markets for environmentally conscious production methods. Understanding these trends and adapting marketing strategies accordingly will be crucial for future success in agricultural commodity markets.
+            The commodity market landscape continues to evolve with technological advancement and changing global trade patterns. Digital platforms are making it easier for farmers to access market information and execute trades. <Link href="https://www.usda.gov/topics/organic" target="_blank" rel="noopener noreferrer">Sustainability certifications<OpenInNewIcon sx={{ fontSize: 14, ml: 0.5 }} /></Link> are creating new premium markets for environmentally conscious production methods. Understanding these trends and adapting marketing strategies accordingly will be crucial for future success in agricultural commodity markets.
           </Typography>
 
           <Box sx={{ mt: 4, p: 2, bgcolor: 'background.paper', borderRadius: 1 }}>
@@ -524,9 +526,9 @@ const Resources = () => {
               Key Takeaways for Farmers:
             </Typography>
             <ul>
-              <li>Understand the basics of commodity markets and price formation</li>
-              <li>Develop a comprehensive marketing strategy that includes risk management</li>
-              <li>Stay informed about market trends and conditions</li>
+              <li>Understand the basics of commodity markets and price formation - <Link href="https://www.cmegroup.com/education/courses/introduction-to-agricultural-products/learn-about-agricultural-products.html" target="_blank" rel="noopener noreferrer">Learn More<OpenInNewIcon sx={{ fontSize: 14, ml: 0.5 }} /></Link></li>
+              <li>Develop a comprehensive marketing strategy that includes risk management - <Link href="https://www.cmegroup.com/education/courses/hedging-with-futures-and-options/developing-a-hedging-strategy.html" target="_blank" rel="noopener noreferrer">View Strategies<OpenInNewIcon sx={{ fontSize: 14, ml: 0.5 }} /></Link></li>
+              <li>Stay informed about market trends and conditions - <Link href="https://www.ers.usda.gov/topics/farm-economy/commodity-outlook/" target="_blank" rel="noopener noreferrer">USDA Outlook<OpenInNewIcon sx={{ fontSize: 14, ml: 0.5 }} /></Link></li>
               <li>Consider using a combination of marketing tools to optimize returns</li>
               <li>Maintain flexibility to adapt to changing market conditions</li>
             </ul>
