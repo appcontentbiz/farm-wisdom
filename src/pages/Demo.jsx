@@ -996,8 +996,8 @@ function Demo() {
 
         {selectedTab === 6 && (
           <Grid container spacing={3}>
-            <Grid item xs={12} md={4}>
-              <Card sx={{ p: 3 }}>
+            <Grid item xs={12}>
+              <Card sx={{ p: 4 }}>
                 <Typography variant="h4" gutterBottom>
                   Local Markets & Community Resources
                 </Typography>
@@ -1007,7 +1007,7 @@ function Demo() {
 
                 <Box sx={{ mt: 4, mb: 4 }}>
                   <Grid container spacing={3}>
-                    <Grid item xs={12} md={7}>
+                    <Grid item xs={12} md={8}>
                       <TextField
                         fullWidth
                         placeholder="Search markets..."
@@ -1020,7 +1020,7 @@ function Demo() {
                         }}
                       />
                     </Grid>
-                    <Grid item xs={12} md={5}>
+                    <Grid item xs={12} md={4}>
                       <FormControl fullWidth>
                         <InputLabel id="location-type-label">Filter By Type</InputLabel>
                         <Select
@@ -1041,7 +1041,7 @@ function Demo() {
 
                 <Grid container spacing={3}>
                   {filteredMarkets.map((market) => (
-                    <Grid item xs={12} md={4} key={market.id}>
+                    <Grid item xs={12} sm={6} lg={4} key={market.id}>
                       <Card 
                         elevation={1}
                         sx={{
@@ -1057,7 +1057,7 @@ function Demo() {
                       >
                         <CardContent sx={{ flexGrow: 1, p: 3 }}>
                           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 2 }}>
-                            <Typography variant="h5" component="h2" gutterBottom>
+                            <Typography variant="h6" component="h2" gutterBottom sx={{ fontSize: '1.25rem' }}>
                               {market.name}
                             </Typography>
                             <IconButton 
@@ -1071,52 +1071,64 @@ function Demo() {
                             </IconButton>
                           </Box>
                           
-                          <Typography variant="body1" color="text.secondary" paragraph>
+                          <Typography 
+                            variant="body1" 
+                            color="text.secondary" 
+                            paragraph
+                            sx={{ 
+                              fontSize: '1rem',
+                              lineHeight: 1.6
+                            }}
+                          >
                             {market.description}
                           </Typography>
 
                           <Box sx={{ mt: 3 }}>
                             <Typography 
-                              variant="subtitle2" 
+                              variant="subtitle1"
                               sx={{ 
                                 display: 'flex', 
                                 alignItems: 'center',
                                 color: 'text.secondary',
-                                mb: 1
+                                mb: 1.5,
+                                fontSize: '1rem'
                               }}
                             >
-                              <AccessTimeIcon sx={{ fontSize: 20, mr: 1 }} />
+                              <AccessTimeIcon sx={{ fontSize: 20, mr: 1.5 }} />
                               {market.schedule}
                             </Typography>
 
                             <Typography 
-                              variant="subtitle2" 
+                              variant="subtitle1"
                               sx={{ 
                                 display: 'flex', 
                                 alignItems: 'center',
                                 color: 'text.secondary',
-                                mb: 1
+                                mb: 1.5,
+                                fontSize: '1rem'
                               }}
                             >
-                              <LocationOnIcon sx={{ fontSize: 20, mr: 1 }} />
+                              <LocationOnIcon sx={{ fontSize: 20, mr: 1.5 }} />
                               {market.address}
                             </Typography>
                           </Box>
 
                           <Box sx={{ mt: 3 }}>
-                            <Typography variant="subtitle2" gutterBottom>
+                            <Typography variant="subtitle1" gutterBottom sx={{ fontSize: '1rem', fontWeight: 500 }}>
                               Accepts:
                             </Typography>
-                            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
                               {market.accepts.map((item, index) => (
                                 <Chip
                                   key={index}
                                   label={item}
-                                  size="small"
+                                  size="medium"
                                   variant="outlined"
                                   sx={{ 
                                     borderRadius: '4px',
-                                    backgroundColor: 'background.paper'
+                                    backgroundColor: 'background.paper',
+                                    fontSize: '0.875rem',
+                                    height: '32px'
                                   }}
                                 />
                               ))}
@@ -1125,14 +1137,18 @@ function Demo() {
                         </CardContent>
 
                         <Box sx={{ p: 2, borderTop: '1px solid', borderColor: 'divider' }}>
-                          <Grid container spacing={1}>
+                          <Grid container spacing={2}>
                             <Grid item xs={4}>
                               <Button
                                 fullWidth
-                                size="small"
+                                variant="text"
+                                size="medium"
                                 startIcon={<PhoneIcon />}
                                 href={`tel:${market.phone}`}
-                                sx={{ textTransform: 'none' }}
+                                sx={{ 
+                                  textTransform: 'none',
+                                  fontSize: '0.9rem'
+                                }}
                               >
                                 Call
                               </Button>
@@ -1140,12 +1156,16 @@ function Demo() {
                             <Grid item xs={4}>
                               <Button
                                 fullWidth
-                                size="small"
+                                variant="text"
+                                size="medium"
                                 startIcon={<LanguageIcon />}
                                 href={`https://${market.website}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                sx={{ textTransform: 'none' }}
+                                sx={{ 
+                                  textTransform: 'none',
+                                  fontSize: '0.9rem'
+                                }}
                               >
                                 Visit
                               </Button>
@@ -1153,12 +1173,16 @@ function Demo() {
                             <Grid item xs={4}>
                               <Button
                                 fullWidth
-                                size="small"
+                                variant="text"
+                                size="medium"
                                 startIcon={<LocationOnIcon />}
                                 onClick={() => {
                                   window.open(`https://maps.google.com/?q=${market.coordinates.lat},${market.coordinates.lng}`);
                                 }}
-                                sx={{ textTransform: 'none' }}
+                                sx={{ 
+                                  textTransform: 'none',
+                                  fontSize: '0.9rem'
+                                }}
                               >
                                 Map
                               </Button>
@@ -1177,125 +1201,6 @@ function Demo() {
                     </Typography>
                   </Box>
                 )}
-              </Card>
-            </Grid>
-
-            <Grid item xs={12} md={4}>
-              <Card>
-                <CardHeader
-                  title="Gleaning Programs"
-                  action={
-                    <Tooltip title="View gleaning opportunities">
-                      <IconButton>
-                        <HelpIcon />
-                      </IconButton>
-                    </Tooltip>
-                  }
-                />
-                <CardContent>
-                  <List>
-                    {localMarkets.gleaningPrograms.map((program, index) => (
-                      <ListItem key={index} button onClick={() => handleOpenDialog('Program Details',
-                        <Box>
-                          <Typography variant="h6">{program.name}</Typography>
-                          <Typography variant="body2" gutterBottom>
-                            {program.description}
-                          </Typography>
-                          <Box mt={2}>
-                            <Typography variant="subtitle2" gutterBottom>
-                              Benefits:
-                            </Typography>
-                            <List dense>
-                              {program.benefits.map((benefit, i) => (
-                                <ListItem key={i}>
-                                  <ListItemIcon><CheckCircleIcon /></ListItemIcon>
-                                  <ListItemText primary={benefit} />
-                                </ListItem>
-                              ))}
-                            </List>
-                          </Box>
-                          <Box mt={2}>
-                            <Typography variant="subtitle2" gutterBottom>
-                              Schedule:
-                            </Typography>
-                            <Typography variant="body2">{program.schedule}</Typography>
-                          </Box>
-                          <Box mt={2}>
-                            <Typography variant="subtitle2" gutterBottom>
-                              Contact:
-                            </Typography>
-                            <Typography variant="body2">{program.contact}</Typography>
-                          </Box>
-                        </Box>
-                      )}>
-                        <ListItemIcon><LocalFloristIcon /></ListItemIcon>
-                        <ListItemText 
-                          primary={program.name}
-                          secondary={program.description}
-                        />
-                      </ListItem>
-                    ))}
-                  </List>
-                </CardContent>
-              </Card>
-            </Grid>
-
-            <Grid item xs={12} md={4}>
-              <Card>
-                <CardHeader
-                  title="Distribution Partners"
-                  action={
-                    <Tooltip title="View distribution partners">
-                      <IconButton>
-                        <HelpIcon />
-                      </IconButton>
-                    </Tooltip>
-                  }
-                />
-                <CardContent>
-                  <List>
-                    {localMarkets.distributors.map((distributor, index) => (
-                      <ListItem key={index} button onClick={() => handleOpenDialog('Distributor Details',
-                        <Box>
-                          <Typography variant="h6">{distributor.name}</Typography>
-                          <Typography variant="subtitle2" color="textSecondary" gutterBottom>
-                            {distributor.type}
-                          </Typography>
-                          <Box mt={2}>
-                            <Typography variant="subtitle2" gutterBottom>
-                              Minimum Order:
-                            </Typography>
-                            <Typography variant="body2">{distributor.minimumOrder}</Typography>
-                          </Box>
-                          <Box mt={2}>
-                            <Typography variant="subtitle2" gutterBottom>
-                              Payment Terms:
-                            </Typography>
-                            <Typography variant="body2">{distributor.paymentTerms}</Typography>
-                          </Box>
-                          <Box mt={2}>
-                            <Typography variant="subtitle2" gutterBottom>
-                              Products:
-                            </Typography>
-                            <Typography variant="body2">{distributor.products.join(", ")}</Typography>
-                          </Box>
-                          <Box mt={2}>
-                            <Typography variant="subtitle2" gutterBottom>
-                              Contact:
-                            </Typography>
-                            <Typography variant="body2">{distributor.contact}</Typography>
-                          </Box>
-                        </Box>
-                      )}>
-                        <ListItemIcon><LocalShippingIcon /></ListItemIcon>
-                        <ListItemText 
-                          primary={distributor.name}
-                          secondary={distributor.type}
-                        />
-                      </ListItem>
-                    ))}
-                  </List>
-                </CardContent>
               </Card>
             </Grid>
           </Grid>
