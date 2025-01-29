@@ -67,6 +67,16 @@ import {
   Storefront as StorefrontIcon,
   LocalFlorist as LocalFloristIcon,
   Send as SendIcon,
+  LocationOn as LocationOnIcon,
+  Search as SearchIcon,
+  Store as StoreIcon,
+  Favorite as FavoriteIcon,
+  FavoriteBorder as FavoriteBorderIcon,
+  Phone as PhoneIcon,
+  Language as LanguageIcon,
+  AccessTime as AccessTimeIcon,
+  LocalAtm as LocalAtmIcon,
+  VolunteerActivism as VolunteerActivismIcon,
 } from '@mui/icons-material';
 import {
   LineChart,
@@ -177,25 +187,46 @@ const generateTreatmentHistory = () => {
 const localMarkets = {
   markets: [
     {
+      id: 1,
       name: "Farmer's Market Central",
+      description: "A vibrant weekly market featuring local farmers and artisans",
+      address: "123 Market Street, Downtown",
+      phone: "(555) 123-4567",
+      website: "www.farmersmarketcentral.com",
       schedule: "Weekly Market - Every Saturday 7AM-2PM",
-      accepts: ["Fresh Produce", "Organic Crops", "Value-Added Products"],
-      payment: "Cash, SNAP/EBT, Credit Cards",
-      commission: "15%"
+      accepts: ["Fresh Produce", "Organic Crops", "Value-Added Products", "Artisanal Foods"],
+      payment: ["Cash", "SNAP/EBT", "Credit Cards", "Mobile Pay"],
+      commission: "15%",
+      amenities: ["Parking Available", "Restrooms", "Food Trucks", "Live Music"],
+      coordinates: { lat: 44.9778, lng: -93.2650 }
     },
     {
+      id: 2,
       name: "Community Food Bank",
+      description: "Supporting local communities through food distribution and farmer partnerships",
+      address: "456 Hope Avenue, Midtown",
+      phone: "(555) 234-5678",
+      website: "www.communityfoodbank.org",
       schedule: "Food Bank - Mon-Fri 9AM-4PM",
-      accepts: ["All Fresh Produce", "Shelf-Stable Items"],
-      payment: "Tax Deduction Receipt",
-      commission: "0%"
+      accepts: ["All Fresh Produce", "Shelf-Stable Items", "Dairy Products", "Proteins"],
+      payment: ["Tax Deduction Receipt", "Direct Deposit"],
+      commission: "0%",
+      amenities: ["Loading Dock", "Cold Storage", "Volunteer Support"],
+      coordinates: { lat: 44.9537, lng: -93.2910 }
     },
     {
+      id: 3,
       name: "Local Co-op Market",
+      description: "Member-owned grocery focusing on local and sustainable products",
+      address: "789 Cooperative Way, Uptown",
+      phone: "(555) 345-6789",
+      website: "www.localcoopmarket.com",
       schedule: "Cooperative Store - Mon-Sat 8AM-8PM",
-      accepts: ["Organic Produce", "Local Crops", "Specialty Items"],
-      payment: "Direct Payment, Store Credit",
-      commission: "20%"
+      accepts: ["Organic Produce", "Local Crops", "Specialty Items", "Prepared Foods"],
+      payment: ["Direct Payment", "Store Credit", "Member Dividends"],
+      commission: "20%",
+      amenities: ["Member Discounts", "Educational Programs", "Cafe", "Bulk Foods"],
+      coordinates: { lat: 44.9482, lng: -93.2982 }
     }
   ],
   gleaningPrograms: [
@@ -297,6 +328,11 @@ function Demo() {
     date: '',
     location: ''
   });
+  const [selectedMarket, setSelectedMarket] = useState(null);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [favoriteMarkets, setFavoriteMarkets] = useState([]);
+  const [mapVisible, setMapVisible] = useState(false);
+  const [filterType, setFilterType] = useState('all');
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
 
@@ -563,6 +599,28 @@ function Demo() {
     enqueueSnackbar('Logistics request scheduled successfully!', { variant: 'success' });
     setLogisticsDialog(false);
   };
+
+  const handleMarketClick = (market) => {
+    setSelectedMarket(market);
+  };
+
+  const toggleFavorite = (marketId) => {
+    setFavoriteMarkets(prev => 
+      prev.includes(marketId)
+        ? prev.filter(id => id !== marketId)
+        : [...prev, marketId]
+    );
+  };
+
+  const filteredMarkets = localMarkets.markets.filter(market => {
+    const matchesSearch = market.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         market.description.toLowerCase().includes(searchTerm.toLowerCase());
+    if (filterType === 'all') return matchesSearch;
+    if (filterType === 'farmers-markets') return matchesSearch && market.name.toLowerCase().includes('farmer');
+    if (filterType === 'food-banks') return matchesSearch && market.name.toLowerCase().includes('food bank');
+    if (filterType === 'co-ops') return matchesSearch && market.name.toLowerCase().includes('co-op');
+    return matchesSearch;
+  });
 
   return (
     <Container maxWidth="lg">
@@ -941,46 +999,164 @@ function Demo() {
             <Grid item xs={12} md={4}>
               <Card>
                 <CardHeader
-                  title="Local Markets"
-                  action={
-                    <Tooltip title="View local market opportunities">
-                      <IconButton>
-                        <HelpIcon />
-                      </IconButton>
-                    </Tooltip>
-                  }
+                  title="Local Markets & Community Resources"
+                  subheader="Find and connect with local markets, food banks, and co-ops"
                 />
                 <CardContent>
-                  <List>
-                    {localMarkets.markets.map((market, index) => (
-                      <ListItem key={index} button onClick={() => handleOpenDialog('Market Details', 
-                        <Box>
-                          <Typography variant="h6">{market.name}</Typography>
-                          <Typography variant="subtitle2" color="textSecondary" gutterBottom>
-                            {market.schedule}
-                          </Typography>
-                          <Box mt={2}>
-                            <Typography variant="subtitle1">Accepts:</Typography>
-                            <Typography variant="body2">{market.accepts.join(", ")}</Typography>
-                          </Box>
-                          <Box mt={2}>
-                            <Typography variant="subtitle1">Payment:</Typography>
-                            <Typography variant="body2">{market.payment}</Typography>
-                          </Box>
-                          <Box mt={2}>
-                            <Typography variant="subtitle1">Commission:</Typography>
-                            <Typography variant="body2">{market.commission}</Typography>
-                          </Box>
-                        </Box>
-                      )}>
-                        <ListItemIcon><StorefrontIcon /></ListItemIcon>
-                        <ListItemText 
-                          primary={market.name}
-                          secondary={market.schedule}
+                  <Box sx={{ mb: 3 }}>
+                    <Grid container spacing={2} alignItems="center">
+                      <Grid item xs={12} md={6}>
+                        <TextField
+                          fullWidth
+                          variant="outlined"
+                          placeholder="Search markets..."
+                          value={searchTerm}
+                          onChange={(e) => setSearchTerm(e.target.value)}
+                          InputProps={{
+                            startAdornment: <SearchIcon sx={{ mr: 1, color: 'text.secondary' }} />
+                          }}
                         />
-                      </ListItem>
+                      </Grid>
+                      <Grid item xs={12} md={6}>
+                        <FormControl fullWidth>
+                          <InputLabel>Filter By Type</InputLabel>
+                          <Select
+                            value={filterType}
+                            onChange={(e) => setFilterType(e.target.value)}
+                            label="Filter By Type"
+                          >
+                            <MenuItem value="all">All Locations</MenuItem>
+                            <MenuItem value="farmers-markets">Farmer's Markets</MenuItem>
+                            <MenuItem value="food-banks">Food Banks</MenuItem>
+                            <MenuItem value="co-ops">Co-ops</MenuItem>
+                          </Select>
+                        </FormControl>
+                      </Grid>
+                    </Grid>
+                  </Box>
+
+                  <Grid container spacing={3}>
+                    {filteredMarkets.map((market) => (
+                      <Grid item xs={12} md={6} lg={4} key={market.id}>
+                        <Card 
+                          elevation={2}
+                          sx={{
+                            height: '100%',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            '&:hover': {
+                              boxShadow: 6,
+                              cursor: 'pointer'
+                            }
+                          }}
+                        >
+                          <CardHeader
+                            title={market.name}
+                            action={
+                              <IconButton onClick={() => toggleFavorite(market.id)}>
+                                {favoriteMarkets.includes(market.id) ? 
+                                  <FavoriteIcon color="error" /> : 
+                                  <FavoriteBorderIcon />
+                                }
+                              </IconButton>
+                            }
+                          />
+                          <CardContent sx={{ flexGrow: 1 }}>
+                            <Typography variant="body2" color="text.secondary" paragraph>
+                              {market.description}
+                            </Typography>
+                            
+                            <List dense>
+                              <ListItem>
+                                <ListItemIcon>
+                                  <AccessTimeIcon />
+                                </ListItemIcon>
+                                <ListItemText primary={market.schedule} />
+                              </ListItem>
+                              <ListItem>
+                                <ListItemIcon>
+                                  <LocationOnIcon />
+                                </ListItemIcon>
+                                <ListItemText primary={market.address} />
+                              </ListItem>
+                              <ListItem>
+                                <ListItemIcon>
+                                  <LocalAtmIcon />
+                                </ListItemIcon>
+                                <ListItemText 
+                                  primary="Payment Options"
+                                  secondary={market.payment.join(', ')}
+                                />
+                              </ListItem>
+                            </List>
+
+                            <Box sx={{ mt: 2 }}>
+                              <Typography variant="subtitle2" gutterBottom>
+                                Accepts:
+                              </Typography>
+                              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+                                {market.accepts.map((item, index) => (
+                                  <Chip
+                                    key={index}
+                                    label={item}
+                                    size="small"
+                                    color="primary"
+                                    variant="outlined"
+                                  />
+                                ))}
+                              </Box>
+                            </Box>
+                          </CardContent>
+                          <Box sx={{ p: 2, borderTop: 1, borderColor: 'divider' }}>
+                            <Grid container spacing={1}>
+                              <Grid item xs={4}>
+                                <Button
+                                  fullWidth
+                                  startIcon={<PhoneIcon />}
+                                  href={`tel:${market.phone}`}
+                                  size="small"
+                                >
+                                  Call
+                                </Button>
+                              </Grid>
+                              <Grid item xs={4}>
+                                <Button
+                                  fullWidth
+                                  startIcon={<LanguageIcon />}
+                                  href={`https://${market.website}`}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  size="small"
+                                >
+                                  Visit
+                                </Button>
+                              </Grid>
+                              <Grid item xs={4}>
+                                <Button
+                                  fullWidth
+                                  startIcon={<LocationOnIcon />}
+                                  onClick={() => {
+                                    window.open(`https://maps.google.com/?q=${market.coordinates.lat},${market.coordinates.lng}`);
+                                  }}
+                                  size="small"
+                                >
+                                  Map
+                                </Button>
+                              </Grid>
+                            </Grid>
+                          </Box>
+                        </Card>
+                      </Grid>
                     ))}
-                  </List>
+                  </Grid>
+
+                  {filteredMarkets.length === 0 && (
+                    <Box sx={{ textAlign: 'center', py: 4 }}>
+                      <Typography variant="h6" color="text.secondary">
+                        No markets found matching your search criteria
+                      </Typography>
+                    </Box>
+                  )}
                 </CardContent>
               </Card>
             </Grid>
@@ -1007,7 +1183,9 @@ function Demo() {
                             {program.description}
                           </Typography>
                           <Box mt={2}>
-                            <Typography variant="subtitle1">Benefits:</Typography>
+                            <Typography variant="subtitle2" gutterBottom>
+                              Benefits:
+                            </Typography>
                             <List dense>
                               {program.benefits.map((benefit, i) => (
                                 <ListItem key={i}>
@@ -1018,11 +1196,15 @@ function Demo() {
                             </List>
                           </Box>
                           <Box mt={2}>
-                            <Typography variant="subtitle1">Schedule:</Typography>
+                            <Typography variant="subtitle2" gutterBottom>
+                              Schedule:
+                            </Typography>
                             <Typography variant="body2">{program.schedule}</Typography>
                           </Box>
                           <Box mt={2}>
-                            <Typography variant="subtitle1">Contact:</Typography>
+                            <Typography variant="subtitle2" gutterBottom>
+                              Contact:
+                            </Typography>
                             <Typography variant="body2">{program.contact}</Typography>
                           </Box>
                         </Box>
@@ -1061,19 +1243,27 @@ function Demo() {
                             {distributor.type}
                           </Typography>
                           <Box mt={2}>
-                            <Typography variant="subtitle1">Minimum Order:</Typography>
+                            <Typography variant="subtitle2" gutterBottom>
+                              Minimum Order:
+                            </Typography>
                             <Typography variant="body2">{distributor.minimumOrder}</Typography>
                           </Box>
                           <Box mt={2}>
-                            <Typography variant="subtitle1">Payment Terms:</Typography>
+                            <Typography variant="subtitle2" gutterBottom>
+                              Payment Terms:
+                            </Typography>
                             <Typography variant="body2">{distributor.paymentTerms}</Typography>
                           </Box>
                           <Box mt={2}>
-                            <Typography variant="subtitle1">Products:</Typography>
+                            <Typography variant="subtitle2" gutterBottom>
+                              Products:
+                            </Typography>
                             <Typography variant="body2">{distributor.products.join(", ")}</Typography>
                           </Box>
                           <Box mt={2}>
-                            <Typography variant="subtitle1">Contact:</Typography>
+                            <Typography variant="subtitle2" gutterBottom>
+                              Contact:
+                            </Typography>
                             <Typography variant="body2">{distributor.contact}</Typography>
                           </Box>
                         </Box>
