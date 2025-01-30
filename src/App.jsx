@@ -23,6 +23,7 @@ import MarketIntelligence from './pages/MarketIntelligence';
 import ResourceOptimization from './pages/ResourceOptimization';
 import EquipmentManagement from './pages/EquipmentManagement';
 import CommunityHub from './pages/CommunityHub';
+import ResourceDirectory from './pages/ResourceDirectory';
 import './App.css';
 
 const PrivateRoute = ({ children }) => {
@@ -50,7 +51,7 @@ function App() {
                 <Route path="/checkout/:plan" element={<Checkout />} />
                 <Route path="/demo" element={<Demo />} />
                 <Route path="/try-enterprise" element={<InteractiveDemo />} />
-                <Route path="/resources" element={<Resources />} />
+                <Route path="/resources" element={<ResourceDirectory />} />
                 <Route path="/smart-crop-planning" element={<SmartCropPlanning />} />
                 <Route path="/precision-weather" element={<PrecisionWeather />} />
                 <Route path="/market-intelligence" element={<MarketIntelligence />} />

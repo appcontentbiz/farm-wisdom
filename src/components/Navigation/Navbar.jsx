@@ -144,9 +144,22 @@ export default function Navbar() {
                 Community Hub
               </Button>
             </StyledLink>
-            <StyledLink to="/demo">
-              <Button color="inherit">Try Demo</Button>
-            </StyledLink>
+            <Button
+              component={Link}
+              to="/demo"
+              color="inherit"
+              sx={{ whiteSpace: 'nowrap' }}
+            >
+              Try Demo
+            </Button>
+            <Button
+              component={Link}
+              to="/resources"
+              color="inherit"
+              sx={{ whiteSpace: 'nowrap' }}
+            >
+              Resources
+            </Button>
             <StyledLink to="/try-enterprise">
               <EnterpriseButton variant="contained">
                 Try Enterprise ERP 
