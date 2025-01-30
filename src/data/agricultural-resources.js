@@ -198,5 +198,80 @@ export const agriculturalResources = {
         description: "Resources for food business development"
       }
     ]
+  },
+  certification: {
+    title: "Certifications & Compliance",
+    links: [
+      {
+        title: "USDA Organic Certification",
+        url: "https://www.ams.usda.gov/services/organic-certification",
+        description: "Official organic certification information and resources"
+      },
+      {
+        title: "Food Safety Certification",
+        url: "https://www.fsis.usda.gov/inspection/compliance-guidance",
+        description: "USDA food safety compliance guidelines"
+      },
+      {
+        title: "GAP Certification Resources",
+        url: "https://www.ams.usda.gov/services/auditing/gap-ghp",
+        description: "Good Agricultural Practices certification guide"
+      },
+      {
+        title: "Animal Welfare Certification",
+        url: "https://www.certifiedhumane.org/",
+        description: "Humane farm animal care certification"
+      }
+    ]
+  },
+  research: {
+    title: "Agricultural Research & Studies",
+    links: [
+      {
+        title: "USDA Agricultural Research Service",
+        url: "https://www.ars.usda.gov/research/",
+        description: "Latest agricultural research and findings"
+      },
+      {
+        title: "Land Grant University Research",
+        url: "https://nifa.usda.gov/land-grant-colleges-and-universities",
+        description: "Research from agricultural universities"
+      },
+      {
+        title: "Crop Research Database",
+        url: "https://www.crops.org/publications/databases",
+        description: "Scientific crop research and studies"
+      },
+      {
+        title: "Agricultural Innovation Database",
+        url: "https://www.innovate-uk.org/agriculture",
+        description: "Database of agricultural innovations"
+      }
+    ]
+  },
+  weather: {
+    title: "Weather & Climate Resources",
+    links: [
+      {
+        title: "USDA Climate Hubs",
+        url: "https://www.climatehubs.usda.gov/",
+        description: "Regional climate change resources"
+      },
+      {
+        title: "Farmer's Almanac",
+        url: "https://www.farmersalmanac.com/",
+        description: "Weather forecasts and planning guides"
+      },
+      {
+        title: "NOAA Agriculture Weather",
+        url: "https://www.weather.gov/agriculture/",
+        description: "Weather tools for agricultural planning"
+      },
+      {
+        title: "Drought Monitor",
+        url: "https://droughtmonitor.unl.edu/",
+        description: "U.S. drought monitoring and forecasting"
+      }
+    ]
   }
 };
