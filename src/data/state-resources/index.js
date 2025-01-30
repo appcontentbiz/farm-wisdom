@@ -10,4 +10,5 @@ export { default as delaware } from './delaware';
 export { default as florida } from './florida';
 export { default as georgia } from './georgia';
 export { default as hawaii } from './hawaii';
+export { default as idaho } from './idaho';
 // ... other states will be exported here as we create them
