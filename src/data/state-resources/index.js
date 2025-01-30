@@ -7,4 +7,5 @@ export { default as california } from './california';
 export { default as colorado } from './colorado';
 export { default as connecticut } from './connecticut';
 export { default as delaware } from './delaware';
+export { default as florida } from './florida';
 // ... other states will be exported here as we create them
