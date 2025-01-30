@@ -8,4 +8,6 @@ export { default as colorado } from './colorado';
 export { default as connecticut } from './connecticut';
 export { default as delaware } from './delaware';
 export { default as florida } from './florida';
+export { default as georgia } from './georgia';
+export { default as hawaii } from './hawaii';
 // ... other states will be exported here as we create them
