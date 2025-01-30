@@ -2,3 +2,4 @@
 export { default as alabama } from './alabama';
 export { default as alaska } from './alaska';
 // ... other states will be exported here as we create them
+export { default as alaska } from './alaska';
