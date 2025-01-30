@@ -51,7 +51,8 @@ function App() {
                 <Route path="/checkout/:plan" element={<Checkout />} />
                 <Route path="/demo" element={<Demo />} />
                 <Route path="/try-enterprise" element={<InteractiveDemo />} />
-                <Route path="/resources" element={<ResourceDirectory />} />
+                <Route path="/resources" element={<Resources />} />
+                <Route path="/resource-directory" element={<ResourceDirectory />} />
                 <Route path="/smart-crop-planning" element={<SmartCropPlanning />} />
                 <Route path="/precision-weather" element={<PrecisionWeather />} />
                 <Route path="/market-intelligence" element={<MarketIntelligence />} />

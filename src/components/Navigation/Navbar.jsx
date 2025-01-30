@@ -158,7 +158,15 @@ export default function Navbar() {
               color="inherit"
               sx={{ whiteSpace: 'nowrap' }}
             >
-              Resources
+              Articles
+            </Button>
+            <Button
+              component={Link}
+              to="/resource-directory"
+              color="inherit"
+              sx={{ whiteSpace: 'nowrap' }}
+            >
+              Resource Directory
             </Button>
             <StyledLink to="/try-enterprise">
               <EnterpriseButton variant="contained">
