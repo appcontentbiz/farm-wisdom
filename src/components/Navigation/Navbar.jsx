@@ -64,10 +64,10 @@ export default function Navbar() {
               <Button 
                 color="inherit"
                 sx={{
-                  background: 'linear-gradient(135deg, #9c27b0 0%, #7b1fa2 100%)',
+                  background: 'linear-gradient(135deg, #1976d2 0%, #1565c0 100%)',
                   color: 'white',
                   '&:hover': {
-                    background: 'linear-gradient(135deg, #7b1fa2 0%, #6a1b9a 100%)',
+                    background: 'linear-gradient(135deg, #1565c0 0%, #0d47a1 100%)',
                   }
                 }}
               >
@@ -88,28 +88,20 @@ export default function Navbar() {
                 Bloopers
               </Button>
             </StyledLink>
-            <Button
-              component={Link}
-              to="/bloopers"
-              color="inherit"
-              sx={{ textTransform: 'none' }}
-            >
-              Bloopers
-            </Button>
-            <Button
-              component={Link}
-              to="/gleaning-programs"
-              color="inherit"
-              sx={{ 
-                background: 'linear-gradient(135deg, #4caf50 0%, #388e3c 100%)',
-                color: 'white',
-                '&:hover': {
-                  background: 'linear-gradient(135deg, #388e3c 0%, #2e7d32 100%)',
-                }
-              }}
-            >
-              Gleaning Programs
-            </Button>
+            <StyledLink to="/gleaning-programs">
+              <Button 
+                color="inherit"
+                sx={{ 
+                  background: 'linear-gradient(135deg, #4caf50 0%, #388e3c 100%)',
+                  color: 'white',
+                  '&:hover': {
+                    background: 'linear-gradient(135deg, #388e3c 0%, #2e7d32 100%)',
+                  }
+                }}
+              >
+                Gleaning Programs
+              </Button>
+            </StyledLink>
             <StyledLink to="/smart-crop-planning">
               <Button 
                 color="inherit"
