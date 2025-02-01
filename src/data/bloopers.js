@@ -88,6 +88,60 @@ const farmBloopers = [
     timestamp: "4:45",
     tags: ["grain", "truck", "spill", "oops"],
     category: "Transport Troubles"
+  },
+  {
+    id: 11,
+    title: "Giant Pumpkin Roll Gone Wrong",
+    description: "Attempt to move a prize-winning giant pumpkin turns into an impromptu downhill race",
+    videoId: "pCqs2DRNPrs",
+    timestamp: "2:15",
+    tags: ["pumpkin", "rolling", "competition", "fail"],
+    category: "Harvest Havoc"
+  },
+  {
+    id: 12,
+    title: "Greenhouse Collapse",
+    description: "Farmer forgets to clear snow from greenhouse roof, leading to a slow-motion disaster",
+    videoId: "k8hG0jFmUwc",
+    timestamp: "3:30",
+    tags: ["greenhouse", "snow", "collapse", "winter"],
+    category: "Structure Struggles"
+  },
+  {
+    id: 13,
+    title: "Watermelon Catching Contest",
+    description: "Farm workers demonstrate why you shouldn't play catch with watermelons",
+    videoId: "SrVQ_cLk-Q0",
+    timestamp: "1:45",
+    tags: ["watermelon", "catch", "splat", "mess"],
+    category: "Produce Pandemonium"
+  },
+  {
+    id: 14,
+    title: "Tomato Sorting Machine Rebellion",
+    description: "New automated tomato sorter creates the world's fastest tomato sauce - unintentionally",
+    videoId: "wk6fpZqyXHo",
+    timestamp: "4:10",
+    tags: ["tomatoes", "machine", "sorting", "mess"],
+    category: "Processing Problems"
+  },
+  {
+    id: 15,
+    title: "The Great Egg Collection Race",
+    description: "Rookie farmer learns why you shouldn't fill your egg collection basket too full",
+    videoId: "mUZ8gJekpqo",
+    timestamp: "2:55",
+    tags: ["eggs", "collection", "drop", "oops"],
+    category: "Collection Calamities"
+  },
+  {
+    id: 16,
+    title: "Beehive Relocation Adventure",
+    description: "Beekeeper's attempt to relocate a hive leads to an impromptu dance performance",
+    videoId: "pCqs2DRNPrs",
+    timestamp: "5:20",
+    tags: ["bees", "hive", "relocation", "chase"],
+    category: "Apiary Antics"
   }
 ];
 
