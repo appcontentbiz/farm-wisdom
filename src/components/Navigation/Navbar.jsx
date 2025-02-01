@@ -102,6 +102,20 @@ export default function Navbar() {
                 Gleaning Programs
               </Button>
             </StyledLink>
+            <StyledLink to="/beginner-farmer">
+              <Button 
+                color="inherit"
+                sx={{ 
+                  background: 'linear-gradient(135deg, #8bc34a 0%, #689f38 100%)',
+                  color: 'white',
+                  '&:hover': {
+                    background: 'linear-gradient(135deg, #689f38 0%, #558b2f 100%)',
+                  }
+                }}
+              >
+                Beginner Farmer
+              </Button>
+            </StyledLink>
             <StyledLink to="/smart-crop-planning">
               <Button 
                 color="inherit"

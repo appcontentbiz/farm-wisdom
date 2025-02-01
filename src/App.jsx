@@ -16,6 +16,7 @@ import PricingPlans from './components/Pricing/PricingPlans';
 import Checkout from './pages/Checkout';
 import Demo from './pages/Demo';
 import InteractiveDemo from './pages/InteractiveDemo';
+import BeginnerFarmerPage from './pages/BeginnerFarmerPage';
 import Resources from './pages/Resources';
 import SmartCropPlanning from './pages/SmartCropPlanning';
 import PrecisionWeather from './pages/PrecisionWeather';
@@ -59,6 +60,7 @@ function App() {
                 <Route path="/state-resources" element={<StateResourcesPage />} />
                 <Route path="/bloopers" element={<BloopersPage />} />
                 <Route path="/gleaning-programs" element={<GleaningProgramsPage />} />
+                <Route path="/beginner-farmer" element={<BeginnerFarmerPage />} />
                 <Route path="/smart-crop-planning" element={<SmartCropPlanning />} />
                 <Route path="/precision-weather" element={<PrecisionWeather />} />
                 <Route path="/market-intelligence" element={<MarketIntelligence />} />
