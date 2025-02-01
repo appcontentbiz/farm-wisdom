@@ -19,12 +19,14 @@ import {
   Inventory as InventoryIcon,
   AccountBalance as FinanceIcon,
   ShoppingCart as SalesIcon,
+  FitnessCenter as HealthIcon,
   CheckCircle as CheckIcon
 } from '@mui/icons-material';
 
 import DemoInventory from '../modules/erp/demo/DemoInventory';
 import DemoFinance from '../modules/erp/finance/DemoFinance';
 import DemoSales from '../modules/erp/sales/DemoSales';
+import DemoHealth from '../modules/health/DemoHealth';
 
 const features = [
   {
@@ -53,6 +55,15 @@ const features = [
       'Sales analytics',
       'Quote-to-cash workflow'
     ]
+  },
+  {
+    title: 'Health & Fitness',
+    items: [
+      'Activity tracking',
+      'Health metrics monitoring',
+      'Wellness tips',
+      'Hydration tracking'
+    ]
   }
 ];
 
@@ -79,7 +90,7 @@ export default function InteractiveDemo() {
       
       <Grid container spacing={3} sx={{ mb: 6 }}>
         {features.map((feature, index) => (
-          <Grid item xs={12} md={4} key={index}>
+          <Grid item xs={12} md={3} key={index}>
             <Card elevation={3}>
               <CardContent>
                 <Typography variant="h5" component="h2" gutterBottom>
@@ -123,6 +134,11 @@ export default function InteractiveDemo() {
             label="Sales"
             iconPosition="start"
           />
+          <Tab
+            icon={<HealthIcon />}
+            label="Health"
+            iconPosition="start"
+          />
         </Tabs>
 
         <Box sx={{ p: 3 }}>
@@ -134,6 +150,9 @@ export default function InteractiveDemo() {
           </TabPanel>
           <TabPanel value={tabValue} index={2}>
             <DemoSales />
+          </TabPanel>
+          <TabPanel value={tabValue} index={3}>
+            <DemoHealth />
           </TabPanel>
         </Box>
       </Paper>
