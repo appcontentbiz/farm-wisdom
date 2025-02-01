@@ -49,4 +49,5 @@ export { default as washington } from './washington';
 export { default as westVirginia } from './west-virginia';
 export { default as wisconsin } from './wisconsin';
 export { default as wyoming } from './wyoming';
+export { default as summary } from './summary';
 // ... other states will be exported here as we create them
