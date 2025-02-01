@@ -74,6 +74,20 @@ export default function Navbar() {
                 State Resources
               </Button>
             </StyledLink>
+            <StyledLink to="/bloopers">
+              <Button 
+                color="inherit"
+                sx={{
+                  background: 'linear-gradient(135deg, #9c27b0 0%, #7b1fa2 100%)',
+                  color: 'white',
+                  '&:hover': {
+                    background: 'linear-gradient(135deg, #7b1fa2 0%, #6a1b9a 100%)',
+                  }
+                }}
+              >
+                Bloopers
+              </Button>
+            </StyledLink>
             <StyledLink to="/smart-crop-planning">
               <Button 
                 color="inherit"
