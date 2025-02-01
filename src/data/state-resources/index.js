@@ -26,4 +26,9 @@ export { default as mississippi } from './mississippi';
 export { default as missouri } from './missouri';
 export { default as montana } from './montana';
 export { default as nebraska } from './nebraska';
+export { default as nevada } from './nevada';
+export { default as newHampshire } from './new-hampshire';
+export { default as newJersey } from './new-jersey';
+export { default as newMexico } from './new-mexico';
+export { default as newYork } from './new-york';
 // ... other states will be exported here as we create them
