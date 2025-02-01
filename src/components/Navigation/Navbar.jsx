@@ -78,10 +78,10 @@ export default function Navbar() {
               <Button 
                 color="inherit"
                 sx={{
-                  background: 'linear-gradient(135deg, #9c27b0 0%, #7b1fa2 100%)',
+                  background: 'linear-gradient(135deg, #ff9800 0%, #f57c00 100%)',
                   color: 'white',
                   '&:hover': {
-                    background: 'linear-gradient(135deg, #7b1fa2 0%, #6a1b9a 100%)',
+                    background: 'linear-gradient(135deg, #f57c00 0%, #ef6c00 100%)',
                   }
                 }}
               >
