@@ -57,6 +57,7 @@ function GleaningPrograms() {
   const [selectedSeason, setSelectedSeason] = useState('');
   const [isFilterDialogOpen, setIsFilterDialogOpen] = useState(false);
   const [isInfoDialogOpen, setIsInfoDialogOpen] = useState(false);
+  const [selectedProgram, setSelectedProgram] = useState(null);
 
   const handleCropSelect = (crop) => {
     if (selectedCrops.includes(crop)) {
@@ -85,7 +86,21 @@ function GleaningPrograms() {
       contact: "contact@communityharvestnetwork.org",
       website: "https://www.communityharvestnetwork.org",
       requirements: "Must be 16+ years old, physical activity required",
-      schedule: "Weekly harvests during growing season"
+      schedule: "Weekly harvests during growing season",
+      coordinator: "Jane Smith",
+      phone: "(555) 123-4567",
+      availableDates: [
+        "Every Tuesday and Thursday, 8 AM - 12 PM",
+        "First Saturday of each month, 9 AM - 2 PM"
+      ],
+      equipment: [
+        "Gloves (provided)",
+        "Sun protection recommended",
+        "Closed-toe shoes required",
+        "Water bottle recommended"
+      ],
+      impact: "In 2024, we rescued over 50,000 pounds of produce that would have otherwise gone to waste",
+      training: "30-minute orientation provided on-site before first gleaning session"
     },
     {
       id: 2,
@@ -97,7 +112,20 @@ function GleaningPrograms() {
       contact: "info@urbangleaners.org",
       website: "https://www.urbangleaners.org",
       requirements: "No experience necessary, training provided",
-      schedule: "Flexible scheduling available"
+      schedule: "Flexible scheduling available",
+      coordinator: "Mike Johnson",
+      phone: "(555) 987-6543",
+      availableDates: [
+        "Monday through Friday, 9 AM - 3 PM",
+        "Select weekends based on harvest schedule"
+      ],
+      equipment: [
+        "Harvest baskets (provided)",
+        "Garden gloves (provided)",
+        "Comfortable clothing recommended"
+      ],
+      impact: "Serving 15 local food banks and community centers",
+      training: "Online orientation video + in-person demonstration"
     },
     // Add more programs as needed
   ];
@@ -161,7 +189,18 @@ function GleaningPrograms() {
         <Grid container spacing={3}>
           {filteredPrograms.map(program => (
             <Grid item xs={12} md={6} key={program.id}>
-              <Card>
+              <Card 
+                sx={{ 
+                  height: '100%',
+                  cursor: 'pointer',
+                  transition: 'transform 0.2s, box-shadow 0.2s',
+                  '&:hover': {
+                    transform: 'translateY(-4px)',
+                    boxShadow: 6
+                  }
+                }}
+                onClick={() => setSelectedProgram(program)}
+              >
                 <CardContent>
                   <Typography variant="h6" gutterBottom>
                     {program.name}
@@ -273,6 +312,154 @@ function GleaningPrograms() {
               Close
             </Button>
           </DialogActions>
+        </Dialog>
+
+        {/* Program Details Dialog */}
+        <Dialog
+          open={Boolean(selectedProgram)}
+          onClose={() => setSelectedProgram(null)}
+          maxWidth="md"
+          fullWidth
+          fullScreen={isMobile}
+        >
+          {selectedProgram && (
+            <>
+              <DialogTitle>
+                {selectedProgram.name}
+                <IconButton
+                  onClick={() => setSelectedProgram(null)}
+                  sx={{ position: 'absolute', right: 8, top: 8 }}
+                >
+                  <CloseIcon />
+                </IconButton>
+              </DialogTitle>
+              <DialogContent>
+                <Box sx={{ mb: 3 }}>
+                  <Typography variant="h6" gutterBottom>
+                    About the Program
+                  </Typography>
+                  <Typography paragraph>
+                    {selectedProgram.description}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary" paragraph>
+                    {selectedProgram.impact}
+                  </Typography>
+                </Box>
+
+                <Box sx={{ mb: 3 }}>
+                  <Typography variant="h6" gutterBottom>
+                    Contact Information
+                  </Typography>
+                  <Typography paragraph>
+                    <strong>Coordinator:</strong> {selectedProgram.coordinator}
+                  </Typography>
+                  <Typography paragraph>
+                    <strong>Email:</strong> {selectedProgram.contact}
+                  </Typography>
+                  <Typography paragraph>
+                    <strong>Phone:</strong> {selectedProgram.phone}
+                  </Typography>
+                  <Button
+                    variant="contained"
+                    component={Link}
+                    href={selectedProgram.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    sx={{ mr: 2, mt: 1 }}
+                  >
+                    Visit Website
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    component={Link}
+                    href={`mailto:${selectedProgram.contact}`}
+                    sx={{ mt: 1 }}
+                  >
+                    Send Email
+                  </Button>
+                </Box>
+
+                <Box sx={{ mb: 3 }}>
+                  <Typography variant="h6" gutterBottom>
+                    Schedule & Availability
+                  </Typography>
+                  <Typography paragraph>
+                    <strong>Season:</strong> {selectedProgram.season}
+                  </Typography>
+                  <Typography variant="subtitle2" gutterBottom>
+                    Available Times:
+                  </Typography>
+                  <ul>
+                    {selectedProgram.availableDates.map((date, index) => (
+                      <li key={index}>
+                        <Typography>{date}</Typography>
+                      </li>
+                    ))}
+                  </ul>
+                </Box>
+
+                <Box sx={{ mb: 3 }}>
+                  <Typography variant="h6" gutterBottom>
+                    Requirements & Equipment
+                  </Typography>
+                  <Typography paragraph>
+                    <strong>Requirements:</strong> {selectedProgram.requirements}
+                  </Typography>
+                  <Typography variant="subtitle2" gutterBottom>
+                    Equipment & Gear:
+                  </Typography>
+                  <ul>
+                    {selectedProgram.equipment.map((item, index) => (
+                      <li key={index}>
+                        <Typography>{item}</Typography>
+                      </li>
+                    ))}
+                  </ul>
+                </Box>
+
+                <Box sx={{ mb: 3 }}>
+                  <Typography variant="h6" gutterBottom>
+                    Training
+                  </Typography>
+                  <Typography>
+                    {selectedProgram.training}
+                  </Typography>
+                </Box>
+
+                <Box sx={{ mb: 2 }}>
+                  <Typography variant="h6" gutterBottom>
+                    Available Crops
+                  </Typography>
+                  <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+                    {selectedProgram.crops.map(crop => (
+                      <Chip
+                        key={crop}
+                        label={crop}
+                        color="primary"
+                        variant="outlined"
+                      />
+                    ))}
+                  </Box>
+                </Box>
+              </DialogContent>
+              <DialogActions sx={{ p: 3 }}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  component={Link}
+                  href={`mailto:${selectedProgram.contact}?subject=Interest in ${selectedProgram.name}&body=Hello, I am interested in participating in your gleaning program. Please send me more information about how to get involved.`}
+                >
+                  Sign Up Now
+                </Button>
+                <Button
+                  variant="outlined"
+                  onClick={() => setSelectedProgram(null)}
+                >
+                  Close
+                </Button>
+              </DialogActions>
+            </>
+          )}
         </Dialog>
 
         {/* Info Dialog */}
