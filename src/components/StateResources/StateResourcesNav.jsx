@@ -38,7 +38,12 @@ function TabPanel(props) {
 
 function StateResourcesNav() {
   const [selectedTab, setSelectedTab] = useState(0);
-  const states = Object.values(stateResources);
+  
+  // Filter out the summary and get only state data
+  const states = Object.entries(stateResources)
+    .filter(([key]) => key !== 'summary')
+    .map(([_, value]) => value)
+    .sort((a, b) => a.state.localeCompare(b.state));
 
   const handleTabChange = (event, newValue) => {
     setSelectedTab(newValue);
@@ -104,41 +109,76 @@ function StateResourcesNav() {
         </CardContent>
       </Card>
 
+      {/* Farmers Markets Section */}
       <Typography variant="h5" gutterBottom sx={{ mt: 4 }}>Farmers Markets</Typography>
       {state.farmersMarkets.map((market, index) => (
         <Card key={index} sx={{ mb: 3 }}>
           <CardContent>
-            <Typography variant="h6" gutterBottom>{market.name}</Typography>
-            <Typography variant="subtitle1" gutterBottom>{market.description}</Typography>
-            
+            <Typography variant="h6">{market.name}</Typography>
+            <Typography variant="subtitle2" color="text.secondary" gutterBottom>
+              {market.address}
+            </Typography>
             <Grid container spacing={2}>
               <Grid item xs={12} md={6}>
-                <Typography variant="subtitle2" gutterBottom>Address:</Typography>
-                <Typography>{market.address}</Typography>
-                
-                <Typography variant="subtitle2" sx={{ mt: 2 }} gutterBottom>Contact:</Typography>
-                <Typography>Phone: {market.contact.phone}</Typography>
-                <Typography>Email: {market.contact.email}</Typography>
-                <Typography>Website: {market.contact.website}</Typography>
+                <Typography variant="subtitle1" gutterBottom>Hours:</Typography>
+                <List dense>
+                  {Object.entries(market.schedule.regularHours).map(([day, hours]) => (
+                    <ListItem key={day}>
+                      <ListItemText 
+                        primary={`${day.charAt(0).toUpperCase() + day.slice(1)}: ${hours}`}
+                      />
+                    </ListItem>
+                  ))}
+                </List>
               </Grid>
-              
               <Grid item xs={12} md={6}>
-                <Typography variant="subtitle2" gutterBottom>Schedule:</Typography>
-                {Object.entries(market.schedule.regularHours).map(([day, hours]) => (
-                  <Typography key={day}>
-                    {day.charAt(0).toUpperCase() + day.slice(1)}: {hours}
-                  </Typography>
-                ))}
-                <Typography sx={{ mt: 1 }}>{market.schedule.seasonalNotes}</Typography>
+                <Typography variant="subtitle1" gutterBottom>Features:</Typography>
+                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+                  {market.features.products.map((product, idx) => (
+                    <Chip key={idx} label={product} size="small" />
+                  ))}
+                </Box>
               </Grid>
             </Grid>
+          </CardContent>
+        </Card>
+      ))}
 
-            <Typography variant="subtitle2" sx={{ mt: 2 }} gutterBottom>Available Products:</Typography>
-            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
-              {market.features.products.map((product, index) => (
-                <Chip key={index} label={product} color="success" variant="outlined" />
-              ))}
-            </Box>
+      {/* Food Banks Section */}
+      <Typography variant="h5" gutterBottom sx={{ mt: 4 }}>Food Banks</Typography>
+      {state.foodBanks.map((bank, index) => (
+        <Card key={index} sx={{ mb: 3 }}>
+          <CardContent>
+            <Typography variant="h6">{bank.name}</Typography>
+            <Typography variant="subtitle2" color="text.secondary" gutterBottom>
+              {bank.address}
+            </Typography>
+            <Typography variant="body2" paragraph>
+              {bank.description}
+            </Typography>
+            <Grid container spacing={2}>
+              <Grid item xs={12} md={6}>
+                <Typography variant="subtitle1" gutterBottom>Services:</Typography>
+                <List dense>
+                  {bank.services.primary.map((service, idx) => (
+                    <ListItem key={idx}>
+                      <ListItemText primary={service} />
+                    </ListItem>
+                  ))}
+                </List>
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <Typography variant="subtitle1" gutterBottom>Impact:</Typography>
+                <List dense>
+                  <ListItem>
+                    <ListItemText primary={`People Served: ${bank.impact.peopleServed}`} />
+                  </ListItem>
+                  <ListItem>
+                    <ListItemText primary={`Counties Served: ${bank.impact.countiesServed}`} />
+                  </ListItem>
+                </List>
+              </Grid>
+            </Grid>
           </CardContent>
         </Card>
       ))}
@@ -147,7 +187,7 @@ function StateResourcesNav() {
 
   return (
     <Box sx={{ width: '100%' }}>
-      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+      <Box sx={{ borderBottom: 1, borderColor: 'divider', mb: 3 }}>
         <Tabs 
           value={selectedTab} 
           onChange={handleTabChange} 
@@ -157,8 +197,8 @@ function StateResourcesNav() {
         >
           {states.map((state, index) => (
             <Tab 
-              key={state.abbreviation} 
-              label={`${state.state} (${state.abbreviation})`} 
+              key={state.abbreviation}
+              label={`${state.state} (${state.abbreviation})`}
               id={`state-tab-${index}`}
               aria-controls={`state-tabpanel-${index}`}
             />
