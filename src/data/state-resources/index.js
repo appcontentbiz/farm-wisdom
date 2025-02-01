@@ -17,4 +17,8 @@ export { default as iowa } from './iowa';
 export { default as kansas } from './kansas';
 export { default as kentucky } from './kentucky';
 export { default as louisiana } from './louisiana';
+export { default as maine } from './maine';
+export { default as maryland } from './maryland';
+export { default as massachusetts } from './massachusetts';
+export { default as michigan } from './michigan';
 // ... other states will be exported here as we create them
