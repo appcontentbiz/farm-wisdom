@@ -43,4 +43,7 @@ export { default as southDakota } from './south-dakota';
 export { default as tennessee } from './tennessee';
 export { default as texas } from './texas';
 export { default as utah } from './utah';
+export { default as vermont } from './vermont';
+export { default as virginia } from './virginia';
+export { default as washington } from './washington';
 // ... other states will be exported here as we create them
