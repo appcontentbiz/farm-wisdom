@@ -1,93 +1,93 @@
 const farmBloopers = [
   {
     id: 1,
-    title: "Goat's Epic Parkour Fail",
-    description: "A playful goat attempts to show off its parkour skills but hilariously miscalculates the jump",
-    videoId: "T_nzW09BRoc",
-    timestamp: "0:45",
-    tags: ["goats", "fails", "funny", "parkour"],
-    category: "Animal Antics"
-  },
-  {
-    id: 2,
-    title: "Pig's Mud Slide Adventure",
-    description: "This pig thought it found the perfect mud slide, but ended up getting more than it bargained for",
-    videoId: "WM0zMRuxyVY",
-    timestamp: "1:23",
-    tags: ["pigs", "mud", "sliding", "funny"],
+    title: "Tractor vs Mud Pit",
+    description: "Watch this overconfident farmer attempt to cross what looks like a small mud puddle, only to discover it's actually a deep mud pit",
+    videoId: "N709Bbq8soQ",
+    timestamp: "1:15",
+    tags: ["tractor", "mud", "stuck", "rescue"],
     category: "Muddy Mishaps"
   },
   {
+    id: 2,
+    title: "Hay Baler Gone Wild",
+    description: "This hay baler has a mind of its own as it creates the world's most irregularly shaped bales",
+    videoId: "dG3Vp8yTIPI",
+    timestamp: "2:30",
+    tags: ["hay", "baler", "equipment", "fails"],
+    category: "Equipment Errors"
+  },
+  {
     id: 3,
-    title: "Chicken Chase Gone Wrong",
-    description: "Watch as this determined chicken chases after a treat, only to run straight into a fence",
-    videoId: "0VZodaa_lB4",
-    timestamp: "2:15",
-    tags: ["chickens", "fails", "running", "funny"],
-    category: "Bird Blunders"
+    title: "Combine Harvester's Corn Shower",
+    description: "Farmer forgets to check the grain tank, resulting in a spectacular corn fountain",
+    videoId: "EZzKCkswPAU",
+    timestamp: "3:45",
+    tags: ["combine", "harvester", "corn", "spills"],
+    category: "Harvest Havoc"
   },
   {
     id: 4,
-    title: "Sheep's Bad Hair Day",
-    description: "This sheep's first post-shearing reaction is absolutely priceless",
-    videoId: "T_nzW09BRoc",
-    timestamp: "3:30",
-    tags: ["sheep", "shearing", "reactions", "funny"],
-    category: "Grooming Gaffes"
-  },
-  {
-    id: 5,
-    title: "Cow's Curious Encounter",
-    description: "A curious cow discovers its reflection in a water trough with hilarious results",
-    videoId: "WM0zMRuxyVY",
-    timestamp: "4:12",
-    tags: ["cows", "water", "reflection", "funny"],
+    title: "The Great Irrigation Incident",
+    description: "New irrigation system test goes hilariously wrong, creating an impromptu water park in the field",
+    videoId: "4ytvWz4-ho0",
+    timestamp: "0:55",
+    tags: ["irrigation", "water", "malfunction", "spray"],
     category: "Water Woes"
   },
   {
+    id: 5,
+    title: "Runaway Round Bale",
+    description: "Watch as this round bale makes a break for freedom down the hill, with the farmer in hot pursuit",
+    videoId: "32vRbjj2f30",
+    timestamp: "2:10",
+    tags: ["hay", "bale", "chase", "rolling"],
+    category: "Harvest Humor"
+  },
+  {
     id: 6,
-    title: "Duck Parade Chaos",
-    description: "What starts as an orderly duck parade quickly turns into adorable chaos",
-    videoId: "0VZodaa_lB4",
-    timestamp: "5:20",
-    tags: ["ducks", "parade", "chaos", "funny"],
-    category: "Parade Problems"
+    title: "Potato Harvester's Revenge",
+    description: "This potato harvester decides to shoot potatoes in every direction except the collection bin",
+    videoId: "N709Bbq8soQ",
+    timestamp: "4:20",
+    tags: ["potato", "harvester", "machinery", "chaos"],
+    category: "Equipment Escapades"
   },
   {
     id: 7,
-    title: "Tractor Training Troubles",
-    description: "New farmer learns the hard way that tractors and mud don't always mix",
-    videoId: "T_nzW09BRoc",
-    timestamp: "6:45",
-    tags: ["tractors", "mud", "learning", "funny"],
-    category: "Machine Mishaps"
+    title: "The Stuck Sprayer Saga",
+    description: "Watch this crop sprayer attempt an impossible turn in a wet field, creating a perfect 'how not to' demonstration",
+    videoId: "dG3Vp8yTIPI",
+    timestamp: "5:15",
+    tags: ["sprayer", "stuck", "turn", "rescue"],
+    category: "Equipment Errors"
   },
   {
     id: 8,
-    title: "Donkey's Door Dilemma",
-    description: "This clever donkey figures out how to open the barn door, but forgets what to do next",
-    videoId: "WM0zMRuxyVY",
-    timestamp: "7:33",
-    tags: ["donkeys", "doors", "clever", "funny"],
-    category: "Barn Bloopers"
+    title: "Fence Post Fiasco",
+    description: "Tractor-mounted post driver demonstrates why aiming is important, sending the post in a completely unexpected direction",
+    videoId: "EZzKCkswPAU",
+    timestamp: "1:30",
+    tags: ["fence", "post", "driver", "fail"],
+    category: "Construction Chaos"
   },
   {
     id: 9,
-    title: "Horse's Hay Hijinks",
-    description: "Watch this horse's dramatic reaction to discovering its hay pile has been moved",
-    videoId: "0VZodaa_lB4",
-    timestamp: "8:10",
-    tags: ["horses", "hay", "drama", "funny"],
-    category: "Feed Follies"
+    title: "Silage Wrap Race",
+    description: "High winds turn routine bale wrapping into an impromptu game of 'catch the plastic wrap'",
+    videoId: "4ytvWz4-ho0",
+    timestamp: "3:20",
+    tags: ["silage", "wrap", "wind", "chase"],
+    category: "Weather Woes"
   },
   {
     id: 10,
-    title: "Farm Dog's Failed Herding",
-    description: "This enthusiastic farm dog tries its best to herd chickens, but the chickens have other plans",
-    videoId: "T_nzW09BRoc",
-    timestamp: "9:25",
-    tags: ["dogs", "herding", "chickens", "funny"],
-    category: "Herding Humor"
+    title: "The Great Grain Spill",
+    description: "Farmer forgets to close the grain truck's back gate, creating a perfect trail of grain across the field",
+    videoId: "32vRbjj2f30",
+    timestamp: "4:45",
+    tags: ["grain", "truck", "spill", "oops"],
+    category: "Transport Troubles"
   }
 ];
 
