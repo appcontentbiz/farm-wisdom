@@ -31,4 +31,7 @@ export { default as newHampshire } from './new-hampshire';
 export { default as newJersey } from './new-jersey';
 export { default as newMexico } from './new-mexico';
 export { default as newYork } from './new-york';
+export { default as northCarolina } from './north-carolina';
+export { default as northDakota } from './north-dakota';
+export { default as ohio } from './ohio';
 // ... other states will be exported here as we create them
