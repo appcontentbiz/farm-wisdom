@@ -21,4 +21,9 @@ export { default as maine } from './maine';
 export { default as maryland } from './maryland';
 export { default as massachusetts } from './massachusetts';
 export { default as michigan } from './michigan';
+export { default as minnesota } from './minnesota';
+export { default as mississippi } from './mississippi';
+export { default as missouri } from './missouri';
+export { default as montana } from './montana';
+export { default as nebraska } from './nebraska';
 // ... other states will be exported here as we create them
