@@ -88,6 +88,28 @@ export default function Navbar() {
                 Bloopers
               </Button>
             </StyledLink>
+            <Button
+              component={Link}
+              to="/bloopers"
+              color="inherit"
+              sx={{ textTransform: 'none' }}
+            >
+              Bloopers
+            </Button>
+            <Button
+              component={Link}
+              to="/gleaning-programs"
+              color="inherit"
+              sx={{ 
+                background: 'linear-gradient(135deg, #4caf50 0%, #388e3c 100%)',
+                color: 'white',
+                '&:hover': {
+                  background: 'linear-gradient(135deg, #388e3c 0%, #2e7d32 100%)',
+                }
+              }}
+            >
+              Gleaning Programs
+            </Button>
             <StyledLink to="/smart-crop-planning">
               <Button 
                 color="inherit"

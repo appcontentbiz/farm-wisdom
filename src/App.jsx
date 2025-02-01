@@ -26,6 +26,7 @@ import CommunityHub from './pages/CommunityHub';
 import ResourceDirectory from './pages/ResourceDirectory';
 import StateResourcesPage from './pages/StateResourcesPage';
 import BloopersPage from './pages/BloopersPage';
+import GleaningProgramsPage from './pages/GleaningProgramsPage';
 import './App.css';
 
 const PrivateRoute = ({ children }) => {
@@ -57,6 +58,7 @@ function App() {
                 <Route path="/resource-directory" element={<ResourceDirectory />} />
                 <Route path="/state-resources" element={<StateResourcesPage />} />
                 <Route path="/bloopers" element={<BloopersPage />} />
+                <Route path="/gleaning-programs" element={<GleaningProgramsPage />} />
                 <Route path="/smart-crop-planning" element={<SmartCropPlanning />} />
                 <Route path="/precision-weather" element={<PrecisionWeather />} />
                 <Route path="/market-intelligence" element={<MarketIntelligence />} />
