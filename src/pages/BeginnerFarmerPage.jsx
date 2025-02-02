@@ -10,9 +10,15 @@ import {
 import {
   Agriculture as AgricultureIcon,
   LocalFlorist as CropsIcon,
-  School as EducationIcon
+  School as EducationIcon,
+  Grass as SoilIcon,
+  CalendarMonth as SeasonIcon,
+  Build as StartupIcon
 } from '@mui/icons-material';
 import NutritiousCrops from '../components/BeginnerFarmer/NutritiousCrops';
+import StartupGuide from '../components/BeginnerFarmer/StartupGuide';
+import SeasonalPlanning from '../components/BeginnerFarmer/SeasonalPlanning';
+import SoilManagement from '../components/BeginnerFarmer/SoilManagement';
 
 function TabPanel({ children, value, index }) {
   return (
@@ -47,14 +53,36 @@ export default function BeginnerFarmerPage() {
             label="Nutritious Crops" 
             iconPosition="start"
           />
-          {/* Add more tabs as needed */}
+          <Tab 
+            icon={<StartupIcon />} 
+            label="Startup Guide" 
+            iconPosition="start"
+          />
+          <Tab 
+            icon={<SeasonIcon />} 
+            label="Seasonal Planning" 
+            iconPosition="start"
+          />
+          <Tab 
+            icon={<SoilIcon />} 
+            label="Soil Management" 
+            iconPosition="start"
+          />
         </Tabs>
 
         <Box>
           <TabPanel value={tabValue} index={0}>
             <NutritiousCrops />
           </TabPanel>
-          {/* Add more tab panels as needed */}
+          <TabPanel value={tabValue} index={1}>
+            <StartupGuide />
+          </TabPanel>
+          <TabPanel value={tabValue} index={2}>
+            <SeasonalPlanning />
+          </TabPanel>
+          <TabPanel value={tabValue} index={3}>
+            <SoilManagement />
+          </TabPanel>
         </Box>
       </Paper>
     </Container>
