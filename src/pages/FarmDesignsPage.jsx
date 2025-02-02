@@ -16,7 +16,8 @@ import {
   Tabs,
   Tab,
   Divider,
-  Chip
+  Chip,
+  Container
 } from '@mui/material';
 import {
   ExpandMore as ExpandMoreIcon,
@@ -285,7 +286,7 @@ const edibleLandscaping = {
         ]
       },
       {
-        type: 'Children's Area',
+        type: "Children's Play Area",
         examples: [
           'Snap Peas',
           'Cherry Tomatoes',
@@ -312,7 +313,7 @@ function TabPanel({ children, value, index }) {
   );
 }
 
-function FarmDesigns() {
+function FarmDesignsPage() {
   const [mainTab, setMainTab] = useState(0);
 
   const handleMainTabChange = (event, newValue) => {
@@ -320,12 +321,12 @@ function FarmDesigns() {
   };
 
   return (
-    <Box sx={{ p: 3 }}>
-      <Typography variant="h4" gutterBottom>
+    <Container maxWidth="xl" sx={{ py: 4 }}>
+      <Typography variant="h3" component="h1" gutterBottom align="center" sx={{ mb: 4 }}>
         Farm Design Layouts
       </Typography>
 
-      <Paper elevation={3} sx={{ mb: 4 }}>
+      <Paper elevation={3}>
         <Tabs
           value={mainTab}
           onChange={handleMainTabChange}
@@ -515,8 +516,8 @@ function FarmDesigns() {
           </Box>
         </TabPanel>
       </Paper>
-    </Box>
+    </Container>
   );
 }
 
-export default FarmDesigns;
+export default FarmDesignsPage;

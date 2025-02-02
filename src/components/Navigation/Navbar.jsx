@@ -200,6 +200,20 @@ export default function Navbar() {
                 Community Hub
               </Button>
             </StyledLink>
+            <StyledLink to="/farm-designs">
+              <Button 
+                color="inherit"
+                sx={{
+                  background: 'linear-gradient(135deg, #795548 0%, #5d4037 100%)',
+                  color: 'white',
+                  '&:hover': {
+                    background: 'linear-gradient(135deg, #5d4037 0%, #3e2723 100%)',
+                  }
+                }}
+              >
+                Farm Designs
+              </Button>
+            </StyledLink>
             <Button
               component={Link}
               to="/demo"
