@@ -16,7 +16,7 @@ const DesignLayout = ({ title, description, imagePath, downloadPath, dimensions,
     <Card elevation={3} sx={{ mb: 4 }}>
       <CardMedia
         component="img"
-        height="400"
+        height="600"
         image={imagePath}
         alt={title}
         sx={{ 

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1000" height="800" viewBox="0 0 1000 800" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1000" height="800" fill="#f8f9fa"/>
+  
+  <!-- Title -->
+  <text x="500" y="50" font-family="Arial" font-size="32" text-anchor="middle" fill="#2c3e50">Urban Food Forest Design</text>
+  
+  <!-- Legend -->
+  <g transform="translate(40, 100)">
+    <rect width="200" height="240" fill="#ffffff" stroke="#dee2e6"/>
+    <text x="15" y="35" font-family="Arial" font-size="18" fill="#2c3e50">Legend:</text>
+    <circle cx="30" cy="65" r="12" fill="#2e7d32"/>
+    <text x="50" y="70" font-family="Arial" font-size="14" fill="#2c3e50">Dwarf Fruit Trees</text>
+    <circle cx="30" cy="95" r="8" fill="#558b2f"/>
+    <text x="50" y="100" font-family="Arial" font-size="14" fill="#2c3e50">Berry Bushes</text>
+    <rect x="20" y="115" width="20" height="20" fill="#81c784"/>
+    <text x="50" y="130" font-family="Arial" font-size="14" fill="#2c3e50">Herb Garden</text>
+    <rect x="20" y="145" width="20" height="20" fill="#c8e6c9"/>
+    <text x="50" y="160" font-family="Arial" font-size="14" fill="#2c3e50">Ground Cover</text>
+    <rect x="20" y="175" width="20" height="20" fill="#90a4ae"/>
+    <text x="50" y="190" font-family="Arial" font-size="14" fill="#2c3e50">Pathways</text>
+    <rect x="20" y="205" width="20" height="20" fill="#a1887f"/>
+    <text x="50" y="220" font-family="Arial" font-size="14" fill="#2c3e50">Seating Area</text>
+  </g>
+
+  <!-- Main Design -->
+  <g transform="translate(300, 150)">
+    <!-- Property Boundary -->
+    <rect x="0" y="0" width="600" height="500" fill="none" stroke="#2c3e50" stroke-width="3"/>
+    
+    <!-- Main Pathways -->
+    <path d="M50,250 L550,250" stroke="#90a4ae" stroke-width="30" fill="none"/>
+    <path d="M300,50 L300,450" stroke="#90a4ae" stroke-width="30" fill="none"/>
+    
+    <!-- Ground Cover Base -->
+    <rect x="50" y="50" width="500" height="400" fill="#c8e6c9"/>
+    
+    <!-- Dwarf Fruit Trees -->
+    <g fill="#2e7d32">
+      <!-- North Section -->
+      <circle cx="150" cy="100" r="25"/>
+      <circle cx="450" cy="100" r="25"/>
+      <!-- South Section -->
+      <circle cx="150" cy="400" r="25"/>
+      <circle cx="450" cy="400" r="25"/>
+    </g>
+    
+    <!-- Berry Bushes -->
+    <g fill="#558b2f">
+      <circle cx="100" cy="150" r="15"/>
+      <circle cx="200" cy="150" r="15"/>
+      <circle cx="400" cy="150" r="15"/>
+      <circle cx="500" cy="150" r="15"/>
+      <circle cx="100" cy="350" r="15"/>
+      <circle cx="200" cy="350" r="15"/>
+      <circle cx="400" cy="350" r="15"/>
+      <circle cx="500" cy="350" r="15"/>
+    </g>
+    
+    <!-- Herb Gardens -->
+    <g fill="#81c784">
+      <rect x="75" y="200" width="175" height="50" rx="10"/>
+      <rect x="350" y="200" width="175" height="50" rx="10"/>
+      <rect x="75" y="300" width="175" height="50" rx="10"/>
+      <rect x="350" y="300" width="175" height="50" rx="10"/>
+    </g>
+    
+    <!-- Seating Area -->
+    <g transform="translate(250,200)">
+      <rect x="0" y="0" width="100" height="100" fill="#a1887f" rx="10"/>
+      <!-- Table -->
+      <circle cx="50" cy="50" r="20" fill="#795548"/>
+      <!-- Benches -->
+      <rect x="20" y="10" width="60" height="15" fill="#795548" rx="5"/>
+      <rect x="20" y="75" width="60" height="15" fill="#795548" rx="5"/>
+    </g>
+
+    <!-- Vertical Growing Systems -->
+    <g stroke="#558b2f" stroke-width="3" fill="none">
+      <!-- Trellises -->
+      <line x1="50" y1="50" x2="50" y2="450"/>
+      <line x1="550" y1="50" x2="550" y2="450"/>
+      <path d="M50,50 C150,100 450,100 550,50"/>
+      <path d="M50,450 C150,400 450,400 550,450"/>
+    </g>
+
+    <!-- Labels -->
+    <g font-family="Arial" font-size="14" fill="#2c3e50" text-anchor="middle">
+      <text x="150" y="75">Dwarf Fruit</text>
+      <text x="150" y="90">Trees</text>
+      <text x="450" y="75">Dwarf Fruit</text>
+      <text x="450" y="90">Trees</text>
+      <text x="125" y="235">Herbs</text>
+      <text x="425" y="235">Herbs</text>
+      <text x="300" y="235">Seating</text>
+      <text x="300" y="250">Area</text>
+    </g>
+
+    <!-- Scale -->
+    <g transform="translate(0, 520)">
+      <line x1="0" y1="0" x2="600" y2="0" stroke="#2c3e50" stroke-width="2"/>
+      <line x1="0" y1="-5" x2="0" y2="5" stroke="#2c3e50" stroke-width="2"/>
+      <line x1="150" y1="-5" x2="150" y2="5" stroke="#2c3e50" stroke-width="2"/>
+      <line x1="300" y1="-5" x2="300" y2="5" stroke="#2c3e50" stroke-width="2"/>
+      <line x1="450" y1="-5" x2="450" y2="5" stroke="#2c3e50" stroke-width="2"/>
+      <line x1="600" y1="-5" x2="600" y2="5" stroke="#2c3e50" stroke-width="2"/>
+      <text x="0" y="25" font-family="Arial" font-size="14" text-anchor="middle" fill="#2c3e50">0'</text>
+      <text x="150" y="25" font-family="Arial" font-size="14" text-anchor="middle" fill="#2c3e50">10'</text>
+      <text x="300" y="25" font-family="Arial" font-size="14" text-anchor="middle" fill="#2c3e50">20'</text>
+      <text x="450" y="25" font-family="Arial" font-size="14" text-anchor="middle" fill="#2c3e50">30'</text>
+      <text x="600" y="25" font-family="Arial" font-size="14" text-anchor="middle" fill="#2c3e50">40'</text>
+    </g>
+
+    <!-- Height Indicator -->
+    <g transform="translate(-50, 0)">
+      <line x1="0" y1="0" x2="0" y2="500" stroke="#2c3e50" stroke-width="2"/>
+      <line x1="-5" y1="0" x2="5" y2="0" stroke="#2c3e50" stroke-width="2"/>
+      <line x1="-5" y1="500" x2="5" y2="500" stroke="#2c3e50" stroke-width="2"/>
+      <text x="-15" y="250" font-family="Arial" font-size="14" text-anchor="middle" fill="#2c3e50" transform="rotate(-90, -15, 250)">30'</text>
+    </g>
+  </g>
+</svg>

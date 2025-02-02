@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+<svg width="1000" height="800" viewBox="0 0 1000 800" xmlns="http://www.w3.org/2000/svg">
   <!-- Background -->
-  <rect width="800" height="600" fill="#f8f9fa"/>
+  <rect width="1000" height="800" fill="#f8f9fa"/>
   
   <!-- Title -->
-  <text x="400" y="40" font-family="Arial" font-size="24" text-anchor="middle" fill="#2c3e50">Market Garden Layout (30" Beds)</text>
+  <text x="500" y="40" font-family="Arial" font-size="24" text-anchor="middle" fill="#2c3e50">Market Garden Layout (30" Beds)</text>
   
   <!-- Legend -->
   <g transform="translate(20, 80)">
@@ -23,80 +23,80 @@
   </g>
 
   <!-- Main Design -->
-  <g transform="translate(200, 100)">
+  <g transform="translate(250, 150)">
     <!-- Equipment Turn Area (Header) -->
-    <rect x="0" y="0" width="550" height="40" fill="#fdd835"/>
+    <rect x="0" y="0" width="700" height="40" fill="#fdd835"/>
     
     <!-- Growing Beds and Paths -->
     <g transform="translate(0, 40)">
       <!-- Zone 1 - Root Crops -->
       <g>
-        <rect x="0" y="0" width="550" height="80" fill="#81c784" stroke="#4caf50"/>
+        <rect x="0" y="0" width="700" height="80" fill="#81c784" stroke="#4caf50"/>
         <text x="10" y="20" font-family="Arial" font-size="12" fill="#2c3e50">Zone 1: Root Crops</text>
         <!-- Beds -->
-        <rect x="0" y="0" width="550" height="80" fill="none" stroke="#4caf50"/>
-        <rect x="0" y="0" width="550" height="2.5" fill="#8b4513"/>
-        <rect x="0" y="20" width="550" height="2.5" fill="#8b4513"/>
-        <rect x="0" y="40" width="550" height="2.5" fill="#8b4513"/>
-        <rect x="0" y="60" width="550" height="2.5" fill="#8b4513"/>
+        <rect x="0" y="0" width="700" height="80" fill="none" stroke="#4caf50"/>
+        <rect x="0" y="0" width="700" height="2.5" fill="#8b4513"/>
+        <rect x="0" y="20" width="700" height="2.5" fill="#8b4513"/>
+        <rect x="0" y="40" width="700" height="2.5" fill="#8b4513"/>
+        <rect x="0" y="60" width="700" height="2.5" fill="#8b4513"/>
         <!-- Paths -->
-        <rect x="0" y="10" width="550" height="1.5" fill="#90a4ae"/>
-        <rect x="0" y="30" width="550" height="1.5" fill="#90a4ae"/>
-        <rect x="0" y="50" width="550" height="1.5" fill="#90a4ae"/>
-        <rect x="0" y="70" width="550" height="1.5" fill="#90a4ae"/>
+        <rect x="0" y="10" width="700" height="1.5" fill="#90a4ae"/>
+        <rect x="0" y="30" width="700" height="1.5" fill="#90a4ae"/>
+        <rect x="0" y="50" width="700" height="1.5" fill="#90a4ae"/>
+        <rect x="0" y="70" width="700" height="1.5" fill="#90a4ae"/>
       </g>
 
       <!-- Zone 2 - Leafy Greens -->
       <g transform="translate(0, 90)">
-        <rect x="0" y="0" width="550" height="80" fill="#a5d6a7" stroke="#4caf50"/>
+        <rect x="0" y="0" width="700" height="80" fill="#a5d6a7" stroke="#4caf50"/>
         <text x="10" y="20" font-family="Arial" font-size="12" fill="#2c3e50">Zone 2: Leafy Greens</text>
         <!-- Beds -->
-        <rect x="0" y="0" width="550" height="2.5" fill="#8b4513"/>
-        <rect x="0" y="20" width="550" height="2.5" fill="#8b4513"/>
-        <rect x="0" y="40" width="550" height="2.5" fill="#8b4513"/>
-        <rect x="0" y="60" width="550" height="2.5" fill="#8b4513"/>
+        <rect x="0" y="0" width="700" height="2.5" fill="#8b4513"/>
+        <rect x="0" y="20" width="700" height="2.5" fill="#8b4513"/>
+        <rect x="0" y="40" width="700" height="2.5" fill="#8b4513"/>
+        <rect x="0" y="60" width="700" height="2.5" fill="#8b4513"/>
         <!-- Paths -->
-        <rect x="0" y="10" width="550" height="1.5" fill="#90a4ae"/>
-        <rect x="0" y="30" width="550" height="1.5" fill="#90a4ae"/>
-        <rect x="0" y="50" width="550" height="1.5" fill="#90a4ae"/>
-        <rect x="0" y="70" width="550" height="1.5" fill="#90a4ae"/>
+        <rect x="0" y="10" width="700" height="1.5" fill="#90a4ae"/>
+        <rect x="0" y="30" width="700" height="1.5" fill="#90a4ae"/>
+        <rect x="0" y="50" width="700" height="1.5" fill="#90a4ae"/>
+        <rect x="0" y="70" width="700" height="1.5" fill="#90a4ae"/>
       </g>
 
       <!-- Zone 3 - Fruiting Crops -->
       <g transform="translate(0, 180)">
-        <rect x="0" y="0" width="550" height="80" fill="#c8e6c9" stroke="#4caf50"/>
+        <rect x="0" y="0" width="700" height="80" fill="#c8e6c9" stroke="#4caf50"/>
         <text x="10" y="20" font-family="Arial" font-size="12" fill="#2c3e50">Zone 3: Fruiting Crops</text>
         <!-- Beds -->
-        <rect x="0" y="0" width="550" height="2.5" fill="#8b4513"/>
-        <rect x="0" y="20" width="550" height="2.5" fill="#8b4513"/>
-        <rect x="0" y="40" width="550" height="2.5" fill="#8b4513"/>
-        <rect x="0" y="60" width="550" height="2.5" fill="#8b4513"/>
+        <rect x="0" y="0" width="700" height="2.5" fill="#8b4513"/>
+        <rect x="0" y="20" width="700" height="2.5" fill="#8b4513"/>
+        <rect x="0" y="40" width="700" height="2.5" fill="#8b4513"/>
+        <rect x="0" y="60" width="700" height="2.5" fill="#8b4513"/>
         <!-- Paths -->
-        <rect x="0" y="10" width="550" height="1.5" fill="#90a4ae"/>
-        <rect x="0" y="30" width="550" height="1.5" fill="#90a4ae"/>
-        <rect x="0" y="50" width="550" height="1.5" fill="#90a4ae"/>
-        <rect x="0" y="70" width="550" height="1.5" fill="#90a4ae"/>
+        <rect x="0" y="10" width="700" height="1.5" fill="#90a4ae"/>
+        <rect x="0" y="30" width="700" height="1.5" fill="#90a4ae"/>
+        <rect x="0" y="50" width="700" height="1.5" fill="#90a4ae"/>
+        <rect x="0" y="70" width="700" height="1.5" fill="#90a4ae"/>
       </g>
 
       <!-- Zone 4 - Brassicas -->
       <g transform="translate(0, 270)">
-        <rect x="0" y="0" width="550" height="80" fill="#e8f5e9" stroke="#4caf50"/>
+        <rect x="0" y="0" width="700" height="80" fill="#e8f5e9" stroke="#4caf50"/>
         <text x="10" y="20" font-family="Arial" font-size="12" fill="#2c3e50">Zone 4: Brassicas</text>
         <!-- Beds -->
-        <rect x="0" y="0" width="550" height="2.5" fill="#8b4513"/>
-        <rect x="0" y="20" width="550" height="2.5" fill="#8b4513"/>
-        <rect x="0" y="40" width="550" height="2.5" fill="#8b4513"/>
-        <rect x="0" y="60" width="550" height="2.5" fill="#8b4513"/>
+        <rect x="0" y="0" width="700" height="2.5" fill="#8b4513"/>
+        <rect x="0" y="20" width="700" height="2.5" fill="#8b4513"/>
+        <rect x="0" y="40" width="700" height="2.5" fill="#8b4513"/>
+        <rect x="0" y="60" width="700" height="2.5" fill="#8b4513"/>
         <!-- Paths -->
-        <rect x="0" y="10" width="550" height="1.5" fill="#90a4ae"/>
-        <rect x="0" y="30" width="550" height="1.5" fill="#90a4ae"/>
-        <rect x="0" y="50" width="550" height="1.5" fill="#90a4ae"/>
-        <rect x="0" y="70" width="550" height="1.5" fill="#90a4ae"/>
+        <rect x="0" y="10" width="700" height="1.5" fill="#90a4ae"/>
+        <rect x="0" y="30" width="700" height="1.5" fill="#90a4ae"/>
+        <rect x="0" y="50" width="700" height="1.5" fill="#90a4ae"/>
+        <rect x="0" y="70" width="700" height="1.5" fill="#90a4ae"/>
       </g>
     </g>
 
     <!-- Equipment Turn Area (Footer) -->
-    <rect x="0" y="390" width="550" height="40" fill="#fdd835"/>
+    <rect x="0" y="530" width="700" height="40" fill="#fdd835"/>
 
     <!-- Irrigation Points -->
     <g fill="#4caf50">
@@ -126,26 +126,26 @@
     </g>
 
     <!-- Scale -->
-    <g transform="translate(0, 450)">
-      <line x1="0" y1="0" x2="550" y2="0" stroke="#2c3e50" stroke-width="2"/>
+    <g transform="translate(0, 600)">
+      <line x1="0" y1="0" x2="700" y2="0" stroke="#2c3e50" stroke-width="2"/>
       <line x1="0" y1="-5" x2="0" y2="5" stroke="#2c3e50" stroke-width="2"/>
-      <line x1="137.5" y1="-5" x2="137.5" y2="5" stroke="#2c3e50" stroke-width="2"/>
-      <line x1="275" y1="-5" x2="275" y2="5" stroke="#2c3e50" stroke-width="2"/>
-      <line x1="412.5" y1="-5" x2="412.5" y2="5" stroke="#2c3e50" stroke-width="2"/>
-      <line x1="550" y1="-5" x2="550" y2="5" stroke="#2c3e50" stroke-width="2"/>
+      <line x1="175" y1="-5" x2="175" y2="5" stroke="#2c3e50" stroke-width="2"/>
+      <line x1="350" y1="-5" x2="350" y2="5" stroke="#2c3e50" stroke-width="2"/>
+      <line x1="525" y1="-5" x2="525" y2="5" stroke="#2c3e50" stroke-width="2"/>
+      <line x1="700" y1="-5" x2="700" y2="5" stroke="#2c3e50" stroke-width="2"/>
       <text x="0" y="20" font-family="Arial" font-size="12" text-anchor="middle" fill="#2c3e50">0'</text>
-      <text x="137.5" y="20" font-family="Arial" font-size="12" text-anchor="middle" fill="#2c3e50">50'</text>
-      <text x="275" y="20" font-family="Arial" font-size="12" text-anchor="middle" fill="#2c3e50">100'</text>
-      <text x="412.5" y="20" font-family="Arial" font-size="12" text-anchor="middle" fill="#2c3e50">150'</text>
-      <text x="550" y="20" font-family="Arial" font-size="12" text-anchor="middle" fill="#2c3e50">200'</text>
+      <text x="175" y="20" font-family="Arial" font-size="12" text-anchor="middle" fill="#2c3e50">50'</text>
+      <text x="350" y="20" font-family="Arial" font-size="12" text-anchor="middle" fill="#2c3e50">100'</text>
+      <text x="525" y="20" font-family="Arial" font-size="12" text-anchor="middle" fill="#2c3e50">150'</text>
+      <text x="700" y="20" font-family="Arial" font-size="12" text-anchor="middle" fill="#2c3e50">200'</text>
     </g>
 
     <!-- Dimensions -->
     <g transform="translate(-30, 40)">
-      <line x1="0" y1="0" x2="0" y2="390" stroke="#2c3e50" stroke-width="2"/>
+      <line x1="0" y1="0" x2="0" y2="530" stroke="#2c3e50" stroke-width="2"/>
       <line x1="-5" y1="0" x2="5" y2="0" stroke="#2c3e50" stroke-width="2"/>
-      <line x1="-5" y1="390" x2="5" y2="390" stroke="#2c3e50" stroke-width="2"/>
-      <text x="-10" y="195" font-family="Arial" font-size="12" text-anchor="middle" fill="#2c3e50" transform="rotate(-90, -10, 195)">100'</text>
+      <line x1="-5" y1="530" x2="5" y2="530" stroke="#2c3e50" stroke-width="2"/>
+      <text x="-10" y="265" font-family="Arial" font-size="12" text-anchor="middle" fill="#2c3e50" transform="rotate(-90, -10, 265)">100'</text>
     </g>
   </g>
 </svg>
