@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1000" height="800" viewBox="0 0 1000 800" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1000" height="800" fill="#f8f9fa"/>
+  
+  <!-- Title -->
+  <text x="500" y="50" font-family="Arial" font-size="32" text-anchor="middle" fill="#2c3e50">Aquaponics System Design</text>
+  
+  <!-- Legend -->
+  <g transform="translate(40, 100)">
+    <rect width="220" height="280" fill="#ffffff" stroke="#dee2e6"/>
+    <text x="15" y="35" font-family="Arial" font-size="18" fill="#2c3e50">Legend:</text>
+    
+    <!-- Fish Tank -->
+    <rect x="20" y="50" width="25" height="25" fill="#2196f3"/>
+    <text x="55" y="68" font-family="Arial" font-size="16" fill="#2c3e50">Fish Tank</text>
+    
+    <!-- Grow Beds -->
+    <rect x="20" y="85" width="25" height="25" fill="#4caf50"/>
+    <text x="55" y="103" font-family="Arial" font-size="16" fill="#2c3e50">Growing Beds</text>
+    
+    <!-- Sump Tank -->
+    <rect x="20" y="120" width="25" height="25" fill="#90caf9"/>
+    <text x="55" y="138" font-family="Arial" font-size="16" fill="#2c3e50">Sump Tank</text>
+    
+    <!-- Filter -->
+    <rect x="20" y="155" width="25" height="25" fill="#78909c"/>
+    <text x="55" y="173" font-family="Arial" font-size="16" fill="#2c3e50">Mechanical Filter</text>
+    
+    <!-- Biofilter -->
+    <rect x="20" y="190" width="25" height="25" fill="#607d8b"/>
+    <text x="55" y="208" font-family="Arial" font-size="16" fill="#2c3e50">Biofilter</text>
+    
+    <!-- Pipes -->
+    <line x1="20" y1="235" x2="45" y2="235" stroke="#2c3e50" stroke-width="3"/>
+    <text x="55" y="240" font-family="Arial" font-size="16" fill="#2c3e50">Water Flow</text>
+  </g>
+
+  <!-- Main Design -->
+  <g transform="translate(300, 150)">
+    <!-- System Boundary -->
+    <rect x="0" y="0" width="600" height="500" fill="none" stroke="#2c3e50" stroke-width="3"/>
+    
+    <!-- Fish Tanks -->
+    <g transform="translate(50, 50)">
+      <rect width="150" height="200" fill="#2196f3" stroke="#1976d2" stroke-width="2"/>
+      <text x="75" y="-10" font-family="Arial" font-size="16" text-anchor="middle" fill="#2c3e50">Fish Tanks</text>
+      <!-- Water Level -->
+      <line x1="0" y1="30" x2="150" y2="30" stroke="#90caf9" stroke-width="2" stroke-dasharray="5,5"/>
+      <!-- Aeration -->
+      <g fill="none" stroke="#fff" stroke-width="1">
+        <circle cx="30" cy="150" r="2"/>
+        <circle cx="75" cy="150" r="2"/>
+        <circle cx="120" cy="150" r="2"/>
+        <line x1="30" y1="150" x2="30" y2="100"/>
+        <line x1="75" y1="150" x2="75" y2="100"/>
+        <line x1="120" y1="150" x2="120" y2="100"/>
+      </g>
+    </g>
+    
+    <!-- Mechanical Filter -->
+    <g transform="translate(250, 50)">
+      <rect width="100" height="100" fill="#78909c" stroke="#546e7a" stroke-width="2"/>
+      <text x="50" y="-10" font-family="Arial" font-size="16" text-anchor="middle" fill="#2c3e50">Mechanical Filter</text>
+    </g>
+    
+    <!-- Biofilter -->
+    <g transform="translate(400, 50)">
+      <rect width="100" height="100" fill="#607d8b" stroke="#455a64" stroke-width="2"/>
+      <text x="50" y="-10" font-family="Arial" font-size="16" text-anchor="middle" fill="#2c3e50">Biofilter</text>
+    </g>
+    
+    <!-- Growing Beds -->
+    <g transform="translate(50, 300)">
+      <!-- Bed 1 -->
+      <rect width="150" height="150" fill="#4caf50" stroke="#2e7d32" stroke-width="2"/>
+      <!-- Media Level -->
+      <line x1="0" y1="30" x2="150" y2="30" stroke="#81c784" stroke-width="2" stroke-dasharray="5,5"/>
+      <text x="75" y="-10" font-family="Arial" font-size="16" text-anchor="middle" fill="#2c3e50">Growing Bed 1</text>
+    </g>
+    
+    <!-- Growing Bed 2 -->
+    <g transform="translate(225, 300)">
+      <rect width="150" height="150" fill="#4caf50" stroke="#2e7d32" stroke-width="2"/>
+      <line x1="0" y1="30" x2="150" y2="30" stroke="#81c784" stroke-width="2" stroke-dasharray="5,5"/>
+      <text x="75" y="-10" font-family="Arial" font-size="16" text-anchor="middle" fill="#2c3e50">Growing Bed 2</text>
+    </g>
+    
+    <!-- Growing Bed 3 -->
+    <g transform="translate(400, 300)">
+      <rect width="150" height="150" fill="#4caf50" stroke="#2e7d32" stroke-width="2"/>
+      <line x1="0" y1="30" x2="150" y2="30" stroke="#81c784" stroke-width="2" stroke-dasharray="5,5"/>
+      <text x="75" y="-10" font-family="Arial" font-size="16" text-anchor="middle" fill="#2c3e50">Growing Bed 3</text>
+    </g>
+    
+    <!-- Sump Tank -->
+    <g transform="translate(250, 175)">
+      <rect width="100" height="75" fill="#90caf9" stroke="#64b5f6" stroke-width="2"/>
+      <text x="50" y="-10" font-family="Arial" font-size="16" text-anchor="middle" fill="#2c3e50">Sump Tank</text>
+    </g>
+    
+    <!-- Water Flow Pipes -->
+    <g fill="none" stroke="#2c3e50" stroke-width="3">
+      <!-- Fish Tank to Filter -->
+      <path d="M200,150 H250"/>
+      <!-- Filter to Biofilter -->
+      <path d="M350,100 H400"/>
+      <!-- Biofilter to Growing Beds -->
+      <path d="M500,100 H550 V275 H50 V300"/>
+      <path d="M550,275 H225 V300"/>
+      <path d="M550,275 H400 V300"/>
+      <!-- Growing Beds to Sump -->
+      <path d="M125,450 V475 H300 V250"/>
+      <path d="M300,450 V475"/>
+      <path d="M475,450 V475"/>
+      <!-- Sump to Fish Tank -->
+      <path d="M250,212 H200 V250"/>
+    </g>
+    
+    <!-- Flow Arrows -->
+    <g fill="#2c3e50">
+      <path d="M245,150 l10,-5 v10 z"/>
+      <path d="M395,100 l10,-5 v10 z"/>
+      <path d="M45,295 l10,-5 v10 z"/>
+      <path d="M220,295 l10,-5 v10 z"/>
+      <path d="M395,295 l10,-5 v10 z"/>
+      <path d="M295,245 l10,-5 v10 z"/>
+      <path d="M195,245 l10,-5 v10 z"/>
+    </g>
+  </g>
+  
+  <!-- Scale -->
+  <g transform="translate(150, 750)">
+    <line x1="0" y1="0" x2="600" y2="0" stroke="#2c3e50" stroke-width="2"/>
+    <line x1="0" y1="-5" x2="0" y2="5" stroke="#2c3e50" stroke-width="2"/>
+    <line x1="150" y1="-5" x2="150" y2="5" stroke="#2c3e50" stroke-width="2"/>
+    <line x1="300" y1="-5" x2="300" y2="5" stroke="#2c3e50" stroke-width="2"/>
+    <line x1="450" y1="-5" x2="450" y2="5" stroke="#2c3e50" stroke-width="2"/>
+    <line x1="600" y1="-5" x2="600" y2="5" stroke="#2c3e50" stroke-width="2"/>
+    <text x="0" y="25" font-family="Arial" font-size="14" text-anchor="middle" fill="#2c3e50">0'</text>
+    <text x="150" y="25" font-family="Arial" font-size="14" text-anchor="middle" fill="#2c3e50">5'</text>
+    <text x="300" y="25" font-family="Arial" font-size="14" text-anchor="middle" fill="#2c3e50">10'</text>
+    <text x="450" y="25" font-family="Arial" font-size="14" text-anchor="middle" fill="#2c3e50">15'</text>
+    <text x="600" y="25" font-family="Arial" font-size="14" text-anchor="middle" fill="#2c3e50">20'</text>
+  </g>
+</svg>

@@ -102,6 +102,45 @@ const traditionalLayouts = [
       "Maintain paths for easy access",
       "Consider solar orientation for plant placement"
     ]
+  },
+  {
+    title: "Permaculture Zones Design",
+    description: "A comprehensive permaculture design showcasing the traditional 5-zone system, from the house (Zone 0) to wilderness (Zone 5). Demonstrates efficient land use based on frequency of access needs.",
+    imagePath: "/images/farm-designs/permaculture-zones.svg",
+    dimensions: "200' radius",
+    keyFeatures: [
+      "Zone 0 - House and immediate area",
+      "Zone 1 - Intensive garden and herbs",
+      "Zone 2 - Food forest and small livestock",
+      "Zone 3 - Main crops and grazing",
+      "Zone 4 - Semi-managed systems",
+      "Zone 5 - Wilderness and observation"
+    ],
+    tips: [
+      "Place most frequently used elements closest to house",
+      "Design for water harvesting and natural flows",
+      "Integrate animal systems throughout zones",
+      "Create beneficial relationships between elements"
+    ]
+  },
+  {
+    title: "Aquaponics System Design",
+    description: "An efficient aquaponics system combining fish farming with hydroponic plant production. Features a recirculating system that maximizes space and water efficiency.",
+    imagePath: "/images/farm-designs/aquaponics-system.svg",
+    dimensions: "20' x 30'",
+    keyFeatures: [
+      "Fish tanks with aeration system",
+      "Mechanical and biological filtration",
+      "Multiple growing beds",
+      "Sump tank for water circulation",
+      "Efficient plumbing system"
+    ],
+    tips: [
+      "Start with hardy fish species like tilapia",
+      "Monitor water quality parameters daily",
+      "Balance fish-to-plant ratios",
+      "Ensure backup power for critical systems"
+    ]
   }
 ];
 
