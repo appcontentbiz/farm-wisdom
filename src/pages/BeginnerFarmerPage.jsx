@@ -21,6 +21,7 @@ import StartupGuide from '../components/BeginnerFarmer/StartupGuide';
 import SeasonalPlanning from '../components/BeginnerFarmer/SeasonalPlanning';
 import SoilManagement from '../components/BeginnerFarmer/SoilManagement';
 import MarketingGuide from '../components/BeginnerFarmer/MarketingGuide';
+import EducationGuide from '../components/BeginnerFarmer/EducationGuide';
 
 function TabPanel({ children, value, index }) {
   return (
@@ -75,6 +76,11 @@ export default function BeginnerFarmerPage() {
             label="Marketing Guide" 
             iconPosition="start"
           />
+          <Tab 
+            icon={<EducationIcon />} 
+            label="Education" 
+            iconPosition="start"
+          />
         </Tabs>
 
         <Box>
@@ -92,6 +98,9 @@ export default function BeginnerFarmerPage() {
           </TabPanel>
           <TabPanel value={tabValue} index={4}>
             <MarketingGuide />
+          </TabPanel>
+          <TabPanel value={tabValue} index={5}>
+            <EducationGuide />
           </TabPanel>
         </Box>
       </Paper>

@@ -41,25 +41,28 @@ const seasonalGuide = {
           'Test soil pH and nutrients',
           'Add compost and amendments',
           'Till or prepare beds',
-          'Install irrigation systems'
+          'Install irrigation systems',
+          'Plan crop rotation'
         ]
       },
       {
         category: 'Planting',
         items: [
-          'Start cold-hardy vegetables',
-          'Plant early season crops',
-          'Start warm-season seedlings indoors',
-          'Plant fruit trees and bushes'
+          'Start seeds indoors',
+          'Direct sow cold-hardy crops',
+          'Plant fruit trees',
+          'Transplant seedlings',
+          'Install support structures'
         ]
       },
       {
         category: 'Maintenance',
         items: [
-          'Clean and sharpen tools',
-          'Repair fences and structures',
-          'Set up season extension devices',
-          'Prepare irrigation systems'
+          'Prune fruit trees',
+          'Clean and repair tools',
+          'Set up pest barriers',
+          'Monitor for frost',
+          'Begin composting'
         ]
       }
     ],
@@ -67,47 +70,53 @@ const seasonalGuide = {
       'Peas',
       'Lettuce',
       'Spinach',
-      'Carrots',
       'Radishes',
+      'Carrots',
       'Beets',
+      'Broccoli',
+      'Potatoes',
       'Onions',
-      'Potatoes'
+      'Garlic'
     ],
     tips: [
       'Watch for late frosts',
       'Use row covers for protection',
-      'Monitor soil temperature',
-      'Start slow with succession planting'
+      'Start with cold-hardy crops',
+      'Monitor soil moisture',
+      'Keep detailed planting records'
     ]
   },
   summer: {
     icon: <SummerIcon />,
     tasks: [
       {
-        category: 'Crop Management',
+        category: 'Planting',
         items: [
-          'Regular harvesting',
           'Succession planting',
+          'Plant heat-loving crops',
+          'Start fall crops',
+          'Fill garden gaps',
+          'Plant cover crops'
+        ]
+      },
+      {
+        category: 'Maintenance',
+        items: [
+          'Regular watering',
+          'Mulch for moisture',
           'Weed control',
-          'Support climbing plants'
+          'Pest monitoring',
+          'Prune tomatoes'
         ]
       },
       {
-        category: 'Pest Control',
+        category: 'Harvesting',
         items: [
-          'Monitor for pests daily',
-          'Implement organic controls',
-          'Maintain beneficial insect habitat',
-          'Remove diseased plants'
-        ]
-      },
-      {
-        category: 'Water Management',
-        items: [
-          'Regular deep watering',
-          'Mulch to retain moisture',
-          'Monitor irrigation systems',
-          'Water early morning/evening'
+          'Daily harvest checks',
+          'Process surplus',
+          'Save seeds',
+          'Market preparation',
+          'Storage preparation'
         ]
       }
     ],
@@ -119,43 +128,49 @@ const seasonalGuide = {
       'Beans',
       'Corn',
       'Eggplant',
-      'Melons'
+      'Melons',
+      'Basil',
+      'Okra'
     ],
     tips: [
       'Water deeply and less frequently',
-      'Use mulch to conserve moisture',
-      'Harvest regularly for continued production',
-      'Provide shade for sensitive crops'
+      'Harvest in early morning',
+      'Monitor for disease',
+      'Provide shade if needed',
+      'Maintain air circulation'
     ]
   },
   fall: {
     icon: <FallIcon />,
     tasks: [
       {
-        category: 'Harvest & Storage',
+        category: 'Planting',
         items: [
-          'Harvest mature crops',
-          'Prepare storage areas',
-          'Process and preserve produce',
-          'Save seeds for next year'
+          'Plant fall crops',
+          'Plant garlic',
+          'Sow cover crops',
+          'Plant spring bulbs',
+          'Start winter greenhouse'
         ]
       },
       {
-        category: 'Soil Care',
+        category: 'Maintenance',
         items: [
-          'Plant cover crops',
-          'Add compost to beds',
-          'Mulch perennial beds',
-          'Collect leaves for composting'
+          'Clean up dead plants',
+          'Collect leaves for compost',
+          'Protect tender plants',
+          'Prepare high tunnels',
+          'Soil testing'
         ]
       },
       {
         category: 'Planning',
         items: [
-          'Record keeping and evaluation',
-          'Order supplies for next season',
+          'Review season notes',
           'Plan crop rotation',
-          'Maintain equipment'
+          'Order seeds early',
+          'Maintain equipment',
+          'Update business plan'
         ]
       }
     ],
@@ -164,60 +179,68 @@ const seasonalGuide = {
       'Brussels Sprouts',
       'Cabbage',
       'Cauliflower',
-      'Broccoli',
-      'Root crops',
+      'Carrots',
+      'Beets',
+      'Turnips',
       'Garlic',
-      'Winter squash'
+      'Leeks',
+      'Winter Squash'
     ],
     tips: [
-      'Watch for early frosts',
-      'Use season extension methods',
-      'Clean up diseased plant material',
-      'Store crops properly'
+      'Watch first frost dates',
+      'Use season extension',
+      'Store crops properly',
+      'Clean and store tools',
+      'Document lessons learned'
     ]
   },
   winter: {
     icon: <WinterIcon />,
     tasks: [
       {
-        category: 'Planning & Preparation',
+        category: 'Planning',
         items: [
-          'Review last season\'s records',
-          'Order seeds and supplies',
-          'Plan crop rotations',
-          'Maintain tools and equipment'
+          'Create crop plan',
+          'Order seeds',
+          'Design garden layout',
+          'Budget planning',
+          'Equipment maintenance'
         ]
       },
       {
         category: 'Infrastructure',
         items: [
-          'Repair greenhouses/cold frames',
-          'Maintain storage facilities',
-          'Plan new garden areas',
-          'Build/repair structures'
+          'Repair tools',
+          'Build cold frames',
+          'Maintain greenhouse',
+          'Check irrigation',
+          'Organize storage'
         ]
       },
       {
         category: 'Education',
         items: [
-          'Attend farming workshops',
+          'Attend workshops',
           'Study new techniques',
-          'Network with other farmers',
-          'Update business plan'
+          'Network with farmers',
+          'Update certifications',
+          'Review regulations'
         ]
       }
     ],
     crops: [
-      'Microgreens (indoor)',
+      'Microgreens',
       'Sprouts',
-      'Winter greenhouse crops',
-      'Cold frame greens'
+      'Winter Greens',
+      'Root Vegetables',
+      'Herbs'
     ],
     tips: [
-      'Plan crop succession for next year',
+      'Plan crop succession',
       'Organize seed inventory',
-      'Review and update farm records',
-      'Research new varieties and methods'
+      'Review farm records',
+      'Research new varieties',
+      'Attend farmer conferences'
     ]
   }
 };
