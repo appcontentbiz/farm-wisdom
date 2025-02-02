@@ -182,7 +182,7 @@ const seasonalGuide = {
       {
         category: 'Planning & Preparation',
         items: [
-          'Review last season's records',
+          'Review last season\'s records',
           'Order seeds and supplies',
           'Plan crop rotations',
           'Maintain tools and equipment'

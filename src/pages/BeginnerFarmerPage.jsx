@@ -13,12 +13,14 @@ import {
   School as EducationIcon,
   Grass as SoilIcon,
   CalendarMonth as SeasonIcon,
-  Build as StartupIcon
+  Build as StartupIcon,
+  Store as MarketIcon
 } from '@mui/icons-material';
 import NutritiousCrops from '../components/BeginnerFarmer/NutritiousCrops';
 import StartupGuide from '../components/BeginnerFarmer/StartupGuide';
 import SeasonalPlanning from '../components/BeginnerFarmer/SeasonalPlanning';
 import SoilManagement from '../components/BeginnerFarmer/SoilManagement';
+import MarketingGuide from '../components/BeginnerFarmer/MarketingGuide';
 
 function TabPanel({ children, value, index }) {
   return (
@@ -68,6 +70,11 @@ export default function BeginnerFarmerPage() {
             label="Soil Management" 
             iconPosition="start"
           />
+          <Tab 
+            icon={<MarketIcon />} 
+            label="Marketing Guide" 
+            iconPosition="start"
+          />
         </Tabs>
 
         <Box>
@@ -82,6 +89,9 @@ export default function BeginnerFarmerPage() {
           </TabPanel>
           <TabPanel value={tabValue} index={3}>
             <SoilManagement />
+          </TabPanel>
+          <TabPanel value={tabValue} index={4}>
+            <MarketingGuide />
           </TabPanel>
         </Box>
       </Paper>
