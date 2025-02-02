@@ -229,7 +229,7 @@ const climateZones = [
   { value: 'hot', label: 'Hot (Zones 10-13)', description: 'Year-round growing possible' }
 ];
 
-export default function SeasonalPlanning() {
+function SeasonalPlanning() {
   const [selectedSeason, setSelectedSeason] = useState('spring');
   const [climateZone, setClimateZone] = useState('');
 
@@ -381,3 +381,5 @@ export default function SeasonalPlanning() {
     </Box>
   );
 }
+
+export default SeasonalPlanning;

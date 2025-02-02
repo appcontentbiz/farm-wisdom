@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Box,
   Typography,
@@ -25,7 +25,8 @@ import {
   ExpandMore as ExpandMoreIcon,
   LocalShipping as DeliveryIcon,
   Assignment as PlanIcon,
-  Campaign as MarketingIcon
+  Campaign as MarketingIcon,
+  Language as WebIcon
 } from '@mui/icons-material';
 
 const marketingStrategies = {
@@ -234,7 +235,7 @@ const onlinePresence = {
   }
 };
 
-export default function MarketingGuide() {
+function MarketingGuide() {
   return (
     <Box sx={{ p: 3 }}>
       <Typography variant="h4" gutterBottom>
@@ -371,7 +372,7 @@ export default function MarketingGuide() {
       {/* Online Presence Section */}
       <Paper elevation={3} sx={{ p: 3 }}>
         <Typography variant="h5" gutterBottom>
-          <Campaign sx={{ mr: 1, verticalAlign: 'middle' }} />
+          <WebIcon sx={{ mr: 1, verticalAlign: 'middle' }} />
           Online Presence
         </Typography>
         <Grid container spacing={3}>
@@ -440,3 +441,5 @@ export default function MarketingGuide() {
     </Box>
   );
 }
+
+export default MarketingGuide;
