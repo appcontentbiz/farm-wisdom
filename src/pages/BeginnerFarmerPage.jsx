@@ -14,8 +14,7 @@ import {
   Grass as SoilIcon,
   CalendarMonth as SeasonIcon,
   Build as StartupIcon,
-  Store as MarketIcon,
-  Park as DesignIcon
+  Store as MarketIcon
 } from '@mui/icons-material';
 import NutritiousCrops from '../components/BeginnerFarmer/NutritiousCrops';
 import StartupGuide from '../components/BeginnerFarmer/StartupGuide';
@@ -23,7 +22,6 @@ import SeasonalPlanning from '../components/BeginnerFarmer/SeasonalPlanning';
 import SoilManagement from '../components/BeginnerFarmer/SoilManagement';
 import MarketingGuide from '../components/BeginnerFarmer/MarketingGuide';
 import EducationGuide from '../components/BeginnerFarmer/EducationGuide';
-import FarmDesigns from '../components/BeginnerFarmer/FarmDesigns';
 
 function TabPanel({ children, value, index }) {
   return (
@@ -83,11 +81,6 @@ export default function BeginnerFarmerPage() {
             label="Education" 
             iconPosition="start"
           />
-          <Tab 
-            icon={<DesignIcon />} 
-            label="Farm Designs" 
-            iconPosition="start"
-          />
         </Tabs>
 
         <Box>
@@ -108,9 +101,6 @@ export default function BeginnerFarmerPage() {
           </TabPanel>
           <TabPanel value={tabValue} index={5}>
             <EducationGuide />
-          </TabPanel>
-          <TabPanel value={tabValue} index={6}>
-            <FarmDesigns />
           </TabPanel>
         </Box>
       </Paper>
