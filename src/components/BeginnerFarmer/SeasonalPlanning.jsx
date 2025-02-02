@@ -22,7 +22,7 @@ import {
 import {
   WbSunny as SunIcon,
   AcUnit as WinterIcon,
-  Eco as SpringIcon,
+  Park as SpringIcon,
   Whatshot as SummerIcon,
   FilterVintage as FallIcon,
   CalendarMonth as CalendarIcon,
