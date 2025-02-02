@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="800" height="600" fill="#f8f9fa"/>
+  
+  <!-- Title -->
+  <text x="400" y="40" font-family="Arial" font-size="24" text-anchor="middle" fill="#2c3e50">Edible Front Yard Design</text>
+  
+  <!-- Legend -->
+  <g transform="translate(20, 80)">
+    <rect width="160" height="200" fill="#ffffff" stroke="#dee2e6"/>
+    <text x="10" y="30" font-family="Arial" font-size="14" fill="#2c3e50">Legend:</text>
+    <circle cx="25" cy="50" r="8" fill="#2e7d32"/>
+    <text x="40" y="55" font-family="Arial" font-size="12" fill="#2c3e50">Dwarf Fruit Trees</text>
+    <rect x="15" y="70" width="20" height="20" fill="#81c784"/>
+    <text x="40" y="85" font-family="Arial" font-size="12" fill="#2c3e50">Herb Garden</text>
+    <rect x="15" y="100" width="20" height="20" fill="#c8e6c9"/>
+    <text x="40" y="115" font-family="Arial" font-size="12" fill="#2c3e50">Edible Borders</text>
+    <path d="M15,130 h20 v20 h-20 z" fill="#a5d6a7"/>
+    <text x="40" y="145" font-family="Arial" font-size="12" fill="#2c3e50">Berry Bushes</text>
+    <rect x="15" y="160" width="20" height="20" fill="#90a4ae"/>
+    <text x="40" y="175" font-family="Arial" font-size="12" fill="#2c3e50">Pathways</text>
+    <rect x="15" y="190" width="20" height="20" fill="#cddc39"/>
+    <text x="40" y="205" font-family="Arial" font-size="12" fill="#2c3e50">Lawn Area</text>
+  </g>
+
+  <!-- Main Design -->
+  <g transform="translate(200, 100)">
+    <!-- Property Boundary -->
+    <rect x="0" y="0" width="550" height="400" fill="none" stroke="#2c3e50" stroke-width="2"/>
+    
+    <!-- Lawn Area -->
+    <path d="M50,150 L500,150 L500,350 L50,350 Z" fill="#cddc39"/>
+    
+    <!-- Front Walk -->
+    <path d="M250,350 L350,350 L350,400 L250,400 Z" fill="#90a4ae"/>
+    
+    <!-- Curved Pathways -->
+    <path d="M50,250 Q275,200 500,250" stroke="#90a4ae" stroke-width="20" fill="none"/>
+    
+    <!-- Edible Borders -->
+    <path d="M50,50 L500,50 L500,150 L50,150 Z" fill="#c8e6c9"/>
+    <path d="M50,350 L250,350 L250,380 L50,380 Z" fill="#c8e6c9"/>
+    <path d="M350,350 L500,350 L500,380 L350,380 Z" fill="#c8e6c9"/>
+    
+    <!-- Herb Spiral -->
+    <g transform="translate(275,100)">
+      <circle cx="0" cy="0" r="30" fill="#81c784"/>
+      <path d="M0,0 Q15,-15 30,0 Q15,15 0,30 Q-15,15 -30,0 Q-15,-15 0,0" 
+            fill="none" stroke="#4caf50" stroke-width="2"/>
+    </g>
+    
+    <!-- Berry Bushes -->
+    <g fill="#a5d6a7">
+      <circle cx="100" cy="100" r="15"/>
+      <circle cx="150" cy="100" r="15"/>
+      <circle cx="450" cy="100" r="15"/>
+      <circle cx="400" cy="100" r="15"/>
+    </g>
+    
+    <!-- Dwarf Fruit Trees -->
+    <g fill="#2e7d32">
+      <circle cx="75" cy="75" r="20"/>
+      <circle cx="475" cy="75" r="20"/>
+      <circle cx="175" cy="75" r="20"/>
+      <circle cx="375" cy="75" r="20"/>
+    </g>
+
+    <!-- Labels -->
+    <g font-family="Arial" font-size="12" fill="#2c3e50" text-anchor="middle">
+      <text x="275" y="90">Herb</text>
+      <text x="275" y="105">Spiral</text>
+      <text x="275" y="300">Main Path</text>
+    </g>
+
+    <!-- Scale -->
+    <g transform="translate(0, 420)">
+      <line x1="0" y1="0" x2="550" y2="0" stroke="#2c3e50" stroke-width="2"/>
+      <line x1="0" y1="-5" x2="0" y2="5" stroke="#2c3e50" stroke-width="2"/>
+      <line x1="137.5" y1="-5" x2="137.5" y2="5" stroke="#2c3e50" stroke-width="2"/>
+      <line x1="275" y1="-5" x2="275" y2="5" stroke="#2c3e50" stroke-width="2"/>
+      <line x1="412.5" y1="-5" x2="412.5" y2="5" stroke="#2c3e50" stroke-width="2"/>
+      <line x1="550" y1="-5" x2="550" y2="5" stroke="#2c3e50" stroke-width="2"/>
+      <text x="0" y="20" font-family="Arial" font-size="12" text-anchor="middle" fill="#2c3e50">0'</text>
+      <text x="137.5" y="20" font-family="Arial" font-size="12" text-anchor="middle" fill="#2c3e50">12.5'</text>
+      <text x="275" y="20" font-family="Arial" font-size="12" text-anchor="middle" fill="#2c3e50">25'</text>
+      <text x="412.5" y="20" font-family="Arial" font-size="12" text-anchor="middle" fill="#2c3e50">37.5'</text>
+      <text x="550" y="20" font-family="Arial" font-size="12" text-anchor="middle" fill="#2c3e50">50'</text>
+    </g>
+
+    <!-- Height Indicator -->
+    <g transform="translate(-30, 0)">
+      <line x1="0" y1="0" x2="0" y2="400" stroke="#2c3e50" stroke-width="2"/>
+      <line x1="-5" y1="0" x2="5" y2="0" stroke="#2c3e50" stroke-width="2"/>
+      <line x1="-5" y1="400" x2="5" y2="400" stroke="#2c3e50" stroke-width="2"/>
+      <text x="-10" y="200" font-family="Arial" font-size="12" text-anchor="middle" fill="#2c3e50" transform="rotate(-90, -10, 200)">30'</text>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="800" height="600" fill="#f8f9fa"/>
+  
+  <!-- Title -->
+  <text x="400" y="40" font-family="Arial" font-size="24" text-anchor="middle" fill="#2c3e50">Mandala Garden Design</text>
+  
+  <!-- Legend -->
+  <g transform="translate(20, 80)">
+    <rect width="160" height="180" fill="#ffffff" stroke="#dee2e6"/>
+    <text x="10" y="30" font-family="Arial" font-size="14" fill="#2c3e50">Legend:</text>
+    <path d="M15,45 h20 v20 h-20 z" fill="#8bc34a"/>
+    <text x="40" y="60" font-family="Arial" font-size="12" fill="#2c3e50">Herb Spiral</text>
+    <path d="M15,75 h20 v20 h-20 z" fill="#a5d6a7"/>
+    <text x="40" y="90" font-family="Arial" font-size="12" fill="#2c3e50">Growing Beds</text>
+    <path d="M15,105 h20 v20 h-20 z" fill="#90a4ae"/>
+    <text x="40" y="120" font-family="Arial" font-size="12" fill="#2c3e50">Paths</text>
+    <circle cx="25" cy="145" r="8" fill="#4caf50"/>
+    <text x="40" y="150" font-family="Arial" font-size="12" fill="#2c3e50">Composting Area</text>
+    <circle cx="25" cy="170" r="8" fill="#2196f3"/>
+    <text x="40" y="175" font-family="Arial" font-size="12" fill="#2c3e50">Water Feature</text>
+  </g>
+
+  <!-- Main Design -->
+  <g transform="translate(400, 300)">
+    <!-- Outer Circle -->
+    <circle cx="0" cy="0" r="200" fill="#e8f5e9" stroke="#81c784" stroke-width="2"/>
+    
+    <!-- Keyhole Paths -->
+    <g fill="#90a4ae">
+      <!-- Center Path -->
+      <path d="M-20,0 L200,0 L190,-10 L190,10 L200,0 Z"/>
+      <!-- Radial Paths -->
+      <path d="M0,0 L173.2,-100 L163.2,-110 L163.2,-90 L173.2,-100 Z" transform="rotate(60)"/>
+      <path d="M0,0 L173.2,-100 L163.2,-110 L163.2,-90 L173.2,-100 Z" transform="rotate(120)"/>
+      <path d="M0,0 L173.2,-100 L163.2,-110 L163.2,-90 L173.2,-100 Z" transform="rotate(180)"/>
+      <path d="M0,0 L173.2,-100 L163.2,-110 L163.2,-90 L173.2,-100 Z" transform="rotate(240)"/>
+      <path d="M0,0 L173.2,-100 L163.2,-110 L163.2,-90 L173.2,-100 Z" transform="rotate(300)"/>
+    </g>
+
+    <!-- Growing Sections -->
+    <g fill="#a5d6a7" stroke="#4caf50">
+      <path d="M0,0 L173.2,100 A200,200 0 0,1 86.6,173.2 Z"/>
+      <path d="M0,0 L173.2,100 A200,200 0 0,1 86.6,173.2 Z" transform="rotate(60)"/>
+      <path d="M0,0 L173.2,100 A200,200 0 0,1 86.6,173.2 Z" transform="rotate(120)"/>
+      <path d="M0,0 L173.2,100 A200,200 0 0,1 86.6,173.2 Z" transform="rotate(180)"/>
+      <path d="M0,0 L173.2,100 A200,200 0 0,1 86.6,173.2 Z" transform="rotate(240)"/>
+      <path d="M0,0 L173.2,100 A200,200 0 0,1 86.6,173.2 Z" transform="rotate(300)"/>
+    </g>
+
+    <!-- Herb Spiral -->
+    <g transform="translate(-10,-10)">
+      <path d="M0,0 A20,20 0 0,1 20,20 A15,15 0 0,0 35,35 A10,10 0 0,1 45,45 A5,5 0 0,0 50,50" 
+            fill="none" stroke="#8bc34a" stroke-width="15"/>
+    </g>
+
+    <!-- Composting Areas -->
+    <g fill="#4caf50">
+      <circle cx="150" cy="0" r="15"/>
+      <circle cx="-75" cy="129.9" r="15"/>
+      <circle cx="-75" cy="-129.9" r="15"/>
+    </g>
+
+    <!-- Water Features -->
+    <g fill="#2196f3">
+      <circle cx="0" cy="150" r="10"/>
+      <circle cx="-129.9" cy="-75" r="10"/>
+      <circle cx="129.9" cy="-75" r="10"/>
+    </g>
+
+    <!-- Section Labels -->
+    <g font-family="Arial" font-size="14" fill="#2c3e50" text-anchor="middle">
+      <text x="100" y="-60">Herbs</text>
+      <text x="100" y="70">Vegetables</text>
+      <text x="0" y="120">Flowers</text>
+      <text x="-100" y="70">Legumes</text>
+      <text x="-100" y="-60">Root Crops</text>
+      <text x="0" y="-120">Leafy Greens</text>
+    </g>
+  </g>
+
+  <!-- Scale -->
+  <g transform="translate(150, 550)">
+    <line x1="0" y1="0" x2="500" y2="0" stroke="#2c3e50" stroke-width="2"/>
+    <line x1="0" y1="-5" x2="0" y2="5" stroke="#2c3e50" stroke-width="2"/>
+    <line x1="125" y1="-5" x2="125" y2="5" stroke="#2c3e50" stroke-width="2"/>
+    <line x1="250" y1="-5" x2="250" y2="5" stroke="#2c3e50" stroke-width="2"/>
+    <line x1="375" y1="-5" x2="375" y2="5" stroke="#2c3e50" stroke-width="2"/>
+    <line x1="500" y1="-5" x2="500" y2="5" stroke="#2c3e50" stroke-width="2"/>
+    <text x="0" y="20" font-family="Arial" font-size="12" text-anchor="middle" fill="#2c3e50">0'</text>
+    <text x="125" y="20" font-family="Arial" font-size="12" text-anchor="middle" fill="#2c3e50">10'</text>
+    <text x="250" y="20" font-family="Arial" font-size="12" text-anchor="middle" fill="#2c3e50">20'</text>
+    <text x="375" y="20" font-family="Arial" font-size="12" text-anchor="middle" fill="#2c3e50">30'</text>
+    <text x="500" y="20" font-family="Arial" font-size="12" text-anchor="middle" fill="#2c3e50">40'</text>
+  </g>
+</svg>
