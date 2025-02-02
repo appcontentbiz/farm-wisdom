@@ -69,6 +69,7 @@ const traditionalLayouts = [
     title: "Market Garden Layout",
     description: "A commercial-scale market garden design optimized for efficient production. Features 30-inch beds organized into crop rotation zones with adequate space for equipment access.",
     imagePath: "/images/farm-designs/market-garden.svg",
+    downloadPath: "/files/market-garden-cad.dwg",
     dimensions: "200' x 100'",
     keyFeatures: [
       "Four distinct crop rotation zones",
@@ -88,6 +89,7 @@ const traditionalLayouts = [
     title: "Mandala Garden Design",
     description: "A beautiful and functional garden design that combines aesthetics with practicality. The circular layout maximizes space efficiency while creating an engaging garden experience.",
     imagePath: "/images/farm-designs/mandala-garden.svg",
+    downloadPath: "/files/mandala-garden-cad.dwg",
     dimensions: "40' diameter",
     keyFeatures: [
       "Central herb spiral",
@@ -107,6 +109,7 @@ const traditionalLayouts = [
     title: "Permaculture Zones Design",
     description: "A comprehensive permaculture design showcasing the traditional 5-zone system, from the house (Zone 0) to wilderness (Zone 5). Demonstrates efficient land use based on frequency of access needs.",
     imagePath: "/images/farm-designs/permaculture-zones.svg",
+    downloadPath: "/files/permaculture-zones-cad.dwg",
     dimensions: "200' radius",
     keyFeatures: [
       "Zone 0 - House and immediate area",
@@ -127,6 +130,7 @@ const traditionalLayouts = [
     title: "Aquaponics System Design",
     description: "An efficient aquaponics system combining fish farming with hydroponic plant production. Features a recirculating system that maximizes space and water efficiency.",
     imagePath: "/images/farm-designs/aquaponics-system.svg",
+    downloadPath: "/files/aquaponics-system-cad.dwg",
     dimensions: "20' x 30'",
     keyFeatures: [
       "Fish tanks with aeration system",
@@ -149,6 +153,7 @@ const edibleLandscaping = [
     title: "Edible Front Yard",
     description: "Transform your front yard into a beautiful and productive space that combines ornamental appeal with food production. This design maintains curb appeal while maximizing growing space.",
     imagePath: "/images/farm-designs/edible-frontyard.svg",
+    downloadPath: "/files/edible-frontyard-cad.dwg",
     dimensions: "50' x 30'",
     keyFeatures: [
       "Dwarf fruit trees for vertical interest",
@@ -168,6 +173,7 @@ const edibleLandscaping = [
     title: "Edible Backyard Oasis",
     description: "Create a multi-functional backyard that combines food production with family recreation. This design creates distinct zones for different activities while maintaining a cohesive look.",
     imagePath: "/images/farm-designs/edible-backyard.svg",
+    downloadPath: "/files/edible-backyard-cad.dwg",
     dimensions: "60' x 40'",
     keyFeatures: [
       "Raised vegetable beds",
