@@ -29,7 +29,6 @@ import StateResourcesPage from './pages/StateResourcesPage';
 import BloopersPage from './pages/BloopersPage';
 import GleaningProgramsPage from './pages/GleaningProgramsPage';
 import FarmDesignsPage from './pages/FarmDesignsPage';
-import ArticlesPage from './pages/ArticlesPage';
 import './App.css';
 
 const PrivateRoute = ({ children }) => {
@@ -70,7 +69,6 @@ function App() {
                 <Route path="/equipment-management" element={<EquipmentManagement />} />
                 <Route path="/community-hub" element={<CommunityHub />} />
                 <Route path="/farm-designs" element={<FarmDesignsPage />} />
-                <Route path="/articles" element={<ArticlesPage />} />
                 <Route
                   path="/professional/*"
                   element={
