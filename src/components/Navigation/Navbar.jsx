@@ -60,6 +60,9 @@ export default function Navbar() {
             <StyledLink to="/resources">
               <Button color="inherit">Resources</Button>
             </StyledLink>
+            <StyledLink to="/articles">
+              <Button color="inherit">Articles</Button>
+            </StyledLink>
             <StyledLink to="/state-resources">
               <Button 
                 color="inherit"
