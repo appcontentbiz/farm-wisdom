@@ -18,7 +18,6 @@ import Demo from './pages/Demo';
 import InteractiveDemo from './pages/InteractiveDemo';
 import BeginnerFarmerPage from './pages/BeginnerFarmerPage';
 import Resources from './pages/Resources';
-import Articles from './pages/Articles';
 import SmartCropPlanning from './pages/SmartCropPlanning';
 import PrecisionWeather from './pages/PrecisionWeather';
 import MarketIntelligence from './pages/MarketIntelligence';
@@ -58,7 +57,6 @@ function App() {
                 <Route path="/demo" element={<Demo />} />
                 <Route path="/try-enterprise" element={<InteractiveDemo />} />
                 <Route path="/resources" element={<Resources />} />
-                <Route path="/articles" element={<Articles />} />
                 <Route path="/resource-directory" element={<ResourceDirectory />} />
                 <Route path="/state-resources" element={<StateResourcesPage />} />
                 <Route path="/bloopers" element={<BloopersPage />} />
