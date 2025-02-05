@@ -60,9 +60,6 @@ export default function Navbar() {
             <StyledLink to="/resources">
               <Button color="inherit">Resources</Button>
             </StyledLink>
-            <StyledLink to="/articles">
-              <Button color="inherit">Articles</Button>
-            </StyledLink>
             <StyledLink to="/state-resources">
               <Button 
                 color="inherit"
@@ -224,14 +221,6 @@ export default function Navbar() {
               sx={{ whiteSpace: 'nowrap' }}
             >
               Try Demo
-            </Button>
-            <Button
-              component={Link}
-              to="/resources"
-              color="inherit"
-              sx={{ whiteSpace: 'nowrap' }}
-            >
-              Articles
             </Button>
             <Button
               component={Link}
