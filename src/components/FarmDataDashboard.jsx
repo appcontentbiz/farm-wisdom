@@ -5,12 +5,11 @@ import {
   CardContent,
   Grid,
   Typography,
-  CircularProgress,
-  Divider,
   List,
   ListItem,
   ListItemText,
-  Paper,
+  Divider,
+  Alert,
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
@@ -28,84 +27,72 @@ const DashboardCard = styled(Card)(({ theme }) => ({
 }));
 
 const FarmDataDashboard = () => {
-  const [soilData, setSoilData] = useState(null);
-  const [weatherData, setWeatherData] = useState(null);
-  const [markets, setMarkets] = useState([]);
-  const [resources, setResources] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [userLocation, setUserLocation] = useState({ lat: 40.7128, lon: -74.0060 });
-
-  useEffect(() => {
-    // Get user's location
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setUserLocation({
-            lat: position.coords.latitude,
-            lon: position.coords.longitude,
-          });
+  // Placeholder data
+  const placeholderData = {
+    soil: {
+      moisture: 0.35,
+      temperature: 22.5,
+      nitrogen: 1.2,
+      phosphorus: 0.8,
+      potassium: 1.1,
+    },
+    weather: {
+      condition: 'Partly Cloudy',
+      temperature: 24.5,
+      humidity: 65,
+      windSpeed: 12,
+      precipitation: 0,
+    },
+    markets: [
+      {
+        id: 1,
+        name: 'Local Farm Market',
+        address: '123 Farm Road',
+        distance: 2.5,
+        hours: '8:00 AM - 6:00 PM',
+        products: ['Vegetables', 'Fruits', 'Dairy'],
+      },
+      {
+        id: 2,
+        name: 'Community Farmers Market',
+        address: '456 Garden Street',
+        distance: 4.1,
+        hours: '9:00 AM - 5:00 PM',
+        products: ['Organic Produce', 'Honey', 'Eggs'],
+      },
+    ],
+    resources: {
+      soil: [
+        {
+          id: 'soil_1',
+          provider: 'Community Garden A',
+          location: '789 Green Ave',
+          quantity: '500 kg',
+          distance: 1.8,
+          contact: '555-0123',
+          available_until: '2025-02-21',
         },
-        (error) => {
-          console.error('Error getting location:', error);
-        }
-      );
-    }
-  }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        const [soilRes, weatherRes, marketsRes, resourcesRes] = await Promise.all([
-          fetch('/api/soil-data'),
-          fetch(`/api/weather?lat=${userLocation.lat}&lon=${userLocation.lon}`),
-          fetch(`/api/farm-markets?lat=${userLocation.lat}&lon=${userLocation.lon}`),
-          fetch(`/api/free-resources?lat=${userLocation.lat}&lon=${userLocation.lon}`),
-        ]);
-
-        const soil = await soilRes.json();
-        const weather = await weatherRes.json();
-        const marketsData = await marketsRes.json();
-        const resourcesData = await resourcesRes.json();
-
-        setSoilData(soil);
-        setWeatherData(weather);
-        setMarkets(marketsData);
-        setResources(resourcesData);
-        setError(null);
-      } catch (err) {
-        setError('Failed to fetch data. Please try again later.');
-        console.error('Error fetching data:', err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    const interval = setInterval(fetchData, 30000); // Update every 30 seconds
-    fetchData(); // Initial fetch
-
-    return () => clearInterval(interval);
-  }, [userLocation]);
-
-  if (loading) {
-    return (
-      <Box display="flex" justifyContent="center" alignItems="center" minHeight="200px">
-        <CircularProgress />
-      </Box>
-    );
-  }
-
-  if (error) {
-    return (
-      <Box p={3}>
-        <Typography color="error">{error}</Typography>
-      </Box>
-    );
-  }
+      ],
+      mulch: [
+        {
+          id: 'mulch_1',
+          provider: 'City Parks Department',
+          location: '321 Park Road',
+          quantity: '1000 kg',
+          distance: 3.2,
+          contact: '555-0456',
+          available_until: '2025-02-14',
+        },
+      ],
+    },
+  };
 
   return (
     <Box p={3}>
+      <Alert severity="info" sx={{ mb: 3 }}>
+        Note: This dashboard currently shows placeholder data. Real-time data service is coming soon.
+      </Alert>
+      
       <Grid container spacing={3}>
         {/* Soil Data */}
         <Grid item xs={12} md={6}>
@@ -118,19 +105,19 @@ const FarmDataDashboard = () => {
                 <ListItem>
                   <ListItemText 
                     primary="Moisture" 
-                    secondary={`${soilData?.moisture * 100}%`} 
+                    secondary={`${placeholderData.soil.moisture * 100}%`} 
                   />
                 </ListItem>
                 <ListItem>
                   <ListItemText 
                     primary="Temperature" 
-                    secondary={`${soilData?.temperature}°C`} 
+                    secondary={`${placeholderData.soil.temperature}°C`} 
                   />
                 </ListItem>
                 <ListItem>
                   <ListItemText 
                     primary="Nitrogen" 
-                    secondary={`${soilData?.nitrogen} index`} 
+                    secondary={`${placeholderData.soil.nitrogen} index`} 
                   />
                 </ListItem>
               </List>
@@ -149,19 +136,19 @@ const FarmDataDashboard = () => {
                 <ListItem>
                   <ListItemText 
                     primary="Condition" 
-                    secondary={weatherData?.condition} 
+                    secondary={placeholderData.weather.condition} 
                   />
                 </ListItem>
                 <ListItem>
                   <ListItemText 
                     primary="Temperature" 
-                    secondary={`${weatherData?.temperature}°C`} 
+                    secondary={`${placeholderData.weather.temperature}°C`} 
                   />
                 </ListItem>
                 <ListItem>
                   <ListItemText 
                     primary="Humidity" 
-                    secondary={`${weatherData?.humidity}%`} 
+                    secondary={`${placeholderData.weather.humidity}%`} 
                   />
                 </ListItem>
               </List>
@@ -177,7 +164,7 @@ const FarmDataDashboard = () => {
                 Nearby Farm Markets
               </Typography>
               <List>
-                {markets.map((market) => (
+                {placeholderData.markets.map((market) => (
                   <React.Fragment key={market.id}>
                     <ListItem>
                       <ListItemText
@@ -210,7 +197,7 @@ const FarmDataDashboard = () => {
               <Typography variant="h6" gutterBottom>
                 Free Resources
               </Typography>
-              {resources && Object.entries(resources).map(([type, offers]) => (
+              {Object.entries(placeholderData.resources).map(([type, offers]) => (
                 <Box key={type} mb={2}>
                   <Typography variant="subtitle1" gutterBottom sx={{ textTransform: 'capitalize' }}>
                     {type}
