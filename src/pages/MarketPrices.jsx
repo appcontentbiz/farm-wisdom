@@ -17,18 +17,19 @@ import {
   Grid,
   Button,
   Tabs,
-  Tab
+  Tab,
+  Chip
 } from '@mui/material';
 import {
   TrendingUp,
   TrendingDown,
   Timeline,
-  ShowChart
+  ShowChart,
+  Refresh as RefreshIcon
 } from '@mui/icons-material';
-import axios from 'axios';
 
-// Sample market data (replace with real API data in production)
-const commodities = [
+// Initial market data
+const initialCommodities = [
   { 
     name: 'Corn',
     futures: [
@@ -67,20 +68,20 @@ const commodities = [
   }
 ];
 
-const marketNews = [
+const initialMarketNews = [
   {
     title: 'Corn Prices Rally on Strong Export Data',
-    date: '2024-01-17',
+    date: '2024-02-07',
     summary: 'Corn futures rose as weekly export sales topped market expectations...'
   },
   {
     title: 'Weather Concerns Impact Soybean Outlook',
-    date: '2024-01-17',
+    date: '2024-02-07',
     summary: 'Soybean prices declined amid forecasts of favorable weather in South America...'
   },
   {
     title: 'Global Wheat Supply Forecast Updated',
-    date: '2024-01-16',
+    date: '2024-02-06',
     summary: 'The USDA raised its forecast for global wheat production...'
   }
 ];
@@ -89,10 +90,47 @@ const MarketPrices = () => {
   const [selectedTab, setSelectedTab] = useState(0);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [marketData, setMarketData] = useState(commodities);
+  const [marketData, setMarketData] = useState(initialCommodities);
+  const [news, setNews] = useState(initialMarketNews);
+  const [lastUpdate, setLastUpdate] = useState(new Date());
+
+  // Simulate real-time price updates
+  const updatePrices = () => {
+    setLoading(true);
+    
+    const updatedData = marketData.map(commodity => ({
+      ...commodity,
+      futures: commodity.futures.map(future => {
+        // Simulate price movement with random changes
+        const priceChange = (Math.random() - 0.5) * 0.1;
+        const newPrice = Number((future.price + priceChange).toFixed(3));
+        
+        return {
+          ...future,
+          price: newPrice,
+          change: Number((newPrice - future.price).toFixed(3))
+        };
+      }),
+      lastUpdated: new Date()
+    }));
+
+    setMarketData(updatedData);
+    setLastUpdate(new Date());
+    setLoading(false);
+  };
+
+  // Update prices every 30 seconds
+  useEffect(() => {
+    const interval = setInterval(updatePrices, 30000);
+    return () => clearInterval(interval);
+  }, [marketData]);
 
   const handleTabChange = (event, newValue) => {
     setSelectedTab(newValue);
+  };
+
+  const handleManualRefresh = () => {
+    updatePrices();
   };
 
   const formatPrice = (price) => {
@@ -122,9 +160,26 @@ const MarketPrices = () => {
 
   return (
     <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-      <Typography variant="h4" component="h1" gutterBottom>
-        Agricultural Market Prices
-      </Typography>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
+        <Typography variant="h4" component="h1">
+          Agricultural Market Prices
+        </Typography>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+          <Chip 
+            label={`Last update: ${lastUpdate.toLocaleTimeString()}`}
+            color="primary"
+            variant="outlined"
+          />
+          <Button
+            startIcon={<RefreshIcon />}
+            onClick={handleManualRefresh}
+            variant="contained"
+            disabled={loading}
+          >
+            Refresh
+          </Button>
+        </Box>
+      </Box>
 
       <Paper sx={{ mb: 4 }}>
         <Tabs
@@ -138,6 +193,12 @@ const MarketPrices = () => {
           <Tab icon={<Timeline />} label="Market News" />
         </Tabs>
       </Paper>
+
+      {loading && (
+        <Box sx={{ display: 'flex', justifyContent: 'center', my: 2 }}>
+          <CircularProgress size={24} />
+        </Box>
+      )}
 
       {selectedTab === 0 && (
         <>
@@ -154,20 +215,13 @@ const MarketPrices = () => {
               <TableBody>
                 {marketData.map((commodity) => (
                   commodity.futures.map((future, index) => (
-                    <TableRow key={`${commodity.name}-${future.month}`}>
+                    <TableRow
+                      key={`${commodity.name}-${future.month}`}
+                      sx={index === 0 ? { '& > td': { borderTop: '2px solid rgba(224, 224, 224, 1)' } } : {}}
+                    >
                       {index === 0 && (
-                        <TableCell
-                          component="th"
-                          scope="row"
-                          rowSpan={commodity.futures.length}
-                          sx={{ verticalAlign: 'top' }}
-                        >
-                          <Typography variant="subtitle1">
-                            {commodity.name}
-                          </Typography>
-                          <Typography variant="caption" color="text.secondary">
-                            Last updated: {commodity.lastUpdated.toLocaleTimeString()}
-                          </Typography>
+                        <TableCell rowSpan={commodity.futures.length}>
+                          {commodity.name}
                         </TableCell>
                       )}
                       <TableCell align="right">{future.month}</TableCell>
@@ -179,29 +233,23 @@ const MarketPrices = () => {
               </TableBody>
             </Table>
           </TableContainer>
-
-          <Box sx={{ mt: 4 }}>
-            <Typography variant="body2" color="text.secondary">
-              * Prices shown are for demonstration purposes. For real-time market data, please sign up for a Professional account.
-            </Typography>
-          </Box>
         </>
       )}
 
       {selectedTab === 1 && (
         <Grid container spacing={3}>
-          {marketNews.map((news) => (
-            <Grid item xs={12} key={news.title}>
+          {news.map((item, index) => (
+            <Grid item xs={12} key={index}>
               <Card>
                 <CardContent>
                   <Typography variant="h6" gutterBottom>
-                    {news.title}
+                    {item.title}
                   </Typography>
-                  <Typography variant="caption" color="text.secondary" display="block" gutterBottom>
-                    {new Date(news.date).toLocaleDateString()}
+                  <Typography color="textSecondary" gutterBottom>
+                    {item.date}
                   </Typography>
-                  <Typography variant="body2">
-                    {news.summary}
+                  <Typography variant="body1">
+                    {item.summary}
                   </Typography>
                 </CardContent>
               </Card>
@@ -209,62 +257,6 @@ const MarketPrices = () => {
           ))}
         </Grid>
       )}
-
-      <Box sx={{ mt: 6, textAlign: 'center' }}>
-        <Typography variant="h6" gutterBottom>
-          Get Real-Time Market Data
-        </Typography>
-        <Typography variant="body1" color="text.secondary" paragraph>
-          Upgrade to our Professional plan for access to:
-        </Typography>
-        <Grid container spacing={2} justifyContent="center">
-          <Grid item xs={12} sm={4}>
-            <Card sx={{ height: '100%' }}>
-              <CardContent>
-                <Typography variant="h6" gutterBottom>
-                  Real-Time Prices
-                </Typography>
-                <Typography variant="body2">
-                  Live updates from major agricultural exchanges
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid item xs={12} sm={4}>
-            <Card sx={{ height: '100%' }}>
-              <CardContent>
-                <Typography variant="h6" gutterBottom>
-                  Market Analysis
-                </Typography>
-                <Typography variant="body2">
-                  Expert insights and price forecasts
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid item xs={12} sm={4}>
-            <Card sx={{ height: '100%' }}>
-              <CardContent>
-                <Typography variant="h6" gutterBottom>
-                  Custom Alerts
-                </Typography>
-                <Typography variant="body2">
-                  Price alerts and market notifications
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-        </Grid>
-        <Button
-          variant="contained"
-          color="primary"
-          size="large"
-          sx={{ mt: 4 }}
-          href="/pricing"
-        >
-          Upgrade Now
-        </Button>
-      </Box>
     </Container>
   );
 };
