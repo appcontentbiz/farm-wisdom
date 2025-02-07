@@ -9,7 +9,9 @@ import {
   CircularProgress,
   Alert,
   Chip,
-  Button
+  Button,
+  TextField,
+  Paper
 } from '@mui/material';
 import {
   WbSunny,
@@ -25,13 +27,17 @@ import {
 } from '@mui/icons-material';
 
 // Initial weather data simulation
-const generateWeatherData = () => {
+const generateWeatherData = (location = null) => {
   const now = new Date();
-  const baseTemp = 65; // Base temperature in Fahrenheit
+  const baseTemp = location ? 
+    // Simulate temperature variations based on location
+    65 + (parseInt(location.zip.substring(0, 1)) - 5) * 3 + (Math.random() * 10 - 5) :
+    65 + (Math.random() * 10 - 5);
   
   return {
+    location: location || { city: 'Your Location', zip: '' },
     current: {
-      temp: baseTemp + (Math.random() * 10 - 5),
+      temp: baseTemp,
       humidity: 45 + (Math.random() * 20 - 10),
       wind_speed: 8 + (Math.random() * 6 - 3),
       description: "Partly Cloudy",
@@ -84,20 +90,43 @@ const Weather = () => {
   const [weatherData, setWeatherData] = useState(generateWeatherData());
   const [loading, setLoading] = useState(false);
   const [lastUpdate, setLastUpdate] = useState(new Date());
+  const [zipCode, setZipCode] = useState('');
+  const [error, setError] = useState(null);
 
-  const updateWeather = () => {
+  const updateWeather = (location = null) => {
     setLoading(true);
-    const newData = generateWeatherData();
+    const newData = generateWeatherData(location);
     setWeatherData(newData);
     setLastUpdate(new Date());
     setLoading(false);
   };
 
+  // Simulate ZIP code lookup
+  const handleZipCodeSearch = () => {
+    if (zipCode.length !== 5 || !/^\d+$/.test(zipCode)) {
+      setError('Please enter a valid 5-digit ZIP code');
+      return;
+    }
+
+    setError(null);
+    setLoading(true);
+
+    // Simulate API call delay
+    setTimeout(() => {
+      const location = {
+        zip: zipCode,
+        city: `City ${zipCode.substring(0, 2)}`, // Simulate city name
+        state: 'ST'
+      };
+      updateWeather(location);
+    }, 500);
+  };
+
   // Update weather every minute
   useEffect(() => {
-    const interval = setInterval(updateWeather, 60000);
+    const interval = setInterval(() => updateWeather(weatherData.location), 60000);
     return () => clearInterval(interval);
-  }, []);
+  }, [weatherData.location]);
 
   const formatDate = (timestamp) => {
     return new Date(timestamp * 1000).toLocaleDateString('en-US', {
@@ -128,7 +157,7 @@ const Weather = () => {
           />
           <Button
             startIcon={<RefreshIcon />}
-            onClick={updateWeather}
+            onClick={() => updateWeather(weatherData.location)}
             variant="contained"
             disabled={loading}
           >
@@ -136,6 +165,38 @@ const Weather = () => {
           </Button>
         </Box>
       </Box>
+
+      <Paper sx={{ p: 3, mb: 3 }}>
+        <Grid container spacing={2} alignItems="center">
+          <Grid item xs={12} sm={6} md={4}>
+            <TextField
+              fullWidth
+              label="Enter ZIP Code"
+              value={zipCode}
+              onChange={(e) => setZipCode(e.target.value)}
+              placeholder="e.g., 10001"
+              error={!!error}
+              helperText={error}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6} md={4}>
+            <Button
+              variant="contained"
+              onClick={handleZipCodeSearch}
+              disabled={loading || !zipCode}
+            >
+              Get Weather
+            </Button>
+          </Grid>
+          {weatherData.location.city !== 'Your Location' && (
+            <Grid item xs={12}>
+              <Typography variant="h6">
+                Weather for {weatherData.location.city}, {weatherData.location.state} ({weatherData.location.zip})
+              </Typography>
+            </Grid>
+          )}
+        </Grid>
+      </Paper>
 
       <Alert severity="info" sx={{ mb: 3 }}>
         Note: This weather data is simulated. Real-time weather service is coming soon.
