@@ -19,7 +19,7 @@ import {
   ExpandMore as ExpandMoreIcon,
   OpenInNew as OpenInNewIcon,
   Bookmark as BookmarkIcon,
-  BookmarkBorderIcon as BookmarkBorderIcon,
+  BookmarkBorder as BookmarkBorderIcon,
   PlayCircleOutline as PlayCircleOutlineIcon
 } from '@mui/icons-material';
 import { agriculturalResources } from '../data/agricultural-resources';
