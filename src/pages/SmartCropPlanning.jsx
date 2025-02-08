@@ -66,6 +66,74 @@ const mockCrops = [
     lightExposure: '5 hours',
     companionPlants: ['Carrots', 'Radishes'],
   },
+  {
+    id: 3,
+    name: 'Bell Peppers',
+    variety: 'California Wonder',
+    plantingDate: '2025-02-15',
+    growthStage: 'Flowering',
+    progress: 60,
+    health: 'Good',
+    nextAction: 'Prune',
+    nextActionDate: '2025-02-10',
+    soilMoisture: 68,
+    temperature: 75,
+    pestRisk: 'Medium',
+    soilHealth: 'Good',
+    lightExposure: '7 hours',
+    companionPlants: ['Basil', 'Onions'],
+  },
+  {
+    id: 4,
+    name: 'Carrots',
+    variety: 'Nantes',
+    plantingDate: '2025-01-20',
+    growthStage: 'Root Development',
+    progress: 40,
+    health: 'Excellent',
+    nextAction: 'Thin Seedlings',
+    nextActionDate: '2025-02-12',
+    soilMoisture: 72,
+    temperature: 65,
+    pestRisk: 'Low',
+    soilHealth: 'Good',
+    lightExposure: '4 hours',
+    companionPlants: ['Rosemary', 'Peas'],
+  },
+  {
+    id: 5,
+    name: 'Spinach',
+    variety: 'Bloomsdale',
+    plantingDate: '2025-02-01',
+    growthStage: 'Leaf Development',
+    progress: 35,
+    health: 'Good',
+    nextAction: 'Fertilize',
+    nextActionDate: '2025-02-15',
+    soilMoisture: 75,
+    temperature: 62,
+    pestRisk: 'Low',
+    soilHealth: 'Very Good',
+    lightExposure: '5.5 hours',
+    companionPlants: ['Strawberries', 'Peas'],
+  },
+  {
+    id: 6,
+    name: 'Cucumber',
+    variety: 'Marketmore',
+    plantingDate: '2025-03-01',
+    growthStage: 'Seedling',
+    progress: 15,
+    health: 'Good',
+    nextAction: 'Install Trellis',
+    nextActionDate: '2025-03-10',
+    soilMoisture: 70,
+    temperature: 73,
+    pestRisk: 'Low',
+    soilHealth: 'Good',
+    lightExposure: '6 hours',
+    companionPlants: ['Sunflowers', 'Dill'],
+  },
 ];
 
 const weatherAlerts = [
@@ -118,6 +186,8 @@ export default function SmartCropPlanning() {
     variety: '',
     plantingDate: '',
   });
+  const [openDialog, setOpenDialog] = useState(false);
+  const [dialogContent, setDialogContent] = useState({ title: '', content: '' });
 
   // Simulate real-time updates
   useEffect(() => {
@@ -133,6 +203,147 @@ export default function SmartCropPlanning() {
 
     return () => clearInterval(interval);
   }, []);
+
+  const handleRecommendationAction = (title, action) => {
+    let content = '';
+    switch (title) {
+      case 'Companion Planting Analysis':
+        if (action === 'View Combinations') {
+          content = (
+            <Box>
+              <Typography variant="h6" gutterBottom>Optimal Companion Planting Pairs</Typography>
+              {crops.map(crop => (
+                <Box key={crop.id} sx={{ mb: 2 }}>
+                  <Typography variant="subtitle1" color="primary">
+                    {crop.name} ({crop.variety})
+                  </Typography>
+                  <Typography variant="body2">
+                    Current companions: {crop.companionPlants.join(', ')}
+                  </Typography>
+                  <Typography variant="body2">
+                    Recommended additions: {['Marigolds', 'Nasturtiums', 'Herbs'].filter(p => !crop.companionPlants.includes(p)).join(', ')}
+                  </Typography>
+                </Box>
+              ))}
+            </Box>
+          );
+        } else {
+          content = 'Update your companion planting arrangement based on the analysis.';
+        }
+        break;
+
+      case 'Soil Health Optimization':
+        if (action === 'View Analysis') {
+          content = (
+            <Box>
+              <Typography variant="h6" gutterBottom>Soil Analysis Results</Typography>
+              {crops.map(crop => (
+                <Box key={crop.id} sx={{ mb: 2 }}>
+                  <Typography variant="subtitle1" color="primary">
+                    {crop.name} Plot
+                  </Typography>
+                  <Typography variant="body2">
+                    Soil Health: {crop.soilHealth}
+                  </Typography>
+                  <Typography variant="body2">
+                    Recommended Amendments:
+                    {crop.soilHealth !== 'Excellent' ? 
+                      ' Add organic compost, maintain moisture levels' : 
+                      ' Current soil conditions are optimal'}
+                  </Typography>
+                </Box>
+              ))}
+            </Box>
+          );
+        } else {
+          content = 'Place an order for recommended soil amendments.';
+        }
+        break;
+
+      case 'Light Exposure Optimization':
+        if (action === 'View Report') {
+          content = (
+            <Box>
+              <Typography variant="h6" gutterBottom>Light Exposure Analysis</Typography>
+              {crops.map(crop => (
+                <Box key={crop.id} sx={{ mb: 2 }}>
+                  <Typography variant="subtitle1" color="primary">
+                    {crop.name}
+                  </Typography>
+                  <Typography variant="body2">
+                    Current Exposure: {crop.lightExposure}
+                  </Typography>
+                  <Typography variant="body2">
+                    Optimal Range: 6-8 hours
+                  </Typography>
+                  <Typography variant="body2">
+                    Recommendation: {
+                      parseFloat(crop.lightExposure) < 6 ? 
+                        'Consider relocating to a sunnier spot' : 
+                        'Current location is optimal'
+                    }
+                  </Typography>
+                </Box>
+              ))}
+            </Box>
+          );
+        } else {
+          content = 'Adjust crop layout based on light exposure recommendations.';
+        }
+        break;
+
+      case 'Sustainable Practices':
+        if (action === 'View Tips') {
+          content = (
+            <Box>
+              <Typography variant="h6" gutterBottom>Sustainable Farming Recommendations</Typography>
+              <Typography variant="subtitle1" color="primary" gutterBottom>
+                Current Practices Impact
+              </Typography>
+              <Typography variant="body2" paragraph>
+                • Water Usage: Efficient (using moisture sensors)
+              </Typography>
+              <Typography variant="body2" paragraph>
+                • Pest Management: Natural (companion planting)
+              </Typography>
+              <Typography variant="body2" paragraph>
+                • Soil Health: Organic amendments only
+              </Typography>
+              <Typography variant="subtitle1" color="primary" gutterBottom>
+                Recommended Improvements
+              </Typography>
+              <Typography variant="body2" paragraph>
+                • Install rainwater harvesting system
+              </Typography>
+              <Typography variant="body2" paragraph>
+                • Implement crop rotation plan
+              </Typography>
+              <Typography variant="body2">
+                • Start composting program
+              </Typography>
+            </Box>
+          );
+        } else {
+          content = (
+            <Box>
+              <Typography variant="h6" gutterBottom>Sustainability Metrics</Typography>
+              <Typography variant="body2" paragraph>
+                Water Conservation: 25% reduction
+              </Typography>
+              <Typography variant="body2" paragraph>
+                Soil Improvement: 15% increase in organic matter
+              </Typography>
+              <Typography variant="body2">
+                Biodiversity: 30% increase in beneficial insects
+              </Typography>
+            </Box>
+          );
+        }
+        break;
+    }
+    setDialogContent({ title: `${title} - ${action}`, content });
+    setOpenDialog(true);
+  };
 
   const handleAddCrop = () => {
     const crop = {
@@ -286,6 +497,7 @@ export default function SmartCropPlanning() {
                       key={i}
                       size="small"
                       variant={i === 0 ? "contained" : "outlined"}
+                      onClick={() => handleRecommendationAction(recommendation.title, action)}
                     >
                       {action}
                     </Button>
@@ -296,6 +508,22 @@ export default function SmartCropPlanning() {
           </Grid>
         ))}
       </Grid>
+
+      {/* Recommendation Dialog */}
+      <Dialog
+        open={openDialog}
+        onClose={() => setOpenDialog(false)}
+        maxWidth="md"
+        fullWidth
+      >
+        <DialogTitle>{dialogContent.title}</DialogTitle>
+        <DialogContent dividers>
+          {dialogContent.content}
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setOpenDialog(false)}>Close</Button>
+        </DialogActions>
+      </Dialog>
 
       {/* Add Crop Dialog */}
       <Dialog open={openAddDialog} onClose={() => setOpenAddDialog(false)}>
