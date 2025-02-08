@@ -21,14 +21,14 @@ import {
 } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import WaterDropIcon from '@mui/icons-material/WaterDrop';
-import ThermostatIcon from '@mui/icons-material/Thermostat';
-import BugReportIcon from '@mui/icons-material/BugReport';
-import TimelineIcon from '@mui/icons-material/Timeline';
+import OpacityIcon from '@mui/icons-material/Opacity';
+import DeviceThermostatIcon from '@mui/icons-material/DeviceThermostat';
+import PestControlIcon from '@mui/icons-material/PestControl';
+import ShowChartIcon from '@mui/icons-material/ShowChart';
 import ScienceIcon from '@mui/icons-material/Science';
-import EcoIcon from '@mui/icons-material/Eco';
-import LocalFloristIcon from '@mui/icons-material/LocalFlorist';
-import Brightness5Icon from '@mui/icons-material/Brightness5';
+import YardIcon from '@mui/icons-material/Yard';
+import SpaIcon from '@mui/icons-material/Spa';
+import LightModeIcon from '@mui/icons-material/LightMode';
 
 // Mock data for demonstration
 const mockCrops = [
@@ -85,7 +85,7 @@ const weatherAlerts = [
 const smartRecommendations = [
   {
     title: 'Companion Planting Analysis',
-    icon: <LocalFloristIcon />,
+    icon: <SpaIcon />,
     description: 'AI-powered suggestions for optimal companion planting combinations to enhance growth and pest resistance.',
     actions: ['View Combinations', 'Update Plants'],
   },
@@ -97,13 +97,13 @@ const smartRecommendations = [
   },
   {
     title: 'Light Exposure Optimization',
-    icon: <Brightness5Icon />,
+    icon: <LightModeIcon />,
     description: 'Track and optimize sunlight exposure for each crop with AI-powered placement suggestions.',
     actions: ['View Report', 'Adjust Layout'],
   },
   {
     title: 'Sustainable Practices',
-    icon: <EcoIcon />,
+    icon: <YardIcon />,
     description: 'Personalized recommendations for sustainable farming practices based on your crops and local conditions.',
     actions: ['View Tips', 'Track Impact'],
   },
@@ -219,7 +219,7 @@ export default function SmartCropPlanning() {
                 <Grid container spacing={2}>
                   <Grid item xs={6}>
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                      <WaterDropIcon color="primary" />
+                      <OpacityIcon color="primary" />
                       <Typography variant="body2">
                         Moisture: {Math.round(crop.soilMoisture)}%
                       </Typography>
@@ -227,7 +227,7 @@ export default function SmartCropPlanning() {
                   </Grid>
                   <Grid item xs={6}>
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                      <ThermostatIcon color="primary" />
+                      <DeviceThermostatIcon color="primary" />
                       <Typography variant="body2">
                         Temp: {Math.round(crop.temperature)}°F
                       </Typography>
@@ -235,7 +235,7 @@ export default function SmartCropPlanning() {
                   </Grid>
                   <Grid item xs={6}>
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                      <BugReportIcon color="primary" />
+                      <PestControlIcon color="primary" />
                       <Typography variant="body2">
                         Pest Risk: {crop.pestRisk}
                       </Typography>
@@ -243,7 +243,7 @@ export default function SmartCropPlanning() {
                   </Grid>
                   <Grid item xs={6}>
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                      <TimelineIcon color="primary" />
+                      <ShowChartIcon color="primary" />
                       <Typography variant="body2">
                         Health: {crop.health}
                       </Typography>
