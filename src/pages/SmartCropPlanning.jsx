@@ -17,6 +17,7 @@ import {
   DialogContent,
   DialogActions,
   TextField,
+  Divider,
 } from '@mui/material';
 import {
   Add as AddIcon,
@@ -25,6 +26,10 @@ import {
   Thermostat as TempIcon,
   BugReport as PestIcon,
   Timeline as GrowthIcon,
+  Science as ScienceIcon,
+  Eco as EcoIcon,
+  LocalFlorist as FloristIcon,
+  Brightness5 as SunIcon,
 } from '@mui/icons-material';
 
 // Mock data for demonstration
@@ -42,6 +47,9 @@ const mockCrops = [
     soilMoisture: 65,
     temperature: 72,
     pestRisk: 'Low',
+    soilHealth: 'Good',
+    lightExposure: '6.5 hours',
+    companionPlants: ['Basil', 'Marigolds'],
   },
   {
     id: 2,
@@ -56,6 +64,9 @@ const mockCrops = [
     soilMoisture: 70,
     temperature: 68,
     pestRisk: 'Low',
+    soilHealth: 'Excellent',
+    lightExposure: '5 hours',
+    companionPlants: ['Carrots', 'Radishes'],
   },
 ];
 
@@ -69,6 +80,34 @@ const weatherAlerts = [
     type: 'Optimal Planting',
     message: 'Ideal conditions for planting tomatoes in the next 3 days.',
     severity: 'success',
+  },
+];
+
+// Smart farming recommendations
+const smartRecommendations = [
+  {
+    title: 'Companion Planting Analysis',
+    icon: <FloristIcon />,
+    description: 'AI-powered suggestions for optimal companion planting combinations to enhance growth and pest resistance.',
+    actions: ['View Combinations', 'Update Plants'],
+  },
+  {
+    title: 'Soil Health Optimization',
+    icon: <ScienceIcon />,
+    description: 'Real-time soil nutrient analysis and recommendations for organic amendments based on crop needs.',
+    actions: ['View Analysis', 'Order Amendments'],
+  },
+  {
+    title: 'Light Exposure Optimization',
+    icon: <SunIcon />,
+    description: 'Track and optimize sunlight exposure for each crop with AI-powered placement suggestions.',
+    actions: ['View Report', 'Adjust Layout'],
+  },
+  {
+    title: 'Sustainable Practices',
+    icon: <EcoIcon />,
+    description: 'Personalized recommendations for sustainable farming practices based on your crops and local conditions.',
+    actions: ['View Tips', 'Track Impact'],
   },
 ];
 
@@ -109,6 +148,9 @@ export default function SmartCropPlanning() {
       soilMoisture: 70,
       temperature: 70,
       pestRisk: 'Low',
+      soilHealth: 'Good',
+      lightExposure: '6 hours',
+      companionPlants: ['Basil', 'Marigolds'],
     };
     setCrops([...crops, crop]);
     setOpenAddDialog(false);
@@ -116,136 +158,145 @@ export default function SmartCropPlanning() {
   };
 
   return (
-    <Container maxWidth="xl" sx={{ mt: 4, mb: 4 }}>
-      <Grid container spacing={3}>
-        {/* Header */}
-        <Grid item xs={12}>
-          <Box display="flex" justifyContent="space-between" alignItems="center">
-            <Typography variant="h4" component="h1" gutterBottom>
-              Smart Crop Planning & Monitoring
-            </Typography>
-            <Button
-              variant="contained"
-              startIcon={<AddIcon />}
-              onClick={() => setOpenAddDialog(true)}
-            >
-              Add Crop
-            </Button>
-          </Box>
-        </Grid>
+    <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
+        <Typography variant="h4" component="h1">
+          Smart Crop Planning
+        </Typography>
+        <Button
+          variant="contained"
+          startIcon={<AddIcon />}
+          onClick={() => setOpenAddDialog(true)}
+        >
+          Add Crop
+        </Button>
+      </Box>
 
-        {/* Alerts */}
-        <Grid item xs={12}>
-          {alerts.map((alert, index) => (
+      {/* Alerts Section */}
+      <Grid container spacing={3} sx={{ mb: 4 }}>
+        {alerts.map((alert, index) => (
+          <Grid item xs={12} key={index}>
             <Alert
-              key={index}
               severity={alert.severity}
-              sx={{ mb: 2 }}
+              icon={<NotificationsIcon />}
               action={
-                <IconButton size="small">
-                  <NotificationsIcon />
-                </IconButton>
+                <Button color="inherit" size="small">
+                  View
+                </Button>
               }
             >
-              <strong>{alert.type}:</strong> {alert.message}
+              <Typography variant="subtitle1">{alert.type}</Typography>
+              {alert.message}
             </Alert>
-          ))}
-        </Grid>
-
-        {/* Crop Cards */}
-        <Grid item xs={12}>
-          <Grid container spacing={3}>
-            {crops.map(crop => (
-              <Grid item xs={12} md={6} key={crop.id}>
-                <Paper elevation={3} sx={{ p: 3 }}>
-                  <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
-                    <Typography variant="h6">
-                      {crop.name} - {crop.variety}
-                    </Typography>
-                    <Chip
-                      label={crop.health}
-                      color={crop.health === 'Excellent' ? 'success' : 'primary'}
-                    />
-                  </Box>
-
-                  <Box mb={3}>
-                    <Typography variant="body2" color="text.secondary" gutterBottom>
-                      Growth Progress
-                    </Typography>
-                    <LinearProgress
-                      variant="determinate"
-                      value={crop.progress}
-                      sx={{ height: 10, borderRadius: 5 }}
-                    />
-                    <Typography variant="body2" color="text.secondary" mt={1}>
-                      Stage: {crop.growthStage}
-                    </Typography>
-                  </Box>
-
-                  <Grid container spacing={2}>
-                    <Grid item xs={4}>
-                      <Card>
-                        <CardContent>
-                          <Box display="flex" alignItems="center">
-                            <WaterIcon color="primary" sx={{ mr: 1 }} />
-                            <div>
-                              <Typography variant="body2" color="text.secondary">
-                                Soil Moisture
-                              </Typography>
-                              <Typography variant="h6">
-                                {Math.round(crop.soilMoisture)}%
-                              </Typography>
-                            </div>
-                          </Box>
-                        </CardContent>
-                      </Card>
-                    </Grid>
-                    <Grid item xs={4}>
-                      <Card>
-                        <CardContent>
-                          <Box display="flex" alignItems="center">
-                            <TempIcon color="error" sx={{ mr: 1 }} />
-                            <div>
-                              <Typography variant="body2" color="text.secondary">
-                                Temperature
-                              </Typography>
-                              <Typography variant="h6">
-                                {Math.round(crop.temperature)}°F
-                              </Typography>
-                            </div>
-                          </Box>
-                        </CardContent>
-                      </Card>
-                    </Grid>
-                    <Grid item xs={4}>
-                      <Card>
-                        <CardContent>
-                          <Box display="flex" alignItems="center">
-                            <PestIcon color="warning" sx={{ mr: 1 }} />
-                            <div>
-                              <Typography variant="body2" color="text.secondary">
-                                Pest Risk
-                              </Typography>
-                              <Typography variant="h6">
-                                {crop.pestRisk}
-                              </Typography>
-                            </div>
-                          </Box>
-                        </CardContent>
-                      </Card>
-                    </Grid>
-                  </Grid>
-
-                  <Box mt={2}>
-                    <Typography variant="body2" color="text.secondary">
-                      Next Action: {crop.nextAction} (Due: {crop.nextActionDate})
-                    </Typography>
-                  </Box>
-                </Paper>
-              </Grid>
-            ))}
           </Grid>
-        </Grid>
+        ))}
+      </Grid>
+
+      {/* Crop Cards */}
+      <Typography variant="h5" gutterBottom>
+        Active Crops
+      </Typography>
+      <Grid container spacing={3} sx={{ mb: 4 }}>
+        {crops.map((crop) => (
+          <Grid item xs={12} md={6} key={crop.id}>
+            <Card>
+              <CardContent>
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2 }}>
+                  <Typography variant="h6">{crop.name}</Typography>
+                  <Chip label={crop.growthStage} color="primary" size="small" />
+                </Box>
+                <Typography color="textSecondary" gutterBottom>
+                  Variety: {crop.variety}
+                </Typography>
+                <Box sx={{ mt: 2 }}>
+                  <Typography variant="body2" gutterBottom>
+                    Growth Progress
+                  </Typography>
+                  <LinearProgress
+                    variant="determinate"
+                    value={crop.progress}
+                    sx={{ mb: 2 }}
+                  />
+                </Box>
+                <Grid container spacing={2}>
+                  <Grid item xs={6}>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                      <WaterIcon color="primary" />
+                      <Typography variant="body2">
+                        Moisture: {Math.round(crop.soilMoisture)}%
+                      </Typography>
+                    </Box>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                      <TempIcon color="primary" />
+                      <Typography variant="body2">
+                        Temp: {Math.round(crop.temperature)}°F
+                      </Typography>
+                    </Box>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                      <PestIcon color="primary" />
+                      <Typography variant="body2">
+                        Pest Risk: {crop.pestRisk}
+                      </Typography>
+                    </Box>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                      <GrowthIcon color="primary" />
+                      <Typography variant="body2">
+                        Health: {crop.health}
+                      </Typography>
+                    </Box>
+                  </Grid>
+                </Grid>
+                <Divider sx={{ my: 2 }} />
+                <Typography variant="body2" color="textSecondary">
+                  Next Action: {crop.nextAction} (Due: {new Date(crop.nextActionDate).toLocaleDateString()})
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+        ))}
+      </Grid>
+
+      {/* Smart Recommendations */}
+      <Typography variant="h5" gutterBottom>
+        Smart Farming Recommendations
+      </Typography>
+      <Grid container spacing={3}>
+        {smartRecommendations.map((recommendation, index) => (
+          <Grid item xs={12} sm={6} md={3} key={index}>
+            <Card>
+              <CardContent>
+                <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+                  <Box sx={{ mr: 2, color: 'primary.main' }}>
+                    {recommendation.icon}
+                  </Box>
+                  <Typography variant="h6" component="h3">
+                    {recommendation.title}
+                  </Typography>
+                </Box>
+                <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                  {recommendation.description}
+                </Typography>
+                <Box sx={{ display: 'flex', gap: 1 }}>
+                  {recommendation.actions.map((action, i) => (
+                    <Button
+                      key={i}
+                      size="small"
+                      variant={i === 0 ? "contained" : "outlined"}
+                    >
+                      {action}
+                    </Button>
+                  ))}
+                </Box>
+              </CardContent>
+            </Card>
+          </Grid>
+        ))}
       </Grid>
 
       {/* Add Crop Dialog */}
