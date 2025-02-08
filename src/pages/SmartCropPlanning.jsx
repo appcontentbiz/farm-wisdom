@@ -19,18 +19,16 @@ import {
   TextField,
   Divider,
 } from '@mui/material';
-import {
-  Add as AddIcon,
-  Notifications as NotificationsIcon,
-  WaterDrop as WaterIcon,
-  Thermostat as TempIcon,
-  BugReport as PestIcon,
-  Timeline as GrowthIcon,
-  Science as ScienceIcon,
-  Eco as EcoIcon,
-  LocalFlorist as FloristIcon,
-  Brightness5 as SunIcon,
-} from '@mui/icons-material';
+import AddIcon from '@mui/icons-material/Add';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import WaterDropIcon from '@mui/icons-material/WaterDrop';
+import ThermostatIcon from '@mui/icons-material/Thermostat';
+import BugReportIcon from '@mui/icons-material/BugReport';
+import TimelineIcon from '@mui/icons-material/Timeline';
+import ScienceIcon from '@mui/icons-material/Science';
+import EcoIcon from '@mui/icons-material/Eco';
+import LocalFloristIcon from '@mui/icons-material/LocalFlorist';
+import Brightness5Icon from '@mui/icons-material/Brightness5';
 
 // Mock data for demonstration
 const mockCrops = [
@@ -87,7 +85,7 @@ const weatherAlerts = [
 const smartRecommendations = [
   {
     title: 'Companion Planting Analysis',
-    icon: <FloristIcon />,
+    icon: <LocalFloristIcon />,
     description: 'AI-powered suggestions for optimal companion planting combinations to enhance growth and pest resistance.',
     actions: ['View Combinations', 'Update Plants'],
   },
@@ -99,7 +97,7 @@ const smartRecommendations = [
   },
   {
     title: 'Light Exposure Optimization',
-    icon: <SunIcon />,
+    icon: <Brightness5Icon />,
     description: 'Track and optimize sunlight exposure for each crop with AI-powered placement suggestions.',
     actions: ['View Report', 'Adjust Layout'],
   },
@@ -221,7 +219,7 @@ export default function SmartCropPlanning() {
                 <Grid container spacing={2}>
                   <Grid item xs={6}>
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                      <WaterIcon color="primary" />
+                      <WaterDropIcon color="primary" />
                       <Typography variant="body2">
                         Moisture: {Math.round(crop.soilMoisture)}%
                       </Typography>
@@ -229,7 +227,7 @@ export default function SmartCropPlanning() {
                   </Grid>
                   <Grid item xs={6}>
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                      <TempIcon color="primary" />
+                      <ThermostatIcon color="primary" />
                       <Typography variant="body2">
                         Temp: {Math.round(crop.temperature)}°F
                       </Typography>
@@ -237,7 +235,7 @@ export default function SmartCropPlanning() {
                   </Grid>
                   <Grid item xs={6}>
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                      <PestIcon color="primary" />
+                      <BugReportIcon color="primary" />
                       <Typography variant="body2">
                         Pest Risk: {crop.pestRisk}
                       </Typography>
@@ -245,7 +243,7 @@ export default function SmartCropPlanning() {
                   </Grid>
                   <Grid item xs={6}>
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                      <GrowthIcon color="primary" />
+                      <TimelineIcon color="primary" />
                       <Typography variant="body2">
                         Health: {crop.health}
                       </Typography>
