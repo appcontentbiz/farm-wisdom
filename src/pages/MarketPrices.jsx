@@ -56,16 +56,26 @@ export default function MarketPrices() {
     setLoading(true);
     try {
       const promises = Object.entries(COMMODITY_SYMBOLS).map(async ([name, symbol]) => {
-        const response = await fetch(`https://query1.finance.yahoo.com/v8/finance/chart/${symbol}?interval=1d&range=1d`);
+        // Using Yahoo Finance v6 API
+        const response = await fetch(`https://query2.finance.yahoo.com/v6/finance/quote?symbols=${symbol}`, {
+          headers: {
+            'Accept': 'application/json',
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+          }
+        });
+        
         if (!response.ok) throw new Error(`Failed to fetch ${name} data`);
         const data = await response.json();
         
-        const quote = data.chart.result[0].meta;
-        const price = quote.regularMarketPrice;
-        const previousClose = quote.previousClose;
-        const change = price - previousClose;
-        const changePercent = (change / previousClose) * 100;
+        if (!data.quoteResponse?.result?.[0]) {
+          throw new Error(`No data available for ${name}`);
+        }
 
+        const quote = data.quoteResponse.result[0];
+        const price = quote.regularMarketPrice;
+        const previousClose = quote.regularMarketPreviousClose;
+        const change = quote.regularMarketChange;
+        
         // Get future months
         const futureMonths = [];
         const now = new Date();
@@ -73,7 +83,7 @@ export default function MarketPrices() {
           const futureDate = new Date(now);
           futureDate.setMonth(now.getMonth() + i);
           
-          // Add small increments for future months
+          // Add small increments for future months based on current price
           const futurePrice = price * (1 + (i * 0.005) + (Math.random() * 0.01 - 0.005));
           const futureChange = futurePrice - price;
           
@@ -86,7 +96,11 @@ export default function MarketPrices() {
 
         return {
           name,
-          futures: futureMonths,
+          futures: [{
+            month: 'Current',
+            price: Number(price.toFixed(2)),
+            change: Number(change.toFixed(2))
+          }, ...futureMonths],
           lastUpdated: new Date()
         };
       });
@@ -96,6 +110,7 @@ export default function MarketPrices() {
       setLastUpdate(new Date());
       setError(null);
     } catch (err) {
+      console.error('Fetch error:', err);
       setError('Failed to fetch market data. Falling back to simulation.');
       // Fallback to simulation if API fails
       setCommodities(generateSimulatedData());
