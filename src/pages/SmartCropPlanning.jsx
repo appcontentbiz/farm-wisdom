@@ -296,9 +296,32 @@ export default function SmartCropPlanning() {
     // ... (similar detailed structures for other crops)
   };
 
+  const recommendations = [
+    {
+      title: 'Soil Analysis',
+      description: 'Schedule a comprehensive soil analysis to optimize nutrient levels',
+      icon: <ScienceIcon />
+    },
+    {
+      title: 'Sustainable Practices',
+      description: 'Implement companion planting to improve pest resistance naturally',
+      icon: <ParkIcon />
+    },
+    {
+      title: 'Resource Management',
+      description: 'Install drip irrigation system to improve water efficiency',
+      icon: <RecyclingIcon />
+    }
+  ];
+
   const handleInsightClick = (insight) => {
     setSelectedInsight(insight);
     setImplementationOpen(true);
+  };
+
+  const handleOpenInsights = (crop) => {
+    setSelectedCrop(crop);
+    setInsightDialogOpen(true);
   };
 
   return (
@@ -411,6 +434,32 @@ export default function SmartCropPlanning() {
             </CardContent>
           </Card>
         </Grid>
+      </Grid>
+
+      {/* Smart Farming Recommendations */}
+      <Typography variant="h5" gutterBottom sx={{ mt: 4 }}>
+        Smart Farming Recommendations
+      </Typography>
+      <Grid container spacing={3}>
+        {recommendations.map((recommendation, index) => (
+          <Grid item xs={12} md={4} key={index}>
+            <Card>
+              <CardContent>
+                <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+                  <Box sx={{ mr: 2, color: 'primary.main' }}>
+                    {recommendation.icon}
+                  </Box>
+                  <Typography variant="h6">
+                    {recommendation.title}
+                  </Typography>
+                </Box>
+                <Typography variant="body2">
+                  {recommendation.description}
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+        ))}
       </Grid>
 
       {/* Enhanced Crop Insights Dialog */}
