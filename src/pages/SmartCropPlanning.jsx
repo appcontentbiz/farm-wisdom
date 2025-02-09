@@ -14,36 +14,38 @@ import {
   DialogContent,
   DialogActions,
   Chip,
+  Paper,
+  Collapse,
   List,
   ListItem,
   ListItemIcon,
   ListItemText,
-  Divider,
-  Collapse,
-  Paper,
   Stepper,
   Step,
   StepLabel,
-  StepContent,
-  CheckCircleOutlineIcon
+  StepContent
 } from '@mui/material';
 import OpacityIcon from '@mui/icons-material/Opacity';
 import DeviceThermostatIcon from '@mui/icons-material/DeviceThermostat';
+import BiotechIcon from '@mui/icons-material/Biotech';
 import BugReportIcon from '@mui/icons-material/BugReport';
+import MonitorHeartIcon from '@mui/icons-material/MonitorHeart';
+import ParkIcon from '@mui/icons-material/Park';
+import WaterDropIcon from '@mui/icons-material/WaterDrop';
+import UpdateIcon from '@mui/icons-material/Update';
+import BuildIcon from '@mui/icons-material/Build';
+import AssessmentIcon from '@mui/icons-material/Assessment';
+import SettingsIcon from '@mui/icons-material/Settings';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import AddIcon from '@mui/icons-material/Add';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import WbSunnyIcon from '@mui/icons-material/WbSunny';
-import UpdateIcon from '@mui/icons-material/Update';
 import ScienceIcon from '@mui/icons-material/Science';
-import ParkIcon from '@mui/icons-material/Park';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import RecyclingIcon from '@mui/icons-material/Recycling';
 import AirIcon from '@mui/icons-material/Air';
-import WaterDropIcon from '@mui/icons-material/WaterDrop';
 import AgricultureIcon from '@mui/icons-material/Agriculture';
-import BiotechIcon from '@mui/icons-material/Biotech';
-import MonitorHeartIcon from '@mui/icons-material/MonitorHeart';
 import CloudIcon from '@mui/icons-material/Cloud';
 import CloseIcon from '@mui/icons-material/Close';
 import SensorsIcon from '@mui/icons-material/Sensors';
@@ -56,9 +58,6 @@ import ThermostatAutoIcon from '@mui/icons-material/ThermostatAuto';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import TimelineIcon from '@mui/icons-material/Timeline';
-import AssessmentIcon from '@mui/icons-material/Assessment';
-import SettingsIcon from '@mui/icons-material/Settings';
-import BuildIcon from '@mui/icons-material/Build';
 import LocalFloristIcon from '@mui/icons-material/LocalFlorist';
 
 export default function SmartCropPlanning() {
@@ -813,7 +812,7 @@ export default function SmartCropPlanning() {
               <Button onClick={() => setInsightDialogOpen(false)}>Close</Button>
             </DialogActions>
           </>
-        )}
+        ))}
       </Dialog>
     </Container>
   );
