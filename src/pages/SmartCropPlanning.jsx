@@ -58,6 +58,7 @@ import TimelineIcon from '@mui/icons-material/Timeline';
 import AssessmentIcon from '@mui/icons-material/Assessment';
 import SettingsIcon from '@mui/icons-material/Settings';
 import BuildIcon from '@mui/icons-material/Build';
+import LocalFloristIcon from '@mui/icons-material/LocalFlorist';
 
 export default function SmartCropPlanning() {
   const [selectedCrop, setSelectedCrop] = useState(null);
@@ -81,73 +82,23 @@ export default function SmartCropPlanning() {
   const activeCrops = [
     {
       name: 'Tomatoes',
-      moisture: 75,
-      temperature: 24,
-      pestRisk: 'Low',
-      health: 90
-    },
-    {
-      name: 'Lettuce',
-      moisture: 65,
-      temperature: 18,
-      pestRisk: 'Medium',
-      health: 85
-    },
-    {
-      name: 'Carrots',
-      moisture: 70,
-      temperature: 20,
-      pestRisk: 'Low',
-      health: 95
+      status: 'Growing well - Day 45',
+      icon: <LocalFloristIcon />
     },
     {
       name: 'Bell Peppers',
-      moisture: 68,
-      temperature: 23,
-      pestRisk: 'Medium',
-      health: 88
+      status: 'Ready for harvest',
+      icon: <LocalFloristIcon />
+    },
+    {
+      name: 'Carrots',
+      status: 'Recently planted',
+      icon: <LocalFloristIcon />
     },
     {
       name: 'Spinach',
-      moisture: 72,
-      temperature: 17,
-      pestRisk: 'Low',
-      health: 92
-    },
-    {
-      name: 'Cucumbers',
-      moisture: 78,
-      temperature: 22,
-      pestRisk: 'Low',
-      health: 87
-    },
-    {
-      name: 'Broccoli',
-      moisture: 70,
-      temperature: 19,
-      pestRisk: 'Medium',
-      health: 89
-    },
-    {
-      name: 'Sweet Potatoes',
-      moisture: 65,
-      temperature: 21,
-      pestRisk: 'Low',
-      health: 94
-    },
-    {
-      name: 'Green Beans',
-      moisture: 73,
-      temperature: 20,
-      pestRisk: 'Low',
-      health: 91
-    },
-    {
-      name: 'Eggplant',
-      moisture: 69,
-      temperature: 23,
-      pestRisk: 'Medium',
-      health: 86
+      status: 'Growing well - Day 20',
+      icon: <LocalFloristIcon />
     }
   ];
 
@@ -253,20 +204,25 @@ export default function SmartCropPlanning() {
               label: 'Installation Process',
               content: 'Set up support posts and connecting lines',
               details: 'Install posts 2-3 feet deep, space them 4-6 feet apart. Use natural twine for connecting lines.'
+            }
+          ]
+        },
+        {
+          title: 'Natural Pest Control',
+          description: 'Organic methods for controlling common tomato pests',
+          steps: [
+            {
+              label: 'Companion Planting',
+              content: 'Plant basil and marigolds nearby',
+              details: 'These plants naturally repel many tomato pests while attracting beneficial insects.'
             },
             {
-              label: 'Maintenance',
-              content: 'Regular checking and adjusting of support systems',
-              details: 'Check weekly for any loose ties or sagging supports. Adjust as plants grow and fruit develops.'
+              label: 'Organic Sprays',
+              content: 'Create neem oil and soap solution',
+              details: 'Mix 2 tsp neem oil and 1 tsp liquid soap per quart of water. Apply weekly.'
             }
-          ],
-          aiMonitoring: {
-            sensors: ['Tension monitors', 'Growth rate sensors'],
-            metrics: ['Plant load distribution', 'Growth pattern analysis'],
-            automatedAlerts: ['Support stress warnings', 'Growth pattern anomalies']
-          }
-        },
-        // ... (similar detailed structures for other practices)
+          ]
+        }
       ],
       aiInsights: [
         {
@@ -274,26 +230,88 @@ export default function SmartCropPlanning() {
           description: 'AI-powered visual analysis for early disease detection',
           implementation: {
             setup: [
-              'Install high-resolution cameras',
-              'Configure image processing software',
-              'Set up automated scanning schedule'
+              'Install high-resolution cameras at key monitoring points',
+              'Configure image processing software for leaf analysis',
+              'Set up automated daily scanning schedule'
             ],
             monitoring: [
-              'Leaf color analysis',
-              'Spot pattern recognition',
-              'Growth rate tracking'
+              'Continuous leaf color and pattern analysis',
+              'Spot pattern recognition and tracking',
+              'Growth rate comparison with healthy baselines'
             ],
             actions: [
-              'Automated alerts for suspicious patterns',
-              'Treatment recommendations',
-              'Prevention strategies'
+              'Immediate alerts for suspicious patterns',
+              'Automated treatment recommendations',
+              'Historical pattern analysis for prevention'
             ]
           }
         },
-        // ... (similar structures for other insights)
+        {
+          title: 'Growth Optimization',
+          description: 'AI-driven growth rate and health monitoring',
+          implementation: {
+            setup: [
+              'Deploy growth monitoring sensors',
+              'Install environmental control system',
+              'Configure AI prediction models'
+            ],
+            monitoring: [
+              'Real-time growth rate tracking',
+              'Nutrient uptake analysis',
+              'Environmental condition correlation'
+            ],
+            actions: [
+              'Automated growth adjustment recommendations',
+              'Nutrient schedule optimization',
+              'Climate control automation'
+            ]
+          }
+        }
       ]
     },
-    // ... (similar detailed structures for other crops)
+    'Bell Peppers': {
+      sustainablePractices: [
+        {
+          title: 'Companion Planting Strategy',
+          description: 'Optimal plant combinations for pepper growth',
+          steps: [
+            {
+              label: 'Plant Selection',
+              content: 'Choose compatible companion plants',
+              details: 'Basil, onions, and marigolds are ideal companions for peppers.'
+            },
+            {
+              label: 'Spacing',
+              content: 'Arrange plants with proper spacing',
+              details: 'Plant companions 12-18 inches from peppers for optimal growth.'
+            }
+          ]
+        }
+      ],
+      aiInsights: [
+        {
+          title: 'Yield Prediction',
+          description: 'AI-based harvest forecasting',
+          implementation: {
+            setup: [
+              'Install fruit counting cameras',
+              'Deploy weight sensors',
+              'Configure prediction algorithms'
+            ],
+            monitoring: [
+              'Daily fruit development tracking',
+              'Size and color analysis',
+              'Growth rate monitoring'
+            ],
+            actions: [
+              'Harvest timing recommendations',
+              'Yield optimization alerts',
+              'Resource allocation planning'
+            ]
+          }
+        }
+      ]
+    }
   };
 
   const recommendations = [
@@ -362,38 +380,11 @@ export default function SmartCropPlanning() {
                 </Typography>
                 <Box sx={{ mb: 2 }}>
                   <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
-                    <OpacityIcon sx={{ mr: 1, color: 'primary.main' }} />
+                    <LocalFloristIcon sx={{ mr: 1, color: 'primary.main' }} />
                     <Typography variant="body2">
-                      Moisture: {crop.moisture}%
+                      {crop.status}
                     </Typography>
                   </Box>
-                  <LinearProgress variant="determinate" value={crop.moisture} sx={{ mb: 2 }} />
-
-                  <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
-                    <DeviceThermostatIcon sx={{ mr: 1, color: 'error.main' }} />
-                    <Typography variant="body2">
-                      Temperature: {crop.temperature}°C
-                    </Typography>
-                  </Box>
-
-                  <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
-                    <BugReportIcon sx={{ mr: 1, color: 'warning.main' }} />
-                    <Typography variant="body2">
-                      Pest Risk: {crop.pestRisk}
-                    </Typography>
-                  </Box>
-
-                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                    <FavoriteIcon sx={{ mr: 1, color: 'success.main' }} />
-                    <Typography variant="body2">
-                      Health: {crop.health}%
-                    </Typography>
-                  </Box>
-                  <LinearProgress 
-                    variant="determinate" 
-                    value={crop.health}
-                    sx={{ mt: 1, '& .MuiLinearProgress-bar': { bgcolor: 'success.main' } }}
-                  />
                 </Box>
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
                   <Button
@@ -517,40 +508,6 @@ export default function SmartCropPlanning() {
                                 </Step>
                               ))}
                             </Stepper>
-                            <Box sx={{ mt: 2 }}>
-                              <Typography variant="subtitle2" gutterBottom>
-                                AI Monitoring
-                              </Typography>
-                              <List dense>
-                                <ListItem>
-                                  <ListItemIcon>
-                                    <SensorsIcon />
-                                  </ListItemIcon>
-                                  <ListItemText 
-                                    primary="Active Sensors"
-                                    secondary={practice.aiMonitoring.sensors.join(', ')}
-                                  />
-                                </ListItem>
-                                <ListItem>
-                                  <ListItemIcon>
-                                    <TimelineIcon />
-                                  </ListItemIcon>
-                                  <ListItemText 
-                                    primary="Tracked Metrics"
-                                    secondary={practice.aiMonitoring.metrics.join(', ')}
-                                  />
-                                </ListItem>
-                                <ListItem>
-                                  <ListItemIcon>
-                                    <NotificationsIcon />
-                                  </ListItemIcon>
-                                  <ListItemText 
-                                    primary="Automated Alerts"
-                                    secondary={practice.aiMonitoring.automatedAlerts.join(', ')}
-                                  />
-                                </ListItem>
-                              </List>
-                            </Box>
                           </Paper>
                         </Collapse>
                       </Box>
