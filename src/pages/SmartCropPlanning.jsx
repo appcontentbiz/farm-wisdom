@@ -19,18 +19,20 @@ import {
   Divider,
   Alert
 } from '@mui/material';
-import WbSunnyIcon from '@mui/icons-material/WbSunny';
-import OpacityIcon from '@mui/icons-material/Opacity';
-import TerrainIcon from '@mui/icons-material/Terrain';
-import TimelineIcon from '@mui/icons-material/Timeline';
-import LocalFloristIcon from '@mui/icons-material/LocalFlorist';
-import EcoIcon from '@mui/icons-material/Eco';
-import PrecisionManufacturingIcon from '@mui/icons-material/PrecisionManufacturing';
-import WaterDropIcon from '@mui/icons-material/WaterDrop';
-import AgricultureIcon from '@mui/icons-material/Agriculture';
-import CloudQueueIcon from '@mui/icons-material/CloudQueue';
-import AnalyticsIcon from '@mui/icons-material/Analytics';
-import Brightness5Icon from '@mui/icons-material/Brightness5';
+import {
+  WbSunny as WbSunnyIcon,
+  Opacity as OpacityIcon,
+  Terrain as TerrainIcon,
+  Timeline as TimelineIcon,
+  LocalFlorist as LocalFloristIcon,
+  Eco as EcoIcon,
+  PrecisionManufacturing as PrecisionManufacturingIcon,
+  WaterDrop as WaterDropIcon,
+  Agriculture as AgricultureIcon,
+  CloudQueue as CloudQueueIcon,
+  Analytics as AnalyticsIcon,
+  Brightness5 as Brightness5Icon
+} from '@mui/icons-material';
 
 export default function SmartCropPlanning() {
   const [selectedCrop, setSelectedCrop] = useState(null);
