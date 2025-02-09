@@ -53,88 +53,58 @@ export default function MarketPrices() {
     const futuresMonths = getFuturesMonths();
 
     return [
-      // Agricultural Commodities
+      // All commodities in alphabetical order
       {
-        name: 'Corn',
+        name: 'Aluminum',
         futures: futuresMonths.map((month, i) => ({
           month,
-          price: Number((4.25 + i * 0.1 + Math.random() * 0.2).toFixed(2)),
+          price: Number((2.15 + i * 0.01 + Math.random() * 0.05).toFixed(3)),
+          change: Number((Math.random() - 0.5) * 0.04)
+        })),
+        lastUpdated: new Date()
+      },
+      {
+        name: 'Barley',
+        futures: futuresMonths.map((month, i) => ({
+          month,
+          price: Number((5.25 + i * 0.08 + Math.random() * 0.18).toFixed(2)),
           change: Number((Math.random() - 0.5) * 0.15)
         })),
         lastUpdated: new Date()
       },
       {
-        name: 'Soybeans',
+        name: 'Canola',
         futures: futuresMonths.map((month, i) => ({
           month,
-          price: Number((12.35 + i * 0.1 + Math.random() * 0.3).toFixed(2)),
-          change: Number((Math.random() - 0.5) * 0.25)
+          price: Number((14.75 + i * 0.15 + Math.random() * 0.35).toFixed(2)),
+          change: Number((Math.random() - 0.5) * 0.30)
         })),
         lastUpdated: new Date()
       },
-      {
-        name: 'Wheat',
-        futures: futuresMonths.map((month, i) => ({
-          month,
-          price: Number((6.15 + i * 0.1 + Math.random() * 0.25).toFixed(2)),
-          change: Number((Math.random() - 0.5) * 0.20)
-        })),
-        lastUpdated: new Date()
-      },
-      // Precious Metals
-      {
-        name: 'Gold',
-        futures: futuresMonths.map((month, i) => ({
-          month,
-          price: Number((2050.75 + i * 5 + Math.random() * 15).toFixed(2)),
-          change: Number((Math.random() - 0.5) * 8)
-        })),
-        lastUpdated: new Date()
-      },
-      {
-        name: 'Silver',
-        futures: futuresMonths.map((month, i) => ({
-          month,
-          price: Number((23.50 + i * 0.25 + Math.random() * 0.75).toFixed(2)),
-          change: Number((Math.random() - 0.5) * 0.45)
-        })),
-        lastUpdated: new Date()
-      },
-      {
-        name: 'Platinum',
-        futures: futuresMonths.map((month, i) => ({
-          month,
-          price: Number((925.50 + i * 2 + Math.random() * 8).toFixed(2)),
-          change: Number((Math.random() - 0.5) * 5)
-        })),
-        lastUpdated: new Date()
-      },
-      // Energy
-      {
-        name: 'Crude Oil',
-        futures: futuresMonths.map((month, i) => ({
-          month,
-          price: Number((75.50 + i * 0.5 + Math.random() * 2).toFixed(2)),
-          change: Number((Math.random() - 0.5) * 1.5)
-        })),
-        lastUpdated: new Date()
-      },
-      {
-        name: 'Natural Gas',
-        futures: futuresMonths.map((month, i) => ({
-          month,
-          price: Number((2.85 + i * 0.05 + Math.random() * 0.15).toFixed(3)),
-          change: Number((Math.random() - 0.5) * 0.12)
-        })),
-        lastUpdated: new Date()
-      },
-      // Soft Commodities
       {
         name: 'Coffee',
         futures: futuresMonths.map((month, i) => ({
           month,
           price: Number((185.25 + i * 1 + Math.random() * 5).toFixed(2)),
           change: Number((Math.random() - 0.5) * 3)
+        })),
+        lastUpdated: new Date()
+      },
+      {
+        name: 'Copper',
+        futures: futuresMonths.map((month, i) => ({
+          month,
+          price: Number((3.85 + i * 0.02 + Math.random() * 0.08).toFixed(3)),
+          change: Number((Math.random() - 0.5) * 0.06)
+        })),
+        lastUpdated: new Date()
+      },
+      {
+        name: 'Corn',
+        futures: futuresMonths.map((month, i) => ({
+          month,
+          price: Number((4.25 + i * 0.1 + Math.random() * 0.2).toFixed(2)),
+          change: Number((Math.random() - 0.5) * 0.15)
         })),
         lastUpdated: new Date()
       },
@@ -148,11 +118,92 @@ export default function MarketPrices() {
         lastUpdated: new Date()
       },
       {
+        name: 'Crude Oil',
+        futures: futuresMonths.map((month, i) => ({
+          month,
+          price: Number((75.50 + i * 0.5 + Math.random() * 2).toFixed(2)),
+          change: Number((Math.random() - 0.5) * 1.5)
+        })),
+        lastUpdated: new Date()
+      },
+      {
+        name: 'Gold',
+        futures: futuresMonths.map((month, i) => ({
+          month,
+          price: Number((2050.75 + i * 5 + Math.random() * 15).toFixed(2)),
+          change: Number((Math.random() - 0.5) * 8)
+        })),
+        lastUpdated: new Date()
+      },
+      {
+        name: 'Lean Hogs',
+        futures: futuresMonths.map((month, i) => ({
+          month,
+          price: Number((85.45 + i * 0.3 + Math.random() * 1.2).toFixed(2)),
+          change: Number((Math.random() - 0.5) * 0.95)
+        })),
+        lastUpdated: new Date()
+      },
+      {
+        name: 'Live Cattle',
+        futures: futuresMonths.map((month, i) => ({
+          month,
+          price: Number((175.25 + i * 0.4 + Math.random() * 1.5).toFixed(2)),
+          change: Number((Math.random() - 0.5) * 1.25)
+        })),
+        lastUpdated: new Date()
+      },
+      {
+        name: 'Natural Gas',
+        futures: futuresMonths.map((month, i) => ({
+          month,
+          price: Number((2.85 + i * 0.05 + Math.random() * 0.15).toFixed(3)),
+          change: Number((Math.random() - 0.5) * 0.12)
+        })),
+        lastUpdated: new Date()
+      },
+      {
+        name: 'Platinum',
+        futures: futuresMonths.map((month, i) => ({
+          month,
+          price: Number((925.50 + i * 2 + Math.random() * 8).toFixed(2)),
+          change: Number((Math.random() - 0.5) * 5)
+        })),
+        lastUpdated: new Date()
+      },
+      {
+        name: 'Silver',
+        futures: futuresMonths.map((month, i) => ({
+          month,
+          price: Number((23.50 + i * 0.25 + Math.random() * 0.75).toFixed(2)),
+          change: Number((Math.random() - 0.5) * 0.45)
+        })),
+        lastUpdated: new Date()
+      },
+      {
+        name: 'Soybeans',
+        futures: futuresMonths.map((month, i) => ({
+          month,
+          price: Number((12.35 + i * 0.1 + Math.random() * 0.3).toFixed(2)),
+          change: Number((Math.random() - 0.5) * 0.25)
+        })),
+        lastUpdated: new Date()
+      },
+      {
         name: 'Sugar',
         futures: futuresMonths.map((month, i) => ({
           month,
           price: Number((0.25 + i * 0.005 + Math.random() * 0.01).toFixed(3)),
           change: Number((Math.random() - 0.5) * 0.008)
+        })),
+        lastUpdated: new Date()
+      },
+      {
+        name: 'Wheat',
+        futures: futuresMonths.map((month, i) => ({
+          month,
+          price: Number((6.15 + i * 0.1 + Math.random() * 0.25).toFixed(2)),
+          change: Number((Math.random() - 0.5) * 0.20)
         })),
         lastUpdated: new Date()
       }
