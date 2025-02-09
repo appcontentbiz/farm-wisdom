@@ -24,154 +24,164 @@ import {
   Refresh as RefreshIcon
 } from '@mui/icons-material';
 
-// Alpha Vantage commodity symbols
-const COMMODITY_SYMBOLS = {
-  'Gold': 'GOLD',
-  'Silver': 'SILVER',
-  'Crude Oil': 'WTI',
-  'Natural Gas': 'NATURAL_GAS',
-  'Copper': 'COPPER',
-  'Aluminum': 'ALUMINUM',
-  'Wheat': 'WHEAT',
-  'Corn': 'CORN',
-  'Cotton': 'COTTON',
-  'Sugar': 'SUGAR',
-  'Coffee': 'COFFEE'
-};
-
 export default function MarketPrices() {
   const [commodities, setCommodities] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [lastUpdate, setLastUpdate] = useState(new Date());
 
-  const fetchMarketData = async () => {
+  const generateSimulatedData = () => {
+    const now = new Date();
+    const currentMonth = now.getMonth();
+    const currentYear = now.getFullYear();
+  
+    const getMonthName = (monthIndex) => {
+      const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      return months[monthIndex % 12];
+    };
+
+    const getFuturesMonths = () => {
+      const futures = [];
+      for (let i = 0; i < 6; i++) {
+        const monthIndex = (currentMonth + i + 1) % 12;
+        const year = currentYear + Math.floor((currentMonth + i + 1) / 12);
+        futures.push(`${getMonthName(monthIndex)} ${year}`);
+      }
+      return futures;
+    };
+
+    const futuresMonths = getFuturesMonths();
+
+    return [
+      // Agricultural Commodities
+      {
+        name: 'Corn',
+        futures: futuresMonths.map((month, i) => ({
+          month,
+          price: Number((4.25 + i * 0.1 + Math.random() * 0.2).toFixed(2)),
+          change: Number((Math.random() - 0.5) * 0.15)
+        })),
+        lastUpdated: new Date()
+      },
+      {
+        name: 'Soybeans',
+        futures: futuresMonths.map((month, i) => ({
+          month,
+          price: Number((12.35 + i * 0.1 + Math.random() * 0.3).toFixed(2)),
+          change: Number((Math.random() - 0.5) * 0.25)
+        })),
+        lastUpdated: new Date()
+      },
+      {
+        name: 'Wheat',
+        futures: futuresMonths.map((month, i) => ({
+          month,
+          price: Number((6.15 + i * 0.1 + Math.random() * 0.25).toFixed(2)),
+          change: Number((Math.random() - 0.5) * 0.20)
+        })),
+        lastUpdated: new Date()
+      },
+      // Precious Metals
+      {
+        name: 'Gold',
+        futures: futuresMonths.map((month, i) => ({
+          month,
+          price: Number((2050.75 + i * 5 + Math.random() * 15).toFixed(2)),
+          change: Number((Math.random() - 0.5) * 8)
+        })),
+        lastUpdated: new Date()
+      },
+      {
+        name: 'Silver',
+        futures: futuresMonths.map((month, i) => ({
+          month,
+          price: Number((23.50 + i * 0.25 + Math.random() * 0.75).toFixed(2)),
+          change: Number((Math.random() - 0.5) * 0.45)
+        })),
+        lastUpdated: new Date()
+      },
+      {
+        name: 'Platinum',
+        futures: futuresMonths.map((month, i) => ({
+          month,
+          price: Number((925.50 + i * 2 + Math.random() * 8).toFixed(2)),
+          change: Number((Math.random() - 0.5) * 5)
+        })),
+        lastUpdated: new Date()
+      },
+      // Energy
+      {
+        name: 'Crude Oil',
+        futures: futuresMonths.map((month, i) => ({
+          month,
+          price: Number((75.50 + i * 0.5 + Math.random() * 2).toFixed(2)),
+          change: Number((Math.random() - 0.5) * 1.5)
+        })),
+        lastUpdated: new Date()
+      },
+      {
+        name: 'Natural Gas',
+        futures: futuresMonths.map((month, i) => ({
+          month,
+          price: Number((2.85 + i * 0.05 + Math.random() * 0.15).toFixed(3)),
+          change: Number((Math.random() - 0.5) * 0.12)
+        })),
+        lastUpdated: new Date()
+      },
+      // Soft Commodities
+      {
+        name: 'Coffee',
+        futures: futuresMonths.map((month, i) => ({
+          month,
+          price: Number((185.25 + i * 1 + Math.random() * 5).toFixed(2)),
+          change: Number((Math.random() - 0.5) * 3)
+        })),
+        lastUpdated: new Date()
+      },
+      {
+        name: 'Cotton',
+        futures: futuresMonths.map((month, i) => ({
+          month,
+          price: Number((0.85 + i * 0.01 + Math.random() * 0.03).toFixed(3)),
+          change: Number((Math.random() - 0.5) * 0.02)
+        })),
+        lastUpdated: new Date()
+      },
+      {
+        name: 'Sugar',
+        futures: futuresMonths.map((month, i) => ({
+          month,
+          price: Number((0.25 + i * 0.005 + Math.random() * 0.01).toFixed(3)),
+          change: Number((Math.random() - 0.5) * 0.008)
+        })),
+        lastUpdated: new Date()
+      }
+    ];
+  };
+
+  const updateData = () => {
     setLoading(true);
     try {
-      const promises = Object.entries(COMMODITY_SYMBOLS).map(async ([name, symbol]) => {
-        // Using Alpha Vantage's free commodity API
-        const response = await fetch(`https://www.alphavantage.co/query?function=COMMODITY_PRICE&symbol=${symbol}&apikey=demo`);
-        
-        if (!response.ok) throw new Error(`Failed to fetch ${name} data`);
-        const data = await response.json();
-        
-        if (data.error) {
-          throw new Error(data.error);
-        }
-
-        const price = parseFloat(data.data?.[0]?.value) || 0;
-        const prevPrice = parseFloat(data.data?.[1]?.value) || 0;
-        const change = price - prevPrice;
-        
-        // Get future months
-        const futureMonths = [];
-        const now = new Date();
-        for (let i = 1; i <= 6; i++) {
-          const futureDate = new Date(now);
-          futureDate.setMonth(now.getMonth() + i);
-          
-          // Add small increments for future months based on current price
-          const futurePrice = price * (1 + (i * 0.005) + (Math.random() * 0.01 - 0.005));
-          const futureChange = futurePrice - price;
-          
-          futureMonths.push({
-            month: futureDate.toLocaleString('default', { month: 'short' }) + ' ' + futureDate.getFullYear(),
-            price: Number(futurePrice.toFixed(2)),
-            change: Number(futureChange.toFixed(2))
-          });
-        }
-
-        return {
-          name,
-          futures: [{
-            month: 'Current',
-            price: Number(price.toFixed(2)),
-            change: Number(change.toFixed(2))
-          }, ...futureMonths],
-          lastUpdated: new Date()
-        };
-      });
-
-      const results = await Promise.all(promises);
-      setCommodities(results.filter(item => item.futures[0].price > 0));
+      const data = generateSimulatedData();
+      setCommodities(data);
       setLastUpdate(new Date());
       setError(null);
     } catch (err) {
-      console.error('Fetch error:', err);
-      setError('Failed to fetch market data. Falling back to simulation.');
-      // Fallback to simulation if API fails
-      setCommodities(generateSimulatedData());
+      console.error('Error generating data:', err);
+      setError('Failed to update market data');
     } finally {
       setLoading(false);
     }
   };
 
-  // Generate simulated data as fallback
-  const generateSimulatedData = () => {
-    const baseValues = {
-      'Gold': 2050.75,
-      'Silver': 23.45,
-      'Crude Oil': 75.30,
-      'Natural Gas': 2.85,
-      'Copper': 3.85,
-      'Aluminum': 2.15,
-      'Wheat': 6.25,
-      'Corn': 4.75,
-      'Cotton': 0.85,
-      'Sugar': 0.25,
-      'Coffee': 1.85
-    };
-
-    return Object.entries(baseValues).map(([name, basePrice]) => {
-      const futureMonths = [];
-      const now = new Date();
-      
-      // Add random variation to base price for current price
-      const currentPrice = basePrice * (1 + (Math.random() * 0.04 - 0.02));
-      const currentChange = currentPrice - basePrice;
-
-      // Generate future months data
-      for (let i = 1; i <= 6; i++) {
-        const futureDate = new Date(now);
-        futureDate.setMonth(now.getMonth() + i);
-        
-        // Add increasing variation for future months
-        const variation = (Math.random() * 0.06 - 0.02) * i;
-        const futurePrice = currentPrice * (1 + variation);
-        const futureChange = futurePrice - currentPrice;
-        
-        futureMonths.push({
-          month: futureDate.toLocaleString('default', { month: 'short' }) + ' ' + futureDate.getFullYear(),
-          price: Number(futurePrice.toFixed(2)),
-          change: Number(futureChange.toFixed(2))
-        });
-      }
-
-      return {
-        name,
-        futures: [{
-          month: 'Current',
-          price: Number(currentPrice.toFixed(2)),
-          change: Number(currentChange.toFixed(2))
-        }, ...futureMonths],
-        lastUpdated: new Date()
-      };
-    });
-  };
-
   useEffect(() => {
-    // Start with simulated data immediately
-    setCommodities(generateSimulatedData());
-    setLastUpdate(new Date());
-    
-    // Then try to fetch real data
-    fetchMarketData();
-    const interval = setInterval(fetchMarketData, 60000); // Update every minute
+    updateData();
+    const interval = setInterval(updateData, 60000); // Update every minute
     return () => clearInterval(interval);
   }, []);
 
   const handleRefresh = () => {
-    fetchMarketData();
+    updateData();
   };
 
   return (
