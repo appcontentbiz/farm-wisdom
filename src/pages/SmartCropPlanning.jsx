@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Container,
   Typography,
@@ -6,223 +6,252 @@ import {
   CardContent,
   Grid,
   Button,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
   Box,
-  Chip,
-  List,
-  ListItem,
-  ListItemText,
-  ListItemIcon,
-  Divider,
-  Alert
+  LinearProgress,
+  IconButton
 } from '@mui/material';
-import {
-  WbSunny,
-  Opacity,
-  Terrain,
-  Timeline,
-  LocalFlorist,
-  EcoOutlined,
-  PrecisionManufacturing,
-  WaterDrop,
-  Agriculture,
-  CloudQueue,
-  Analytics,
-  Brightness5
-} from '@mui/icons-material';
+import WaterDropIcon from '@mui/icons-material/WaterDrop';
+import ThermostatIcon from '@mui/icons-material/Thermostat';
+import BugReportIcon from '@mui/icons-material/BugReport';
+import MonitorHeartIcon from '@mui/icons-material/MonitorHeart';
+import AddIcon from '@mui/icons-material/Add';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import WbSunnyIcon from '@mui/icons-material/WbSunny';
+import UpdateIcon from '@mui/icons-material/Update';
+import ScienceIcon from '@mui/icons-material/Science';
+import EcoIcon from '@mui/icons-material/Eco';
+import LightModeIcon from '@mui/icons-material/LightMode';
+import RecyclingIcon from '@mui/icons-material/Recycling';
 
 export default function SmartCropPlanning() {
-  const [selectedCrop, setSelectedCrop] = useState(null);
-  const [dialogOpen, setDialogOpen] = useState(false);
+  const alerts = [
+    {
+      type: 'warning',
+      title: 'Frost Warning',
+      message: 'Potential frost tonight. Consider protecting sensitive crops.'
+    },
+    {
+      type: 'success',
+      title: 'Optimal Planting',
+      message: 'Ideal conditions for planting tomatoes in the next 3 days.'
+    }
+  ];
 
   const crops = [
     {
+      name: 'Tomatoes',
+      variety: 'Beefsteak',
+      stage: 'Vegetative',
+      moisture: 70,
+      temperature: 70,
+      pestRisk: 'Low',
+      health: 'Good',
+      nextAction: 'Fertilize',
+      dueDate: '1/29/2025'
+    },
+    {
+      name: 'Lettuce',
+      variety: 'Romaine',
+      stage: 'Harvest Ready',
+      moisture: 55,
+      temperature: 68,
+      pestRisk: 'Low',
+      health: 'Excellent',
+      nextAction: 'Harvest',
+      dueDate: '1/28/2025'
+    },
+    {
       name: 'Bell Peppers',
-      season: 'Spring-Summer',
-      waterNeeds: 'Moderate',
-      soilType: 'Well-drained, rich in organic matter',
-      aiInsights: [
-        'Disease detection through leaf analysis',
-        'Precision watering based on soil moisture data',
-        'Yield prediction using growth patterns'
-      ],
-      sustainablePractices: [
-        'Companion planting with basil and marigolds',
-        'Natural pest control using beneficial insects',
-        'Drip irrigation for water conservation'
-      ]
+      variety: 'California Wonder',
+      stage: 'Flowering',
+      moisture: 66,
+      temperature: 73,
+      pestRisk: 'Medium',
+      health: 'Good',
+      nextAction: 'Prune',
+      dueDate: '2/9/2025'
     },
     {
       name: 'Carrots',
-      season: 'Spring-Fall',
-      waterNeeds: 'Moderate',
-      soilType: 'Deep, loose, well-drained',
-      aiInsights: [
-        'Root development monitoring using soil sensors',
-        'Growth rate optimization through data analysis',
-        'Harvest timing predictions'
-      ],
-      sustainablePractices: [
-        'Cover cropping to prevent soil erosion',
-        'Crop rotation with legumes',
-        'Organic mulching for moisture retention'
-      ]
-    },
-    {
-      name: 'Cucumber',
-      season: 'Summer',
-      waterNeeds: 'High',
-      soilType: 'Rich, well-drained',
-      aiInsights: [
-        'Early disease detection using image analysis',
-        'Automated pollination tracking',
-        'Yield optimization through climate data'
-      ],
-      sustainablePractices: [
-        'Vertical growing techniques',
-        'Integrated pest management',
-        'Water recycling systems'
-      ]
+      variety: 'Nantes',
+      stage: 'Root Development',
+      moisture: 97,
+      temperature: 62,
+      pestRisk: 'Low',
+      health: 'Excellent',
+      nextAction: 'Thin Seedlings',
+      dueDate: '2/11/2025'
     },
     {
       name: 'Spinach',
-      season: 'Spring-Fall',
-      waterNeeds: 'Moderate',
-      soilType: 'Rich, well-drained',
-      aiInsights: [
-        'Nutrient deficiency detection',
-        'Optimal harvest window prediction',
-        'Growth rate monitoring'
-      ],
-      sustainablePractices: [
-        'Natural soil enrichment methods',
-        'Shade cloth usage for temperature control',
-        'Efficient water management systems'
-      ]
+      variety: 'Bloomsdale',
+      stage: 'Leaf Development',
+      moisture: 76,
+      temperature: 60,
+      pestRisk: 'Low',
+      health: 'Good',
+      nextAction: 'Fertilize',
+      dueDate: '2/14/2025'
+    },
+    {
+      name: 'Cucumber',
+      variety: 'Marketmore',
+      stage: 'Seedling',
+      moisture: 56,
+      temperature: 69,
+      pestRisk: 'Low',
+      health: 'Good',
+      nextAction: 'Install Trellis',
+      dueDate: '3/9/2025'
     }
   ];
 
-  const modernFarmingTips = [
+  const recommendations = [
     {
-      title: 'AI-Powered Precision Agriculture',
-      icon: <PrecisionManufacturing />,
-      description: 'Using AI for precise resource management, disease detection, and yield prediction',
-      techniques: [
-        'Smart sensors for soil and climate monitoring',
-        'Computer vision for plant health analysis',
-        'Predictive analytics for harvest optimization'
+      title: 'Companion Planting Analysis',
+      description: 'AI-powered suggestions for optimal companion planting combinations to enhance growth and pest resistance.',
+      icon: <EcoIcon />,
+      actions: [
+        { label: 'VIEW COMBINATIONS', color: 'primary' },
+        { label: 'UPDATE PLANTS', color: 'secondary' }
       ]
     },
     {
-      title: 'Sustainable Water Management',
-      icon: <WaterDrop />,
-      description: 'Advanced irrigation and water conservation methods',
-      techniques: [
-        'Soil moisture sensors and automated irrigation',
-        'Rainwater harvesting systems',
-        'Drought-resistant farming techniques'
+      title: 'Soil Health Optimization',
+      description: 'Real-time soil nutrient analysis and recommendations for organic amendments based on crop needs.',
+      icon: <ScienceIcon />,
+      actions: [
+        { label: 'VIEW ANALYSIS', color: 'primary' },
+        { label: 'ORDER AMENDMENTS', color: 'secondary' }
       ]
     },
     {
-      title: 'Modern Farming Technologies',
-      icon: <Agriculture />,
-      description: 'Cutting-edge tools and methods for efficient farming',
-      techniques: [
-        'Drone monitoring for crop assessment',
-        'IoT devices for environmental control',
-        'Automated climate control systems'
+      title: 'Light Exposure Optimization',
+      description: 'Track and optimize sunlight exposure for each crop with AI-powered placement suggestions.',
+      icon: <LightModeIcon />,
+      actions: [
+        { label: 'VIEW REPORT', color: 'primary' },
+        { label: 'ADJUST LAYOUT', color: 'secondary' }
       ]
     },
     {
-      title: 'Climate-Smart Agriculture',
-      icon: <CloudQueue />,
-      description: 'Adapting to and mitigating climate change impacts',
-      techniques: [
-        'Weather pattern analysis and prediction',
-        'Climate-resilient farming methods',
-        'Sustainable soil management'
+      title: 'Sustainable Practices',
+      description: 'Personalized recommendations for sustainable farming practices based on your crops and local conditions.',
+      icon: <RecyclingIcon />,
+      actions: [
+        { label: 'VIEW TIPS', color: 'primary' },
+        { label: 'TRACK IMPACT', color: 'secondary' }
       ]
     }
   ];
-
-  const handleCropClick = (crop) => {
-    setSelectedCrop(crop);
-    setDialogOpen(true);
-  };
 
   return (
     <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-      <Typography variant="h4" gutterBottom component="h1">
-        Smart Crop Planning
-      </Typography>
-
-      <Alert severity="info" sx={{ mb: 3 }}>
-        Our AI-powered system provides real-time insights and sustainable farming recommendations
-        based on local conditions and modern agricultural practices.
-      </Alert>
-
-      <Box sx={{ mb: 4 }}>
-        <Typography variant="h5" gutterBottom>
-          Modern Farming Insights
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
+        <Typography variant="h4" component="h1">
+          Smart Crop Planning
         </Typography>
-        <Grid container spacing={3}>
-          {modernFarmingTips.map((tip) => (
-            <Grid item xs={12} md={6} key={tip.title}>
-              <Card>
-                <CardContent>
-                  <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                    {tip.icon}
-                    <Typography variant="h6" sx={{ ml: 1 }}>
-                      {tip.title}
-                    </Typography>
-                  </Box>
-                  <Typography variant="body2" color="text.secondary" paragraph>
-                    {tip.description}
-                  </Typography>
-                  <List dense>
-                    {tip.techniques.map((technique) => (
-                      <ListItem key={technique}>
-                        <ListItemIcon>
-                          <EcoOutlined color="primary" fontSize="small" />
-                        </ListItemIcon>
-                        <ListItemText primary={technique} />
-                      </ListItem>
-                    ))}
-                  </List>
-                </CardContent>
-              </Card>
-            </Grid>
-          ))}
-        </Grid>
+        <Button
+          variant="contained"
+          color="primary"
+          startIcon={<AddIcon />}
+        >
+          ADD CROP
+        </Button>
       </Box>
 
-      <Typography variant="h5" gutterBottom>
+      {alerts.map((alert, index) => (
+        <Card 
+          key={index} 
+          sx={{ 
+            mb: 2, 
+            backgroundColor: alert.type === 'warning' ? '#fff3e0' : '#e8f5e9'
+          }}
+        >
+          <CardContent sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <Box>
+              <Typography variant="h6" component="div">
+                {alert.title}
+              </Typography>
+              <Typography variant="body2">
+                {alert.message}
+              </Typography>
+            </Box>
+            <Button size="small" endIcon={<VisibilityIcon />}>
+              VIEW
+            </Button>
+          </CardContent>
+        </Card>
+      ))}
+
+      <Typography variant="h5" sx={{ mt: 4, mb: 3 }}>
         Active Crops
       </Typography>
+
       <Grid container spacing={3}>
-        {crops.map((crop) => (
-          <Grid item xs={12} md={6} key={crop.name}>
-            <Card 
-              sx={{ 
-                cursor: 'pointer',
-                '&:hover': { boxShadow: 6 }
-              }}
-              onClick={() => handleCropClick(crop)}
-            >
+        {crops.map((crop, index) => (
+          <Grid item xs={12} md={6} key={index}>
+            <Card>
               <CardContent>
-                <Typography variant="h6" gutterBottom>
-                  {crop.name}
-                </Typography>
-                <Box sx={{ display: 'flex', gap: 1, mb: 2, flexWrap: 'wrap' }}>
-                  <Chip icon={<WbSunny />} label={crop.season} />
-                  <Chip icon={<Opacity />} label={crop.waterNeeds} />
-                  <Chip icon={<Terrain />} label="Soil Type" />
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2 }}>
+                  <Typography variant="h6">
+                    {crop.name}
+                  </Typography>
+                  <Typography 
+                    variant="caption" 
+                    sx={{ 
+                      backgroundColor: 'primary.main',
+                      color: 'white',
+                      padding: '4px 8px',
+                      borderRadius: '4px'
+                    }}
+                  >
+                    {crop.stage}
+                  </Typography>
                 </Box>
-                <Typography variant="body2" color="text.secondary">
-                  Click for AI insights and sustainable practices
+                <Typography variant="subtitle2" color="text.secondary" gutterBottom>
+                  Variety: {crop.variety}
+                </Typography>
+                <Typography variant="subtitle2" gutterBottom>
+                  Growth Progress
+                </Typography>
+                <LinearProgress variant="determinate" value={70} sx={{ mb: 2 }} />
+                <Grid container spacing={2}>
+                  <Grid item xs={6}>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                      <WaterDropIcon color="primary" />
+                      <Typography variant="body2">
+                        Moisture: {crop.moisture}%
+                      </Typography>
+                    </Box>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                      <ThermostatIcon color="primary" />
+                      <Typography variant="body2">
+                        Temp: {crop.temperature}°F
+                      </Typography>
+                    </Box>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                      <BugReportIcon color="primary" />
+                      <Typography variant="body2">
+                        Pest Risk: {crop.pestRisk}
+                      </Typography>
+                    </Box>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                      <MonitorHeartIcon color="primary" />
+                      <Typography variant="body2">
+                        Health: {crop.health}
+                      </Typography>
+                    </Box>
+                  </Grid>
+                </Grid>
+                <Typography variant="body2" sx={{ mt: 2, color: 'text.secondary' }}>
+                  Next Action: {crop.nextAction} (Due: {crop.dueDate})
                 </Typography>
               </CardContent>
             </Card>
@@ -230,56 +259,41 @@ export default function SmartCropPlanning() {
         ))}
       </Grid>
 
-      <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)} maxWidth="md" fullWidth>
-        {selectedCrop && (
-          <>
-            <DialogTitle>
-              <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                <LocalFlorist color="primary" sx={{ mr: 1 }} />
-                {selectedCrop.name} - Smart Farming Guide
-              </Box>
-            </DialogTitle>
-            <DialogContent>
-              <Grid container spacing={3}>
-                <Grid item xs={12}>
-                  <Typography variant="h6" gutterBottom sx={{ display: 'flex', alignItems: 'center' }}>
-                    <Analytics sx={{ mr: 1 }} /> AI-Powered Insights
+      <Typography variant="h5" sx={{ mt: 4, mb: 3 }}>
+        Smart Farming Recommendations
+      </Typography>
+
+      <Grid container spacing={3}>
+        {recommendations.map((rec, index) => (
+          <Grid item xs={12} md={6} lg={3} key={index}>
+            <Card>
+              <CardContent>
+                <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+                  {rec.icon}
+                  <Typography variant="h6" sx={{ ml: 1 }}>
+                    {rec.title}
                   </Typography>
-                  <List>
-                    {selectedCrop.aiInsights.map((insight, index) => (
-                      <ListItem key={index}>
-                        <ListItemIcon>
-                          <Timeline color="primary" />
-                        </ListItemIcon>
-                        <ListItemText primary={insight} />
-                      </ListItem>
-                    ))}
-                  </List>
-                </Grid>
-                <Grid item xs={12}>
-                  <Divider />
-                  <Typography variant="h6" gutterBottom sx={{ mt: 2, display: 'flex', alignItems: 'center' }}>
-                    <Brightness5 sx={{ mr: 1 }} /> Sustainable Practices
-                  </Typography>
-                  <List>
-                    {selectedCrop.sustainablePractices.map((practice, index) => (
-                      <ListItem key={index}>
-                        <ListItemIcon>
-                          <EcoOutlined color="success" />
-                        </ListItemIcon>
-                        <ListItemText primary={practice} />
-                      </ListItem>
-                    ))}
-                  </List>
-                </Grid>
-              </Grid>
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={() => setDialogOpen(false)}>Close</Button>
-            </DialogActions>
-          </>
-        )}
-      </Dialog>
+                </Box>
+                <Typography variant="body2" color="text.secondary" paragraph>
+                  {rec.description}
+                </Typography>
+                <Box sx={{ display: 'flex', gap: 1 }}>
+                  {rec.actions.map((action, actionIndex) => (
+                    <Button
+                      key={actionIndex}
+                      variant={actionIndex === 0 ? "contained" : "outlined"}
+                      color={action.color}
+                      size="small"
+                    >
+                      {action.label}
+                    </Button>
+                  ))}
+                </Box>
+              </CardContent>
+            </Card>
+          </Grid>
+        ))}
+      </Grid>
     </Container>
   );
 }
