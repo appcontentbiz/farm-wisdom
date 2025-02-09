@@ -20,18 +20,18 @@ import {
   Alert
 } from '@mui/material';
 import {
-  WbSunny as WbSunnyIcon,
-  Opacity as OpacityIcon,
-  Terrain as TerrainIcon,
-  Timeline as TimelineIcon,
-  LocalFlorist as LocalFloristIcon,
-  Eco as EcoIcon,
-  PrecisionManufacturing as PrecisionManufacturingIcon,
-  WaterDrop as WaterDropIcon,
-  Agriculture as AgricultureIcon,
-  CloudQueue as CloudQueueIcon,
-  Analytics as AnalyticsIcon,
-  Brightness5 as Brightness5Icon
+  WbSunny,
+  Opacity,
+  Terrain,
+  Timeline,
+  LocalFlorist,
+  EcoOutlined,
+  PrecisionManufacturing,
+  WaterDrop,
+  Agriculture,
+  CloudQueue,
+  Analytics,
+  Brightness5
 } from '@mui/icons-material';
 
 export default function SmartCropPlanning() {
@@ -108,7 +108,7 @@ export default function SmartCropPlanning() {
   const modernFarmingTips = [
     {
       title: 'AI-Powered Precision Agriculture',
-      icon: <PrecisionManufacturingIcon />,
+      icon: <PrecisionManufacturing />,
       description: 'Using AI for precise resource management, disease detection, and yield prediction',
       techniques: [
         'Smart sensors for soil and climate monitoring',
@@ -118,7 +118,7 @@ export default function SmartCropPlanning() {
     },
     {
       title: 'Sustainable Water Management',
-      icon: <WaterDropIcon />,
+      icon: <WaterDrop />,
       description: 'Advanced irrigation and water conservation methods',
       techniques: [
         'Soil moisture sensors and automated irrigation',
@@ -128,7 +128,7 @@ export default function SmartCropPlanning() {
     },
     {
       title: 'Modern Farming Technologies',
-      icon: <AgricultureIcon />,
+      icon: <Agriculture />,
       description: 'Cutting-edge tools and methods for efficient farming',
       techniques: [
         'Drone monitoring for crop assessment',
@@ -138,7 +138,7 @@ export default function SmartCropPlanning() {
     },
     {
       title: 'Climate-Smart Agriculture',
-      icon: <CloudQueueIcon />,
+      icon: <CloudQueue />,
       description: 'Adapting to and mitigating climate change impacts',
       techniques: [
         'Weather pattern analysis and prediction',
@@ -186,7 +186,7 @@ export default function SmartCropPlanning() {
                     {tip.techniques.map((technique) => (
                       <ListItem key={technique}>
                         <ListItemIcon>
-                          <EcoIcon color="primary" fontSize="small" />
+                          <EcoOutlined color="primary" fontSize="small" />
                         </ListItemIcon>
                         <ListItemText primary={technique} />
                       </ListItem>
@@ -217,9 +217,9 @@ export default function SmartCropPlanning() {
                   {crop.name}
                 </Typography>
                 <Box sx={{ display: 'flex', gap: 1, mb: 2, flexWrap: 'wrap' }}>
-                  <Chip icon={<WbSunnyIcon />} label={crop.season} />
-                  <Chip icon={<OpacityIcon />} label={crop.waterNeeds} />
-                  <Chip icon={<TerrainIcon />} label="Soil Type" />
+                  <Chip icon={<WbSunny />} label={crop.season} />
+                  <Chip icon={<Opacity />} label={crop.waterNeeds} />
+                  <Chip icon={<Terrain />} label="Soil Type" />
                 </Box>
                 <Typography variant="body2" color="text.secondary">
                   Click for AI insights and sustainable practices
@@ -235,7 +235,7 @@ export default function SmartCropPlanning() {
           <>
             <DialogTitle>
               <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                <LocalFloristIcon color="primary" sx={{ mr: 1 }} />
+                <LocalFlorist color="primary" sx={{ mr: 1 }} />
                 {selectedCrop.name} - Smart Farming Guide
               </Box>
             </DialogTitle>
@@ -243,13 +243,13 @@ export default function SmartCropPlanning() {
               <Grid container spacing={3}>
                 <Grid item xs={12}>
                   <Typography variant="h6" gutterBottom sx={{ display: 'flex', alignItems: 'center' }}>
-                    <AnalyticsIcon sx={{ mr: 1 }} /> AI-Powered Insights
+                    <Analytics sx={{ mr: 1 }} /> AI-Powered Insights
                   </Typography>
                   <List>
                     {selectedCrop.aiInsights.map((insight, index) => (
                       <ListItem key={index}>
                         <ListItemIcon>
-                          <TimelineIcon color="primary" />
+                          <Timeline color="primary" />
                         </ListItemIcon>
                         <ListItemText primary={insight} />
                       </ListItem>
@@ -259,13 +259,13 @@ export default function SmartCropPlanning() {
                 <Grid item xs={12}>
                   <Divider />
                   <Typography variant="h6" gutterBottom sx={{ mt: 2, display: 'flex', alignItems: 'center' }}>
-                    <Brightness5Icon sx={{ mr: 1 }} /> Sustainable Practices
+                    <Brightness5 sx={{ mr: 1 }} /> Sustainable Practices
                   </Typography>
                   <List>
                     {selectedCrop.sustainablePractices.map((practice, index) => (
                       <ListItem key={index}>
                         <ListItemIcon>
-                          <EcoIcon color="success" />
+                          <EcoOutlined color="success" />
                         </ListItemIcon>
                         <ListItemText primary={practice} />
                       </ListItem>
