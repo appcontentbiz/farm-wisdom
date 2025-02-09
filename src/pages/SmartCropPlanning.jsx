@@ -8,7 +8,9 @@ import {
   Button,
   Box,
   LinearProgress,
-  IconButton,
+  IconButton
+} from '@mui/material';
+import {
   WaterDrop as WaterDropIcon,
   Thermostat as ThermostatIcon,
   BugReport as BugReportIcon,
@@ -21,7 +23,7 @@ import {
   Eco as EcoIcon,
   LightMode as LightModeIcon,
   Recycling as RecyclingIcon
-} from '@mui/material';
+} from '@mui/icons-material';
 
 export default function SmartCropPlanning() {
   const alerts = [
