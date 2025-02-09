@@ -64,6 +64,7 @@ export default function SmartCropPlanning() {
   const [selectedCrop, setSelectedCrop] = useState(null);
   const [insightDialogOpen, setInsightDialogOpen] = useState(false);
   const [selectedInsight, setSelectedInsight] = useState(null);
+  const [selectedInsightType, setSelectedInsightType] = useState(null);
   const [implementationOpen, setImplementationOpen] = useState(false);
 
   const alerts = [
@@ -343,9 +344,77 @@ export default function SmartCropPlanning() {
     }
   ];
 
-  const handleInsightClick = (insight) => {
-    setSelectedInsight(insight);
-    setImplementationOpen(true);
+  const handleInsightClick = (insight, type) => {
+    if (selectedInsight === insight && selectedInsightType === type) {
+      setImplementationOpen(!implementationOpen);
+    } else {
+      setSelectedInsight(insight);
+      setSelectedInsightType(type);
+      setImplementationOpen(true);
+    }
+  };
+
+  const getImplementationGuide = (insight, type) => {
+    switch (type) {
+      case 'sustainable':
+        return {
+          title: 'Implementation Guide',
+          steps: [
+            {
+              label: 'Planning',
+              content: `Plan your ${insight.toLowerCase()} system`,
+              details: 'Assess your current setup and identify required materials and timeline.'
+            },
+            {
+              label: 'Setup',
+              content: 'Initial setup and configuration',
+              details: 'Follow best practices for installation and configuration.'
+            },
+            {
+              label: 'Maintenance',
+              content: 'Regular maintenance tasks',
+              details: 'Schedule regular checks and maintenance to ensure optimal performance.'
+            }
+          ]
+        };
+      case 'ai':
+        return {
+          title: 'AI Implementation Guide',
+          setup: [
+            'Install required sensors and monitoring equipment',
+            'Configure software and data collection systems',
+            'Set up automated alerts and notifications'
+          ],
+          monitoring: [
+            'Regular data collection and analysis',
+            'Pattern recognition and trend analysis',
+            'Performance optimization'
+          ],
+          actions: [
+            'Automated response system setup',
+            'Alert handling procedures',
+            'Continuous improvement process'
+          ]
+        };
+      case 'water':
+        return {
+          title: 'Water Management Guide',
+          steps: [
+            {
+              label: 'System Setup',
+              content: 'Install water management components',
+              details: 'Set up sensors, controls, and monitoring systems.'
+            },
+            {
+              label: 'Optimization',
+              content: 'Fine-tune water usage',
+              details: 'Adjust settings based on crop needs and environmental conditions.'
+            }
+          ]
+        };
+      default:
+        return null;
+    }
   };
 
   const handleOpenInsights = (crop) => {
@@ -424,15 +493,23 @@ export default function SmartCropPlanning() {
                     sx={{ mt: 1, '& .MuiLinearProgress-bar': { bgcolor: 'success.main' } }}
                   />
                 </Box>
-                <Button
-                  variant="outlined"
-                  color="primary"
-                  startIcon={<BiotechIcon />}
-                  onClick={() => handleOpenInsights(crop)}
-                  fullWidth
-                >
-                  AI Insights
-                </Button>
+                <Box sx={{ display: 'flex', gap: 1, mt: 2 }}>
+                  <Button
+                    variant="outlined"
+                    color="primary"
+                    startIcon={<BiotechIcon />}
+                    onClick={() => handleOpenInsights(crop)}
+                  >
+                    AI Insights
+                  </Button>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    startIcon={<UpdateIcon />}
+                  >
+                    Update
+                  </Button>
+                </Box>
               </CardContent>
             </Card>
           </Grid>
@@ -491,13 +568,38 @@ export default function SmartCropPlanning() {
                   </Typography>
                   <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, mb: 2 }}>
                     {cropSpecificInsights[selectedCrop.name]?.sustainablePractices.map((practice, idx) => (
-                      <Chip
-                        key={idx}
-                        icon={<ParkIcon />}
-                        label={practice}
-                        color="primary"
-                        variant="outlined"
-                      />
+                      <Box key={idx}>
+                        <Chip
+                          icon={<ParkIcon />}
+                          label={practice}
+                          color="primary"
+                          variant="outlined"
+                          onClick={() => handleInsightClick(practice, 'sustainable')}
+                          sx={{ mb: 1 }}
+                        />
+                        <Collapse in={selectedInsight === practice && selectedInsightType === 'sustainable' && implementationOpen}>
+                          <Paper sx={{ p: 2, mt: 1 }}>
+                            <Typography variant="h6" gutterBottom>
+                              {getImplementationGuide(practice, 'sustainable').title}
+                            </Typography>
+                            <Stepper orientation="vertical">
+                              {getImplementationGuide(practice, 'sustainable').steps.map((step, stepIdx) => (
+                                <Step key={stepIdx} active={true}>
+                                  <StepLabel>
+                                    <Typography variant="subtitle2">{step.label}</Typography>
+                                  </StepLabel>
+                                  <StepContent>
+                                    <Typography>{step.content}</Typography>
+                                    <Typography variant="body2" color="textSecondary" sx={{ mt: 1 }}>
+                                      {step.details}
+                                    </Typography>
+                                  </StepContent>
+                                </Step>
+                              ))}
+                            </Stepper>
+                          </Paper>
+                        </Collapse>
+                      </Box>
                     ))}
                   </Box>
                 </Grid>
@@ -507,13 +609,76 @@ export default function SmartCropPlanning() {
                   </Typography>
                   <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, mb: 2 }}>
                     {cropSpecificInsights[selectedCrop.name]?.aiInsights.map((insight, idx) => (
-                      <Chip
-                        key={idx}
-                        icon={<BiotechIcon />}
-                        label={insight}
-                        color="secondary"
-                        variant="outlined"
-                      />
+                      <Box key={idx}>
+                        <Chip
+                          icon={<BiotechIcon />}
+                          label={insight}
+                          color="secondary"
+                          variant="outlined"
+                          onClick={() => handleInsightClick(insight, 'ai')}
+                          sx={{ mb: 1 }}
+                        />
+                        <Collapse in={selectedInsight === insight && selectedInsightType === 'ai' && implementationOpen}>
+                          <Paper sx={{ p: 2, mt: 1 }}>
+                            <Typography variant="h6" gutterBottom>
+                              {getImplementationGuide(insight, 'ai').title}
+                            </Typography>
+                            <List dense>
+                              <ListItem>
+                                <ListItemIcon>
+                                  <BuildIcon />
+                                </ListItemIcon>
+                                <ListItemText 
+                                  primary="Setup Requirements"
+                                  secondary={
+                                    <List dense>
+                                      {getImplementationGuide(insight, 'ai').setup.map((step, stepIdx) => (
+                                        <ListItem key={stepIdx}>
+                                          <ListItemText primary={step} />
+                                        </ListItem>
+                                      ))}
+                                    </List>
+                                  }
+                                />
+                              </ListItem>
+                              <ListItem>
+                                <ListItemIcon>
+                                  <AssessmentIcon />
+                                </ListItemIcon>
+                                <ListItemText 
+                                  primary="Monitoring Process"
+                                  secondary={
+                                    <List dense>
+                                      {getImplementationGuide(insight, 'ai').monitoring.map((step, stepIdx) => (
+                                        <ListItem key={stepIdx}>
+                                          <ListItemText primary={step} />
+                                        </ListItem>
+                                      ))}
+                                    </List>
+                                  }
+                                />
+                              </ListItem>
+                              <ListItem>
+                                <ListItemIcon>
+                                  <SettingsIcon />
+                                </ListItemIcon>
+                                <ListItemText 
+                                  primary="Automated Actions"
+                                  secondary={
+                                    <List dense>
+                                      {getImplementationGuide(insight, 'ai').actions.map((step, stepIdx) => (
+                                        <ListItem key={stepIdx}>
+                                          <ListItemText primary={step} />
+                                        </ListItem>
+                                      ))}
+                                    </List>
+                                  }
+                                />
+                              </ListItem>
+                            </List>
+                          </Paper>
+                        </Collapse>
+                      </Box>
                     ))}
                   </Box>
                 </Grid>
@@ -523,13 +688,38 @@ export default function SmartCropPlanning() {
                   </Typography>
                   <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
                     {cropSpecificInsights[selectedCrop.name]?.waterManagement.map((practice, idx) => (
-                      <Chip
-                        key={idx}
-                        icon={<WaterDropIcon />}
-                        label={practice}
-                        color="info"
-                        variant="outlined"
-                      />
+                      <Box key={idx}>
+                        <Chip
+                          icon={<WaterDropIcon />}
+                          label={practice}
+                          color="info"
+                          variant="outlined"
+                          onClick={() => handleInsightClick(practice, 'water')}
+                          sx={{ mb: 1 }}
+                        />
+                        <Collapse in={selectedInsight === practice && selectedInsightType === 'water' && implementationOpen}>
+                          <Paper sx={{ p: 2, mt: 1 }}>
+                            <Typography variant="h6" gutterBottom>
+                              {getImplementationGuide(practice, 'water').title}
+                            </Typography>
+                            <Stepper orientation="vertical">
+                              {getImplementationGuide(practice, 'water').steps.map((step, stepIdx) => (
+                                <Step key={stepIdx} active={true}>
+                                  <StepLabel>
+                                    <Typography variant="subtitle2">{step.label}</Typography>
+                                  </StepLabel>
+                                  <StepContent>
+                                    <Typography>{step.content}</Typography>
+                                    <Typography variant="body2" color="textSecondary" sx={{ mt: 1 }}>
+                                      {step.details}
+                                    </Typography>
+                                  </StepContent>
+                                </Step>
+                              ))}
+                            </Stepper>
+                          </Paper>
+                        </Collapse>
+                      </Box>
                     ))}
                   </Box>
                 </Grid>
