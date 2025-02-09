@@ -24,26 +24,19 @@ import {
   Refresh as RefreshIcon
 } from '@mui/icons-material';
 
-// Mapping of commodities to their Yahoo Finance symbols
+// Alpha Vantage commodity symbols
 const COMMODITY_SYMBOLS = {
-  'Gold': 'GC=F',
-  'Silver': 'SI=F',
-  'Platinum': 'PL=F',
-  'Palladium': 'PA=F',
-  'Crude Oil': 'CL=F',
-  'Natural Gas': 'NG=F',
-  'Corn': 'ZC=F',
-  'Soybeans': 'ZS=F',
-  'Wheat': 'ZW=F',
-  'Cotton': 'CT=F',
-  'Coffee': 'KC=F',
-  'Sugar': 'SB=F',
-  'Cocoa': 'CC=F',
-  'Copper': 'HG=F',
-  'Lumber': 'LBS=F',
-  'Rice': 'ZR=F',
-  'Oats': 'ZO=F',
-  'Orange Juice': 'OJ=F'
+  'Gold': 'GOLD',
+  'Silver': 'SILVER',
+  'Crude Oil': 'WTI',
+  'Natural Gas': 'NATURAL_GAS',
+  'Copper': 'COPPER',
+  'Aluminum': 'ALUMINUM',
+  'Wheat': 'WHEAT',
+  'Corn': 'CORN',
+  'Cotton': 'COTTON',
+  'Sugar': 'SUGAR',
+  'Coffee': 'COFFEE'
 };
 
 export default function MarketPrices() {
@@ -56,25 +49,19 @@ export default function MarketPrices() {
     setLoading(true);
     try {
       const promises = Object.entries(COMMODITY_SYMBOLS).map(async ([name, symbol]) => {
-        // Using Yahoo Finance v6 API
-        const response = await fetch(`https://query2.finance.yahoo.com/v6/finance/quote?symbols=${symbol}`, {
-          headers: {
-            'Accept': 'application/json',
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
-          }
-        });
+        // Using Alpha Vantage's free commodity API
+        const response = await fetch(`https://www.alphavantage.co/query?function=COMMODITY_PRICE&symbol=${symbol}&apikey=demo`);
         
         if (!response.ok) throw new Error(`Failed to fetch ${name} data`);
         const data = await response.json();
         
-        if (!data.quoteResponse?.result?.[0]) {
-          throw new Error(`No data available for ${name}`);
+        if (data.error) {
+          throw new Error(data.error);
         }
 
-        const quote = data.quoteResponse.result[0];
-        const price = quote.regularMarketPrice;
-        const previousClose = quote.regularMarketPreviousClose;
-        const change = quote.regularMarketChange;
+        const price = parseFloat(data.data?.[0]?.value) || 0;
+        const prevPrice = parseFloat(data.data?.[1]?.value) || 0;
+        const change = price - prevPrice;
         
         // Get future months
         const futureMonths = [];
@@ -106,7 +93,7 @@ export default function MarketPrices() {
       });
 
       const results = await Promise.all(promises);
-      setCommodities(results);
+      setCommodities(results.filter(item => item.futures[0].price > 0));
       setLastUpdate(new Date());
       setError(null);
     } catch (err) {
