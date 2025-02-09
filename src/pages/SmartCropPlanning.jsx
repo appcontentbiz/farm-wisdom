@@ -24,7 +24,8 @@ import {
   Stepper,
   Step,
   StepLabel,
-  StepContent
+  StepContent,
+  CheckCircleOutlineIcon
 } from '@mui/material';
 import OpacityIcon from '@mui/icons-material/Opacity';
 import DeviceThermostatIcon from '@mui/icons-material/DeviceThermostat';
@@ -357,12 +358,76 @@ export default function SmartCropPlanning() {
   const getImplementationGuide = (insight, type) => {
     switch (type) {
       case 'sustainable':
-        return {
+        const sustainableGuides = {
+          'Sustainable Trellising Methods': {
+            title: 'Sustainable Trellising Methods Guide',
+            definition: 'Trellising is a plant support system that uses vertical structures to guide plant growth, maximize space usage, and improve air circulation. Sustainable trellising specifically uses eco-friendly, reusable materials and methods that minimize environmental impact while maximizing crop yield.',
+            benefits: [
+              'Improved air circulation reducing disease risk',
+              'Better light exposure for all plant parts',
+              'Efficient use of garden space',
+              'Easier harvest and maintenance'
+            ],
+            steps: [
+              {
+                label: 'Planning',
+                content: 'Choose your trellising system',
+                details: 'Select from options like bamboo stakes, recycled metal frames, or natural twine systems based on your crop needs. For tomatoes, consider sturdy metal cages or Florida weave system using biodegradable twine.'
+              },
+              {
+                label: 'Setup',
+                content: 'Install your trellising system',
+                details: 'Set up main support posts, ensure proper anchoring, and install cross-supports or wires. Use sustainable materials like bamboo, recycled metal, or natural fiber twine.'
+              },
+              {
+                label: 'Maintenance',
+                content: 'Regular maintenance tasks',
+                details: 'Guide plant growth through the trellis, remove damaged materials, and adjust supports as plants grow. Inspect weekly for stability and plant health.'
+              }
+            ]
+          },
+          'Companion Planting': {
+            title: 'Companion Planting Guide',
+            definition: 'Companion planting is the strategic placement of different plant species that benefit each other through nutrient provision, pest control, or improved growth conditions. This method maximizes garden efficiency while reducing the need for chemical interventions.',
+            benefits: [
+              'Natural pest control',
+              'Improved soil fertility',
+              'Enhanced crop flavor',
+              'Better resource utilization'
+            ],
+            steps: [
+              {
+                label: 'Planning',
+                content: 'Select compatible companion plants',
+                details: 'Research and choose plants that work well together. For example, tomatoes benefit from basil (pest control) and carrots (soil aeration).'
+              },
+              {
+                label: 'Setup',
+                content: 'Plant layout and spacing',
+                details: 'Arrange companions considering mature plant sizes, sun exposure, and root depths. Maintain appropriate spacing for air circulation.'
+              },
+              {
+                label: 'Maintenance',
+                content: 'Monitor plant interactions',
+                details: 'Observe plant growth patterns, pest presence, and soil health. Adjust spacing or replant as needed for optimal benefits.'
+              }
+            ]
+          }
+        };
+        
+        return sustainableGuides[insight] || {
           title: 'Implementation Guide',
+          definition: 'A sustainable farming practice that promotes environmental stewardship while maintaining productive agricultural systems.',
+          benefits: [
+            'Reduced environmental impact',
+            'Long-term soil health',
+            'Resource efficiency',
+            'Economic sustainability'
+          ],
           steps: [
             {
               label: 'Planning',
-              content: `Plan your ${insight.toLowerCase()} system`,
+              content: `Plan your ${insight.toLowerCase()} implementation`,
               details: 'Assess your current setup and identify required materials and timeline.'
             },
             {
@@ -581,6 +646,25 @@ export default function SmartCropPlanning() {
                           <Paper sx={{ p: 2, mt: 1 }}>
                             <Typography variant="h6" gutterBottom>
                               {getImplementationGuide(practice, 'sustainable').title}
+                            </Typography>
+                            <Typography variant="body1" paragraph sx={{ color: 'text.secondary' }}>
+                              {getImplementationGuide(practice, 'sustainable').definition}
+                            </Typography>
+                            <Typography variant="subtitle2" gutterBottom>
+                              Benefits:
+                            </Typography>
+                            <List dense>
+                              {getImplementationGuide(practice, 'sustainable').benefits.map((benefit, idx) => (
+                                <ListItem key={idx}>
+                                  <ListItemIcon>
+                                    <CheckCircleOutlineIcon color="success" />
+                                  </ListItemIcon>
+                                  <ListItemText primary={benefit} />
+                                </ListItem>
+                              ))}
+                            </List>
+                            <Typography variant="subtitle2" gutterBottom sx={{ mt: 2 }}>
+                              Implementation Steps:
                             </Typography>
                             <Stepper orientation="vertical">
                               {getImplementationGuide(practice, 'sustainable').steps.map((step, stepIdx) => (
