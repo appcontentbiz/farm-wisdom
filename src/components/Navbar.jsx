@@ -7,7 +7,7 @@ import {
   Box,
   useTheme
 } from '@mui/material';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useLocation } from 'react-router-dom';
 import {
   Home as HomeIcon,
   AttachMoney as MoneyIcon,
@@ -18,6 +18,7 @@ import {
 
 export default function Navbar() {
   const theme = useTheme();
+  const location = useLocation();
   
   const navItems = [
     { name: 'Home', path: '/', icon: <HomeIcon /> },
@@ -25,7 +26,14 @@ export default function Navbar() {
       name: 'Market Prices', 
       path: '/market-prices', 
       icon: <MoneyIcon />,
-      color: '#FFD700' // Gold color
+      style: {
+        backgroundColor: '#FFD700',
+        color: '#000000',
+        fontWeight: 'bold',
+        '&:hover': {
+          backgroundColor: '#FFE55C',
+        }
+      }
     },
     { name: 'Weather', path: '/weather', icon: <WeatherIcon /> },
     { name: 'Smart Crop Planning', path: '/smart-crop-planning', icon: <FarmIcon /> },
@@ -46,12 +54,13 @@ export default function Navbar() {
               to={item.path}
               startIcon={item.icon}
               sx={{
-                color: item.color || 'inherit',
-                '&:hover': {
-                  backgroundColor: item.color ? `${item.color}22` : 'inherit',
-                },
+                color: 'inherit',
                 textTransform: 'none',
-                fontWeight: item.color ? 600 : 400
+                fontWeight: location.pathname === item.path ? 600 : 400,
+                px: 2,
+                py: 1,
+                borderRadius: 1,
+                ...(item.style || {}),
               }}
             >
               {item.name}
