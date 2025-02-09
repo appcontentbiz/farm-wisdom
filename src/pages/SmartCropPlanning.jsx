@@ -58,6 +58,55 @@ export default function SmartCropPlanning() {
       temperature: 20,
       pestRisk: 'Low',
       health: 95
+    },
+    {
+      name: 'Bell Peppers',
+      moisture: 68,
+      temperature: 23,
+      pestRisk: 'Medium',
+      health: 88
+    },
+    {
+      name: 'Spinach',
+      moisture: 72,
+      temperature: 17,
+      pestRisk: 'Low',
+      health: 92
+    },
+    {
+      name: 'Cucumbers',
+      moisture: 78,
+      temperature: 22,
+      pestRisk: 'Low',
+      health: 87
+    },
+    {
+      name: 'Broccoli',
+      moisture: 70,
+      temperature: 19,
+      pestRisk: 'Medium',
+      health: 89
+    },
+    {
+      name: 'Sweet Potatoes',
+      moisture: 65,
+      temperature: 21,
+      pestRisk: 'Low',
+      health: 94
+    },
+    {
+      name: 'Green Beans',
+      moisture: 73,
+      temperature: 20,
+      pestRisk: 'Low',
+      health: 91
+    },
+    {
+      name: 'Eggplant',
+      moisture: 69,
+      temperature: 23,
+      pestRisk: 'Medium',
+      health: 86
     }
   ];
 
