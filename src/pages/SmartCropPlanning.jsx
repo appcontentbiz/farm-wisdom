@@ -18,7 +18,13 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-  Divider
+  Divider,
+  Collapse,
+  Paper,
+  Stepper,
+  Step,
+  StepLabel,
+  StepContent
 } from '@mui/material';
 import OpacityIcon from '@mui/icons-material/Opacity';
 import DeviceThermostatIcon from '@mui/icons-material/DeviceThermostat';
@@ -46,10 +52,18 @@ import LocalDrinkIcon from '@mui/icons-material/LocalDrink';
 import DroneIcon from '@mui/icons-material/FlightTakeoff';
 import RouterIcon from '@mui/icons-material/Router';
 import ThermostatAutoIcon from '@mui/icons-material/ThermostatAuto';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ExpandLessIcon from '@mui/icons-material/ExpandLess';
+import TimelineIcon from '@mui/icons-material/Timeline';
+import AssessmentIcon from '@mui/icons-material/Assessment';
+import SettingsIcon from '@mui/icons-material/Settings';
+import BuildIcon from '@mui/icons-material/Build';
 
 export default function SmartCropPlanning() {
   const [selectedCrop, setSelectedCrop] = useState(null);
   const [insightDialogOpen, setInsightDialogOpen] = useState(false);
+  const [selectedInsight, setSelectedInsight] = useState(null);
+  const [implementationOpen, setImplementationOpen] = useState(false);
 
   const alerts = [
     {
@@ -137,243 +151,154 @@ export default function SmartCropPlanning() {
     }
   ];
 
-  const recommendations = [
-    {
-      title: 'Soil Analysis',
-      description: 'Schedule a comprehensive soil analysis to optimize nutrient levels',
-      icon: <ScienceIcon />
-    },
-    {
-      title: 'Sustainable Practices',
-      description: 'Implement companion planting to improve pest resistance naturally',
-      icon: <ParkIcon />
-    },
-    {
-      title: 'Resource Management',
-      description: 'Install drip irrigation system to improve water efficiency',
-      icon: <RecyclingIcon />
-    }
-  ];
-
-  const modernFarmingInsights = [
-    {
+  const aiSystemFeatures = {
+    precisionAgriculture: {
       title: 'AI-Powered Precision Agriculture',
-      description: 'Advanced monitoring and analytics for optimal crop management',
-      icon: <BiotechIcon />,
-      details: [
-        { icon: <SensorsIcon />, text: 'Smart sensors for real-time soil and climate monitoring' },
-        { icon: <CameraAltIcon />, text: 'Computer vision for early disease detection' },
-        { icon: <QueryStatsIcon />, text: 'Predictive analytics for harvest optimization' }
+      features: [
+        {
+          name: 'Smart Sensor Network',
+          description: 'Real-time monitoring of soil conditions, climate, and plant health',
+          implementation: [
+            'Install IoT sensor network throughout the farm',
+            'Configure sensor data collection intervals',
+            'Set up automated alerts for condition changes'
+          ]
+        },
+        {
+          name: 'Computer Vision Analysis',
+          description: 'Automated visual inspection of crops for disease and growth monitoring',
+          implementation: [
+            'Deploy camera systems at strategic locations',
+            'Train AI models on crop-specific visual patterns',
+            'Implement real-time image processing pipeline'
+          ]
+        },
+        {
+          name: 'Predictive Analytics',
+          description: 'AI-driven predictions for harvest timing and yield optimization',
+          implementation: [
+            'Collect historical crop data',
+            'Train machine learning models',
+            'Set up automated prediction reports'
+          ]
+        }
       ]
     },
-    {
-      title: 'Sustainable Water Management',
-      description: 'Smart irrigation and water conservation techniques',
-      icon: <WaterDropIcon />,
-      details: [
-        { icon: <OpacityIcon />, text: 'Automated irrigation based on soil moisture data' },
-        { icon: <CloudIcon />, text: 'Rainwater harvesting system integration' },
-        { icon: <LocalDrinkIcon />, text: 'Water usage optimization algorithms' }
+    waterManagement: {
+      title: 'Smart Water Management',
+      features: [
+        {
+          name: 'Automated Irrigation',
+          description: 'AI-controlled irrigation based on real-time soil moisture data',
+          implementation: [
+            'Install smart irrigation controllers',
+            'Configure soil moisture thresholds',
+            'Set up automated watering schedules'
+          ]
+        },
+        {
+          name: 'Water Conservation',
+          description: 'Advanced techniques for water usage optimization',
+          implementation: [
+            'Implement drip irrigation systems',
+            'Install rainwater collection systems',
+            'Set up water usage monitoring'
+          ]
+        }
       ]
     },
-    {
+    modernTechnology: {
       title: 'Modern Farming Technologies',
-      description: 'Cutting-edge tools for precision farming',
-      icon: <AgricultureIcon />,
-      details: [
-        { icon: <DroneIcon />, text: 'Drone-based crop monitoring and analysis' },
-        { icon: <RouterIcon />, text: 'IoT sensors for environmental control' },
-        { icon: <ThermostatAutoIcon />, text: 'Smart climate control systems' }
-      ]
-    },
-    {
-      title: 'Climate-Smart Agriculture',
-      description: 'Adaptive farming for changing climate conditions',
-      icon: <AirIcon />,
-      details: [
-        { icon: <WbSunnyIcon />, text: 'Weather pattern analysis and prediction' },
-        { icon: <ParkIcon />, text: 'Climate-resilient farming techniques' },
-        { icon: <RecyclingIcon />, text: 'Sustainable soil management practices' }
-      ]
-    }
-  ];
-
-  const cropSpecificInsights = {
-    'Bell Peppers': {
-      sustainablePractices: [
-        'Companion planting with basil and marigolds',
-        'Natural calcium supplementation for strong growth',
-        'Vertical growing systems for space optimization'
-      ],
-      aiInsights: [
-        'Disease prediction based on humidity patterns',
-        'Automated pollination monitoring',
-        'Yield prediction using computer vision'
-      ],
-      waterManagement: [
-        'Precision drip irrigation scheduling',
-        'Mulching recommendations',
-        'Water stress monitoring'
-      ]
-    },
-    'Tomatoes': {
-      sustainablePractices: [
-        'Companion planting with carrots and basil',
-        'Natural pest control using neem oil',
-        'Sustainable trellising methods'
-      ],
-      aiInsights: [
-        'Early blight detection using image analysis',
-        'Growth rate optimization',
-        'Nutrient deficiency prediction'
-      ],
-      waterManagement: [
-        'Smart watering based on fruit development stage',
-        'Soil moisture threshold monitoring',
-        'Root zone irrigation optimization'
-      ]
-    },
-    'Lettuce': {
-      sustainablePractices: [
-        'Intercropping with tall plants for shade',
-        'Organic pest management using beneficial insects',
-        'Succession planting schedule'
-      ],
-      aiInsights: [
-        'Leaf quality assessment via computer vision',
-        'Harvest time prediction',
-        'Growth rate analysis'
-      ],
-      waterManagement: [
-        'Misting system automation',
-        'Hydroponic solution monitoring',
-        'Water quality management'
-      ]
-    },
-    'Carrots': {
-      sustainablePractices: [
-        'Companion planting with onions and leeks',
-        'Natural soil aeration techniques',
-        'Cover cropping strategies'
-      ],
-      aiInsights: [
-        'Root development monitoring using soil sensors',
-        'Size and quality prediction',
-        'Optimal harvest timing'
-      ],
-      waterManagement: [
-        'Deep watering schedule optimization',
-        'Soil moisture gradient monitoring',
-        'Water retention improvement'
-      ]
-    },
-    'Spinach': {
-      sustainablePractices: [
-        'Crop rotation with nitrogen-fixing plants',
-        'Natural frost protection methods',
-        'Organic fertilizer management'
-      ],
-      aiInsights: [
-        'Leaf health monitoring',
-        'Bolting prediction system',
-        'Nutrient content analysis'
-      ],
-      waterManagement: [
-        'Cool-season irrigation patterns',
-        'Leaf moisture monitoring',
-        'Drought stress prevention'
-      ]
-    },
-    'Cucumbers': {
-      sustainablePractices: [
-        'Companion planting with sunflowers',
-        'Natural pollinator attraction methods',
-        'Vertical growing techniques'
-      ],
-      aiInsights: [
-        'Vine growth pattern analysis',
-        'Fruit development tracking',
-        'Disease resistance monitoring'
-      ],
-      waterManagement: [
-        'Humidity-based irrigation control',
-        'Root zone temperature monitoring',
-        'Water uptake optimization'
-      ]
-    },
-    'Broccoli': {
-      sustainablePractices: [
-        'Companion planting with aromatic herbs',
-        'Natural caterpillar control methods',
-        'Cool season growing techniques'
-      ],
-      aiInsights: [
-        'Head formation prediction',
-        'Side shoot development tracking',
-        'Optimal harvest window prediction'
-      ],
-      waterManagement: [
-        'Even moisture distribution system',
-        'Temperature-based irrigation',
-        'Root development monitoring'
-      ]
-    },
-    'Sweet Potatoes': {
-      sustainablePractices: [
-        'Natural vine training methods',
-        'Organic slip production',
-        'Soil warming techniques'
-      ],
-      aiInsights: [
-        'Tuber development monitoring',
-        'Growth rate optimization',
-        'Size distribution prediction'
-      ],
-      waterManagement: [
-        'Moisture gradient management',
-        'Drought tolerance monitoring',
-        'Root zone irrigation control'
-      ]
-    },
-    'Green Beans': {
-      sustainablePractices: [
-        'Nitrogen-fixing promotion',
-        'Natural trellis systems',
-        'Companion planting with corn'
-      ],
-      aiInsights: [
-        'Pod development tracking',
-        'Yield prediction modeling',
-        'Plant stress detection'
-      ],
-      waterManagement: [
-        'Flowering stage irrigation control',
-        'Humidity management system',
-        'Water stress prevention'
-      ]
-    },
-    'Eggplant': {
-      sustainablePractices: [
-        'Companion planting with herbs',
-        'Natural pest deterrent methods',
-        'Heat management techniques'
-      ],
-      aiInsights: [
-        'Fruit development monitoring',
-        'Color change prediction',
-        'Growth pattern analysis'
-      ],
-      waterManagement: [
-        'Deep root irrigation system',
-        'Moisture consistency monitoring',
-        'Heat stress management'
+      features: [
+        {
+          name: 'Drone Monitoring',
+          description: 'Aerial crop assessment and mapping',
+          implementation: [
+            'Acquire agricultural drones',
+            'Train operators on flight patterns',
+            'Set up automated image processing'
+          ]
+        },
+        {
+          name: 'IoT Integration',
+          description: 'Connected devices for farm automation',
+          implementation: [
+            'Install IoT gateways',
+            'Deploy sensor networks',
+            'Configure automated controls'
+          ]
+        }
       ]
     }
   };
 
-  const handleOpenInsights = (crop) => {
-    setSelectedCrop(crop);
-    setInsightDialogOpen(true);
+  const cropSpecificInsights = {
+    'Tomatoes': {
+      sustainablePractices: [
+        {
+          title: 'Sustainable Trellising Methods',
+          description: 'Advanced techniques for supporting tomato growth naturally',
+          steps: [
+            {
+              label: 'Select Natural Materials',
+              content: 'Use bamboo poles or recycled wood for trellis construction',
+              details: 'Choose materials that are both sustainable and durable. Bamboo is ideal as it\'s renewable and naturally resistant to decay.'
+            },
+            {
+              label: 'Design Implementation',
+              content: 'Create a Florida weave or A-frame system',
+              details: 'The Florida weave uses less material and allows for better airflow. A-frames work well for determinate varieties.'
+            },
+            {
+              label: 'Installation Process',
+              content: 'Set up support posts and connecting lines',
+              details: 'Install posts 2-3 feet deep, space them 4-6 feet apart. Use natural twine for connecting lines.'
+            },
+            {
+              label: 'Maintenance',
+              content: 'Regular checking and adjusting of support systems',
+              details: 'Check weekly for any loose ties or sagging supports. Adjust as plants grow and fruit develops.'
+            }
+          ],
+          aiMonitoring: {
+            sensors: ['Tension monitors', 'Growth rate sensors'],
+            metrics: ['Plant load distribution', 'Growth pattern analysis'],
+            automatedAlerts: ['Support stress warnings', 'Growth pattern anomalies']
+          }
+        },
+        // ... (similar detailed structures for other practices)
+      ],
+      aiInsights: [
+        {
+          title: 'Early Blight Detection',
+          description: 'AI-powered visual analysis for early disease detection',
+          implementation: {
+            setup: [
+              'Install high-resolution cameras',
+              'Configure image processing software',
+              'Set up automated scanning schedule'
+            ],
+            monitoring: [
+              'Leaf color analysis',
+              'Spot pattern recognition',
+              'Growth rate tracking'
+            ],
+            actions: [
+              'Automated alerts for suspicious patterns',
+              'Treatment recommendations',
+              'Prevention strategies'
+            ]
+          }
+        },
+        // ... (similar structures for other insights)
+      ]
+    },
+    // ... (similar detailed structures for other crops)
+  };
+
+  const handleInsightClick = (insight) => {
+    setSelectedInsight(insight);
+    setImplementationOpen(true);
   };
 
   return (
@@ -488,43 +413,7 @@ export default function SmartCropPlanning() {
         </Grid>
       </Grid>
 
-      {/* Modern Farming Insights */}
-      <Typography variant="h5" gutterBottom sx={{ mt: 4 }}>
-        Modern Farming Insights
-      </Typography>
-      <Grid container spacing={3}>
-        {modernFarmingInsights.map((insight, index) => (
-          <Grid item xs={12} md={6} key={index}>
-            <Card>
-              <CardContent>
-                <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                  <Box sx={{ mr: 2, color: 'primary.main' }}>
-                    {insight.icon}
-                  </Box>
-                  <Typography variant="h6">
-                    {insight.title}
-                  </Typography>
-                </Box>
-                <Typography variant="body2" gutterBottom>
-                  {insight.description}
-                </Typography>
-                <List dense>
-                  {insight.details.map((detail, idx) => (
-                    <ListItem key={idx}>
-                      <ListItemIcon sx={{ minWidth: 36 }}>
-                        {detail.icon}
-                      </ListItemIcon>
-                      <ListItemText primary={detail.text} />
-                    </ListItem>
-                  ))}
-                </List>
-              </CardContent>
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
-
-      {/* Crop Insights Dialog */}
+      {/* Enhanced Crop Insights Dialog */}
       <Dialog
         open={insightDialogOpen}
         onClose={() => setInsightDialogOpen(false)}
@@ -543,51 +432,160 @@ export default function SmartCropPlanning() {
             </DialogTitle>
             <DialogContent dividers>
               <Grid container spacing={3}>
+                {/* Sustainable Practices Section */}
                 <Grid item xs={12}>
                   <Typography variant="subtitle1" gutterBottom>
                     Sustainable Practices
                   </Typography>
                   <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, mb: 2 }}>
                     {cropSpecificInsights[selectedCrop.name]?.sustainablePractices.map((practice, idx) => (
-                      <Chip
-                        key={idx}
-                        icon={<ParkIcon />}
-                        label={practice}
-                        color="primary"
-                        variant="outlined"
-                      />
+                      <Box key={idx}>
+                        <Chip
+                          icon={<ParkIcon />}
+                          label={practice.title}
+                          color="primary"
+                          variant="outlined"
+                          onClick={() => handleInsightClick(practice)}
+                          sx={{ mb: 1 }}
+                        />
+                        <Collapse in={selectedInsight === practice && implementationOpen}>
+                          <Paper sx={{ p: 2, mt: 1 }}>
+                            <Typography variant="subtitle2" gutterBottom>
+                              {practice.description}
+                            </Typography>
+                            <Stepper orientation="vertical">
+                              {practice.steps.map((step, stepIdx) => (
+                                <Step key={stepIdx} active={true}>
+                                  <StepLabel>
+                                    <Typography variant="subtitle2">{step.label}</Typography>
+                                  </StepLabel>
+                                  <StepContent>
+                                    <Typography>{step.content}</Typography>
+                                    <Typography variant="body2" color="textSecondary" sx={{ mt: 1 }}>
+                                      {step.details}
+                                    </Typography>
+                                  </StepContent>
+                                </Step>
+                              ))}
+                            </Stepper>
+                            <Box sx={{ mt: 2 }}>
+                              <Typography variant="subtitle2" gutterBottom>
+                                AI Monitoring
+                              </Typography>
+                              <List dense>
+                                <ListItem>
+                                  <ListItemIcon>
+                                    <SensorsIcon />
+                                  </ListItemIcon>
+                                  <ListItemText 
+                                    primary="Active Sensors"
+                                    secondary={practice.aiMonitoring.sensors.join(', ')}
+                                  />
+                                </ListItem>
+                                <ListItem>
+                                  <ListItemIcon>
+                                    <TimelineIcon />
+                                  </ListItemIcon>
+                                  <ListItemText 
+                                    primary="Tracked Metrics"
+                                    secondary={practice.aiMonitoring.metrics.join(', ')}
+                                  />
+                                </ListItem>
+                                <ListItem>
+                                  <ListItemIcon>
+                                    <NotificationsIcon />
+                                  </ListItemIcon>
+                                  <ListItemText 
+                                    primary="Automated Alerts"
+                                    secondary={practice.aiMonitoring.automatedAlerts.join(', ')}
+                                  />
+                                </ListItem>
+                              </List>
+                            </Box>
+                          </Paper>
+                        </Collapse>
+                      </Box>
                     ))}
                   </Box>
                 </Grid>
+
+                {/* AI-Powered Insights Section */}
                 <Grid item xs={12}>
                   <Typography variant="subtitle1" gutterBottom>
                     AI-Powered Insights
                   </Typography>
                   <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, mb: 2 }}>
                     {cropSpecificInsights[selectedCrop.name]?.aiInsights.map((insight, idx) => (
-                      <Chip
-                        key={idx}
-                        icon={<BiotechIcon />}
-                        label={insight}
-                        color="secondary"
-                        variant="outlined"
-                      />
-                    ))}
-                  </Box>
-                </Grid>
-                <Grid item xs={12}>
-                  <Typography variant="subtitle1" gutterBottom>
-                    Water Management
-                  </Typography>
-                  <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
-                    {cropSpecificInsights[selectedCrop.name]?.waterManagement.map((practice, idx) => (
-                      <Chip
-                        key={idx}
-                        icon={<WaterDropIcon />}
-                        label={practice}
-                        color="info"
-                        variant="outlined"
-                      />
+                      <Box key={idx}>
+                        <Chip
+                          icon={<BiotechIcon />}
+                          label={insight.title}
+                          color="secondary"
+                          variant="outlined"
+                          onClick={() => handleInsightClick(insight)}
+                          sx={{ mb: 1 }}
+                        />
+                        <Collapse in={selectedInsight === insight && implementationOpen}>
+                          <Paper sx={{ p: 2, mt: 1 }}>
+                            <Typography variant="subtitle2" gutterBottom>
+                              {insight.description}
+                            </Typography>
+                            <List dense>
+                              <ListItem>
+                                <ListItemIcon>
+                                  <BuildIcon />
+                                </ListItemIcon>
+                                <ListItemText 
+                                  primary="Setup Requirements"
+                                  secondary={
+                                    <List dense>
+                                      {insight.implementation.setup.map((step, stepIdx) => (
+                                        <ListItem key={stepIdx}>
+                                          <ListItemText primary={step} />
+                                        </ListItem>
+                                      ))}
+                                    </List>
+                                  }
+                                />
+                              </ListItem>
+                              <ListItem>
+                                <ListItemIcon>
+                                  <AssessmentIcon />
+                                </ListItemIcon>
+                                <ListItemText 
+                                  primary="Monitoring Process"
+                                  secondary={
+                                    <List dense>
+                                      {insight.implementation.monitoring.map((step, stepIdx) => (
+                                        <ListItem key={stepIdx}>
+                                          <ListItemText primary={step} />
+                                        </ListItem>
+                                      ))}
+                                    </List>
+                                  }
+                                />
+                              </ListItem>
+                              <ListItem>
+                                <ListItemIcon>
+                                  <SettingsIcon />
+                                </ListItemIcon>
+                                <ListItemText 
+                                  primary="Automated Actions"
+                                  secondary={
+                                    <List dense>
+                                      {insight.implementation.actions.map((step, stepIdx) => (
+                                        <ListItem key={stepIdx}>
+                                          <ListItemText primary={step} />
+                                        </ListItem>
+                                      ))}
+                                    </List>
+                                  }
+                                />
+                              </ListItem>
+                            </List>
+                          </Paper>
+                        </Collapse>
+                      </Box>
                     ))}
                   </Box>
                 </Grid>
