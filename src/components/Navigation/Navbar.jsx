@@ -9,6 +9,15 @@ const StyledLink = styled(Link)({
   color: 'inherit'
 });
 
+const MarketPricesButton = styled(Button)({
+  backgroundColor: '#87CEEB !important', // Sky blue
+  color: '#000000 !important',
+  fontWeight: 'bold',
+  '&:hover': {
+    backgroundColor: '#B0E2FF !important', // Lighter sky blue on hover
+  }
+});
+
 const EnterpriseButton = styled(Button)({
   background: 'linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)',
   color: 'white',
@@ -239,7 +248,7 @@ export default function Navbar() {
               <Button color="inherit">Weather</Button>
             </StyledLink>
             <StyledLink to="/market">
-              <Button color="inherit">Market Prices</Button>
+              <MarketPricesButton color="inherit">Market Prices</MarketPricesButton>
             </StyledLink>
           </Box>
         </Box>
