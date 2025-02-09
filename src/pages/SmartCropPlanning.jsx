@@ -8,20 +8,20 @@ import {
   Button,
   Box,
   LinearProgress,
-  IconButton
+  IconButton,
+  WaterDrop as WaterDropIcon,
+  Thermostat as ThermostatIcon,
+  BugReport as BugReportIcon,
+  MonitorHeart as MonitorHeartIcon,
+  Add as AddIcon,
+  Visibility as VisibilityIcon,
+  WbSunny as WbSunnyIcon,
+  Update as UpdateIcon,
+  Science as ScienceIcon,
+  Eco as EcoIcon,
+  LightMode as LightModeIcon,
+  Recycling as RecyclingIcon
 } from '@mui/material';
-import WaterDropIcon from '@mui/icons-material/WaterDrop';
-import ThermostatIcon from '@mui/icons-material/Thermostat';
-import BugReportIcon from '@mui/icons-material/BugReport';
-import MonitorHeartIcon from '@mui/icons-material/MonitorHeart';
-import AddIcon from '@mui/icons-material/Add';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import WbSunnyIcon from '@mui/icons-material/WbSunny';
-import UpdateIcon from '@mui/icons-material/Update';
-import ScienceIcon from '@mui/icons-material/Science';
-import EcoIcon from '@mui/icons-material/Eco';
-import LightModeIcon from '@mui/icons-material/LightMode';
-import RecyclingIcon from '@mui/icons-material/Recycling';
 
 export default function SmartCropPlanning() {
   const alerts = [
