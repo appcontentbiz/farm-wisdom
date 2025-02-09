@@ -16,6 +16,15 @@ import {
   LocalLibrary as ResourcesIcon
 } from '@mui/icons-material';
 
+const MARKET_PRICES_STYLE = {
+  backgroundColor: '#87CEEB', // Sky blue
+  color: '#000000',
+  fontWeight: 'bold',
+  '&:hover': {
+    backgroundColor: '#B0E2FF', // Lighter sky blue on hover
+  }
+};
+
 export default function Navbar() {
   const theme = useTheme();
   const location = useLocation();
@@ -26,14 +35,7 @@ export default function Navbar() {
       name: 'Market Prices', 
       path: '/market-prices', 
       icon: <MoneyIcon />,
-      style: {
-        backgroundColor: '#FFD700',
-        color: '#000000',
-        fontWeight: 'bold',
-        '&:hover': {
-          backgroundColor: '#FFE55C',
-        }
-      }
+      style: MARKET_PRICES_STYLE
     },
     { name: 'Weather', path: '/weather', icon: <WeatherIcon /> },
     { name: 'Smart Crop Planning', path: '/smart-crop-planning', icon: <FarmIcon /> },
