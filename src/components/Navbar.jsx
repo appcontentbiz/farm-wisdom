@@ -13,7 +13,8 @@ import {
   AttachMoney as MoneyIcon,
   Cloud as WeatherIcon,
   Agriculture as FarmIcon,
-  LocalLibrary as ResourcesIcon
+  LocalLibrary as ResourcesIcon,
+  CalendarMonth as CalendarMonthIcon
 } from '@mui/icons-material';
 
 const MARKET_PRICES_STYLE = {
@@ -39,6 +40,24 @@ export default function Navbar() {
     },
     { name: 'Weather', path: '/weather', icon: <WeatherIcon /> },
     { name: 'Smart Crop Planning', path: '/smart-crop-planning', icon: <FarmIcon /> },
+    { 
+      name: 'Seasonal Events', 
+      path: '/seasonal-events', 
+      icon: <CalendarMonthIcon />,
+      style: {
+        backgroundColor: 'yellow',
+        '&:hover': {
+          backgroundColor: '#ffeb3b',
+        },
+        '& .MuiListItemIcon-root': {
+          color: 'black',
+        },
+        '& .MuiListItemText-primary': {
+          color: 'black',
+          fontWeight: 'bold'
+        }
+      }
+    },
     { name: 'Resources', path: '/resources', icon: <ResourcesIcon /> }
   ];
 

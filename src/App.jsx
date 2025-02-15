@@ -1,3 +1,4 @@
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { UserProvider } from './context/UserContext';
 import { SnackbarProvider } from 'notistack';
@@ -37,7 +38,7 @@ import BuildIcon from '@mui/icons-material/Build';
 import PeopleIcon from '@mui/icons-material/People';
 import ArchitectureIcon from '@mui/icons-material/Architecture';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import { Link, ListItemIcon, ListItemText, ListItemButton, List, Divider, Toolbar, Drawer, IconButton } from '@mui/material';
+import { Link, ListItemIcon, ListItemText, ListItemButton, List, Divider, Toolbar, IconButton } from '@mui/material';
 import './App.css';
 
 const PrivateRoute = ({ children }) => {
