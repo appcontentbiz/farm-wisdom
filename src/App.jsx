@@ -29,6 +29,7 @@ import StateResourcesPage from './pages/StateResourcesPage';
 import BloopersPage from './pages/BloopersPage';
 import GleaningProgramsPage from './pages/GleaningProgramsPage';
 import FarmDesignsPage from './pages/FarmDesignsPage';
+import SeasonalEvents from './pages/SeasonalEvents';
 import './App.css';
 
 const PrivateRoute = ({ children }) => {
@@ -69,6 +70,7 @@ function App() {
                 <Route path="/equipment-management" element={<EquipmentManagement />} />
                 <Route path="/community-hub" element={<CommunityHub />} />
                 <Route path="/farm-designs" element={<FarmDesignsPage />} />
+                <Route path="/seasonal-events" element={<SeasonalEvents />} />
                 <Route
                   path="/professional/*"
                   element={
