@@ -616,12 +616,14 @@ export default function SmartCropPlanning() {
         {selectedCrop && (
           <>
             <DialogTitle>
-              <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <Typography variant="h6">AI Insights for {selectedCrop.name}</Typography>
-                <IconButton onClick={() => setInsightDialogOpen(false)}>
-                  <CloseIcon />
-                </IconButton>
-              </Box>
+              AI Insights for {selectedCrop.name}
+              <IconButton
+                aria-label="close"
+                onClick={() => setInsightDialogOpen(false)}
+                sx={{ position: 'absolute', right: 8, top: 8 }}
+              >
+                <CloseIcon />
+              </IconButton>
             </DialogTitle>
             <DialogContent dividers>
               <Grid container spacing={3}>
@@ -686,133 +688,13 @@ export default function SmartCropPlanning() {
                     ))}
                   </Box>
                 </Grid>
-                <Grid item xs={12}>
-                  <Typography variant="subtitle1" gutterBottom>
-                    AI-Powered Insights
-                  </Typography>
-                  <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, mb: 2 }}>
-                    {cropSpecificInsights[selectedCrop.name]?.aiInsights.map((insight, idx) => (
-                      <Box key={idx}>
-                        <Chip
-                          icon={<BiotechIcon />}
-                          label={insight}
-                          color="secondary"
-                          variant="outlined"
-                          onClick={() => handleInsightClick(insight, 'ai')}
-                          sx={{ mb: 1 }}
-                        />
-                        <Collapse in={selectedInsight === insight && selectedInsightType === 'ai' && implementationOpen}>
-                          <Paper sx={{ p: 2, mt: 1 }}>
-                            <Typography variant="h6" gutterBottom>
-                              {getImplementationGuide(insight, 'ai').title}
-                            </Typography>
-                            <List dense>
-                              <ListItem>
-                                <ListItemIcon>
-                                  <BuildIcon />
-                                </ListItemIcon>
-                                <ListItemText 
-                                  primary="Setup Requirements"
-                                  secondary={
-                                    <List dense>
-                                      {getImplementationGuide(insight, 'ai').setup.map((step, stepIdx) => (
-                                        <ListItem key={stepIdx}>
-                                          <ListItemText primary={step} />
-                                        </ListItem>
-                                      ))}
-                                    </List>
-                                  }
-                                />
-                              </ListItem>
-                              <ListItem>
-                                <ListItemIcon>
-                                  <AssessmentIcon />
-                                </ListItemIcon>
-                                <ListItemText 
-                                  primary="Monitoring Process"
-                                  secondary={
-                                    <List dense>
-                                      {getImplementationGuide(insight, 'ai').monitoring.map((step, stepIdx) => (
-                                        <ListItem key={stepIdx}>
-                                          <ListItemText primary={step} />
-                                        </ListItem>
-                                      ))}
-                                    </List>
-                                  }
-                                />
-                              </ListItem>
-                              <ListItem>
-                                <ListItemIcon>
-                                  <SettingsIcon />
-                                </ListItemIcon>
-                                <ListItemText 
-                                  primary="Automated Actions"
-                                  secondary={
-                                    <List dense>
-                                      {getImplementationGuide(insight, 'ai').actions.map((step, stepIdx) => (
-                                        <ListItem key={stepIdx}>
-                                          <ListItemText primary={step} />
-                                        </ListItem>
-                                      ))}
-                                    </List>
-                                  }
-                                />
-                              </ListItem>
-                            </List>
-                          </Paper>
-                        </Collapse>
-                      </Box>
-                    ))}
-                  </Box>
-                </Grid>
-                <Grid item xs={12}>
-                  <Typography variant="subtitle1" gutterBottom>
-                    Water Management
-                  </Typography>
-                  <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
-                    {cropSpecificInsights[selectedCrop.name]?.waterManagement.map((practice, idx) => (
-                      <Box key={idx}>
-                        <Chip
-                          icon={<WaterDropIcon />}
-                          label={practice}
-                          color="info"
-                          variant="outlined"
-                          onClick={() => handleInsightClick(practice, 'water')}
-                          sx={{ mb: 1 }}
-                        />
-                        <Collapse in={selectedInsight === practice && selectedInsightType === 'water' && implementationOpen}>
-                          <Paper sx={{ p: 2, mt: 1 }}>
-                            <Typography variant="h6" gutterBottom>
-                              {getImplementationGuide(practice, 'water').title}
-                            </Typography>
-                            <Stepper orientation="vertical">
-                              {getImplementationGuide(practice, 'water').steps.map((step, stepIdx) => (
-                                <Step key={stepIdx} active={true}>
-                                  <StepLabel>
-                                    <Typography variant="subtitle2">{step.label}</Typography>
-                                  </StepLabel>
-                                  <StepContent>
-                                    <Typography>{step.content}</Typography>
-                                    <Typography variant="body2" color="textSecondary" sx={{ mt: 1 }}>
-                                      {step.details}
-                                    </Typography>
-                                  </StepContent>
-                                </Step>
-                              ))}
-                            </Stepper>
-                          </Paper>
-                        </Collapse>
-                      </Box>
-                    ))}
-                  </Box>
-                </Grid>
               </Grid>
             </DialogContent>
             <DialogActions>
               <Button onClick={() => setInsightDialogOpen(false)}>Close</Button>
             </DialogActions>
           </>
-        ))}
+        )}
       </Dialog>
     </Container>
   );
