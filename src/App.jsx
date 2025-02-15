@@ -30,6 +30,14 @@ import BloopersPage from './pages/BloopersPage';
 import GleaningProgramsPage from './pages/GleaningProgramsPage';
 import FarmDesignsPage from './pages/FarmDesignsPage';
 import SeasonalEvents from './pages/SeasonalEvents';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import AgricultureIcon from '@mui/icons-material/Agriculture';
+import BuildIcon from '@mui/icons-material/Build';
+import PeopleIcon from '@mui/icons-material/People';
+import ArchitectureIcon from '@mui/icons-material/Architecture';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import { Link, ListItemIcon, ListItemText, ListItemButton, List, Divider, Toolbar, Drawer, IconButton } from '@mui/material';
 import './App.css';
 
 const PrivateRoute = ({ children }) => {
@@ -38,12 +46,86 @@ const PrivateRoute = ({ children }) => {
 };
 
 function App() {
+  const [open, setOpen] = React.useState(true);
+  const toggleDrawer = () => {
+    setOpen(!open);
+  };
+
   return (
     <UserProvider>
       <SnackbarProvider maxSnack={3}>
         <Router>
           <div className="app-container">
             <Navbar />
+            <Drawer variant="permanent" open={open}>
+              <Toolbar
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'flex-end',
+                  px: [1],
+                }}
+              >
+                <IconButton onClick={toggleDrawer}>
+                  <ChevronLeftIcon />
+                </IconButton>
+              </Toolbar>
+              <Divider />
+              <List component="nav">
+                <ListItemButton component={Link} to="/">
+                  <ListItemIcon>
+                    <DashboardIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Dashboard" />
+                </ListItemButton>
+                <ListItemButton component={Link} to="/smart-crop-planning">
+                  <ListItemIcon>
+                    <AgricultureIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Smart Crop Planning" />
+                </ListItemButton>
+                <ListItemButton 
+                  component={Link} 
+                  to="/seasonal-events"
+                  sx={{
+                    backgroundColor: 'yellow',
+                    '&:hover': {
+                      backgroundColor: '#ffeb3b',
+                    },
+                    '& .MuiListItemIcon-root': {
+                      color: 'black',
+                    },
+                    '& .MuiListItemText-primary': {
+                      color: 'black',
+                      fontWeight: 'bold'
+                    }
+                  }}
+                >
+                  <ListItemIcon>
+                    <CalendarMonthIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Seasonal Events" />
+                </ListItemButton>
+                <ListItemButton component={Link} to="/equipment-management">
+                  <ListItemIcon>
+                    <BuildIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Equipment Management" />
+                </ListItemButton>
+                <ListItemButton component={Link} to="/community-hub">
+                  <ListItemIcon>
+                    <PeopleIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Community Hub" />
+                </ListItemButton>
+                <ListItemButton component={Link} to="/farm-designs">
+                  <ListItemIcon>
+                    <ArchitectureIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Farm Designs" />
+                </ListItemButton>
+              </List>
+            </Drawer>
             <main className="main-content">
               <Routes>
                 <Route path="/" element={<Home />} />
