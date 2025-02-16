@@ -2,25 +2,11 @@ import React, { useState } from 'react';
 import {
   Container,
   Typography,
-  Card,
-  CardContent,
   Grid,
   Box,
-  Button,
   Tabs,
   Tab,
   Paper,
-  Divider,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  Chip,
-  CardMedia,
-  CardActionArea,
-  IconButton,
-  Collapse,
-  CardActions
 } from '@mui/material';
 import {
   Agriculture,
@@ -29,8 +15,6 @@ import {
   Nature,
   Build,
   People,
-  ExpandMore,
-  ChevronRight,
   LocalFlorist,
   Pets,
   Grass,
@@ -42,12 +26,24 @@ import {
   ArrowUpward,
   Home
 } from '@mui/icons-material';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import FarmingTypeCard from '../components/FarmingTypeCard';
+
+// Import images
+import traditionalFarmingImg from '../assets/images/traditional-farming.jpg';
+import urbanFarmingImg from '../assets/images/urban-farming.jpg';
+import organicFarmingImg from '../assets/images/organic-farming.jpg';
+import hydroponicFarmingImg from '../assets/images/hydroponic-farming.jpg';
+import aquaponicFarmingImg from '../assets/images/aquaponic-farming.jpg';
+import permacultureFarmingImg from '../assets/images/permaculture-farming.jpg';
+import greenhouseFarmingImg from '../assets/images/greenhouse-farming.jpg';
+import verticalFarmingImg from '../assets/images/vertical-farming.jpg';
+import rooftopFarmingImg from '../assets/images/rooftop-farming.jpg';
 
 const farmingTypes = [
   {
     title: 'Traditional Farming',
-    image: '/images/traditional-farming.jpg',
+    image: traditionalFarmingImg,
     icon: <Agriculture />,
     description: 'Time-tested methods passed down through generations',
     benefits: [
@@ -85,7 +81,7 @@ const farmingTypes = [
   },
   {
     title: 'Urban Farming',
-    image: '/images/urban-farming.jpg',
+    image: urbanFarmingImg,
     icon: <Home />,
     description: 'Modern solutions for city-based agriculture',
     benefits: [
@@ -123,7 +119,7 @@ const farmingTypes = [
   },
   {
     title: 'Organic Farming',
-    image: '/images/organic-farming.jpg',
+    image: organicFarmingImg,
     icon: <LocalFlorist />,
     description: 'Natural and sustainable farming without synthetic inputs',
     benefits: [
@@ -161,7 +157,7 @@ const farmingTypes = [
   },
   {
     title: 'Hydroponic Farming',
-    image: '/images/hydroponic-farming.jpg',
+    image: hydroponicFarmingImg,
     icon: <Water />,
     description: 'Soil-less growing using nutrient-rich water solutions',
     benefits: [
@@ -199,7 +195,7 @@ const farmingTypes = [
   },
   {
     title: 'Aquaponic Farming',
-    image: '/images/aquaponic-farming.jpg',
+    image: aquaponicFarmingImg,
     icon: <Pets />,
     description: 'Combining fish farming with plant cultivation',
     benefits: [
@@ -237,7 +233,7 @@ const farmingTypes = [
   },
   {
     title: 'Permaculture Farming',
-    image: '/images/permaculture-farming.jpg',
+    image: permacultureFarmingImg,
     icon: <EmojiNature />,
     description: 'Creating sustainable agricultural ecosystems',
     benefits: [
@@ -275,7 +271,7 @@ const farmingTypes = [
   },
   {
     title: 'Greenhouse Farming',
-    image: '/images/greenhouse-farming.jpg',
+    image: greenhouseFarmingImg,
     icon: <Park />,
     description: 'Controlled environment agriculture for optimal growth',
     benefits: [
@@ -313,7 +309,7 @@ const farmingTypes = [
   },
   {
     title: 'Vertical Farming',
-    image: '/images/vertical-farming.jpg',
+    image: verticalFarmingImg,
     icon: <ArrowUpward />,
     description: 'Maximizing production in minimal space using vertical systems',
     benefits: [
@@ -350,46 +346,8 @@ const farmingTypes = [
     }
   },
   {
-    title: 'Smart Farming',
-    image: '/images/smart-farming.jpg',
-    icon: <Science />,
-    description: 'Technology-driven agriculture using IoT and data analytics',
-    benefits: [
-      'Data-driven decisions',
-      'Automation',
-      'Resource optimization',
-      'Precision control'
-    ],
-    guide: {
-      basics: [
-        'Sensor deployment',
-        'Data analysis',
-        'Automation setup',
-        'System integration'
-      ],
-      equipment: [
-        'IoT sensors',
-        'Weather stations',
-        'Automated systems',
-        'Data platforms'
-      ],
-      crops: [
-        'All crop types',
-        'Precision irrigation',
-        'Variable rate application',
-        'Yield monitoring'
-      ],
-      tips: [
-        'Regular calibration',
-        'Data backup',
-        'System updates',
-        'Staff training'
-      ]
-    }
-  },
-  {
     title: 'Rooftop Farming',
-    image: '/images/rooftop-farming.jpg',
+    image: rooftopFarmingImg,
     icon: <Home />,
     description: 'Converting urban rooftops into productive growing spaces',
     benefits: [
@@ -818,129 +776,18 @@ function BeginnerGuide() {
 
       {/* Farming Types */}
       {activeTab === 0 && (
-        <>
-          <Grid container spacing={3}>
-            {farmingTypes.map((type, index) => (
-              <Grid item xs={12} md={6} key={type.title}>
-                <Card 
-                  sx={{ 
-                    height: '100%',
-                  }}
-                >
-                  <CardActionArea onClick={() => handleExpandClick(index)}>
-                    <CardMedia
-                      component="img"
-                      height="200"
-                      image={type.image}
-                      alt={type.title}
-                    />
-                    <CardContent>
-                      <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
-                        <Box sx={{ color: 'primary.main', mr: 1 }}>{type.icon}</Box>
-                        <Typography variant="h5">
-                          {type.title}
-                        </Typography>
-                      </Box>
-                      <Typography color="text.secondary" variant="subtitle1">
-                        {type.description}
-                      </Typography>
-                    </CardContent>
-                  </CardActionArea>
-                  <Collapse in={expanded[index]}>
-                    <CardContent>
-                      <Typography variant="h6" gutterBottom>Key Benefits:</Typography>
-                      <List>
-                        {type.benefits.map((benefit) => (
-                          <ListItem key={benefit}>
-                            <ListItemIcon>
-                              <ChevronRight color="primary" />
-                            </ListItemIcon>
-                            <ListItemText primary={benefit} />
-                          </ListItem>
-                        ))}
-                      </List>
-                      {type.guide && (
-                        <>
-                          <Divider sx={{ my: 2 }} />
-                          <Typography variant="h6" gutterBottom>Complete Guide:</Typography>
-                          <Grid container spacing={2}>
-                            {Object.entries(type.guide).map(([section, items]) => (
-                              <Grid item xs={12} md={6} key={section}>
-                                <Typography variant="subtitle1" color="primary" gutterBottom sx={{ textTransform: 'capitalize' }}>
-                                  {section}:
-                                </Typography>
-                                <List dense>
-                                  {items.map((item) => (
-                                    <ListItem key={item}>
-                                      <ListItemIcon>
-                                        <ChevronRight color="primary" fontSize="small" />
-                                      </ListItemIcon>
-                                      <ListItemText primary={item} />
-                                    </ListItem>
-                                  ))}
-                                </List>
-                              </Grid>
-                            ))}
-                          </Grid>
-                        </>
-                      )}
-                    </CardContent>
-                  </Collapse>
-                </Card>
-              </Grid>
-            ))}
-          </Grid>
-
-          {/* Professional Wellness Section */}
-          <Paper sx={{ p: 4, mt: 4, backgroundColor: 'primary.main', color: 'white' }}>
-            <Typography variant="h4" gutterBottom>
-              Farm-to-Wellness Program (PRO)
-            </Typography>
-            <Typography variant="subtitle1" paragraph>
-              Transform your farming journey into a complete wellness lifestyle
-            </Typography>
-            <Grid container spacing={3}>
-              {professionalFeatures.modules.map((module) => (
-                <Grid item xs={12} md={6} lg={3} key={module.title}>
-                  <Card>
-                    <CardMedia
-                      component="img"
-                      height="160"
-                      image={module.image}
-                      alt={module.title}
-                    />
-                    <CardContent>
-                      <Typography variant="h6" gutterBottom>
-                        {module.title}
-                      </Typography>
-                      <List dense>
-                        {module.topics.map((topic) => (
-                          <ListItem key={topic}>
-                            <ListItemIcon>
-                              <ChevronRight />
-                            </ListItemIcon>
-                            <ListItemText primary={topic} />
-                          </ListItem>
-                        ))}
-                      </List>
-                    </CardContent>
-                  </Card>
-                </Grid>
-              ))}
+        <Grid container spacing={3}>
+          {farmingTypes.map((type, index) => (
+            <Grid item xs={12} md={6} key={type.title}>
+              <FarmingTypeCard
+                type={type}
+                expanded={expanded[index]}
+                onExpand={handleExpandClick}
+                index={index}
+              />
             </Grid>
-            <Box sx={{ mt: 3, textAlign: 'center' }}>
-              <Button
-                variant="contained"
-                color="secondary"
-                size="large"
-                onClick={() => navigate('/pricing')}
-                startIcon={<ArrowUpward />}
-              >
-                Upgrade to Access Wellness Program
-              </Button>
-            </Box>
-          </Paper>
-        </>
+          ))}
+        </Grid>
       )}
 
       {/* Learning Paths */}
