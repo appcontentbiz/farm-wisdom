@@ -10,21 +10,12 @@ import {
 import { Link as RouterLink, useLocation } from 'react-router-dom';
 import {
   Home as HomeIcon,
-  AttachMoney as MoneyIcon,
-  Cloud as WeatherIcon,
   Agriculture as FarmIcon,
-  LocalLibrary as ResourcesIcon,
+  Build as BuildIcon,
+  People as PeopleIcon,
+  Architecture as ArchitectureIcon,
   CalendarMonth as CalendarMonthIcon
 } from '@mui/icons-material';
-
-const MARKET_PRICES_STYLE = {
-  backgroundColor: '#87CEEB',
-  color: '#000000',
-  fontWeight: 'bold',
-  '&:hover': {
-    backgroundColor: '#B0E2FF',
-  }
-};
 
 const SEASONAL_EVENTS_STYLE = {
   backgroundColor: 'yellow',
@@ -41,13 +32,6 @@ export default function Navbar() {
   
   const navItems = [
     { name: 'Home', path: '/', icon: <HomeIcon /> },
-    { 
-      name: 'Market Prices', 
-      path: '/market-prices', 
-      icon: <MoneyIcon />,
-      style: MARKET_PRICES_STYLE
-    },
-    { name: 'Weather', path: '/weather', icon: <WeatherIcon /> },
     { name: 'Smart Crop Planning', path: '/smart-crop-planning', icon: <FarmIcon /> },
     { 
       name: 'Seasonal Events', 
@@ -55,7 +39,9 @@ export default function Navbar() {
       icon: <CalendarMonthIcon />,
       style: SEASONAL_EVENTS_STYLE
     },
-    { name: 'Resources', path: '/resources', icon: <ResourcesIcon /> }
+    { name: 'Equipment Management', path: '/equipment-management', icon: <BuildIcon /> },
+    { name: 'Community Hub', path: '/community-hub', icon: <PeopleIcon /> },
+    { name: 'Farm Designs', path: '/farm-designs', icon: <ArchitectureIcon /> }
   ];
 
   return (
