@@ -13,7 +13,7 @@ import {
   LibraryBooks as ResourcesIcon,
   LocationOn as StateResourcesIcon,
   EmojiEmotions as BloopersIcon,
-  Volunteer as GleaningIcon,
+  Handshake as GleaningIcon,
   Agriculture as FarmerIcon,
   Science as SmartCropIcon,
   Cloud as WeatherIcon,
