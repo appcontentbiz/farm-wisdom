@@ -18,11 +18,20 @@ import {
 } from '@mui/icons-material';
 
 const MARKET_PRICES_STYLE = {
-  backgroundColor: '#87CEEB', // Sky blue
+  backgroundColor: '#87CEEB',
   color: '#000000',
   fontWeight: 'bold',
   '&:hover': {
-    backgroundColor: '#B0E2FF', // Lighter sky blue on hover
+    backgroundColor: '#B0E2FF',
+  }
+};
+
+const SEASONAL_EVENTS_STYLE = {
+  backgroundColor: 'yellow',
+  color: '#000000',
+  fontWeight: 'bold',
+  '&:hover': {
+    backgroundColor: '#ffeb3b',
   }
 };
 
@@ -44,44 +53,30 @@ export default function Navbar() {
       name: 'Seasonal Events', 
       path: '/seasonal-events', 
       icon: <CalendarMonthIcon />,
-      style: {
-        backgroundColor: 'yellow',
-        '&:hover': {
-          backgroundColor: '#ffeb3b',
-        },
-        '& .MuiListItemIcon-root': {
-          color: 'black',
-        },
-        '& .MuiListItemText-primary': {
-          color: 'black',
-          fontWeight: 'bold'
-        }
-      }
+      style: SEASONAL_EVENTS_STYLE
     },
     { name: 'Resources', path: '/resources', icon: <ResourcesIcon /> }
   ];
 
   return (
-    <AppBar position="static" color="primary">
+    <AppBar position="static" color="default" elevation={0}>
       <Toolbar>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 0, mr: 4 }}>
+        <Typography variant="h6" component="div" sx={{ flexGrow: 0, mr: 2 }}>
           Farm Wisdom
         </Typography>
-        <Box sx={{ flexGrow: 1, display: 'flex', gap: 2 }}>
+        <Box sx={{ display: 'flex', flexGrow: 1 }}>
           {navItems.map((item) => (
             <Button
-              key={item.name}
+              key={item.path}
               component={RouterLink}
               to={item.path}
               startIcon={item.icon}
               sx={{
-                color: 'inherit',
-                textTransform: 'none',
-                fontWeight: location.pathname === item.path ? 600 : 400,
-                px: 2,
-                py: 1,
-                borderRadius: 1,
-                ...(item.style || {}),
+                mx: 1,
+                ...(location.pathname === item.path && {
+                  backgroundColor: theme.palette.action.selected
+                }),
+                ...(item.style || {})
               }}
             >
               {item.name}
