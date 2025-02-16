@@ -29,21 +29,10 @@ import {
 import { useNavigate } from 'react-router-dom';
 import FarmingTypeCard from '../components/FarmingTypeCard';
 
-// Import images
-import traditionalFarmingImg from '../assets/images/traditional-farming.jpg';
-import urbanFarmingImg from '../assets/images/urban-farming.jpg';
-import organicFarmingImg from '../assets/images/organic-farming.jpg';
-import hydroponicFarmingImg from '../assets/images/hydroponic-farming.jpg';
-import aquaponicFarmingImg from '../assets/images/aquaponic-farming.jpg';
-import permacultureFarmingImg from '../assets/images/permaculture-farming.jpg';
-import greenhouseFarmingImg from '../assets/images/greenhouse-farming.jpg';
-import verticalFarmingImg from '../assets/images/vertical-farming.jpg';
-import rooftopFarmingImg from '../assets/images/rooftop-farming.jpg';
-
 const farmingTypes = [
   {
     title: 'Traditional Farming',
-    image: traditionalFarmingImg,
+    image: '/images/traditional-farming.jpg',
     icon: <Agriculture />,
     description: 'Time-tested methods passed down through generations',
     benefits: [
@@ -81,7 +70,7 @@ const farmingTypes = [
   },
   {
     title: 'Urban Farming',
-    image: urbanFarmingImg,
+    image: '/images/urban-farming.jpg',
     icon: <Home />,
     description: 'Modern solutions for city-based agriculture',
     benefits: [
@@ -119,7 +108,7 @@ const farmingTypes = [
   },
   {
     title: 'Organic Farming',
-    image: organicFarmingImg,
+    image: '/images/organic-farming.jpg',
     icon: <LocalFlorist />,
     description: 'Natural and sustainable farming without synthetic inputs',
     benefits: [
@@ -157,7 +146,7 @@ const farmingTypes = [
   },
   {
     title: 'Hydroponic Farming',
-    image: hydroponicFarmingImg,
+    image: '/images/hydroponic-farming.jpg',
     icon: <Water />,
     description: 'Soil-less growing using nutrient-rich water solutions',
     benefits: [
@@ -195,7 +184,7 @@ const farmingTypes = [
   },
   {
     title: 'Aquaponic Farming',
-    image: aquaponicFarmingImg,
+    image: '/images/aquaponic-farming.jpg',
     icon: <Pets />,
     description: 'Combining fish farming with plant cultivation',
     benefits: [
@@ -233,7 +222,7 @@ const farmingTypes = [
   },
   {
     title: 'Permaculture Farming',
-    image: permacultureFarmingImg,
+    image: '/images/permaculture-farming.jpg',
     icon: <EmojiNature />,
     description: 'Creating sustainable agricultural ecosystems',
     benefits: [
@@ -271,7 +260,7 @@ const farmingTypes = [
   },
   {
     title: 'Greenhouse Farming',
-    image: greenhouseFarmingImg,
+    image: '/images/greenhouse-farming.jpg',
     icon: <Park />,
     description: 'Controlled environment agriculture for optimal growth',
     benefits: [
@@ -309,7 +298,7 @@ const farmingTypes = [
   },
   {
     title: 'Vertical Farming',
-    image: verticalFarmingImg,
+    image: '/images/vertical-farming.jpg',
     icon: <ArrowUpward />,
     description: 'Maximizing production in minimal space using vertical systems',
     benefits: [
@@ -347,7 +336,7 @@ const farmingTypes = [
   },
   {
     title: 'Rooftop Farming',
-    image: rooftopFarmingImg,
+    image: '/images/rooftop-farming.jpg',
     icon: <Home />,
     description: 'Converting urban rooftops into productive growing spaces',
     benefits: [
