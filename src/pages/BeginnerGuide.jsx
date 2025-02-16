@@ -386,6 +386,44 @@ const farmingTypes = [
         'Staff training'
       ]
     }
+  },
+  {
+    title: 'Rooftop Farming',
+    image: '/images/rooftop-farming.jpg',
+    icon: <Home />,
+    description: 'Converting urban rooftops into productive growing spaces',
+    benefits: [
+      'Urban space utilization',
+      'Building insulation',
+      'Reduced heat island effect',
+      'Local food production'
+    ],
+    guide: {
+      basics: [
+        'Structural assessment',
+        'Drainage planning',
+        'Weight distribution',
+        'Access considerations'
+      ],
+      equipment: [
+        'Lightweight containers',
+        'Irrigation systems',
+        'Safety equipment',
+        'Wind protection'
+      ],
+      crops: [
+        'Container vegetables',
+        'Herbs',
+        'Pollinator plants',
+        'Heat-tolerant varieties'
+      ],
+      tips: [
+        'Check building codes',
+        'Plan for wind exposure',
+        'Use lightweight soil mix',
+        'Install safety barriers'
+      ]
+    }
   }
 ];
 
