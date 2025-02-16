@@ -122,40 +122,40 @@ const farmingTypes = [
     }
   },
   {
-    title: 'Smart Farming',
-    image: '/images/smart-farming.jpg',
-    icon: <Science />,
-    description: 'Technology-driven precision agriculture',
+    title: 'Organic Farming',
+    image: '/images/organic-farming.jpg',
+    icon: <LocalFlorist />,
+    description: 'Natural and sustainable farming without synthetic inputs',
     benefits: [
-      'Data-driven decisions',
-      'Resource optimization',
-      'Higher yields',
-      'Reduced waste'
+      'Chemical-free produce',
+      'Environmental sustainability',
+      'Premium market prices',
+      'Soil health improvement'
     ],
     guide: {
       basics: [
-        'Sensor deployment',
-        'Data collection methods',
-        'Automation basics',
-        'System integration'
+        'Natural pest control',
+        'Composting methods',
+        'Crop rotation',
+        'Soil enrichment'
       ],
       equipment: [
-        'IoT sensors',
-        'Automated systems',
-        'Mobile apps',
-        'Weather stations'
+        'Composting bins',
+        'Natural fertilizers',
+        'Manual tools',
+        'Beneficial insects'
       ],
       crops: [
-        'High-value crops',
-        'Research varieties',
-        'Climate-adapted plants',
-        'Experimental hybrids'
+        'Heritage varieties',
+        'Mixed vegetables',
+        'Cover crops',
+        'Companion plants'
       ],
       tips: [
-        'Regular system maintenance',
-        'Data backup practices',
-        'Stay updated with tech',
-        'Network with experts'
+        'Plan crop rotations',
+        'Build healthy soil',
+        'Natural pest management',
+        'Water conservation'
       ]
     }
   },
@@ -1149,7 +1149,7 @@ function BeginnerGuide() {
         <Typography variant="h4" gutterBottom>
           Ready to enhance your farming journey?
         </Typography>
-        <Typography variant="subtitle1" color="text.secondary" paragraph>
+        <Typography variant="h6" color="text.secondary" paragraph>
           Get access to all premium features and take your farming to the next level
         </Typography>
         <Button
