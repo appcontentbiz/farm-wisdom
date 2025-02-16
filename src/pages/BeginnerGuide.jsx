@@ -158,6 +158,234 @@ const farmingTypes = [
         'Network with experts'
       ]
     }
+  },
+  {
+    title: 'Hydroponic Farming',
+    image: '/images/hydroponic-farming.jpg',
+    icon: <Water />,
+    description: 'Soil-less growing using nutrient-rich water solutions',
+    benefits: [
+      'Water efficiency',
+      'Higher yields',
+      'Year-round production',
+      'Space optimization'
+    ],
+    guide: {
+      basics: [
+        'Nutrient solution management',
+        'pH level monitoring',
+        'System maintenance',
+        'Plant spacing'
+      ],
+      equipment: [
+        'Growing containers',
+        'Pumps and filters',
+        'LED grow lights',
+        'Monitoring systems'
+      ],
+      crops: [
+        'Leafy greens',
+        'Herbs',
+        'Tomatoes',
+        'Strawberries'
+      ],
+      tips: [
+        'Start small and scale up',
+        'Monitor water quality',
+        'Maintain cleanliness',
+        'Regular system checks'
+      ]
+    }
+  },
+  {
+    title: 'Aquaponic Farming',
+    image: '/images/aquaponic-farming.jpg',
+    icon: <Pets />,
+    description: 'Combining fish farming with plant cultivation',
+    benefits: [
+      'Sustainable ecosystem',
+      'Dual income streams',
+      'Organic production',
+      'Resource efficiency'
+    ],
+    guide: {
+      basics: [
+        'Fish selection',
+        'Plant compatibility',
+        'System cycling',
+        'Water chemistry'
+      ],
+      equipment: [
+        'Fish tanks',
+        'Growing beds',
+        'Biofilters',
+        'Aeration systems'
+      ],
+      crops: [
+        'Tilapia',
+        'Lettuce',
+        'Herbs',
+        'Watercress'
+      ],
+      tips: [
+        'Balance fish-to-plant ratio',
+        'Regular water testing',
+        'Monitor fish health',
+        'Maintain temperature'
+      ]
+    }
+  },
+  {
+    title: 'Permaculture Farming',
+    image: '/images/permaculture-farming.jpg',
+    icon: <EmojiNature />,
+    description: 'Creating sustainable agricultural ecosystems',
+    benefits: [
+      'Self-sustaining system',
+      'Biodiversity',
+      'Low maintenance',
+      'Natural resilience'
+    ],
+    guide: {
+      basics: [
+        'Zone planning',
+        'Companion planting',
+        'Water management',
+        'Soil building'
+      ],
+      equipment: [
+        'Hand tools',
+        'Mulching materials',
+        'Composting systems',
+        'Rain catchment'
+      ],
+      crops: [
+        'Food forests',
+        'Perennial vegetables',
+        'Native plants',
+        'Medicinal herbs'
+      ],
+      tips: [
+        'Observe and interact',
+        'Design for sustainability',
+        'Stack functions',
+        'Work with nature'
+      ]
+    }
+  },
+  {
+    title: 'Greenhouse Farming',
+    image: '/images/greenhouse-farming.jpg',
+    icon: <Park />,
+    description: 'Controlled environment agriculture for optimal growth',
+    benefits: [
+      'Climate control',
+      'Extended growing season',
+      'Protection from pests',
+      'Higher yields'
+    ],
+    guide: {
+      basics: [
+        'Temperature control',
+        'Ventilation management',
+        'Irrigation systems',
+        'Light optimization'
+      ],
+      equipment: [
+        'Climate controls',
+        'Ventilation fans',
+        'Drip irrigation',
+        'Shade cloth'
+      ],
+      crops: [
+        'Tomatoes',
+        'Cucumbers',
+        'Peppers',
+        'Flowers'
+      ],
+      tips: [
+        'Monitor humidity',
+        'Regular maintenance',
+        'Pest prevention',
+        'Energy efficiency'
+      ]
+    }
+  },
+  {
+    title: 'Vertical Farming',
+    image: '/images/vertical-farming.jpg',
+    icon: <ArrowUpward />,
+    description: 'Maximizing production in minimal space using vertical systems',
+    benefits: [
+      'Space efficiency',
+      'Controlled environment',
+      'Urban integration',
+      'Resource optimization'
+    ],
+    guide: {
+      basics: [
+        'Vertical system design',
+        'Light management',
+        'Nutrient delivery',
+        'Space planning'
+      ],
+      equipment: [
+        'Growing towers',
+        'LED lighting',
+        'Irrigation systems',
+        'Environmental controls'
+      ],
+      crops: [
+        'Microgreens',
+        'Lettuce',
+        'Herbs',
+        'Strawberries'
+      ],
+      tips: [
+        'Optimize light exposure',
+        'Maintain air circulation',
+        'Monitor plant health',
+        'Regular cleaning'
+      ]
+    }
+  },
+  {
+    title: 'Smart Farming',
+    image: '/images/smart-farming.jpg',
+    icon: <Science />,
+    description: 'Technology-driven agriculture using IoT and data analytics',
+    benefits: [
+      'Data-driven decisions',
+      'Automation',
+      'Resource optimization',
+      'Precision control'
+    ],
+    guide: {
+      basics: [
+        'Sensor deployment',
+        'Data analysis',
+        'Automation setup',
+        'System integration'
+      ],
+      equipment: [
+        'IoT sensors',
+        'Weather stations',
+        'Automated systems',
+        'Data platforms'
+      ],
+      crops: [
+        'All crop types',
+        'Precision irrigation',
+        'Variable rate application',
+        'Yield monitoring'
+      ],
+      tips: [
+        'Regular calibration',
+        'Data backup',
+        'System updates',
+        'Staff training'
+      ]
+    }
   }
 ];
 
