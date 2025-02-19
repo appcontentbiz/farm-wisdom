@@ -13,8 +13,8 @@ import {
   Divider,
   CardActionArea,
   Collapse,
-  ChevronRight
 } from '@mui/material';
+import { ChevronRight } from '@mui/icons-material';
 
 export default function FarmingTypeCard({ type, expanded, onExpand, index }) {
   return (
