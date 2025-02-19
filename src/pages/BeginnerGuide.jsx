@@ -189,15 +189,15 @@ const farmingTypes = [
     description: 'Combining fish farming with plant cultivation',
     benefits: [
       'Sustainable ecosystem',
-      'Dual income streams',
-      'Organic production',
-      'Resource efficiency'
+      'Dual production',
+      'Water efficiency',
+      'Natural fertilization'
     ],
     guide: {
       basics: [
+        'System design',
         'Fish selection',
         'Plant compatibility',
-        'System cycling',
         'Water chemistry'
       ],
       equipment: [
@@ -331,6 +331,44 @@ const farmingTypes = [
         'Maintain air circulation',
         'Monitor plant health',
         'Regular cleaning'
+      ]
+    }
+  },
+  {
+    title: 'Smart Farming',
+    image: '/images/smart-farming.jpg',
+    icon: <Science />,
+    description: 'Technology-driven agriculture using IoT and data analytics',
+    benefits: [
+      'Data-driven decisions',
+      'Automation',
+      'Resource optimization',
+      'Precision control'
+    ],
+    guide: {
+      basics: [
+        'Sensor deployment',
+        'Data analysis',
+        'Automation setup',
+        'System integration'
+      ],
+      equipment: [
+        'IoT sensors',
+        'Weather stations',
+        'Automated systems',
+        'Data platforms'
+      ],
+      crops: [
+        'All crop types',
+        'Precision irrigation',
+        'Variable rate application',
+        'Yield monitoring'
+      ],
+      tips: [
+        'Regular calibration',
+        'Data backup',
+        'System updates',
+        'Staff training'
       ]
     }
   },
