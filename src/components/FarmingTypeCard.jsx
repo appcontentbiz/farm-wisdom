@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   Card,
   CardContent,
@@ -16,7 +17,14 @@ import {
 } from '@mui/material';
 import { ChevronRight } from '@mui/icons-material';
 
-export default function FarmingTypeCard({ type, expanded, onExpand, index }) {
+function FarmingTypeCard({ type, expanded, onExpand, index }) {
+  console.log('FarmingTypeCard props:', { type, expanded, index });
+  
+  if (!type) {
+    console.error('FarmingTypeCard: type prop is missing');
+    return null;
+  }
+
   return (
     <Card sx={{ height: '100%' }}>
       <CardActionArea onClick={() => onExpand(index)}>
@@ -85,3 +93,24 @@ export default function FarmingTypeCard({ type, expanded, onExpand, index }) {
     </Card>
   );
 }
+
+FarmingTypeCard.propTypes = {
+  type: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    image: PropTypes.string.isRequired,
+    icon: PropTypes.node.isRequired,
+    description: PropTypes.string.isRequired,
+    benefits: PropTypes.arrayOf(PropTypes.string).isRequired,
+    guide: PropTypes.shape({
+      basics: PropTypes.arrayOf(PropTypes.string).isRequired,
+      equipment: PropTypes.arrayOf(PropTypes.string).isRequired,
+      crops: PropTypes.arrayOf(PropTypes.string).isRequired,
+      tips: PropTypes.arrayOf(PropTypes.string).isRequired,
+    }).isRequired,
+  }).isRequired,
+  expanded: PropTypes.bool,
+  onExpand: PropTypes.func.isRequired,
+  index: PropTypes.number.isRequired,
+};
+
+export default FarmingTypeCard;

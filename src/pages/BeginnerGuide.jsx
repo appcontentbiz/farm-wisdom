@@ -766,12 +766,17 @@ function BeginnerGuide() {
   const navigate = useNavigate();
 
   const handleTabChange = (event, newValue) => {
+    console.log('Tab changed to:', newValue);
     setActiveTab(newValue);
   };
 
   const handleExpandClick = (index) => {
+    console.log('Expanding card:', index);
     setExpanded({ ...expanded, [index]: !expanded[index] });
   };
+
+  console.log('Current active tab:', activeTab);
+  console.log('farmingTypes:', farmingTypes);
 
   return (
     <Container maxWidth="lg" sx={{ py: 4 }}>
@@ -804,16 +809,19 @@ function BeginnerGuide() {
       {/* Farming Types */}
       {activeTab === 0 && (
         <Grid container spacing={3}>
-          {farmingTypes.map((type, index) => (
-            <Grid item xs={12} md={6} key={type.title}>
-              <FarmingTypeCard
-                type={type}
-                expanded={expanded[index]}
-                onExpand={handleExpandClick}
-                index={index}
-              />
-            </Grid>
-          ))}
+          {farmingTypes.map((type, index) => {
+            console.log('Rendering farming type:', type.title);
+            return (
+              <Grid item xs={12} md={6} key={type.title}>
+                <FarmingTypeCard
+                  type={type}
+                  expanded={expanded[index]}
+                  onExpand={handleExpandClick}
+                  index={index}
+                />
+              </Grid>
+            );
+          })}
         </Grid>
       )}
 
